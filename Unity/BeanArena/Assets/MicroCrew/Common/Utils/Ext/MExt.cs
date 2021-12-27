@@ -1,0 +1,223 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public static class MExt {
+
+    //========= COLORS ===========
+
+    public static Color SetA(this Color c, float a) {
+        c.a = a;
+        return c;
+    }
+
+    //========= VECTOR_3 ===========
+
+    public static Vector3 SetX(this Vector3 v, float x) {
+        v.x = x;
+        return v;
+    }
+
+    public static Vector3 SetY(this Vector3 v, float y) {
+        v.y = y;
+        return v;
+    }
+
+    public static Vector3 SetZ(this Vector3 v, float z) {
+        v.z = z;
+        return v;
+    }
+
+    public static Vector3 MulX(this Vector3 v, float x) {
+        v.x *= x;
+        return v;
+    }
+
+    public static Vector3 MulY(this Vector3 v, float y) {
+        v.y *= y;
+        return v;
+    }
+
+    public static Vector3 MulZ(this Vector3 v, float z) {
+        v.z *= z;
+        return v;
+    }
+
+    public static Vector3 InvXYZ(this Vector3 a) {
+        a.x = 1 / a.x;
+        a.y = 1 / a.y;
+        a.z = 1 / a.z;
+        return a;
+    }
+
+    public static Vector3 MulEach(this Vector3 a, Vector3 b) {
+        a.x *= b.x;
+        a.y *= b.y;
+        a.z *= b.z;
+        return a;
+    }
+
+    public static Vector3 DivEach(this Vector3 a, Vector3 b) {
+        if (b.x != 0) {
+            a.x /= b.x;
+        } else {
+            Debug.LogError("DivisionByZero");
+        }
+        if (b.y != 0) {
+            a.y /= b.y;
+        } else {
+            Debug.LogError("DivisionByZero");
+        }
+        if (b.z != 0) {
+            a.z /= b.z;
+        } else {
+            Debug.LogError("DivisionByZero");
+        }
+        return a;
+    }
+
+    //==============================
+
+
+    //========= VECTOR_4 ===========
+
+    public static Vector2 Vec2XY(this Vector4 a) {
+        return new Vector2(a.x, a.y);
+    }
+
+    public static Vector2 Vec2ZW(this Vector4 a) {
+        return new Vector2(a.z, a.w);
+    }
+
+    public static Vector3 Vec3XY(this Vector4 a) {
+        return new Vector3(a.x, a.y, 0);
+    }
+
+    public static Vector3 Vec3ZW(this Vector4 a) {
+        return new Vector3(a.z, a.w, 0);
+    }
+
+    //========= VECTOR_2 ===========
+
+    public static bool IsZero(this Vector2 a) {
+        return (Mathf.Abs(a.x) < Mathf.Epsilon && Mathf.Abs(a.y) < Mathf.Epsilon);
+    }
+
+    public static Vector2 SetX(this Vector2 a, float x) {
+        a.x = x;
+        return a;
+    }
+
+    public static Vector2 SetY(this Vector2 a, float y) {
+        a.y = y;
+        return a;
+    }
+
+    public static Vector2 MulXY(this Vector2 a, Vector2 b) {
+        a.x *= b.x;
+        a.y *= b.y;
+        return a;
+    }
+
+    public static Vector2 DivXY(this Vector2 a, Vector2 b) {
+        a.x /= b.x;
+        a.y /= b.y;
+        return a;
+    }
+
+    public static Vector2 MulX(this Vector2 a, float f) {
+        a.x *= f;
+        return a;
+    }
+
+    public static Vector2 MulY(this Vector2 a, float f) {
+        a.y *= f;
+        return a;
+    }
+
+    public static Vector2 InvXY(this Vector2 a) {
+        a.x = 1 / a.x;
+        a.y = 1 / a.y;
+        return a;
+    }
+
+    public static Vector2 FlipXY(this Vector2 a) {
+        float y = a.y;
+        a.y = a.x;
+        a.x = y;
+        return a;
+    }
+
+    //==============================
+
+    //======== TRANSFORM ===========
+
+    public static TransformData GetTransformData(this Transform t, bool local) {
+        if (local) {
+            return new TransformData() {
+                isLocal = true,
+                position = t.localPosition,
+                rotation = t.localRotation.eulerAngles,
+                scale = t.localScale
+            };
+        } else {
+            return new TransformData() {
+                isLocal = false,
+                position = t.position,
+                rotation = t.rotation.eulerAngles,
+                scale = t.lossyScale
+            };
+        }
+    }
+
+    public static void ApplyTransformData(this Transform t, TransformData data) {
+        if (data.isLocal) {
+            t.localPosition = data.position;
+            t.localRotation = Quaternion.Euler(data.rotation);
+            t.localScale = data.scale;
+        } else {
+            t.position = data.position;
+            t.rotation = Quaternion.Euler(data.rotation);
+
+            if (t.parent != null) {
+                t.localScale = data.scale.DivEach(t.parent.lossyScale);
+            } else {
+                t.localScale = data.scale;
+            }
+        }
+    }
+
+    //==============================
+
+}
+
+[System.Serializable]
+public struct TransformData {
+    public Vector3 position;
+    public Vector3 rotation;
+    public Vector3 scale;
+    public bool isLocal;
+
+    public TransformData(Vector3 position, Vector3 rotation, Vector3 scale, bool isLocal) {
+        this.position = position;
+        this.rotation = rotation;
+        this.scale = scale;
+        this.isLocal = isLocal;
+    }
+
+    public static TransformData identity = new TransformData(Vector3.zero, Vector3.zero, Vector3.one, true);
+
+}
+
+public static class EnumUtils {
+    public static IEnumerable<T> GetValues<T>() {
+        return Enum.GetValues(typeof(T)).Cast<T>();
+    }
+
+    public static int EnumValuesCount<T>() {
+        return Enum.GetValues(typeof(T)).Length;
+    }
+
+}
