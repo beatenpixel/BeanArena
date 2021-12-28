@@ -7,8 +7,10 @@ public class Player : MonoBehaviour {
 
 	public Hero hero;
 
+	public SO_PlayerInput playerInput;
+
 	public void Init() {
-		
+		playerInput.OnMoveInput += MoveJoystickInput;
 	}
 	
 	public void InternalStart() {
@@ -26,5 +28,9 @@ public class Player : MonoBehaviour {
 	public void InternalFixedUpdate() {
 		
 	}
+
+	private void MoveJoystickInput(UIJoystickEventData e) {
+
+    }
 	
 }

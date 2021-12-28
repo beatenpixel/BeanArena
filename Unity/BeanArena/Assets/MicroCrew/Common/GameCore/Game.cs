@@ -44,6 +44,8 @@ public class Game : Singleton<Game> {
 		SetupGame();
 
 		map.Init();
+
+		player.Init();
     }
 
 	private void OnSceneLoadEnd(SceneEvent e) {

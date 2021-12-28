@@ -3,6 +3,7 @@ Shader "Demonixis/FastPostProcessing"
 	Properties
 	{
 		_MainTex("Base (RGB)", 2D) = "white" {}
+		_ShadowTex("ShadowTexture",2D) = "white" {}
 	}
 
 		CGINCLUDE
@@ -17,7 +18,9 @@ Shader "Demonixis/FastPostProcessing"
 #pragma multi_compile __ DITHERING
 #pragma multi_compile __ USERLUT_TEXTURE
 #pragma multi_compile __ GAMMA_CORRECTION
-		uniform sampler2D _MainTex;
+#pragma multi_compile __ VIGNETTE
+	uniform sampler2D _MainTex;
+	uniform sampler2D _ShadowTex;
 	uniform half4 _MainTex_TexelSize;
 	uniform	half4 _MainTex_ST;
 	uniform float _SharpenSize;
@@ -28,6 +31,7 @@ Shader "Demonixis/FastPostProcessing"
 	uniform float _Exposure;
 	sampler2D _UserLutTex;
 	uniform half4 _UserLutParams;
+	float4x4 _CameraToWorldMatrix;
 
 	struct v2f_data {
 		float4 pos : SV_POSITION;
@@ -35,6 +39,7 @@ Shader "Demonixis/FastPostProcessing"
 #if UNITY_UV_STARTS_AT_TOP
 		half2  uv2 : TEXCOORD1;
 #endif
+		float2 worldPos : TEXCOORD2;
 	};
 
 	v2f_data vertFunction(appdata_img v) {
@@ -48,6 +53,7 @@ Shader "Demonixis/FastPostProcessing"
 		if (_MainTex_TexelSize.y < 0.0)
 			o.uv.y = 1.0 - o.uv.y;
 #endif
+		o.worldPos = mul(unity_ObjectToWorld, v.vertex);
 		return o;
 	}
 
@@ -181,15 +187,27 @@ Shader "Demonixis/FastPostProcessing"
 
 #if DITHERING
 		// Interleaved Gradient Noise from http://www.iryoku.com/next-generation-post-processing-in-call-of-duty-advanced-warfare (slide 122)
+		// 27
+		const float ditherSize = 1;
 		half3 magic = float3(0.06711056, 0.00583715, 52.9829189);
-		half gradient = frac(magic.z * frac(dot(uv / _MainTex_TexelSize, magic.xy))) / 255.0;
-		col.rgb -= gradient.xxx * 5;
+		half gradient = frac(magic.z * frac(dot(uv / _MainTex_TexelSize * ditherSize, magic.xy))) / 255.0;
+		col.rgb -= gradient.xxx * 20;
 #endif
 
 #if USERLUT_TEXTURE
 		half3 lc = applyLUT(_UserLutTex, saturate(col.rgb), _UserLutParams.xyz);
 		col = lerp(col, lc, _UserLutParams.w);
 #endif
+
+#if VIGNETTE
+		fixed2 dst = (uv - 0.5) * 1.25;
+		dst.x = 1 - dot(dst, dst)*0.5;
+		col.rgb *= dst.x;
+#endif
+
+		// Shadows
+		fixed4 shadowSample = tex2D(_ShadowTex, uv);
+		col.rgb = shadowSample + fixed3(i.worldPos,0);
 
 		return half4(col, 1.0);
 	}

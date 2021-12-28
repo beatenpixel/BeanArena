@@ -59,6 +59,13 @@ namespace Demonixis.Toolbox {
         [SerializeField]
         private bool m_GammaCorrectionEnabled = false;
 
+        [Header("Vignette")]
+        [SerializeField]
+        private bool m_Vignette = false;
+
+        [Header("Shadows")]
+        public RenderTexture shadowTexture;
+
         #region Properties
 
         public bool Sharpen {
@@ -114,6 +121,14 @@ namespace Demonixis.Toolbox {
             }
         }
 
+        public bool Vignette {
+            get => m_Vignette;
+            set {
+                m_Vignette = value;
+                SetDefine("VIGNETTE", m_Vignette);
+            }
+        }
+
         public float UserLUTContribution {
             get => m_UserLutParams.z;
             set => m_UserLutParams.z = value;
@@ -149,6 +164,8 @@ namespace Demonixis.Toolbox {
             if (m_PostProcessMaterial == null)
                 m_PostProcessMaterial = new Material(m_Shader);
 
+            m_PostProcessMaterial.SetTexture("_ShadowTex", shadowTexture);
+
             m_UserLutEnabled = m_UserLutTexture != null;
 
             if (m_UserLutEnabled)
@@ -159,6 +176,7 @@ namespace Demonixis.Toolbox {
             SetDefine("DITHERING", m_Dithering);
             SetDefine("USERLUT_TEXTURE", m_UserLutEnabled && m_UserLutTexture != null);
             SetDefine("GAMMA_CORRECTION", m_GammaCorrectionEnabled);
+            SetDefine("VIGNETTE", m_Vignette);
 
             UpdateTonemapperDefines();
         }
