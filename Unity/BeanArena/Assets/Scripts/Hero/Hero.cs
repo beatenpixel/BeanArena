@@ -12,6 +12,8 @@ public class Hero : PoolObject {
 
 	private HeroInput input = new HeroInput();
 
+	private float jumpTimer;
+
 	protected override void Awake() {
         base.Awake();
 
@@ -31,14 +33,20 @@ public class Hero : PoolObject {
 		if (input.move.magnitude > 0.2f) {
 			body.rb.AddForce(input.move * moveConfig.moveForce * Time.deltaTime);
 
-			//body.motion.SetR()
+			float angle = Vector2.SignedAngle(Vector2.up, input.move.normalized);
+			body.motion.SetR(angle, true);
 
-			if (body.isGrounded) {
-				body.SetGrounded(false);
+			if (input.move.y > 0.3f && Time.time > jumpTimer) {
+				if (body.isGrounded) {
+					jumpTimer = Time.time + 0.3f;
+					body.SetGrounded(false);
 
-				body.rb.AddForce(input.move * moveConfig.jumpForce);
+					body.rb.AddForce(input.move * moveConfig.jumpForce);
+				}
 			}
-		}		
+		} else {
+			body.motion.SetR(0f, true);
+		}	
 	}
 
 	public void MoveInput(Vector2 inp) {

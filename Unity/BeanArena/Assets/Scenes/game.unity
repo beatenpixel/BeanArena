@@ -5662,11 +5662,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2582720005879347001, guid: befbaac469cee5a46957574baacb2e00, type: 3}
       propertyPath: moveConfig.jumpForce
-      value: 300
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6186975833157792498, guid: befbaac469cee5a46957574baacb2e00, type: 3}
       propertyPath: m_UseLimits
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186975833157792498, guid: befbaac469cee5a46957574baacb2e00, type: 3}
       propertyPath: m_AngleLimits.m_LowerAngle
@@ -5675,6 +5675,18 @@ PrefabInstance:
     - target: {fileID: 6186975833157792498, guid: befbaac469cee5a46957574baacb2e00, type: 3}
       propertyPath: m_AngleLimits.m_UpperAngle
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186975833157792499, guid: befbaac469cee5a46957574baacb2e00, type: 3}
+      propertyPath: m_GravityScale
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186975833157792509, guid: befbaac469cee5a46957574baacb2e00, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.71360546
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186975834321502700, guid: befbaac469cee5a46957574baacb2e00, type: 3}
+      propertyPath: m_GravityScale
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6186975834321502701, guid: befbaac469cee5a46957574baacb2e00, type: 3}
       propertyPath: m_RootOrder
@@ -5742,7 +5754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6186975834962897314, guid: befbaac469cee5a46957574baacb2e00, type: 3}
       propertyPath: m_UseLimits
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6186975834962897314, guid: befbaac469cee5a46957574baacb2e00, type: 3}
       propertyPath: m_AngleLimits.m_LowerAngle
@@ -5751,6 +5763,10 @@ PrefabInstance:
     - target: {fileID: 6186975834962897314, guid: befbaac469cee5a46957574baacb2e00, type: 3}
       propertyPath: m_AngleLimits.m_UpperAngle
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186975834962897325, guid: befbaac469cee5a46957574baacb2e00, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.71360546
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: befbaac469cee5a46957574baacb2e00, type: 3}

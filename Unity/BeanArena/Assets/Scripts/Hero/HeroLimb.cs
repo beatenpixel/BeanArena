@@ -28,7 +28,7 @@ public abstract class HeroLimb : MonoBehaviour {
 	}
 
 	protected virtual void FixedUpdate() {
-		if (!isGrounded && Time.fixedTime > ungroundFixedTime) {
+		if (isGrounded && Time.fixedTime > ungroundFixedTime) {
 			isGrounded = false;
 			groundNormal = Vector2.up;
 		}

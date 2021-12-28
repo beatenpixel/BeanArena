@@ -73,7 +73,7 @@ namespace Demonixis.Toolbox {
             get => m_Sharpen;
             set {
                 m_Sharpen = value;
-                //SetDefine("SHARPEN", m_Sharpen);
+                SetDefine("SHARPEN", m_Sharpen);
             }
         }
 
@@ -81,7 +81,7 @@ namespace Demonixis.Toolbox {
             get => m_Bloom;
             set {
                 m_Bloom = value;
-                //SetDefine("BLOOM", m_Bloom);
+                SetDefine("BLOOM", m_Bloom);
             }
         }
 
@@ -102,7 +102,7 @@ namespace Demonixis.Toolbox {
                 if (m_UserLutEnabled)
                     m_UserLutParams = new Vector4(1f / m_UserLutTexture.width, 1f / m_UserLutTexture.height, m_UserLutTexture.height - 1f, m_LutContribution);
 
-                //SetDefine("USERLUT_TEXTURE", m_UserLutEnabled);
+                SetDefine("USERLUT_TEXTURE", m_UserLutEnabled);
             }
         }
 
@@ -110,7 +110,7 @@ namespace Demonixis.Toolbox {
             get => m_Dithering;
             set {
                 m_Dithering = value;
-                //SetDefine("DITHERING", m_Dithering);
+                SetDefine("DITHERING", m_Dithering);
             }
         }
 
@@ -118,7 +118,7 @@ namespace Demonixis.Toolbox {
             get => m_GammaCorrectionEnabled;
             set {
                 m_GammaCorrectionEnabled = value;
-                //SetDefine("GAMMA_CORRECTION", m_GammaCorrectionEnabled);
+                SetDefine("GAMMA_CORRECTION", m_GammaCorrectionEnabled);
             }
         }
 
@@ -126,7 +126,7 @@ namespace Demonixis.Toolbox {
             get => m_Vignette;
             set {
                 m_Vignette = value;
-                //SetDefine("VIGNETTE", m_Vignette);
+                SetDefine("VIGNETTE", m_Vignette);
             }
         }
 
@@ -174,22 +174,22 @@ namespace Demonixis.Toolbox {
             if (m_UserLutEnabled)
                 m_UserLutParams = new Vector4(1.0f / m_UserLutTexture.width, 1.0f / m_UserLutTexture.height, m_UserLutTexture.height - 1.0f, m_LutContribution);
 
-            //SetDefine("SHARPEN", m_Sharpen);
-            //SetDefine("BLOOM", m_Bloom);
-            //SetDefine("DITHERING", m_Dithering);
-            //SetDefine("USERLUT_TEXTURE", m_UserLutEnabled && m_UserLutTexture != null);
-            //SetDefine("GAMMA_CORRECTION", m_GammaCorrectionEnabled);
-            //SetDefine("VIGNETTE", m_Vignette);
+            SetDefine("SHARPEN", m_Sharpen);
+            SetDefine("BLOOM", m_Bloom);
+            SetDefine("DITHERING", m_Dithering);
+            SetDefine("USERLUT_TEXTURE", m_UserLutEnabled && m_UserLutTexture != null);
+            SetDefine("GAMMA_CORRECTION", m_GammaCorrectionEnabled);
+            SetDefine("VIGNETTE", m_Vignette);
 
             UpdateTonemapperDefines();
         }
 
         private void UpdateTonemapperDefines() {
-            //SetDefine("TONEMAPPER_ACES", m_ToneMapper == ToneMapper.ACES);
-            //SetDefine("TONEMAPPER_HABLE", m_ToneMapper == ToneMapper.Hable);
-            //SetDefine("TONEMAPPER_PHOTOGRAPHIC", m_ToneMapper == ToneMapper.Photographic);
-            //SetDefine("TONEMAPPER_DAWSON", m_ToneMapper == ToneMapper.Dawson);
-            //SetDefine("TONEMAPPER_REINHART", m_ToneMapper == ToneMapper.Reinhart);
+            SetDefine("TONEMAPPER_ACES", m_ToneMapper == ToneMapper.ACES);
+            SetDefine("TONEMAPPER_HABLE", m_ToneMapper == ToneMapper.Hable);
+            SetDefine("TONEMAPPER_PHOTOGRAPHIC", m_ToneMapper == ToneMapper.Photographic);
+            SetDefine("TONEMAPPER_DAWSON", m_ToneMapper == ToneMapper.Dawson);
+            SetDefine("TONEMAPPER_REINHART", m_ToneMapper == ToneMapper.Reinhart);
         }
 
         private void SetDefine(string define, bool isEnabled) {
