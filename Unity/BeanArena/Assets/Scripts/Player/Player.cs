@@ -30,7 +30,11 @@ public class Player : MonoBehaviour {
 	}
 
 	private void MoveJoystickInput(UIJoystickEventData e) {
-
+		if (e.type == UIJoystickEventData.EventType.Cancel || e.type == UIJoystickEventData.EventType.End) {
+			hero.MoveInput(Vector2.zero);
+		} else {
+			hero.MoveInput(e.value);
+		}
     }
 	
 }

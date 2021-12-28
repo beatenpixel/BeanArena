@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Hero : PoolObject {
 
+	public MoveConfig moveConfig;
+
 	private HeroBody body;
 	private List<HeroArm> arms;
 
@@ -20,22 +22,28 @@ public class Hero : PoolObject {
     public void Init() {
 		
 	}
-	
-	public void InternalStart() {
-		
-	}
-	
+
 	public void InternalUpdate() {
 		
 	}
 	
-	public void InternalLateUpdate() {
-		
-	}
-	
 	public void InternalFixedUpdate() {
-		
+		if (input.move.magnitude > 0.2f) {
+			body.rb.AddForce(input.move * moveConfig.moveForce * Time.deltaTime);
+
+			//body.motion.SetR()
+
+			if (body.isGrounded) {
+				body.SetGrounded(false);
+
+				body.rb.AddForce(input.move * moveConfig.jumpForce);
+			}
+		}		
 	}
+
+	public void MoveInput(Vector2 inp) {
+		input.move = inp;
+    }
 
     public override Type GetPoolObjectType() {
 		return typeof(Hero);
@@ -47,4 +55,10 @@ public class HeroInput {
 	public Vector2 move;
 	public bool shoot;
 	public bool ult;
+}
+
+[System.Serializable]
+public class MoveConfig {
+	public float moveForce = 200f;
+	public float jumpForce = 800f;
 }

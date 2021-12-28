@@ -31,7 +31,10 @@ Shader "Demonixis/FastPostProcessing"
 	uniform float _Exposure;
 	sampler2D _UserLutTex;
 	uniform half4 _UserLutParams;
+
 	float4x4 _CameraToWorldMatrix;
+	uniform float _MapBaseLineCameraSpaceY;
+	uniform float _MapBaseLineWorldY;
 
 	struct v2f_data {
 		float4 pos : SV_POSITION;
@@ -53,7 +56,9 @@ Shader "Demonixis/FastPostProcessing"
 		if (_MainTex_TexelSize.y < 0.0)
 			o.uv.y = 1.0 - o.uv.y;
 #endif
-		o.worldPos = mul(unity_ObjectToWorld, v.vertex);
+		float4 d = mul(_CameraToWorldMatrix, float4((v.texcoord.x) * 2 - 1, (v.texcoord.y) * 2 - 1, 0.5, 1));
+		o.worldPos = d.xy;
+
 		return o;
 	}
 
@@ -206,8 +211,18 @@ Shader "Demonixis/FastPostProcessing"
 #endif
 
 		// Shadows
-		fixed4 shadowSample = tex2D(_ShadowTex, uv);
-		col.rgb = shadowSample + fixed3(i.worldPos,0);
+		float offsetX = sin(_Time.y) * 0.15;
+		float fadeP = (_MapBaseLineCameraSpaceY - uv.y) / _MapBaseLineCameraSpaceY;
+		fixed4 shadowSample = tex2D(_ShadowTex, float2(uv.x - offsetX * fadeP, _MapBaseLineCameraSpaceY - (uv.y - _MapBaseLineCameraSpaceY)));
+
+		if (i.worldPos.y < _MapBaseLineWorldY) {		
+
+			if (shadowSample.a > 0.5) {
+				col.rgb *= 1 - clamp(shadowSample * 100,0,1) * 0.3 * (1 - fadeP);
+			}
+		}
+
+		//col.rgb = fadeP;
 
 		return half4(col, 1.0);
 	}

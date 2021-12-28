@@ -14,6 +14,7 @@ namespace Demonixis.Toolbox {
         private Material m_PostProcessMaterial = null;
         private Vector4 m_UserLutParams;
         private bool m_UserLutEnabled = true;
+        private Camera cam;
 
         [Header("Material")]
         [SerializeField]
@@ -158,6 +159,8 @@ namespace Demonixis.Toolbox {
         #endregion
 
         private void OnEnable() {
+            cam = GetComponent<Camera>();
+
             if (m_Shader == null)
                 m_Shader = Shader.Find("Demonixis/FastPostProcessing");
 
@@ -230,6 +233,8 @@ namespace Demonixis.Toolbox {
                 m_PostProcessMaterial.SetVector("_UserLutParams", m_UserLutParams);
                 m_PostProcessMaterial.SetTexture("_UserLutTex", m_UserLutTexture);
             }
+
+            m_PostProcessMaterial.SetMatrix("_CameraToWorldMatrix", (cam.projectionMatrix * cam.worldToCameraMatrix).inverse);
 
             UnityGraphics.Blit(source, destination, m_PostProcessMaterial);
         }

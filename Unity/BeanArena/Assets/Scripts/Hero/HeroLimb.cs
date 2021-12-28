@@ -14,6 +14,11 @@ public abstract class HeroLimb : MonoBehaviour {
 
 	public LimbMotion motion;
 
+	public bool isGrounded { get; private set; }
+	public Vector2 groundNormal { get; private set; }
+
+	private float ungroundFixedTime;
+
 	protected virtual void Awake() {
 		rb.centerOfMass = centerOfMass;
 	}
@@ -23,6 +28,11 @@ public abstract class HeroLimb : MonoBehaviour {
 	}
 
 	protected virtual void FixedUpdate() {
+		if (!isGrounded && Time.fixedTime > ungroundFixedTime) {
+			isGrounded = false;
+			groundNormal = Vector2.up;
+		}
+
 		if(motion.rotSpeed > 0.01f) {
 			float rot = motion.targetRot;
 			if(!motion.isGlobal) {
@@ -34,12 +44,32 @@ public abstract class HeroLimb : MonoBehaviour {
         }
     }
 
+	public void SetGrounded(bool isGrounded) {
+		this.isGrounded = isGrounded;
+    }
+
     protected virtual void OnCollisionEnter2D(Collision2D collision) {
         
     }
 
     protected virtual void OnCollisionStay2D(Collision2D collision) {
-        
+		int colCount = collision.contactCount;
+		bool _isGrounded = false;
+
+		for (int i = 0; i < colCount; i++) {
+			ContactPoint2D contact = collision.GetContact(i);
+
+			if(Vector2.Angle(Vector2.up, contact.normal) < 45) {
+				_isGrounded = true;
+				groundNormal = contact.normal;
+				break;
+            }
+        }
+
+		if(_isGrounded) {
+			isGrounded = true;
+			ungroundFixedTime = Time.fixedTime + Time.fixedDeltaTime * 2f;
+        }
     }
 
     private void OnDrawGizmosSelected() {

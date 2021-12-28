@@ -33,6 +33,7 @@ public class Game : Singleton<Game> {
 		Economy.InitIfNeeded(null);
 
 		MGameLoop.Update.Register(InternalUpdate);
+		MGameLoop.FixedUpdate.Register(InternalFixedUpdate);
 
 		MAppUI.InitIfNeeded(null);
 		MUI.InitIfNeeded(null);
@@ -59,7 +60,15 @@ public class Game : Singleton<Game> {
     }
 
 	public void InternalUpdate() {
-		
+		if(map != null) {
+			map.InternalUpdate();
+        }
+	}
+
+	public void InternalFixedUpdate() {
+		if (map != null) {
+			map.InternalFixedUpdate();
+		}
 	}
 
 }
