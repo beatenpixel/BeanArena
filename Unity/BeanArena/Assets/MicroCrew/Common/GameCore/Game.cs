@@ -9,15 +9,23 @@ public class Game : Singleton<Game> {
 
 	public static GD_Game data;
 
+	[HideInInspector] public Map map;
+	public Player player;
+
+	private bool didSetupGame;
+
 	public override void Init() {
-		
+		MSceneManager.OnSceneChangeEnd.Add(-1000,OnSceneLoadEnd);
 	}
 
 	protected override void Shutdown() {
 
 	}
 
-	public void StartGame() {
+	public void SetupGame() {
+		if (didSetupGame)
+			return;
+
 		MAssets.InitIfNeeded(null);
 		GameDataManager.InitIfNeeded(null);
 		data = GameDataManager.inst.Load();
@@ -29,11 +37,23 @@ public class Game : Singleton<Game> {
 		MAppUI.InitIfNeeded(null);
 		MUI.InitIfNeeded(null);
 
-		StartGameLogic();
+		didSetupGame = true;
 	}
 
 	private void StartGameLogic() {
+		SetupGame();
 
+		map.Init();
+    }
+
+	private void OnSceneLoadEnd(SceneEvent e) {
+		Debug.Log("LoadScene");
+
+		if(e.next.name != "menu") {
+			map = FindObjectOfType<Map>();
+
+			StartGameLogic();
+        }
     }
 
 	public void InternalUpdate() {

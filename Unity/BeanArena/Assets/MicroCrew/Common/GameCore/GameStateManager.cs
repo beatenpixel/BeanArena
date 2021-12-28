@@ -168,7 +168,7 @@ public class GameState_Gameplay : GameState {
 	}
 
 	protected override void OnSwitchedToMe(GameState prevState, GameContext context) {
-		context.game.StartGame();
+		context.game.SetupGame();
 	}
 
 	protected override bool SwitchTo(GameState state, GameContext context) {

@@ -106,6 +106,31 @@ public static class MInput {
         return raycastResults.Count > 0;
     }
 
+    public static Touch GetTouchClosestToPosition(Vector2 position) {
+        float minPosSqr = float.MaxValue;
+        Touch closestTouch = default(Touch);
+        foreach (var touch in Input.touches) {
+            if ((position - touch.position).sqrMagnitude < minPosSqr) {
+                minPosSqr = (position - touch.position).sqrMagnitude;
+                closestTouch = touch;
+            }
+        }
+
+        return closestTouch;
+    }
+
+    private static bool GetTouchByFingerID(int fingerID, out Touch touch) {
+        foreach (var t in Input.touches) {
+            if (t.fingerId == fingerID) {
+                touch = t;
+                return true;
+            }
+        }
+
+        touch = default(Touch);
+        return false;
+    }
+
     public static void ToggleCursorLock() {
         if (Cursor.lockState == CursorLockMode.Locked) {
             Cursor.lockState = CursorLockMode.None;

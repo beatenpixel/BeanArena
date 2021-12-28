@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b383191ddce9c1c4fb83b7236cf8f8fc, type: 3}
   m_Name: MAppConfig
   m_EditorClassIdentifier: 
+  useDisplayFps: 1
   targetFPS: 60
   isUnityRemote: 0
