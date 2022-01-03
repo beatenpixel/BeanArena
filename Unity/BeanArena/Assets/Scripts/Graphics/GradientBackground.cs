@@ -73,6 +73,10 @@ public class GradientBackground : MonoBehaviour {
 		meshRenderer.sortingOrder = orderInLayer;
 	}
 
+	public void AlignSizeToCamera(Camera cam) {
+		t.localScale = new Vector3(MCamera.SCREEN_WH_RATIO * cam.orthographicSize * 2, cam.orthographicSize * 2) * 1.05f;
+	}
+
 	[System.Serializable]
 	public struct GradientPoint {
 		public float position;

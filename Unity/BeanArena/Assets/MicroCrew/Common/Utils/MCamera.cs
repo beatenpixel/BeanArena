@@ -9,41 +9,43 @@ public class MCamera : Singleton<MCamera> {
     public Camera cam;
     public Transform camT;
 
+    public Camera shadowCam;
+    public Transform shadowCamT;
+
+    public GradientBackground gradientBackground;
+
+
     [Header("Config")]
-    public Vector2 minMaxZoomFOV;
-    public Vector2 offsetInPlaneDefault;
-    public Vector2 offsetInPlaneWhenAiming;
+    public CameraConfig config;
 
     private RaycastHitCache hitCache;
 
-    [SerializeField] private Transform target;
-    private Vector3 targetOffset;
+    [SerializeField] private List<CameraTarget> targets;
+    private Vector2 shakeValue;
 
-    private Vector3 camPosDamp;
-    private Vector3 targetPos;
+    private Vector3 startCamPos;
+    private float startCamSize;
 
-    private float targetFov;
-    private float rotX, rotY, rotZ;
-    public float camDst = 10;
+    private Vector2 camPosDamp;
+    private Vector2 targetPos;
+    private Vector2 pos;
 
-    private Vector2 currerntOffsetInPlane;
-    private Vector2 targetOffsetInPlane;
+    private float targetSize;
+    private float targetSizeDamp;
 
-    private Vector3 shakeOffset;
+    private Bounds targetsBounds;
+
     private Tween shakeTween;
 
-    private Vector3 startPos;
+    public static float SCREEN_WH_RATIO => Screen.width / (float)Screen.height;
 
     private void Awake() {
-        startPos = camT.position;
+        startCamPos = camT.position;
+        startCamSize = cam.orthographicSize;
     }
 
     public override void Init() {
         hitCache = new RaycastHitCache(5);
-
-        targetFov = minMaxZoomFOV.y;
-        targetOffsetInPlane = offsetInPlaneDefault;
-        currerntOffsetInPlane = offsetInPlaneDefault;
 
         MGameLoop.Update.Register(1000, InternalUpdate);
         MGameLoop.LateUpdate.Register(1000, InternalLateUpdate);
@@ -55,33 +57,93 @@ public class MCamera : Singleton<MCamera> {
     }
 
     private void InternalUpdate() {
-        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFov, Time.deltaTime * 10f);
-        currerntOffsetInPlane = Vector2.Lerp(currerntOffsetInPlane, targetOffsetInPlane, Time.deltaTime * 10f);
+
     }
 
     private void InternalLateUpdate() {
+        int enabledTargetsCount = 0;
+        for (int i = 0; i < targets.Count; i++) {
+            enabledTargetsCount += (targets[i].t != null && targets[i].doFollow) ? 1 : 0;
+        }
 
+        if (enabledTargetsCount > 0) {
+            targetsBounds = new Bounds();
+
+            for (int i = targets.Count - 1; i >= 0; i--) {
+                if (targets[i].t != null && targets[i].doFollow) {
+                    Bounds b = new Bounds(targets[i].targetPosition, targets[i].bounds);
+                    targetsBounds.Encapsulate(b);
+                }
+            }
+
+            targetsBounds.Expand(config.followMargin);
+
+            targetPos = targetsBounds.center;
+
+            if (targetsBounds.size.y > config.minMaxSize.y) {
+                targetSize = Mathf.Clamp(targetsBounds.size.y * 0.5f, config.minMaxSize.x, config.minMaxSize.y);
+            } else {
+                targetSize = Mathf.Clamp(targetsBounds.size.x / SCREEN_WH_RATIO * 0.5f, config.minMaxSize.x, config.minMaxSize.y);
+            }
+        } else {
+            targetPos = startCamPos;
+            targetSize = startCamSize;
+        }
+
+        if (config.useLimits) {
+            targetPos = ClampCameraPosInsideArea(targetPos, config.limitsCenter, config.limitsSize, cam);
+        }
+
+        Vector3 newPos = Vector2.SmoothDamp(camT.position, targetPos, ref camPosDamp, config.followTime) + shakeValue;
+        newPos = ClampCameraPosInsideArea(newPos, config.limitsCenter, config.limitsSize, cam);
+        camT.position = newPos.SetZ(startCamPos.z);
+
+        float newSize = Mathf.SmoothDamp(cam.orthographicSize, targetSize, ref targetSizeDamp, config.sizeChangeTime);
+        cam.orthographicSize = newSize;
+
+        shadowCamT.position = camT.position;
+        shadowCam.orthographicSize = cam.orthographicSize;
+
+        gradientBackground.AlignSizeToCamera(cam);
     }
 
-    private void LateUpdate() {
-        if (target != null) {
-            Follow();
-        } else {
-            camT.position = Vector3.SmoothDamp(camT.position, startPos, ref camPosDamp, 0.1f) + shakeOffset;
+    private void OnDrawGizmosSelected() {
+        if (config.useLimits) {
+            Gizmos.color = Color.red.SetA(0.1f);
+            Gizmos.DrawCube(config.limitsCenter, config.limitsSize);
+        }
+
+        for (int i = 0; i < targets.Count; i++) {
+            Gizmos.color = Color.green.SetA(0.1f);
+            Gizmos.DrawCube(targets[i].targetPosition, targets[i].bounds);
+        }
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(targetPos, 0.3f);
+    }
+
+    /*
+    public void ApplyGraphicsPreset(GraphicsPreset preset) {
+        
+        postFXVolume.sharedProfile.TryGet(out Bloom bloom);
+        postFXVolume.sharedProfile.TryGet(out Vignette vignette);
+
+        switch (preset) {
+            case GraphicsPreset.Fast:
+                bloom.active = false;
+                vignette.active = false;
+                break;
+            case GraphicsPreset.Medium:
+                bloom.active = false;
+                vignette.active = true;
+                break;
+            case GraphicsPreset.Fancy:
+                bloom.active = true;
+                vignette.active = true;
+                break;
         }
     }
-
-    private void Follow() {
-        Quaternion rot = Quaternion.Euler(0, rotY, 0) * Quaternion.Euler(rotX, 0, 0) * Quaternion.Euler(0, 0, rotZ);
-        targetPos = target.position + targetOffset + rot * Vector3.forward * camDst;
-
-        camT.rotation = rot;
-        camT.forward = -camT.forward;
-
-        targetPos += camT.right * currerntOffsetInPlane.x + camT.up * currerntOffsetInPlane.y;
-
-        camT.position = Vector3.SmoothDamp(camT.position, targetPos, ref camPosDamp, 0.1f) + shakeOffset;
-    }
+    */
 
     public void SetSizeAccordingToScreen(Vector2 safeAreaSize, ScreenMatchType matchType) {
         float wDivH = Screen.width / (float)Screen.height;
@@ -103,20 +165,24 @@ public class MCamera : Singleton<MCamera> {
         cam.orthographicSize = size;
     }
 
-    public void SetTarget(Transform _target, Vector3 targetOffset, Vector3 axisRotations, float dst, Vector2 _offsetInPlane) {
-        target = _target;
-        this.targetOffset = targetOffset;
-        rotX = axisRotations.x; rotY = axisRotations.y; rotZ = axisRotations.z;
-        camDst = dst;
-        targetOffsetInPlane = _offsetInPlane;
+    public void ClearTarget() {
+        targets.Clear();
     }
 
-    public void SetZoomPercent(float p, bool instant = false) {
-        targetFov = Mathf.Lerp(minMaxZoomFOV.x, minMaxZoomFOV.y, 1 - p);
+    public CameraTarget AddTarget(CameraTarget target) {
+        targets.Add(target);
+        return target;
+    }
 
-        if (instant) {
-            cam.fieldOfView = targetFov;
+    public void Shake() {
+        if (shakeTween != null) {
+            shakeTween.Kill(true);
         }
+        shakeValue = Vector3.zero;
+
+        shakeTween = DOTween.Shake(() => shakeValue, (x) => shakeValue = x, 0.3f, 0.4f, 12).OnComplete(() => {
+            shakeTween = null;
+        });
     }
 
     public static Vector2 GetWorldPos2D(Vector2 screenPos) {
@@ -154,15 +220,64 @@ public class MCamera : Singleton<MCamera> {
         }
     }
 
-    public void Shake(float force = 0.15f, float duration = 0.4f) {
-        if (shakeTween != null) {
-            shakeTween.Kill(false);
-            shakeOffset = Vector3.zero;
-        }
+    public static Vector2 ClampCameraPosInsideArea(Vector2 camPos, Vector2 areaCenter, Vector2 areaSize, Camera _cam) {
+        Vector2 mapBottomLeft = areaCenter - areaSize * 0.5f;
+        Vector2 mapTopRight = areaCenter + areaSize * 0.5f;
+        Vector2 camSize = GetCameraWorldSize(_cam);
 
-        shakeTween = DOTween.Shake(() => shakeOffset, x => shakeOffset = x, duration, force, 12, 90, true, true);
+        Vector2 minCamPos = mapBottomLeft + camSize * 0.5f;
+        Vector2 maxCamPos = mapTopRight - camSize * 0.5f;
+
+        return new Vector2(Mathf.Clamp(camPos.x, minCamPos.x, maxCamPos.x), Mathf.Clamp(camPos.y, minCamPos.y, maxCamPos.y));
     }
 
+    public static Vector2 GetCameraWorldSize(Camera _cam) {
+        float k = Screen.width / (float)Screen.height;
+        return new Vector2(_cam.orthographicSize * k, _cam.orthographicSize) * 2f;
+    }
+
+    public static Vector4 GetCameraCorners(Camera _cam, Transform _camT) {
+        Vector2 camSize = GetCameraWorldSize(_cam);
+        return new Vector4(_camT.position.x - camSize.x * 0.5f, _camT.position.y - camSize.y * 0.5f, _camT.position.x + camSize.x * 0.5f, _camT.position.y + camSize.y * 0.5f);
+    }
+
+}
+
+[System.Serializable]
+public class CameraTarget {
+    public Transform t;
+    public Vector2 offset;
+    public Vector2 bounds;
+    public float priority = 0.5f;
+    public bool doFollow = true;
+
+    public CameraTarget(Transform _t, Vector2 _offset, Vector2 _bounds, bool doFollow = true) {
+        t = _t;
+        offset = _offset;
+        bounds = _bounds;
+        this.doFollow = doFollow;
+    }
+
+    public CameraTarget SetPriority(float p) {
+        priority = p;
+        return this;
+    }
+
+    public Vector2 targetPosition => (Vector2)t.position + offset;
+
+}
+
+[System.Serializable]
+public class CameraConfig {
+    public float followTime = 0.2f;
+    public float sizeChangeTime = 0.3f;
+
+    public bool useLimits;
+    public Vector2 limitsCenter;
+    public Vector2 limitsSize;
+
+    public Vector2 followMargin;
+    public Vector2 minMaxSize;
 }
 
 public enum ScreenMatchType {

@@ -10,8 +10,8 @@ public abstract class HeroLimb : MonoBehaviour {
 
 	public Rigidbody2D rb;
 	public Collider2D[] colliders;
-	public SpriteRenderer baseSpriteRend;
 
+	public HeroLimbRend rend;
 	public LimbMotion motion;
 
 	public bool isGrounded { get; private set; }
@@ -24,7 +24,7 @@ public abstract class HeroLimb : MonoBehaviour {
 	}
 
 	public virtual void Init() {
-		
+		rend.Init(this);
 	}
 
 	protected virtual void FixedUpdate() {

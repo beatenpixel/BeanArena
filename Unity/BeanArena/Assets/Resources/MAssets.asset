@@ -17,3 +17,24 @@ MonoBehaviour:
     t: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
   - name: switch_panel
     t: {r: 0.20630117, g: 0.43023384, b: 0.7169812, a: 1}
+  - name: bean_team_0
+    t: {r: 0.20630117, g: 0.43023384, b: 0.7169812, a: 1}
+  - name: bean_team_1
+    t: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
+  - name: bean_team_2
+    t: {r: 0.9137255, g: 0.65383065, b: 0.16862743, a: 1}
+  - name: bean_team_3
+    t: {r: 0.55368537, g: 0.9137255, b: 0.16862743, a: 1}
+  m_TextPresets:
+  - preset: 0
+    fontAsset: {fileID: 11400000, guid: b3e1909bfa2fc3640b6280041d40f338, type: 2}
+    material: {fileID: 6112594639685037943, guid: b3e1909bfa2fc3640b6280041d40f338, type: 2}
+  - preset: 1
+    fontAsset: {fileID: 11400000, guid: b3e1909bfa2fc3640b6280041d40f338, type: 2}
+    material: {fileID: 2100000, guid: 21db5a421c17a5c4aa25680e05b824b6, type: 2}
+  - preset: 2
+    fontAsset: {fileID: 11400000, guid: 9aa6326b69cf6fb43b5ac6d834b4f3d3, type: 2}
+    material: {fileID: 5355257908315070428, guid: 9aa6326b69cf6fb43b5ac6d834b4f3d3, type: 2}
+  - preset: 3
+    fontAsset: {fileID: 11400000, guid: 9aa6326b69cf6fb43b5ac6d834b4f3d3, type: 2}
+    material: {fileID: 2100000, guid: 69c4898ce4715244c9315b943e7b38bb, type: 2}

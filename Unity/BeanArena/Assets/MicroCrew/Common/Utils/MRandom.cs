@@ -45,6 +45,9 @@ public static class MRandom {
             return new Vector2(Range(-size.x * 0.5f, size.x * 0.5f), size.y * 0.5f * Sign());
         }
     }
+    public static Vector2 InsideRect(Vector2 size) {
+        return new Vector2(MRandom.Range(-size.x, size.x), MRandom.Range(-size.y, size.y));
+    }
 
     public static string RandomFirstName() {
         int sex = MRandom.Range(0, 2);

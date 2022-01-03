@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-	public Hero hero;
+	public Hero hero { get; private set; }
 
 	public SO_PlayerInput playerInput;
 
 	public void Init() {
 		playerInput.OnMoveInput += MoveJoystickInput;
+		playerInput.OnArmInput += ArmJoystickInput;
 	}
 	
 	public void InternalStart() {
@@ -18,7 +19,10 @@ public class Player : MonoBehaviour {
 	}
 	
 	public void InternalUpdate() {
-		
+		if(MInput.inputType == MInput.InputType.PC) {
+			Vector2 keyboardMoveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));			
+			hero.MoveInput(Vector2.ClampMagnitude(keyboardMoveInput, 1f));
+        }
 	}
 	
 	public void InternalLateUpdate() {
@@ -29,6 +33,10 @@ public class Player : MonoBehaviour {
 		
 	}
 
+	public void AssignHero(Hero _hero) {
+		hero = _hero;
+	}
+
 	private void MoveJoystickInput(UIJoystickEventData e) {
 		if (e.type == UIJoystickEventData.EventType.Cancel || e.type == UIJoystickEventData.EventType.End) {
 			hero.MoveInput(Vector2.zero);
@@ -36,5 +44,13 @@ public class Player : MonoBehaviour {
 			hero.MoveInput(e.value);
 		}
     }
-	
+
+	private void ArmJoystickInput(UIJoystickEventData e) {
+		if (e.type == UIJoystickEventData.EventType.Cancel || e.type == UIJoystickEventData.EventType.End) {
+			hero.ArmInput(Vector2.zero);
+		} else {
+			hero.ArmInput(e.value);
+		}
+	}
+
 }

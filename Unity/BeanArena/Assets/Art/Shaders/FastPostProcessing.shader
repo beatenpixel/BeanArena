@@ -109,10 +109,14 @@ Shader "Demonixis/FastPostProcessing"
 
 			if (shadowSample.a > 0.5) {
 				col.rgb *= 1 - clamp(shadowSample * 100,0,1) * 0.3 * (1 - fadeP);
+				//col.r = 1 - fadeP;
+				//col.g = fadeP;
 			}
 		}
 
 		//col.rgb = fadeP;
+
+		//col.rgb = 1 - col.rgb;
 
 		return half4(col, 1.0);
 	}

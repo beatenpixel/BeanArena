@@ -12,55 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab297f54b838984eaa5ff7b5cef7a51, type: 3}
   m_Name: MPool
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 202226592503866919, guid: 04391c853f59aef4e93f74717c37ddc5, type: 3}
-    - {fileID: 985350063632542303, guid: 5dd4393ff0fcbfc418ee8b632beb6b8d, type: 3}
-    - {fileID: 5310414538654345142, guid: b55a927ba7696a2409aa960c22e4ad5b, type: 3}
-    - {fileID: 1547314348094329415, guid: 93cb96950c9b7de4caff267fc568742b, type: 3}
-    - {fileID: 7761240283940996904, guid: 24d484ddf8ae7f640bf2d43631b3e6da, type: 3}
-    - {fileID: 3727043907130833752, guid: 0629553b68d455d46b54fc9e8a5cd9b8, type: 3}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: prefabs
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[MicroCrew.Utils.IPoolObject, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 6
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 10
-      Data: 3
-    - Name: 
-      Entry: 10
-      Data: 4
-    - Name: 
-      Entry: 10
-      Data: 5
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: objects
-      Entry: 6
-      Data: 
-    - Name: objPrefabs
-      Entry: 6
-      Data: 
+  prefabs:
+  - {fileID: 6186975834321502702, guid: befbaac469cee5a46957574baacb2e00, type: 3}
+  - {fileID: 2560367928480507612, guid: 81a305149882be14691a1d2af17fca98, type: 3}
+  - {fileID: 6307285711843241830, guid: c20856cf25ff02f4b80193cbd7daaf6e, type: 3}

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class Map : MonoBehaviour {
@@ -9,10 +10,14 @@ public abstract class Map : MonoBehaviour {
 
 	public List<Hero> heroes;
 
+	[SerializeField] private List<MapArea> areas;
+
+	protected virtual void Awake() {
+		areas = new List<MapArea>(FindObjectsOfType<MapArea>());
+    }
+
 	public virtual void Init() {
-		for (int i = 0; i < heroes.Count; i++) {
-			heroes[i].Init();
-		}
+		
 	}
 	
 	public virtual void InternalUpdate() {
@@ -29,12 +34,31 @@ public abstract class Map : MonoBehaviour {
 		}
 	}
 
+	public void AddHero(Hero hero) {
+		heroes.Add(hero);
+    }
+
 	private void UpdateShader() {
 		Shader.SetGlobalFloat("_MapBaseLineWorldY", groundBaseLineY.position.y);
 		Vector2 screenSpacePos = MCamera.inst.cam.WorldToScreenPoint(groundBaseLineY.position);
 		float uvY = screenSpacePos.y / Screen.height;
 		Shader.SetGlobalFloat("_MapBaseLineCameraSpaceY", uvY);
 	}
+
+	public MapArea GetArea(string name) {
+		return areas.Find(x => x.areaName == name);
+    }
+
+	public List<MapArea> GetAreas(Func<MapArea,bool> func) {
+		List<MapArea> result = new List<MapArea>();
+        for (int i = 0; i < areas.Count; i++) {
+			if(func(areas[i])) {
+				result.Add(areas[i]);
+            }
+        }
+
+		return result;
+    }
 
 	protected virtual void OnDrawGizmos() {
 		Gizmos.color = Color.yellow;
