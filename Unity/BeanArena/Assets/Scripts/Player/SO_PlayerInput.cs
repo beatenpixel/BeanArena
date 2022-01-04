@@ -9,6 +9,7 @@ public class SO_PlayerInput : ScriptableObject {
 
     public Action<UIJoystickEventData> OnMoveInput;
     public Action<UIJoystickEventData> OnArmInput;
+    public Action<ButtonInputEventData> OnButtonInput;
 
     public void OnJoystickInput(UIJoystickEventData data) {
         OnMoveInput?.Invoke(data);
@@ -18,4 +19,12 @@ public class SO_PlayerInput : ScriptableObject {
         OnArmInput?.Invoke(data);
     }
 
+    public void TriggerOnButtonInput(ButtonInputEventData data) {
+        OnButtonInput?.Invoke(data);
+    }
+
+}
+
+public struct ButtonInputEventData {
+    public int buttonID;
 }

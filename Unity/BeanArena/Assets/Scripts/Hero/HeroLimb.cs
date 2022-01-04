@@ -17,7 +17,12 @@ public abstract class HeroLimb : MonoBehaviour {
 	public bool isGrounded { get; private set; }
 	public Vector2 groundNormal { get; private set; }
 
+	[Header("Equipment")]
+	public int maxEquipmentSlots = 1;
+
 	private float ungroundFixedTime;
+
+	public List<Equipment> equipment = new List<Equipment>();
 
 	protected virtual void Awake() {
 		rb.centerOfMass = centerOfMass;
@@ -41,6 +46,20 @@ public abstract class HeroLimb : MonoBehaviour {
 
 			float angle = Mathf.LerpAngle(rb.rotation, rot, Time.deltaTime * motion.rotSpeed);
 			rb.MoveRotation(angle);
+        }
+    }
+
+	public bool CanEquip(Equipment equip) {
+		Debug.Log(equip.gameObject.name + " " + gameObject.name + (equipment.Count < maxEquipmentSlots) + " " + equipment.Count);
+		return equipment.Count < maxEquipmentSlots;
+	}
+
+	public bool AddEquipment(Equipment equip) {
+		if (equipment.Count < maxEquipmentSlots) {
+			equipment.Add(equip);
+			return true;
+		} else {
+			return false;
         }
     }
 
@@ -79,11 +98,12 @@ public abstract class HeroLimb : MonoBehaviour {
 
 }
 
+[Flags]
 public enum LimbType {
-	None,
-	Body,
-	RArm,
-	LArm
+	None = 0,
+	Body = 1 << 0,
+	RArm = 1 << 1,
+	LArm = 1 << 2
 }
 
 [System.Serializable]

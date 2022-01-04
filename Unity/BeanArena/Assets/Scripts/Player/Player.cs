@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
 	public void Init() {
 		playerInput.OnMoveInput += MoveJoystickInput;
 		playerInput.OnArmInput += ArmJoystickInput;
+		playerInput.OnButtonInput += ButtonInput;
 	}
 	
 	public void InternalStart() {
@@ -21,7 +22,7 @@ public class Player : MonoBehaviour {
 	public void InternalUpdate() {
 		if(MInput.inputType == MInput.InputType.PC) {
 			Vector2 keyboardMoveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));			
-			hero.MoveInput(Vector2.ClampMagnitude(keyboardMoveInput, 1f));
+			//hero.MoveInput(Vector2.ClampMagnitude(keyboardMoveInput, 1f));
         }
 	}
 	
@@ -51,6 +52,10 @@ public class Player : MonoBehaviour {
 		} else {
 			hero.ArmInput(e.value);
 		}
+	}
+
+	private void ButtonInput(ButtonInputEventData e) {
+		hero.ButtonInput(e);
 	}
 
 }

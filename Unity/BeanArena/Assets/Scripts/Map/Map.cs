@@ -8,7 +8,8 @@ public abstract class Map : MonoBehaviour {
 
 	public Transform groundBaseLineY;
 
-	public List<Hero> heroes;
+	public List<Hero> heroes = new List<Hero>();
+	public List<ITarget> targets = new List<ITarget>();
 
 	[SerializeField] private List<MapArea> areas;
 
@@ -36,6 +37,32 @@ public abstract class Map : MonoBehaviour {
 
 	public void AddHero(Hero hero) {
 		heroes.Add(hero);
+		targets.Add(hero);
+	}
+
+	public ITarget GetClosestTarget(Vector2 worldPos, Func<ITarget, bool> targetFilter, out TargetAimPoint aimPoint) {
+		float minDst = 1000000;
+		ITarget closestTarget = null;
+		aimPoint = null;
+
+		for (int i = 0; i < targets.Count; i++) {
+			if (!targetFilter(targets[i]))
+				continue;
+
+			int pc = targets[i].targetAimPoints.Count;
+
+			for (int x = 0; x < pc; x++) {
+				Vector2 dd = worldPos - targets[i].targetAimPoints[x].worldPos;
+				if(dd.magnitude < minDst) {
+					minDst = dd.magnitude;
+
+					closestTarget = targets[i];
+					aimPoint = targets[i].targetAimPoints[x];
+				}
+			}
+        }
+
+		return closestTarget;
     }
 
 	private void UpdateShader() {

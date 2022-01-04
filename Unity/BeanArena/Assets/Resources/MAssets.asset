@@ -18,7 +18,7 @@ MonoBehaviour:
   - name: switch_panel
     t: {r: 0.20630117, g: 0.43023384, b: 0.7169812, a: 1}
   - name: bean_team_0
-    t: {r: 0.20630117, g: 0.43023384, b: 0.7169812, a: 1}
+    t: {r: 0.2654859, g: 0.5420415, b: 0.8962264, a: 1}
   - name: bean_team_1
     t: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
   - name: bean_team_2

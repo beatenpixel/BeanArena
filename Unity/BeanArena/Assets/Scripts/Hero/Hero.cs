@@ -1,12 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class Hero : PoolObject {
+public class Hero : PoolObject, IDamageable, ITarget {
+
+	public HeroInfo info { get; private set; }
 
 	public MoveConfig moveConfig;
 
+	private HeroFaceRend faceRend;
 	private HeroBody body;
 	private List<HeroArm> arms;
 	private List<HeroLimb> limbs;
@@ -19,11 +23,25 @@ public class Hero : PoolObject {
 
 	public Orientation orientation { get; private set; }
 
-	protected override void Awake() {
+	private TargetAim targetAim;
+
+	// ITarget
+	private TargetInfo m_TargetInfo = new TargetInfo() {
+		type = TargetType.Hero
+	};
+
+	private List<TargetAimPoint> m_TargetAimPoints = new List<TargetAimPoint>();
+
+	public TargetInfo targetInfo => m_TargetInfo;
+    public List<TargetAimPoint> targetAimPoints => m_TargetAimPoints;
+	// ITarget
+
+    protected override void Awake() {
         base.Awake();
 
 		body = GetComponentInChildren<HeroBody>();
 		arms = new List<HeroArm>(GetComponentsInChildren<HeroArm>());
+		faceRend = GetComponentInChildren<HeroFaceRend>();
 
 		limbs = new List<HeroLimb>();
 		limbs.Add(body);
@@ -32,10 +50,21 @@ public class Hero : PoolObject {
         for (int i = 0; i < limbs.Count; i++) {
 			limbs[i].Init();
         }
+
+		faceRend.Init();
+
+		m_TargetAimPoints.Add(new TargetAimPoint() {
+			worldPos = body.transform.position
+		});
 	}
 
 	public virtual void InitInFactory(HeroConfig config) {
-		if(config.role == HeroRole.Enemy) {
+		info = new HeroInfo();
+		info.maxHealth = 100;
+		info.health = 100;
+		info.teamID = config.teamID;
+
+		if (config.role == HeroRole.Enemy) {
 			WUI_TextStyle style = WUI_TextStyle.beanNickname;
 			style.textColor = Color.white.SetA(0.3f);
 			nicknameText = WorldUI.inst.AddText(config.nickname, body.transform, Vector2.up * 1.5f, style);
@@ -47,7 +76,7 @@ public class Hero : PoolObject {
 		
         for (int i = 0; i < limbs.Count; i++) {
 			limbs[i].rend.SetBaseColor(beanColor);
-			limbs[i].gameObject.layer = LayerMask.NameToLayer("team" + config.teamID);
+			limbs[i].gameObject.layer = Game.TeamIDToLayer(config.teamID);
 		}
 
 		SetOrientation(config.orientation);
@@ -58,10 +87,11 @@ public class Hero : PoolObject {
 	}
 
 	public void InternalUpdate() {
-		
+		targetAimPoints[0].worldPos = body.transform.position;
 	}
 	
 	public void InternalFixedUpdate() {
+
 		if (input.move.magnitude > 0.2f) {
 			body.rb.AddForce(input.move * moveConfig.moveForce * Time.deltaTime);
 
@@ -79,19 +109,79 @@ public class Hero : PoolObject {
 			}
 		} else {
 			body.motion.SetR(0f, true);			
-		}	
+		}
 
-		if(input.arm.magnitude > 0.2f) {
+		if (targetAim != null /* && input.move.magnitude > 0.2f*/) {
+			Vector2 p = targetAim.aimPoint.worldPos;
+			Vector2 dd = p - (Vector2)arms[0].transform.position;
+
+			if (dd.magnitude <= 10f) {
+				ArmInput(dd.normalized);
+			} else {
+				ArmInput(Vector2.zero);
+			}
+		} else {
+			ArmInput(Vector2.zero);
+		}
+
+		if (input.arm.magnitude > 0.2f) {
 			float armAngle = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
 
 			for (int i = 0; i < arms.Count; i++) {
-				arms[i].motion.SetR(armAngle, true).SetS(20f);
+				if (arms[i].limbType != LimbType.RArm) {
+					arms[i].motion.SetR(armAngle + i * 15, true).SetS(15f);
+				} else {
+					arms[i].motion.SetR(0f, true).SetS(0f);
+				}
 			}
 		} else {
 			for (int i = 0; i < arms.Count; i++) {
 				arms[i].motion.SetR(0f, true).SetS(0f);
 			}
 		}
+
+		/*
+		bool autoAim = false;
+
+		if (autoAim) {
+			bool resetArms = false;
+
+			if(targetAim != null) {
+				Vector2 p = targetAim.aimPoint.worldPos;
+				Vector2 dd = p - (Vector2)arms[0].transform.position;
+
+				if(dd.magnitude <= 7f) {
+					float armAngle = Vector2.SignedAngle(Vector2.right, dd.normalized);
+
+					for (int i = 0; i < arms.Count; i++) {
+						arms[i].motion.SetR(armAngle + i * 15f, true).SetS(15f);
+					}
+				} else {
+					resetArms = true;
+                }
+            } else {
+				resetArms = true;
+            }
+
+			if(resetArms) {
+				for (int i = 0; i < arms.Count; i++) {
+					arms[i].motion.SetR(0f, true).SetS(0f);
+				}
+			}
+		} 
+		*/
+
+	}
+
+	public void SetTarget(ITarget _target, TargetAimPoint _aimPoint = null) {
+		if(_aimPoint == null) {
+			_aimPoint = _target.targetAimPoints[0];
+        }
+
+		targetAim = new TargetAim() {
+			target = _target,
+			aimPoint = _aimPoint
+		};
 	}
 
 	public void SetOrientation(Orientation o) {
@@ -115,10 +205,58 @@ public class Hero : PoolObject {
 		input.arm = inp;
 	}
 
+	public void ButtonInput(ButtonInputEventData inp) {
+		HeroLimb limb;
+
+		if(inp.buttonID == 0) {
+			limb = this[LimbType.RArm].First();
+		} else {
+			limb = this[LimbType.LArm].First();
+		}
+
+		if(limb.equipment.Count > 0) {
+			limb.equipment[0].Use();
+        }
+    }
+
+	public bool AttachEquipment(Equipment equip) {
+		var targetLimbs = limbs.Where(x => MUtils.EnumAnyInMask((int)equip.canAttachToLimbs, (int)x.limbType));
+		
+		if (targetLimbs.Count() > 0) {
+			var freeLimbs = targetLimbs.Where(x => x.CanEquip(equip));
+
+			if (freeLimbs.Count() > 0) {
+				HeroLimb freeLimb = freeLimbs.First();
+
+				equip.AttachToHero(this, freeLimb);
+				freeLimb.AddEquipment(equip);
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public Vector2 GetPosition() {
+		return body.transform.position;
+    }
+
 	public override Type GetPoolObjectType() {
 		return typeof(Hero);
     }
 
+	public IEnumerable<HeroLimb> this[LimbType type] {
+		get {
+			return limbs.Where(x => x.limbType == type);
+        }
+    }
+
+	// IDamageable
+    public DamageResponse TakeDamage(DamageInfo damage) {
+        throw new NotImplementedException();
+    }
+	// IDamageable
 }
 
 public class HeroInput {
@@ -132,6 +270,13 @@ public class HeroInput {
 public class MoveConfig {
 	public float moveForce = 200f;
 	public float jumpForce = 800f;
+}
+
+[System.Serializable]
+public class HeroInfo {
+	public float health;
+	public float maxHealth;
+	public int teamID;
 }
 
 public enum HeroRole {

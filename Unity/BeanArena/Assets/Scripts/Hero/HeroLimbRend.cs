@@ -22,6 +22,7 @@ public class HeroLimbRend : MonoBehaviour {
 
     public void Init(HeroLimb limb) {
         this.limb = limb;
+        baseRendSprite.sortingOrder = limbsOrderLayers[limb.limbType];
     }
 
     public void SetOrientation(Orientation orient) {
@@ -47,5 +48,11 @@ public class HeroLimbRend : MonoBehaviour {
             baseRendSprite.color = (color * 1f).SetA(1f);
         }
     }
+
+    public static Dictionary<LimbType, int> limbsOrderLayers = new Dictionary<LimbType, int> {
+        {LimbType.Body, 50 },
+        {LimbType.LArm, 30 },
+        {LimbType.RArm, 70 },
+    };
 
 }

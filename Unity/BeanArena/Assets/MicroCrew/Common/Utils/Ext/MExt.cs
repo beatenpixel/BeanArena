@@ -6,6 +6,28 @@ using UnityEngine;
 
 public static class MExt {
 
+    public static void SetLayerRecursively(this GameObject obj, int layer) {
+        obj.layer = layer;
+
+        foreach (Transform child in obj.transform) {
+            child.gameObject.SetLayerRecursively(layer);
+        }
+    }
+
+    public static void ShiftFromStart<T>(this T[] arr, T newItem) {
+        for (int i = arr.Length - 1; i > 0; i--) {
+            arr[i] = arr[i - 1];
+        }
+        arr[0] = newItem;
+    }
+
+    public static void ShiftFromEnd<T>(this T[] arr, T newItem) {
+        for (int i = 0; i < arr.Length - 2; i++) {
+            arr[i] = arr[i + 1];
+        }
+        arr[arr.Length - 1] = newItem;
+    }
+
     //========= COLORS ===========
 
     public static Color SetA(this Color c, float a) {

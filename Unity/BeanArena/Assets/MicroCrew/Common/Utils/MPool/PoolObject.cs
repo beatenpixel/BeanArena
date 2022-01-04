@@ -12,7 +12,7 @@ public abstract class PoolObject : MonoBehaviour, IPoolObject {
     [HideInInspector] public Transform t;
 
     [SerializeField] private string _subType = DEFAULT_SUB_TYPE;
-    public string subType {
+    public virtual string subType {
         get {
             return _subType;
         }
