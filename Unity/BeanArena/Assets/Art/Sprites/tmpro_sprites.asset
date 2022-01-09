@@ -51,6 +51,12 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: gem
     m_HashCode: 110863
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 2
+    m_Scale: 1
+    m_Name: cup
+    m_HashCode: 107270
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -82,6 +88,21 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     sprite: {fileID: 3867287787966158001, guid: e9104975539d48742ab9e47a6a6eb9af, type: 3}
+  - m_Index: 2
+    m_Metrics:
+      m_Width: 168
+      m_Height: 180
+      m_HorizontalBearingX: -15.7
+      m_HorizontalBearingY: 168.33
+      m_HorizontalAdvance: 168
+    m_GlyphRect:
+      m_X: 12
+      m_Y: 445
+      m_Width: 168
+      m_Height: 180
+    m_Scale: 0.8
+    m_AtlasIndex: 0
+    sprite: {fileID: -5935198479381384675, guid: e9104975539d48742ab9e47a6a6eb9af, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
 --- !u!21 &7619985351615412051

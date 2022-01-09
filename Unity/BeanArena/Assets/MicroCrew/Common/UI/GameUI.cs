@@ -9,6 +9,8 @@ public class GameUI : MonoBehaviour {
 
     public SO_PlayerInput playerInput;
 
+    public PlayerPanel[] playerPanels;
+
     public UISimpleButton[] abilityButtons;
 
     [SerializeField] private UICanvas m_Canvas;
@@ -22,7 +24,12 @@ public class GameUI : MonoBehaviour {
             }));
         }
 
+        for (int i = 0; i < playerPanels.Length; i++) {
+            playerPanels[i].Init();
+        }
+
         MGameLoop.Update.Register(InternalUpdate);
+        HeroDamageEvent.Register(OnHeroDamageEvent);
     }
 
     public void InternalUpdate() {
@@ -32,6 +39,14 @@ public class GameUI : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.F)) {
             playerInput.TriggerOnButtonInput(new ButtonInputEventData() { buttonID = 1 });
+        }
+    }
+
+    public void OnHeroDamageEvent(HeroDamageEvent e) {
+        for (int i = 0; i < playerPanels.Length; i++) {
+            if(playerPanels[i].attachedHero == e.hero) {
+                playerPanels[i].healthbar.SetValue(e.hero.info.health / (float)e.hero.info.maxHealth, false);
+            }
         }
     }
 

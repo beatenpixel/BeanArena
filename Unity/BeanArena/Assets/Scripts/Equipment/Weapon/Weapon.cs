@@ -38,7 +38,7 @@ public abstract class Weapon : Equipment {
 			rends[i].sortingOrder = limb.rend.baseRendSprite.sortingOrder - 1;
 		}
 
-		gameObject.SetLayerRecursively(Game.TeamIDToOnlyBeanLayer(hero.info.teamID));
+		gameObject.SetLayerRecursively(Game.TeamIDToLayer(hero.info.teamID));
 
 		transform.SetParent(limb.transform);
 		transform.ApplyTransformData(attachTData);

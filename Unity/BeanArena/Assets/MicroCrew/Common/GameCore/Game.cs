@@ -95,14 +95,22 @@ public class Game : Singleton<Game> {
 
 		MCamera.inst.AddTarget(new CameraTarget(player.hero.t, new Vector2(0, -2), Vector2.one * 2));
 
-		ITarget enemyTarget = map.GetClosestTarget(playerHero.GetPosition(), (t) => t != (ITarget)playerHero, out TargetAimPoint aimPoint);
-		playerHero.SetTarget(enemyTarget, aimPoint);
+		playerHero.FindClosestTarget();
+        for (int i = 0; i < enemies.Count; i++) {
+			enemies[i].hero.FindClosestTarget();
+        }
 
-		Sword sword = (Sword)equipmentFactory.Create(new WeaponConfig(WeaponType.Sword), Vector2.zero);
-		playerHero.AttachEquipment(sword);
+		//Sword sword = (Sword)equipmentFactory.Create(new WeaponConfig(WeaponType.Sword), Vector2.zero);
+		//playerHero.AttachEquipment(sword);
 
 		Pistol pistol = (Pistol)equipmentFactory.Create(new WeaponConfig(WeaponType.Pistol), Vector2.zero);
 		playerHero.AttachEquipment(pistol);
+
+		Pistol pistol2 = (Pistol)equipmentFactory.Create(new WeaponConfig(WeaponType.Pistol), Vector2.zero);
+		playerHero.AttachEquipment(pistol2);
+
+		GameUI.inst.playerPanels[0].SetHero(playerHero);
+		GameUI.inst.playerPanels[1].SetHero(enemies[0].hero);
 	}
 
 	private void OnSceneLoadEnd(SceneEvent e) {
@@ -124,6 +132,10 @@ public class Game : Singleton<Game> {
 
         for (int i = enemies.Count - 1; i >= 0; i--) {
 			enemies[i].InternalUpdate();
+        }
+
+		if(Input.GetKeyDown(KeyCode.R)) {
+			MSceneManager.ReloadScene();
         }
 	}
 

@@ -228,7 +228,7 @@ MonoBehaviour:
   weaponSO: {fileID: 11400000, guid: 62a7b599a6937e14989c07e7124698b3, type: 2}
   hingeJointAnchor: {x: -0.4, y: -0.2}
   hingeJointConnectedAnchor: {x: 0.8, y: 0}
-  shootForce: {x: 200, y: 300}
+  shootForce: {x: 50, y: 100}
   shootPoint: {fileID: 4288825302750845908}
 --- !u!50 &302938953662217073
 Rigidbody2D:

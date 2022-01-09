@@ -16,11 +16,23 @@ public abstract class DamageInfo {
     }
 }
 
-public class PhysicalDamage : DamageInfo {
+public abstract class HeroDamage : DamageInfo {
+
+    public Hero hero;
+    public HeroLimb limb;
+
+    protected HeroDamage(Hero _hero, HeroLimb _limb, DamageCause _causeType) : base(_causeType) {
+        hero = _hero;
+        limb = _limb;
+    }
+
+}
+
+public class PhysicalDamage : HeroDamage {
     public Collision2D collision;
     public Vector2 relVelocity;
 
-    public PhysicalDamage() : base(DamageCause.PHYSICS) {
+    public PhysicalDamage(Hero _hero, HeroLimb _limb) : base(_hero, _limb, DamageCause.PHYSICS) {
 
     }
 

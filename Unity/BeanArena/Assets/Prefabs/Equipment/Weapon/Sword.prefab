@@ -127,7 +127,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 32ffca16d437c6a439eb26ff267a4fb4, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -163,14 +163,14 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.1
   m_LinearDrag: 0
-  m_AngularDrag: 1
-  m_GravityScale: 0.3
+  m_AngularDrag: 0.5
+  m_GravityScale: 8
   m_Material: {fileID: 6200000, guid: 32ffca16d437c6a439eb26ff267a4fb4, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!114 &6653449992119986416
 MonoBehaviour:
@@ -201,5 +201,6 @@ MonoBehaviour:
   hingeJointConnectedAnchor: {x: 0.8, y: 0}
   forcePoint: {x: 1, y: 0}
   force: -30
-  massOnUse: 0.3
-  massOnIdle: 0.3
+  pushForce: 10
+  massOnUse: 0.1
+  massOnIdle: 0.1

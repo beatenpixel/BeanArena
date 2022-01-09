@@ -214,7 +214,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483647
   rb: {fileID: 5202255688328640630}
-  additionalGravity: 5
+  additionalGravity: 0
   refRotationDireciton: {x: 1, y: 0}
   trailRend: {fileID: 5202255688328640624}
 --- !u!50 &5202255688328640630
@@ -236,7 +236,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!61 &5202255688328640631
 BoxCollider2D:

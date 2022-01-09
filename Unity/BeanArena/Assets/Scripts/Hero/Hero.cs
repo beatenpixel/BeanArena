@@ -63,6 +63,7 @@ public class Hero : PoolObject, IDamageable, ITarget {
 		info.maxHealth = 100;
 		info.health = 100;
 		info.teamID = config.teamID;
+		info.state = HeroState.Alive;
 
 		if (config.role == HeroRole.Enemy) {
 			WUI_TextStyle style = WUI_TextStyle.beanNickname;
@@ -91,6 +92,13 @@ public class Hero : PoolObject, IDamageable, ITarget {
 	}
 	
 	public void InternalFixedUpdate() {
+		if (info.state == HeroState.Dead) {
+			return;
+		}
+
+        for (int i = 0; i < limbs.Count; i++) {
+			limbs[i].InternalFixedUpdate();
+        }
 
 		if (input.move.magnitude > 0.2f) {
 			body.rb.AddForce(input.move * moveConfig.moveForce * Time.deltaTime);
@@ -111,32 +119,52 @@ public class Hero : PoolObject, IDamageable, ITarget {
 			body.motion.SetR(0f, true);			
 		}
 
-		if (targetAim != null /* && input.move.magnitude > 0.2f*/) {
-			Vector2 p = targetAim.aimPoint.worldPos;
-			Vector2 dd = p - (Vector2)arms[0].transform.position;
+		if (false) {
 
-			if (dd.magnitude <= 10f) {
-				ArmInput(dd.normalized);
+			if (targetAim != null /* && input.move.magnitude > 0.2f*/) {
+				Vector2 p = targetAim.aimPoint.worldPos;
+				Vector2 dd = p - (Vector2)arms[0].transform.position;
+
+				if (dd.magnitude <= 30f) {
+					ArmInput(dd.normalized);
+				} else {
+					ArmInput(Vector2.zero);
+				}
 			} else {
 				ArmInput(Vector2.zero);
 			}
-		} else {
-			ArmInput(Vector2.zero);
-		}
 
-		if (input.arm.magnitude > 0.2f) {
-			float armAngle = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
+			if (input.arm.magnitude > 0.2f) {
+				float armAngle = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
 
-			for (int i = 0; i < arms.Count; i++) {
-				if (arms[i].limbType != LimbType.RArm) {
+				for (int i = 0; i < arms.Count; i++) {
 					arms[i].motion.SetR(armAngle + i * 15, true).SetS(15f);
-				} else {
+
+					continue;
+
+					if (arms[i].limbType != LimbType.RArm) {
+						arms[i].motion.SetR(armAngle + i * 15, true).SetS(15f);
+					} else {
+						arms[i].motion.SetR(0f, true).SetS(0f);
+					}
+				}
+			} else {
+				for (int i = 0; i < arms.Count; i++) {
 					arms[i].motion.SetR(0f, true).SetS(0f);
 				}
 			}
+
 		} else {
+			Vector2 bodyDir = body.transform.right * (int)orientation;
+			Vector2 enemyDir = targetAim.aimPoint.worldPos - (Vector2)arms[0].transform.position;
+
+			ArmInput(body.transform.right * MMath.CeilAwayFrom0Int(enemyDir.x));
+			SetOrientation(enemyDir);
+
+			float armAngle = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
+
 			for (int i = 0; i < arms.Count; i++) {
-				arms[i].motion.SetR(0f, true).SetS(0f);
+				arms[i].motion.SetR(armAngle + i * 15, true).SetS(5f);
 			}
 		}
 
@@ -188,7 +216,7 @@ public class Hero : PoolObject, IDamageable, ITarget {
 		orientation = o;
 
         for (int i = 0; i < limbs.Count; i++) {
-			limbs[i].rend.SetOrientation(orientation);
+			limbs[i].SetOrientation(orientation);
         }
     }
 
@@ -197,12 +225,14 @@ public class Hero : PoolObject, IDamageable, ITarget {
 	}
 
 	public void ArmInput(Vector2 inp) {
+		input.arm = inp;
+	}
+
+	public void SetOrientation(Vector2 inp) {
 		int s = MMath.SignInt(inp.x);
 		if ((int)orientation != s && s != 0) {
 			SetOrientation((Orientation)s);
 		}
-
-		input.arm = inp;
 	}
 
 	public void ButtonInput(ButtonInputEventData inp) {
@@ -238,6 +268,16 @@ public class Hero : PoolObject, IDamageable, ITarget {
 		return false;
 	}
 
+	public void FindClosestTarget() {
+		ITarget enemyTarget = Game.inst.map.GetClosestTarget(this.GetPosition(), (t) => t != (ITarget)this, out TargetAimPoint aimPoint);
+		SetTarget(enemyTarget, aimPoint);
+	}
+
+	private void Die() {
+		info.state = HeroState.Dead;
+		faceRend.SetFace(HeroFace.Dead);
+    }
+
 	public Vector2 GetPosition() {
 		return body.transform.position;
     }
@@ -254,7 +294,24 @@ public class Hero : PoolObject, IDamageable, ITarget {
 
 	// IDamageable
     public DamageResponse TakeDamage(DamageInfo damage) {
-        throw new NotImplementedException();
+		if (info.state != HeroState.Alive) {
+			return new DamageResponse() { success = false };
+		}
+
+		if (damage.causeType == DamageCause.PHYSICS) {
+			PhysicalDamage physDmg = (PhysicalDamage)damage;
+
+			info.health -= 10f;
+		}
+
+		HeroDamageEvent.Invoke(new HeroDamageEvent(this));
+
+		if(info.health <= 0) {
+			info.health = 0f;
+			Die();
+        }
+
+		return new DamageResponse();
     }
 	// IDamageable
 }
@@ -274,9 +331,16 @@ public class MoveConfig {
 
 [System.Serializable]
 public class HeroInfo {
+	public HeroState state;
 	public float health;
 	public float maxHealth;
 	public int teamID;
+}
+
+public enum HeroState {
+	None,
+	Alive,
+	Dead
 }
 
 public enum HeroRole {
@@ -294,4 +358,13 @@ public enum Axis2D {
 public enum Orientation {
 	Left = -1,
 	Right = 1,
+}
+
+public class HeroDamageEvent : MGameEvent<HeroDamageEvent> {
+
+	public Hero hero;
+
+	public HeroDamageEvent(Hero hero) {
+		this.hero = hero;
+	}
 }

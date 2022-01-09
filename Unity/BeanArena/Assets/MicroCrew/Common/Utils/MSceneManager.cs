@@ -51,6 +51,10 @@ public class MSceneManager : Singleton<MSceneManager> {
         inst.Internal_LoadScene(name);
     }
 
+    public static void ReloadScene() {
+        LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     #endregion
 
 }

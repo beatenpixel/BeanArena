@@ -21,10 +21,12 @@ public abstract class HeroLimb : MonoBehaviour {
 	public int maxEquipmentSlots = 1;
 
 	private float ungroundFixedTime;
+	private Vector3 startLocalScale;
 
 	public List<Equipment> equipment = new List<Equipment>();
 
 	protected virtual void Awake() {
+		startLocalScale = transform.localScale;
 		rb.centerOfMass = centerOfMass;
 	}
 
@@ -32,7 +34,7 @@ public abstract class HeroLimb : MonoBehaviour {
 		rend.Init(this);
 	}
 
-	protected virtual void FixedUpdate() {
+	public virtual void InternalFixedUpdate() {
 		if (isGrounded && Time.fixedTime > ungroundFixedTime) {
 			isGrounded = false;
 			groundNormal = Vector2.up;
@@ -61,6 +63,14 @@ public abstract class HeroLimb : MonoBehaviour {
 		} else {
 			return false;
         }
+    }
+
+	public void SetOrientation(Orientation orientation) {
+		if (limbType == LimbType.Body) {
+			rend.SetOrientation(orientation);
+		} else {
+			transform.localScale = startLocalScale.MulY((int)orientation);
+		}
     }
 
 	public void SetGrounded(bool isGrounded) {

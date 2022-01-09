@@ -214,6 +214,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed7e94a8b4bd544199db359922c55b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  faces:
+  - {fileID: -6597388907290003206, guid: 56fe8a06b0052aa4c9d578a4b452a045, type: 3}
+  - {fileID: 306614722634328623, guid: a7824e99320e86f4a8dd66fad9291819, type: 3}
+  - {fileID: -6154962540722802533, guid: a7824e99320e86f4a8dd66fad9291819, type: 3}
+  - {fileID: -5092351411351413438, guid: 56fe8a06b0052aa4c9d578a4b452a045, type: 3}
   faceSpriteRend: {fileID: 6186975834600973596}
 --- !u!1 &6186975834321502702
 GameObject:

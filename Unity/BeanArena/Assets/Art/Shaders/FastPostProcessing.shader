@@ -93,7 +93,7 @@ Shader "Demonixis/FastPostProcessing"
 		const float ditherSize = 1;
 		float3 magic = float3(0.06711056, 0.00583715, 52.9829189);
 		float gradient = frac(magic.z * frac(dot(uv / _MainTex_TexelSize * ditherSize, magic.xy))) / 255.0;
-		col.rgb -= gradient.xxx * 20;
+		col.rgb += gradient.xxx * 20;
 
 		// Vignette
 		half2 dst = (uv - 0.5) * 1.25;
