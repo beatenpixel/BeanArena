@@ -29,15 +29,15 @@ public abstract class HeroDamage : DamageInfo {
 }
 
 public class PhysicalDamage : HeroDamage {
-    public Collision2D collision;
-    public Vector2 relVelocity;
+    public float damage;
 
-    public PhysicalDamage(Hero _hero, HeroLimb _limb) : base(_hero, _limb, DamageCause.PHYSICS) {
-
+    public PhysicalDamage(float damage, Hero _hero, HeroLimb _limb) : base(_hero, _limb, DamageCause.PHYSICS) {
+        this.damage = damage;
     }
 
     public override float GetDamage() {
-        return relVelocity.magnitude * Mathf.Sqrt(collision.rigidbody.mass + collision.otherRigidbody.mass);
+        return damage;
+        //return relVelocity.magnitude * Mathf.Sqrt(collision.rigidbody.mass + collision.otherRigidbody.mass);
     }
 }
 

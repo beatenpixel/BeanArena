@@ -73,6 +73,8 @@ public class Game : Singleton<Game> {
 
 		enemies = new List<Enemy>();
 
+		MCamera.inst.ClearTargets();
+
 		for (int i = 0; i < 1; i++) {
 			Enemy enemy = new Enemy();
 

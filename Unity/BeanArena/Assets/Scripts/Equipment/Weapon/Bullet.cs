@@ -8,14 +8,19 @@ public class Bullet : Projectile {
     protected override void Interact(Collision2D collision) {
         base.Interact(collision);
 
-        HeroLimb limb = collision.gameObject.GetComponentInParent<HeroLimb>();
-        if(limb != null) {
-            
+        Debug.Log(collision.collider.gameObject.name);
+
+        Rigidbody2D otherRb = collision.collider.GetComponentInParent<Rigidbody2D>();
+        Debug.Log("rb is null: " + (otherRb == null));
+        if(otherRb != null) {
+            otherRb.AddForce(transform.right * 500);
         }
 
-        Hero hero = collision.gameObject.GetComponentInParent<Hero>();
-        if(hero != null) {
-            hero.TakeDamage(new PhysicalDamage(hero, limb));
+        HeroLimb limb = collision.collider.gameObject.GetComponentInParent<HeroLimb>();
+        Hero hero = collision.collider.gameObject.GetComponentInParent<Hero>();
+
+        if (hero != null && limb != null) {
+            hero.TakeDamage(new PhysicalDamage(10, hero, limb));
         }
 
         Push();
