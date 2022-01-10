@@ -22,11 +22,11 @@ public abstract class Equipment : PoolObject {
         this.limb = limb;
     }
 
-    public virtual void Use() {
+    public virtual void Use(EquipmentUseArgs useArgs) {
         if(Time.time > nextUseTime) {
             nextUseTime = Time.time + useDelay;
 
-            OnUse();
+            OnUse(useArgs);
         }
     }
 
@@ -34,7 +34,7 @@ public abstract class Equipment : PoolObject {
 
     }
 
-    protected abstract void OnUse();
+    protected abstract void OnUse(EquipmentUseArgs useArgs);
 
     public override Type GetPoolObjectType() {
         return typeof(Equipment);
@@ -52,4 +52,8 @@ public enum EquipmentCategory {
     Weapon,
     Helmet,
     Boots
+}
+
+public class EquipmentUseArgs {
+    public float charge;
 }

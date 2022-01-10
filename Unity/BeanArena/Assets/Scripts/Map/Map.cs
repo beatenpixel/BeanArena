@@ -23,7 +23,11 @@ public abstract class Map : MonoBehaviour {
 
 	protected virtual void OnDestroy() {
         for (int i = heroes.Count - 1; i >= 0; i--) {
-			heroes[i].DestroyHero();
+			if (heroes[i] != null) {
+				heroes[i].DestroyHero();
+			}
+
+			heroes.RemoveAt(i);
 		}
     }
 	

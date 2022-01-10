@@ -13,6 +13,7 @@ public class EquipmentFactory : MonoBehaviour {
         if(config.category == EquipmentCategory.Weapon) {
             WeaponConfig weaponConfig = (WeaponConfig)config;
 
+            Debug.Log("weapon: " + weaponConfig.weaponType.ToString());
             Weapon weapon = MPool.Get<Weapon>(weaponConfig.weaponType.ToString());
             weapon.t.position = position;
 

@@ -80,6 +80,8 @@ public class Hero : PoolObject, IDamageable, ITarget {
 			limbs[i].gameObject.layer = Game.TeamIDToLayer(config.teamID);
 		}
 
+		gameObject.layer = Game.TeamIDToLayer(config.teamID);
+
 		SetOrientation(config.orientation);
 	}
 
@@ -155,19 +157,29 @@ public class Hero : PoolObject, IDamageable, ITarget {
 			}
 
 		} else {
-			Vector2 bodyDir = body.transform.right * (int)orientation;
-			Vector2 enemyDD = targetAim.aimPoint.worldPos - (Vector2)arms[0].transform.position;
+			if (targetAim != null) {
+				Vector2 bodyDir = body.transform.right * (int)orientation;
+				Vector2 enemyDD = targetAim.aimPoint.worldPos - (Vector2)arms[0].transform.position;
 
-			ArmInput(body.transform.right * MMath.CeilAwayFrom0Int(enemyDD.x));
+				ArmInput(body.transform.right * MMath.CeilAwayFrom0Int(enemyDD.x));
 
-			if (Mathf.Abs(enemyDD.x) > 1f) {
-				SetOrientation(enemyDD);
-			}
+				if (Mathf.Abs(enemyDD.x) > 1f) {
+					SetOrientationFromVector2(enemyDD);
+				}
 
-			float armAngle = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
+				float armAngle = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
 
-			for (int i = 0; i < arms.Count; i++) {
-				arms[i].motion.SetR(armAngle + i * 15, true).SetS(20);
+				for (int i = 0; i < arms.Count; i++) {
+					arms[i].motion.SetR(armAngle + i * 15, true).SetS(500);
+				}
+			} else {
+				ArmInput(body.transform.right * (int)orientation);
+
+				float armAngle = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
+
+				for (int i = 0; i < arms.Count; i++) {
+					arms[i].motion.SetR(armAngle + i * 15, true).SetS(500);
+				}
 			}
 		}
 
@@ -239,7 +251,7 @@ public class Hero : PoolObject, IDamageable, ITarget {
 		input.arm = inp;
 	}
 
-	public void SetOrientation(Vector2 inp) {
+	public void SetOrientationFromVector2(Vector2 inp) {
 		int s = MMath.SignInt(inp.x);
 		if ((int)orientation != s && s != 0) {
 			SetOrientation((Orientation)s);
@@ -260,7 +272,9 @@ public class Hero : PoolObject, IDamageable, ITarget {
 		}
 
 		if(limb.equipment.Count > 0) {
-			limb.equipment[0].Use();
+			limb.equipment[0].Use(new EquipmentUseArgs() {
+			  charge = inp.chargePercent
+			});
         }
     }
 
@@ -283,9 +297,15 @@ public class Hero : PoolObject, IDamageable, ITarget {
 		return false;
 	}
 
-	public void FindClosestTarget() {
+	public bool FindClosestTarget() {
 		ITarget enemyTarget = Game.inst.map.GetClosestTarget(this.GetPosition(), (t) => t != (ITarget)this, out TargetAimPoint aimPoint);
-		SetTarget(enemyTarget, aimPoint);
+
+		if (enemyTarget != null) {
+			SetTarget(enemyTarget, aimPoint);
+			return true;
+		}
+
+		return false;
 	}
 
 	private void Die() {

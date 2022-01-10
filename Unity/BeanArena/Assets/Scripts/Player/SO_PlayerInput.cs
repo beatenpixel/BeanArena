@@ -27,4 +27,18 @@ public class SO_PlayerInput : ScriptableObject {
 
 public struct ButtonInputEventData {
     public int buttonID;
+    public bool isCharge;
+    public float chargePercent;
+
+    public ButtonInputEventData(int _buttonID) {
+        isCharge = false;
+        buttonID = _buttonID;
+        chargePercent = -1;
+    }
+
+    public ButtonInputEventData(int _buttonID, float charge) {
+        isCharge = true;
+        buttonID = _buttonID;
+        chargePercent = charge;
+    }
 }

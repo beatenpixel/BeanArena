@@ -18,7 +18,7 @@ public class Sword : Weapon {
         rb.mass = massOnIdle;
     }
 
-    protected override void OnUse() {
+    protected override void OnUse(EquipmentUseArgs useArgs) {
         float torque = force * -(int)hero.orientation;
 
         //rb.mass = massOnUse;

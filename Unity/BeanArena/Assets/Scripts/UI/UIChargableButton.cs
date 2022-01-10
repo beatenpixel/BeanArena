@@ -13,7 +13,7 @@ public class UIChargableButton : UIButtonBase {
     public UIChargableButtonConfig config;
 
     public Image chargeImage;
-
+    
     public override UIButtonConfig baseConfig => config;
 
     private float charge;
@@ -26,6 +26,8 @@ public class UIChargableButton : UIButtonBase {
     private Vector2 targetShakePos;
 
     private Color startChargeImageColor;
+
+    public Action<UIChargeableButtonOutput> OnOutput;
 
     public override Type GetPoolObjectType() {
         return typeof(UIChargableButton);
@@ -81,8 +83,15 @@ public class UIChargableButton : UIButtonBase {
 
         chargeImage.DOKill(true);
         chargeImage.DOFade(0f, 0.15f);
-        Debug.Log("charge p: " + (charge/config.chargeTime));
+
+        OnOutput?.Invoke(new UIChargeableButtonOutput() {
+            chargePercent = this.chargePercent
+        });
     }
+}
+
+public struct UIChargeableButtonOutput {
+    public float chargePercent;
 }
 
 [System.Serializable]

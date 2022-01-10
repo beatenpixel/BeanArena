@@ -9,6 +9,7 @@ public abstract class Weapon : Equipment {
 	public SO_Weapon weaponSO;
 	public Vector2 hingeJointAnchor;
 	public Vector2 hingeJointConnectedAnchor;
+	public Vector2 hingeJointLimits = new Vector2(-10, 10);
 
 	public void Init() {
 		
@@ -45,8 +46,16 @@ public abstract class Weapon : Equipment {
 
 
 		if(attachType == EquipmentAttachType.Rigidbody) {
-			Joint2DCreateResult result = Joint2DFactory.Create(new HingeJoint2DSettings(hingeJointAnchor, hingeJointConnectedAnchor).SetLimits(-15, 15), rb, limb.rb);
+			Joint2DCreateResult result = Joint2DFactory.Create(
+				new HingeJoint2DSettings(hingeJointAnchor, hingeJointConnectedAnchor).SetLimits(hingeJointLimits.x, hingeJointLimits.y), rb, limb.rb);
         }
+    }
+
+    protected override void OnDrawGizmosSelected() {
+        base.OnDrawGizmosSelected();
+
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawSphere(transform.TransformPoint(hingeJointAnchor),0.05f);
     }
 
     public override string subType {
@@ -70,5 +79,6 @@ public enum WeaponCategory {
 public enum WeaponType {
 	None,
 	Sword,
-	Pistol
+	Pistol,
+	WaterPistol
 }

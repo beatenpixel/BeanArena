@@ -10,13 +10,17 @@ public class GameUI : MonoBehaviour {
     public SO_PlayerInput playerInput;
 
     public PlayerPanel[] playerPanels;
-
+    public UIChargableButton chargeableButton;
     public UISimpleButton[] abilityButtons;
 
     [SerializeField] private UICanvas m_Canvas;
 
 	public void Init() {
         inst = this;
+
+        chargeableButton.OnOutput += (chargeOutput) => {
+            playerInput.TriggerOnButtonInput(new ButtonInputEventData(0, chargeOutput.chargePercent));
+        };
 
         for (int i = 0; i < abilityButtons.Length; i++) {
             abilityButtons[i].SetOnClick(i, (x) => playerInput.TriggerOnButtonInput(new ButtonInputEventData() {
@@ -33,13 +37,24 @@ public class GameUI : MonoBehaviour {
     }
 
     public void InternalUpdate() {
-        if(Input.GetKeyDown(KeyCode.D)) {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            chargeableButton.OnPointerDown(null);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space)) {
+            chargeableButton.OnPointerUp(null);
+            chargeableButton.OnPointerClick(null);
+        }
+
+        /*
+        if (Input.GetKeyDown(KeyCode.D)) {
             playerInput.TriggerOnButtonInput(new ButtonInputEventData() { buttonID = 0 });
         }
 
         if (Input.GetKeyDown(KeyCode.F)) {
             playerInput.TriggerOnButtonInput(new ButtonInputEventData() { buttonID = 1 });
         }
+        */
     }
 
     public void OnHeroDamageEvent(HeroDamageEvent e) {

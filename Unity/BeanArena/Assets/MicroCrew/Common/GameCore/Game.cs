@@ -75,7 +75,9 @@ public class Game : Singleton<Game> {
 
 		MCamera.inst.ClearTargets();
 
-		for (int i = 0; i < 1; i++) {
+		int enemyCount = 1;
+
+		for (int i = 0; i < enemyCount; i++) {
 			Enemy enemy = new Enemy();
 
 			Hero enemyHero = heroFactory.Create(new HeroConfig() {
@@ -108,11 +110,11 @@ public class Game : Singleton<Game> {
 		//Sword sword = (Sword)equipmentFactory.Create(new WeaponConfig(WeaponType.Sword), Vector2.zero);
 		//playerHero.AttachEquipment(sword);
 
-		Pistol pistol = (Pistol)equipmentFactory.Create(new WeaponConfig(WeaponType.Pistol), Vector2.zero);
-		playerHero.AttachEquipment(pistol);
+		Pistol waterPistol = (Pistol)equipmentFactory.Create(new WeaponConfig(WeaponType.WaterPistol), Vector2.zero);
+		playerHero.AttachEquipment(waterPistol);
 
-		Pistol pistol2 = (Pistol)equipmentFactory.Create(new WeaponConfig(WeaponType.Pistol), Vector2.zero);
-		playerHero.AttachEquipment(pistol2);
+		//Pistol pistol2 = (Pistol)equipmentFactory.Create(new WeaponConfig(WeaponType.Pistol), Vector2.zero);
+		//playerHero.AttachEquipment(pistol2);
 
 		GameUI.inst.playerPanels[0].SetHero(playerHero);
 		GameUI.inst.playerPanels[1].SetHero(enemies[0].hero);
