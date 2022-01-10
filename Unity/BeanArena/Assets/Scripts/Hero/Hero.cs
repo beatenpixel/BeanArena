@@ -157,29 +157,37 @@ public class Hero : PoolObject, IDamageable, ITarget {
 			}
 
 		} else {
-			if (targetAim != null) {
-				Vector2 bodyDir = body.transform.right * (int)orientation;
-				Vector2 enemyDD = targetAim.aimPoint.worldPos - (Vector2)arms[0].transform.position;
+			if (false) {
+				if (targetAim != null) {
+					Vector2 bodyDir = body.transform.right * (int)orientation;
+					Vector2 enemyDD = targetAim.aimPoint.worldPos - (Vector2)arms[0].transform.position;
 
-				ArmInput(body.transform.right * MMath.CeilAwayFrom0Int(enemyDD.x));
+					ArmInput(body.transform.right * MMath.CeilAwayFrom0Int(enemyDD.x));
 
-				if (Mathf.Abs(enemyDD.x) > 1f) {
-					SetOrientationFromVector2(enemyDD);
+					if (Mathf.Abs(enemyDD.x) > 1f) {
+						SetOrientationFromVector2(enemyDD);
+					}
+
+					float armAngle = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
+
+					for (int i = 0; i < arms.Count; i++) {
+						arms[i].motion.SetR(armAngle + i * 15, true).SetS(500);
+					}
+				} else {
+					ArmInput(body.transform.right * (int)orientation);
+
+					float armAngle = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
+
+					for (int i = 0; i < arms.Count; i++) {
+						arms[i].motion.SetR(armAngle + i * 15, true).SetS(500);
+					}
 				}
+			}
 
-				float armAngle = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
+			float armAngle2 = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
 
-				for (int i = 0; i < arms.Count; i++) {
-					arms[i].motion.SetR(armAngle + i * 15, true).SetS(500);
-				}
-			} else {
-				ArmInput(body.transform.right * (int)orientation);
-
-				float armAngle = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
-
-				for (int i = 0; i < arms.Count; i++) {
-					arms[i].motion.SetR(armAngle + i * 15, true).SetS(500);
-				}
+			for (int i = 0; i < arms.Count; i++) {
+				arms[i].motion.SetR(armAngle2 + i * 10, true).SetS(500);
 			}
 		}
 
