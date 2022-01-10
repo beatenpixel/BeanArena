@@ -164,7 +164,7 @@ public class Hero : PoolObject, IDamageable, ITarget {
 			float armAngle = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
 
 			for (int i = 0; i < arms.Count; i++) {
-				arms[i].motion.SetR(armAngle + i * 15, true).SetS(5f);
+				arms[i].motion.SetR(armAngle + i * 15, true).SetS(15f);
 			}
 		}
 
@@ -298,10 +298,17 @@ public class Hero : PoolObject, IDamageable, ITarget {
 			return new DamageResponse() { success = false };
 		}
 
-		if (damage.causeType == DamageCause.PHYSICS) {
-			PhysicalDamage physDmg = (PhysicalDamage)damage;
+		switch(damage.causeType) {
+			case DamageCause.PHYSICS: {
+					PhysicalDamage physDmg = (PhysicalDamage)damage;
 
-			info.health -= 10f;
+					float dmg = physDmg.GetDamage();
+					info.health -= dmg;
+
+					Debug.Log($"physDmg:{physDmg.limb == null} physDmg.limb.rend:{physDmg.limb.rend}");
+
+					physDmg.limb.rend.TakeDamage(Mathf.Clamp01(dmg / info.maxHealth * 4));
+				}break;
 		}
 
 		HeroDamageEvent.Invoke(new HeroDamageEvent(this));

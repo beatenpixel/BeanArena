@@ -60,7 +60,9 @@ public class HeroLimbRend : MonoBehaviour {
         }
 
         baseRendSprite.color = Color.Lerp(defaultBaseColor, MAssets.colors["bean_damage"], 0.5f);
-        colorTween = baseRendSprite.DOColor(defaultBaseColor, 0.3f);
+        colorTween = baseRendSprite.DOColor(defaultBaseColor, 0.3f).OnComplete(() => {
+            colorTween = null;
+        });
     }
 
     public static Dictionary<LimbType, int> limbsOrderLayers = new Dictionary<LimbType, int> {

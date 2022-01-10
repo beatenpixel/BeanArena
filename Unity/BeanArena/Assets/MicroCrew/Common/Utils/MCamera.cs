@@ -165,7 +165,7 @@ public class MCamera : Singleton<MCamera> {
         cam.orthographicSize = size;
     }
 
-    public void ClearTarget() {
+    public void ClearTargets() {
         targets.Clear();
     }
 
