@@ -8,7 +8,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UISimpleButton : UIInteractableElement {
+public class UISimpleButton : UIButtonBase {
 
     public UnityEvent ClickUnityEvent;
 
@@ -16,24 +16,12 @@ public class UISimpleButton : UIInteractableElement {
     public Action<int> OnClickEventInt;
     private int onClickEventIntArg;
     public AnimatedButtonConfig config;
-    public RectTransform subRectT;
-    [SerializeField] private Image buttonImage;
-    [SerializeField] private Image buttonIcon;
-    [SerializeField] private TextMeshProUGUI buttonText;
-
-    private List<Graphic> childGraphics = new List<Graphic>();
-    private Dictionary<Graphic, Color> startColors;
-
-    private Vector3 startScale;
-    private Color startImageColor;
 
     public override Type GetPoolObjectType() {
         return typeof(UISimpleButton);
     }
 
-    public override UIElementType GetElementType() {
-        return UIElementType.Button;
-    }
+    public override UIButtonConfig baseConfig => config;
 
     protected override void Awake() {
         base.Awake();
@@ -41,25 +29,6 @@ public class UISimpleButton : UIInteractableElement {
         OnClickEvent += () => {
             ClickUnityEvent?.Invoke();
         };
-
-        startScale = subRectT.localScale;
-
-        childGraphics = new List<Graphic>(GetComponentsInChildren<Graphic>(true));
-        startColors = new Dictionary<Graphic, Color>();
-        foreach (var g in childGraphics) {
-            startColors.Add(g, g.color);
-            if (g.gameObject != gameObject) {
-                g.raycastTarget = false;
-            }
-        }
-
-        startImageColor = buttonImage.color;
-    }
-
-    public void TintAllGraphics(Color tint) {
-        foreach (var g in childGraphics) {
-            g.color = startColors[g] * tint;
-        }
     }
 
     public void SetOnClick(Action action) {
@@ -71,111 +40,76 @@ public class UISimpleButton : UIInteractableElement {
         OnClickEventInt = action;
     }
 
-    public void SetBackgroundColor(Color color) {
-        startColors[buttonImage] = color;
-        buttonImage.color = color;
-    }
+    protected override void OnBecomePressed() {
+        base.OnBecomePressed();
 
-    public void SetIcon(Sprite sprite, Color color) {
-        buttonIcon.sprite = sprite;
-        buttonIcon.color = color;
-        startColors[buttonIcon] = color;
-    }
-
-    public void SetText(string text) {
-        buttonText.text = text;
-    }
-
-    private void OnBecomePressed() {
         subRectT.DOKill(true);
         subRectT.DOScale(startScale * config.pressScale, config.pressDuration).SetUpdate(true).SetEase(Ease.OutBack);
-
-        TintAllGraphics(config.tintOnPress);
     }
 
-    private void OnBecomeUnpressed() {
+    protected override void OnBecomeUnpressed() {
+        base.OnBecomeUnpressed();
+
         subRectT.DOKill(true);
         subRectT.DOScale(startScale, config.pressDuration).SetUpdate(true).SetEase(Ease.OutBack);
-
-        TintAllGraphics(Color.white);
     }
 
-    #region UIEvents
+    protected override void OnClick() {
+        base.OnClick();
 
-    public override void OnPointerClick(PointerEventData eventData) {
         OnClickEvent?.Invoke();
         OnClickEventInt?.Invoke(onClickEventIntArg);
 
         MSound.Play("click");
     }
 
-    public override void OnPointerDown(PointerEventData eventData) {
-        base.OnPointerDown(eventData);
+}
 
-        OnBecomePressed();
+[System.Serializable]
+public class UIGraphicsElement {
+    public Image image;
+    public TextMeshProUGUI text;
+    [HideInInspector] public Color startColor;
+
+    public void GetColorFromComponents() {
+        startColor = GetColor();
     }
 
-    public override void OnPointerExit(PointerEventData eventData) {
-        base.OnPointerExit(eventData);
-
-        OnBecomeUnpressed();
-    }
-
-    public override void OnPointerEnter(PointerEventData eventData) {
-        base.OnPointerEnter(eventData);
-    }
-
-    public override void OnPointerUp(PointerEventData eventData) {
-        base.OnPointerUp(eventData);
-
-        OnBecomeUnpressed();
-    }
-
-    #endregion
-
-    [System.Serializable]
-    public class UIGraphicsElement {
-        public Image image;
-        public TextMeshProUGUI text;
-        [HideInInspector] public Color startColor;
-
-        public void GetColorFromComponents() {
-            startColor = GetColor();
+    public void SetColor(Color _color) {
+        if (image != null) {
+            image.color = _color;
         }
 
-        public void SetColor(Color _color) {
-            if (image != null) {
-                image.color = _color;
-            }
+        if (text != null) {
+            text.color = _color;
+        }
+    }
 
-            if (text != null) {
-                text.color = _color;
-            }
+    public Color GetColor() {
+        if (image != null) {
+            return image.color;
         }
 
-        public Color GetColor() {
-            if (image != null) {
-                return image.color;
-            }
-
-            if (text != null) {
-                return text.color;
-            }
-
-            return new Color(1, 0, 1, 1);
+        if (text != null) {
+            return text.color;
         }
 
+        return new Color(1, 0, 1, 1);
     }
 
 }
 
 [System.Serializable]
-public class AnimatedButtonConfig {
+public class UIButtonConfig {
+    public bool doTint = true;
+    public Color tintOnPress = new Color(1,1,1,1);
+}
+
+[System.Serializable]
+public class AnimatedButtonConfig : UIButtonConfig {
     public float pressScale = 0.87f;
     public float pressDuration = 0.2f;
     public Ease pressEase = Ease.OutBounce;
-
-    public Color tintOnPress;
 }
 
 public interface IUIInteractableElement : IPointerDownHandler, IPointerUpHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler {

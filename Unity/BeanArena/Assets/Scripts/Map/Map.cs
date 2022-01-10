@@ -20,6 +20,12 @@ public abstract class Map : MonoBehaviour {
 	public virtual void Init() {
 		
 	}
+
+	protected virtual void OnDestroy() {
+        for (int i = heroes.Count - 1; i >= 0; i--) {
+			heroes[i].DestroyHero();
+		}
+    }
 	
 	public virtual void InternalUpdate() {
 		UpdateShader();

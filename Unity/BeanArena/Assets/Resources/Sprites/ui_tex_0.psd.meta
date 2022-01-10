@@ -20,6 +20,9 @@ TextureImporter:
   - first:
       213: 3351257870148316972
     second: ui_tex_circle_outline
+  - first:
+      213: 1533761465559781216
+    second: circle_hollow_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -179,7 +182,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 8
-        y: 1013
+        y: 1015
         width: 512
         height: 512
       alignment: 0
@@ -254,6 +257,27 @@ TextureImporter:
       bones: []
       spriteID: c2f2ce4f64f028e20800000000000000
       internalID: 3351257870148316972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: circle_hollow_1
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 616
+        width: 391
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06f8fdc3de3094510800000000000000
+      internalID: 1533761465559781216
       vertices: []
       indices: 
       edges: []

@@ -13,10 +13,12 @@ public class Projectile : PoolObject {
     public TrailRenderer trailRend;
 
     private bool doClearTrail;
+    private bool didInteract;
 
     public override void OnPop() {
         base.OnPop();
 
+        didInteract = false;
         rb.velocity = Vector2.zero;
         if (trailRend != null) {
             doClearTrail = true;
@@ -47,7 +49,12 @@ public class Projectile : PoolObject {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
+        if(didInteract) {
+            return;
+        }
+
         if (MUtils.LayerInMask(interactMask, collision.gameObject.layer)) {
+            didInteract = true;
             Interact(collision);
         }
     }

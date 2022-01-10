@@ -156,15 +156,18 @@ public class Hero : PoolObject, IDamageable, ITarget {
 
 		} else {
 			Vector2 bodyDir = body.transform.right * (int)orientation;
-			Vector2 enemyDir = targetAim.aimPoint.worldPos - (Vector2)arms[0].transform.position;
+			Vector2 enemyDD = targetAim.aimPoint.worldPos - (Vector2)arms[0].transform.position;
 
-			ArmInput(body.transform.right * MMath.CeilAwayFrom0Int(enemyDir.x));
-			SetOrientation(enemyDir);
+			ArmInput(body.transform.right * MMath.CeilAwayFrom0Int(enemyDD.x));
+
+			if (Mathf.Abs(enemyDD.x) > 1f) {
+				SetOrientation(enemyDD);
+			}
 
 			float armAngle = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
 
 			for (int i = 0; i < arms.Count; i++) {
-				arms[i].motion.SetR(armAngle + i * 15, true).SetS(15f);
+				arms[i].motion.SetR(armAngle + i * 15, true).SetS(20);
 			}
 		}
 
@@ -221,10 +224,18 @@ public class Hero : PoolObject, IDamageable, ITarget {
     }
 
 	public void MoveInput(Vector2 inp) {
+		if (info.state != HeroState.Alive) {
+			return;
+		}
+
 		input.move = inp;
 	}
 
 	public void ArmInput(Vector2 inp) {
+		if (info.state != HeroState.Alive) {
+			return;
+		}
+
 		input.arm = inp;
 	}
 
@@ -236,6 +247,10 @@ public class Hero : PoolObject, IDamageable, ITarget {
 	}
 
 	public void ButtonInput(ButtonInputEventData inp) {
+		if (info.state != HeroState.Alive) {
+			return;
+		}
+
 		HeroLimb limb;
 
 		if(inp.buttonID == 0) {
@@ -294,9 +309,6 @@ public class Hero : PoolObject, IDamageable, ITarget {
 
 	// IDamageable
     public DamageResponse TakeDamage(DamageInfo damage) {
-		if (info.state != HeroState.Alive) {
-			return new DamageResponse() { success = false };
-		}
 
 		switch(damage.causeType) {
 			case DamageCause.PHYSICS: {
@@ -311,6 +323,10 @@ public class Hero : PoolObject, IDamageable, ITarget {
 				}break;
 		}
 
+		if (info.state != HeroState.Alive) {
+			return new DamageResponse() { success = false };
+		}
+
 		HeroDamageEvent.Invoke(new HeroDamageEvent(this));
 
 		if(info.health <= 0) {
@@ -321,6 +337,12 @@ public class Hero : PoolObject, IDamageable, ITarget {
 		return new DamageResponse();
     }
 	// IDamageable
+
+	public void DestroyHero() {
+		Destroy(gameObject);
+		//Push();
+    }
+
 }
 
 public class HeroInput {

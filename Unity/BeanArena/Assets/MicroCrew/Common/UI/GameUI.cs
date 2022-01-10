@@ -50,4 +50,8 @@ public class GameUI : MonoBehaviour {
         }
     }
 
+    public void RestartGame() {
+        MSceneManager.ReloadScene();
+    }
+
 }

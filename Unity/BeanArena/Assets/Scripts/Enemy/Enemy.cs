@@ -24,6 +24,14 @@ public class Enemy {
 
             hero.MoveInput(moveInput);
             hero.ArmInput(armInput);
+
+            hero.ButtonInput(new ButtonInputEventData() {
+                buttonID = 0
+            });
+
+            hero.ButtonInput(new ButtonInputEventData() {
+                buttonID = 1
+            });
         }
     }
 
