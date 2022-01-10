@@ -11,11 +11,13 @@ public class PlayerPanel : MonoBehaviour {
 	public Image icon;
 	public TextMeshProUGUI playerNameText;
 	public TextMeshProUGUI cupsText;
+	public WinCounter winCounter;
 
-	public Hero attachedHero;
+	[HideInInspector] public Hero attachedHero;
 
 	public void Init() {
-
+		winCounter.Init(2);
+		winCounter.SetWinsCount(MRandom.Range(0, 3));
     }
 
 	public void SetHero(Hero hero) {

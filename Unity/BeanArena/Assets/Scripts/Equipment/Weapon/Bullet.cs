@@ -13,7 +13,7 @@ public class Bullet : Projectile {
         Rigidbody2D otherRb = collision.collider.GetComponentInParent<Rigidbody2D>();
         Debug.Log("rb is null: " + (otherRb == null));
         if(otherRb != null) {
-            otherRb.AddForce(transform.right * 500);
+            otherRb.AddForceAtPosition(transform.right * 500, transform.position);
         }
 
         HeroLimb limb = collision.collider.gameObject.GetComponentInParent<HeroLimb>();

@@ -27,6 +27,10 @@ MonoBehaviour:
     t: {r: 0.55368537, g: 0.9137255, b: 0.16862743, a: 1}
   - name: bean_damage
     t: {r: 1, g: 0.13679248, b: 0.1924573, a: 1}
+  - name: win_dot
+    t: {r: 0.67058825, g: 1, b: 0.33333334, a: 1}
+  - name: neutral_dot
+    t: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
   m_TextPresets:
   - preset: 0
     fontAsset: {fileID: 11400000, guid: b3e1909bfa2fc3640b6280041d40f338, type: 2}
