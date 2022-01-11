@@ -228,7 +228,7 @@ MonoBehaviour:
   weaponSO: {fileID: 11400000, guid: e03bcd0491ec3f74c9bfd5cda8f2f751, type: 2}
   hingeJointAnchor: {x: -1.31, y: -0.41}
   hingeJointConnectedAnchor: {x: 0.8, y: 0}
-  hingeJointLimits: {x: -5, y: 5}
+  hingeJointLimits: {x: -1, y: 1}
   shootForce: {x: 50, y: 120}
   shootPoint: {fileID: 4288825302750845908}
 --- !u!50 &302938953662217073
@@ -243,7 +243,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.05
+  m_Mass: 0.001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1

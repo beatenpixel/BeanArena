@@ -23,7 +23,7 @@ public class Enemy {
             }
 
             hero.MoveInput(moveInput);
-            hero.ArmInput(armInput);
+            //hero.ArmInput(armInput);
 
             hero.ButtonInput(new ButtonInputEventData(0, 0.5f));
             hero.ButtonInput(new ButtonInputEventData(1, 0.5f));

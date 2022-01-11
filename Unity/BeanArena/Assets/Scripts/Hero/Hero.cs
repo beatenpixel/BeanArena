@@ -11,7 +11,7 @@ public class Hero : PoolObject, IDamageable, ITarget {
 	public MoveConfig moveConfig;
 
 	private HeroFaceRend faceRend;
-	private HeroBody body;
+	[HideInInspector] public HeroBody body;
 	private List<HeroArm> arms;
 	private List<HeroLimb> limbs;
 
@@ -35,6 +35,8 @@ public class Hero : PoolObject, IDamageable, ITarget {
 	public TargetInfo targetInfo => m_TargetInfo;
     public List<TargetAimPoint> targetAimPoints => m_TargetAimPoints;
 	// ITarget
+
+	private bool hadMoveInputLastFrame;
 
     protected override void Awake() {
         base.Awake();
@@ -64,6 +66,7 @@ public class Hero : PoolObject, IDamageable, ITarget {
 		info.health = 100;
 		info.teamID = config.teamID;
 		info.state = HeroState.Alive;
+		info.role = config.role;
 
 		if (config.role == HeroRole.Enemy) {
 			WUI_TextStyle style = WUI_TextStyle.beanNickname;
@@ -102,23 +105,56 @@ public class Hero : PoolObject, IDamageable, ITarget {
 			limbs[i].InternalFixedUpdate();
         }
 
+		if (targetAim != null) {
+			Vector2 bodyDir = body.transform.right * (int)orientation;
+			Vector2 enemyDD = targetAim.aimPoint.worldPos - (Vector2)arms[0].transform.position;
+
+			if (info.role != HeroRole.Player) {
+				ArmInput(body.transform.right * MMath.CeilAwayFrom0Int(enemyDD.x));
+			}
+
+			if (Mathf.Abs(enemyDD.x) > 1f) {
+				SetOrientationFromVector2(enemyDD);
+			}
+		}
+
+		float armAngle2 = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
+
+		for (int i = 0; i < arms.Count; i++) {
+			arms[i].motion.SetR(armAngle2 + i * 10, true).SetS(500);
+		}
+
 		if (input.move.magnitude > 0.2f) {
-			body.rb.AddForce(input.move * moveConfig.moveForce * Time.deltaTime);
+			if (!body.isGrounded) {
+				body.rb.AddForce(input.move * moveConfig.moveForce * Time.deltaTime);
+			}
 
-			float angle = Vector2.SignedAngle(Vector2.up, input.move.normalized);		
+			float angle = Vector2.SignedAngle(Vector2.up, input.move.normalized);
 
-			body.motion.SetR(angle, true);            
+			body.motion.SetR(angle, true);
 
 			if (input.move.y > 0.3f && Time.time > jumpTimer) {
 				if (body.isGrounded) {
-					jumpTimer = Time.time + 0.3f;
+					jumpTimer = Time.time + 0.5f;
 					body.SetGrounded(false);
 
 					body.rb.AddForce(input.move * moveConfig.jumpForce);
 				}
 			}
+
+			if (!hadMoveInputLastFrame) {
+				SetGravityLevelForBodyParts(0.5f);
+			}
+
+			hadMoveInputLastFrame = true;
 		} else {
-			body.motion.SetR(0f, true);			
+			body.motion.SetR(0f, true);
+
+			if (hadMoveInputLastFrame) {
+				SetGravityLevelForBodyParts(0.8f);
+			}
+
+			hadMoveInputLastFrame = false;
 		}
 
 		if (false) {
@@ -184,11 +220,7 @@ public class Hero : PoolObject, IDamageable, ITarget {
 				}
 			}
 
-			float armAngle2 = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
-
-			for (int i = 0; i < arms.Count; i++) {
-				arms[i].motion.SetR(armAngle2 + i * 10, true).SetS(500);
-			}
+			
 		}
 
 		/*
@@ -222,6 +254,14 @@ public class Hero : PoolObject, IDamageable, ITarget {
 		} 
 		*/
 
+	}
+
+	private void SetGravityLevelForBodyParts(float grav) {
+		for (int i = 0; i < limbs.Count; i++) {
+			if (limbs[i].rb != null) {
+				limbs[i].rb.gravityScale = grav;
+			}
+		}
 	}
 
 	public void SetTarget(ITarget _target, TargetAimPoint _aimPoint = null) {
@@ -389,6 +429,7 @@ public class MoveConfig {
 [System.Serializable]
 public class HeroInfo {
 	public HeroState state;
+	public HeroRole role;
 	public float health;
 	public float maxHealth;
 	public int teamID;

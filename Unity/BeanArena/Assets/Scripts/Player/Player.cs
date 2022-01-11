@@ -48,7 +48,7 @@ public class Player : MonoBehaviour {
 
 	private void ArmJoystickInput(UIJoystickEventData e) {
 		if (e.type == UIJoystickEventData.EventType.Cancel || e.type == UIJoystickEventData.EventType.End) {
-			hero.ArmInput(Vector2.zero);
+			//hero.ArmInput(Vector2.zero);
 			ButtonInput(new ButtonInputEventData(0, e.value.magnitude));
 		} else {
 			hero.ArmInput(e.value);

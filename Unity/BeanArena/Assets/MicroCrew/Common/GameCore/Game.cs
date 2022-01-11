@@ -94,13 +94,13 @@ public class Game : Singleton<Game> {
 
 			enemies.Add(enemy);
 
-			MCamera.inst.AddTarget(new CameraTarget(enemy.hero.t, new Vector2(0, -2), Vector2.one * 2));
+			MCamera.inst.AddTarget(new CameraTarget(enemy.hero.body.transform, new Vector2(0, -2), Vector2.one * 2));
 
 			Pistol epistol = (Pistol)equipmentFactory.Create(new WeaponConfig(WeaponType.Pistol), Vector2.zero);
 			enemyHero.AttachEquipment(epistol);
 		}
 
-		MCamera.inst.AddTarget(new CameraTarget(player.hero.t, new Vector2(0, -2), Vector2.one * 2));
+		MCamera.inst.AddTarget(new CameraTarget(player.hero.body.transform, new Vector2(0, -2), Vector2.one * 2));
 
 		playerHero.FindClosestTarget();
         for (int i = 0; i < enemies.Count; i++) {
