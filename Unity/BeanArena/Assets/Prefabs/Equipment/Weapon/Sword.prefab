@@ -199,6 +199,7 @@ MonoBehaviour:
   weaponSO: {fileID: 11400000, guid: 8b36ecf6074368248a2fae2569eeaf94, type: 2}
   hingeJointAnchor: {x: 0, y: 0}
   hingeJointConnectedAnchor: {x: 0.8, y: 0}
+  hingeJointLimits: {x: -1, y: 1}
   forcePoint: {x: 1, y: 0}
   force: -30
   pushForce: 10

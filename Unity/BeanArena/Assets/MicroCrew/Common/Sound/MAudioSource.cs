@@ -143,6 +143,21 @@ public class SoundConfig {
         return this;
     }
 
+    public SoundConfig Copy() {
+        SoundConfig config = new SoundConfig();
+        config.pitch = pitch;
+        config.pitchRandomVariation = pitchRandomVariation;
+        config.volume = volume;
+        config.volumeRandomVariation = volumeRandomVariation;
+        
+        config.loop = loop;
+        config.threeDimensional = threeDimensional;
+        
+        config.targetT = targetT;
+        config.targetTPosOffset = targetTPosOffset;
+        return config;
+    }
+
     public static SoundConfig[] configs = new SoundConfig[] {
         def,
         randVolume01,

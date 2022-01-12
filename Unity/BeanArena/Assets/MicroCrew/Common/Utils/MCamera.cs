@@ -13,7 +13,8 @@ public class MCamera : Singleton<MCamera> {
     public Transform shadowCamT;
 
     public GradientBackground gradientBackground;
-
+    public FastPostProcessing fastPostProcessing;
+    public MAudioListener audioListener;
 
     [Header("Config")]
     public CameraConfig config;
@@ -46,6 +47,8 @@ public class MCamera : Singleton<MCamera> {
 
     public override void Init() {
         hitCache = new RaycastHitCache(5);
+
+        audioListener.Init();
 
         MGameLoop.Update.Register(1000, InternalUpdate);
         MGameLoop.LateUpdate.Register(1000, InternalLateUpdate);

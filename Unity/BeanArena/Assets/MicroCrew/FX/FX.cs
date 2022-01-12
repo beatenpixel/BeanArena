@@ -14,6 +14,16 @@ public class FX : Singleton<FX> {
 
     }
 
+    public void EnableDeathScreenEffect(bool enable) {
+        if (enable) {
+            MCamera.inst.fastPostProcessing.EnableGraysacle(true, false);
+            MCamera.inst.audioListener.EnableDeathScreenEffect(true);
+        } else {
+            MCamera.inst.fastPostProcessing.EnableGraysacle(false, true);
+            MCamera.inst.audioListener.EnableDeathScreenEffect(false);
+        }
+    }
+
     public void Explosion(Vector3 p, Vector3 normal, float scale = 1f) {
         MParticle explosion = MPool.Get<MParticle>("explosion");
         explosion.transform.position = p;

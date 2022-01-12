@@ -26,6 +26,7 @@ Shader "Demonixis/FastPostProcessing"
 	float4x4 _CameraToWorldMatrix;
 	uniform float _MapBaseLineCameraSpaceY;
 	uniform float _MapBaseLineWorldY;
+	uniform float _GrayscaleValue;
 
 	struct v2f_data {
 		float4 pos : SV_POSITION;
@@ -102,8 +103,9 @@ Shader "Demonixis/FastPostProcessing"
 
 		// Shadows
 		float offsetX = sin(_Time.y) * 0.15;
+		offsetX = 0.2;
 		float fadeP = (_MapBaseLineCameraSpaceY - uv.y) / _MapBaseLineCameraSpaceY;
-		half4 shadowSample = tex2D(_ShadowTex, float2(uv.x - offsetX * fadeP, _MapBaseLineCameraSpaceY - (uv.y - _MapBaseLineCameraSpaceY)));
+		half4 shadowSample = tex2D(_ShadowTex, float2(uv.x - offsetX * fadeP, _MapBaseLineCameraSpaceY - (uv.y - _MapBaseLineCameraSpaceY)*3));
 
 		if (i.vertexWorldPos.y < _MapBaseLineWorldY) {		
 
@@ -113,6 +115,9 @@ Shader "Demonixis/FastPostProcessing"
 				//col.g = fadeP;
 			}
 		}
+
+		// Grayscale
+		col.rgb = lerp(col.rgb, (col.r + col.g + col.b) * 0.3333, _GrayscaleValue);
 
 		//col.rgb = fadeP;
 

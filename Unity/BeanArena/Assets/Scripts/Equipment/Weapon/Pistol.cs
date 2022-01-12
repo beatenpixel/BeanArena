@@ -24,6 +24,12 @@ public class Pistol : Weapon {
         bullet.t.position = shootPoint.position;
         bullet.SetShotCharge(useArgs.charge);
         bullet.Shoot(shootPoint.right * Mathf.Lerp(shootForce.x, shootForce.y, useArgs.charge));
+
+        if (hero.info.role != HeroRole.Player) {
+            MSound.Play("pistol_shot", new SoundConfig().SetPitch(1,0.1f).SetVolume(0.2f,0.1f), t.position);
+        } else {
+            MSound.Play("pistol_shot", SoundConfig.randVolumePitch01, t.position);
+        }
     }
 
 }

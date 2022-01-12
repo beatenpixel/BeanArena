@@ -22,11 +22,19 @@ public class Game : Singleton<Game> {
 
 	public override void Init() {
 		MSceneManager.OnSceneChangeEnd.Add(-1000,OnSceneLoadEnd);
+
+		HeroDieEvent.Register(GameEvent_HeroDie);
 	}
 
 	protected override void Shutdown() {
 
 	}
+
+	private void GameEvent_HeroDie(HeroDieEvent e) {
+		if(e.hero == player.hero) {
+			FX.inst.EnableDeathScreenEffect(true);
+        }
+    } 
 
 	public void SetupGame() {
 		if (didSetupGame)
@@ -56,7 +64,9 @@ public class Game : Singleton<Game> {
 		map.Init();
 
 		SpawnHeroes();
-    }
+
+		FX.inst.EnableDeathScreenEffect(false);
+	}
 
 	private void SpawnHeroes() {
 		Hero playerHero = heroFactory.Create(new HeroConfig() {
@@ -110,11 +120,11 @@ public class Game : Singleton<Game> {
 		//Sword sword = (Sword)equipmentFactory.Create(new WeaponConfig(WeaponType.Sword), Vector2.zero);
 		//playerHero.AttachEquipment(sword);
 
-		Pistol waterPistol = (Pistol)equipmentFactory.Create(new WeaponConfig(WeaponType.WaterPistol), Vector2.zero);
-		playerHero.AttachEquipment(waterPistol);
+		//Pistol waterPistol = (Pistol)equipmentFactory.Create(new WeaponConfig(WeaponType.WaterPistol), Vector2.zero);
+		//playerHero.AttachEquipment(waterPistol);
 
-		//Pistol pistol2 = (Pistol)equipmentFactory.Create(new WeaponConfig(WeaponType.Pistol), Vector2.zero);
-		//playerHero.AttachEquipment(pistol2);
+		Pistol pistol2 = (Pistol)equipmentFactory.Create(new WeaponConfig(WeaponType.Pistol), Vector2.zero);
+		playerHero.AttachEquipment(pistol2);
 
 		GameUI.inst.playerPanels[0].SetHero(playerHero);
 		GameUI.inst.playerPanels[1].SetHero(enemies[0].hero);

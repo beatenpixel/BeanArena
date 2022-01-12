@@ -22,6 +22,7 @@ public class Hero : PoolObject, IDamageable, ITarget {
 	private WUI_Text nicknameText;
 
 	public Orientation orientation { get; private set; }
+	private HeroControllType controllType = HeroControllType.OneJoystick;
 
 	private TargetAim targetAim;
 
@@ -95,7 +96,12 @@ public class Hero : PoolObject, IDamageable, ITarget {
 	public void InternalUpdate() {
 		targetAimPoints[0].worldPos = body.transform.position;
 	}
-	
+
+	private Vector2 GetMoveInputByAim(Vector2 aimInput) {
+		float angle = Vector2.SignedAngle(Vector2.up, aimInput);
+		return (Quaternion.Euler(0, 0, angle * 0.4f) * Vector3.up).normalized;
+	}
+
 	public void InternalFixedUpdate() {
 		if (info.state == HeroState.Dead) {
 			return;
@@ -110,7 +116,17 @@ public class Hero : PoolObject, IDamageable, ITarget {
 			Vector2 enemyDD = targetAim.aimPoint.worldPos - (Vector2)arms[0].transform.position;
 
 			if (info.role != HeroRole.Player) {
-				ArmInput(body.transform.right * MMath.CeilAwayFrom0Int(enemyDD.x));
+				//ArmInput(body.transform.right * MMath.CeilAwayFrom0Int(enemyDD.x));
+				Vector2 armInput = enemyDD.normalized;
+				ArmInput(armInput);
+
+				Vector2 moveInput = GetMoveInputByAim(armInput);
+
+				if (enemyDD.magnitude > 15) {					
+					MoveInput(moveInput);
+				} else {
+					MoveInput(moveInput.MulX(0.1f));
+				}
 			}
 
 			if (Mathf.Abs(enemyDD.x) > 1f) {
@@ -139,11 +155,12 @@ public class Hero : PoolObject, IDamageable, ITarget {
 					body.SetGrounded(false);
 
 					body.rb.AddForce(input.move * moveConfig.jumpForce);
+					MSound.Play("swoosh", new SoundConfig().SetPitch(1f, 0.3f).SetVolume(0.4f, 0.2f), t.position);
 				}
 			}
 
 			if (!hadMoveInputLastFrame) {
-				SetGravityLevelForBodyParts(0.5f);
+				SetGravityLevelForBodyParts(1f);
 			}
 
 			hadMoveInputLastFrame = true;
@@ -151,109 +168,11 @@ public class Hero : PoolObject, IDamageable, ITarget {
 			body.motion.SetR(0f, true);
 
 			if (hadMoveInputLastFrame) {
-				SetGravityLevelForBodyParts(0.8f);
+				SetGravityLevelForBodyParts(1f);
 			}
 
 			hadMoveInputLastFrame = false;
 		}
-
-		if (false) {
-
-			if (targetAim != null /* && input.move.magnitude > 0.2f*/) {
-				Vector2 p = targetAim.aimPoint.worldPos;
-				Vector2 dd = p - (Vector2)arms[0].transform.position;
-
-				if (dd.magnitude <= 30f) {
-					ArmInput(dd.normalized);
-				} else {
-					ArmInput(Vector2.zero);
-				}
-			} else {
-				ArmInput(Vector2.zero);
-			}
-
-			if (input.arm.magnitude > 0.2f) {
-				float armAngle = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
-
-				for (int i = 0; i < arms.Count; i++) {
-					arms[i].motion.SetR(armAngle + i * 15, true).SetS(15f);
-
-					continue;
-
-					if (arms[i].limbType != LimbType.RArm) {
-						arms[i].motion.SetR(armAngle + i * 15, true).SetS(15f);
-					} else {
-						arms[i].motion.SetR(0f, true).SetS(0f);
-					}
-				}
-			} else {
-				for (int i = 0; i < arms.Count; i++) {
-					arms[i].motion.SetR(0f, true).SetS(0f);
-				}
-			}
-
-		} else {
-			if (false) {
-				if (targetAim != null) {
-					Vector2 bodyDir = body.transform.right * (int)orientation;
-					Vector2 enemyDD = targetAim.aimPoint.worldPos - (Vector2)arms[0].transform.position;
-
-					ArmInput(body.transform.right * MMath.CeilAwayFrom0Int(enemyDD.x));
-
-					if (Mathf.Abs(enemyDD.x) > 1f) {
-						SetOrientationFromVector2(enemyDD);
-					}
-
-					float armAngle = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
-
-					for (int i = 0; i < arms.Count; i++) {
-						arms[i].motion.SetR(armAngle + i * 15, true).SetS(500);
-					}
-				} else {
-					ArmInput(body.transform.right * (int)orientation);
-
-					float armAngle = Vector2.SignedAngle(Vector2.right, input.arm.normalized);
-
-					for (int i = 0; i < arms.Count; i++) {
-						arms[i].motion.SetR(armAngle + i * 15, true).SetS(500);
-					}
-				}
-			}
-
-			
-		}
-
-		/*
-		bool autoAim = false;
-
-		if (autoAim) {
-			bool resetArms = false;
-
-			if(targetAim != null) {
-				Vector2 p = targetAim.aimPoint.worldPos;
-				Vector2 dd = p - (Vector2)arms[0].transform.position;
-
-				if(dd.magnitude <= 7f) {
-					float armAngle = Vector2.SignedAngle(Vector2.right, dd.normalized);
-
-					for (int i = 0; i < arms.Count; i++) {
-						arms[i].motion.SetR(armAngle + i * 15f, true).SetS(15f);
-					}
-				} else {
-					resetArms = true;
-                }
-            } else {
-				resetArms = true;
-            }
-
-			if(resetArms) {
-				for (int i = 0; i < arms.Count; i++) {
-					arms[i].motion.SetR(0f, true).SetS(0f);
-				}
-			}
-		} 
-		*/
-
 	}
 
 	private void SetGravityLevelForBodyParts(float grav) {
@@ -359,6 +278,7 @@ public class Hero : PoolObject, IDamageable, ITarget {
 	private void Die() {
 		info.state = HeroState.Dead;
 		faceRend.SetFace(HeroFace.Dead);
+		HeroDieEvent.Invoke(new HeroDieEvent(this));
     }
 
 	public Vector2 GetPosition() {
@@ -387,7 +307,7 @@ public class Hero : PoolObject, IDamageable, ITarget {
 
 					Debug.Log($"physDmg:{physDmg.limb == null} physDmg.limb.rend:{physDmg.limb.rend}");
 
-					physDmg.limb.rend.TakeDamage(Mathf.Clamp01(dmg / info.maxHealth * 4));
+					physDmg.limb.rend.TakeDamage(Mathf.Clamp01(dmg / info.maxHealth * 4));					
 				}break;
 		}
 
@@ -399,8 +319,11 @@ public class Hero : PoolObject, IDamageable, ITarget {
 
 		if(info.health <= 0) {
 			info.health = 0f;
-			Die();
-        }
+			MSound.Play("death", null, t.position);
+			Die();			
+        } else {
+			MSound.PlayFromGroup("hero_ouch", -1, new SoundConfig().SetPitch(1.6f, 0.2f), t.position);
+		}		
 
 		return new DamageResponse();
     }
@@ -435,6 +358,11 @@ public class HeroInfo {
 	public int teamID;
 }
 
+public enum HeroControllType {
+	OneJoystick,
+	TwoJoysticks
+}
+
 public enum HeroState {
 	None,
 	Alive,
@@ -463,6 +391,15 @@ public class HeroDamageEvent : MGameEvent<HeroDamageEvent> {
 	public Hero hero;
 
 	public HeroDamageEvent(Hero hero) {
+		this.hero = hero;
+	}
+}
+
+public class HeroDieEvent : MGameEvent<HeroDieEvent> {
+
+	public Hero hero;
+
+	public HeroDieEvent(Hero hero) {
 		this.hero = hero;
 	}
 }
