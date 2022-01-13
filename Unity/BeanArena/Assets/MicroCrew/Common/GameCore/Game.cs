@@ -66,6 +66,8 @@ public class Game : Singleton<Game> {
 		SpawnHeroes();
 
 		FX.inst.EnableDeathScreenEffect(false);
+
+		GameUI.inst.Show(true);
 	}
 
 	private void SpawnHeroes() {

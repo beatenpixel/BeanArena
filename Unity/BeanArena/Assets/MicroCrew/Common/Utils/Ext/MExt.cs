@@ -2,9 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 
 public static class MExt {
+
+    public static void Log<T>(this IList<T> list, Func<T,string> func) {
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine("Collection log:");
+        for (int i = 0; i < list.Count; i++) {
+            sb.Append(i); sb.Append(": ");
+            sb.AppendLine(func(list[i]));
+        }
+
+        Debug.Log(sb.ToString());
+    }
 
     public static void SetLayerRecursively(this GameObject obj, int layer) {
         obj.layer = layer;

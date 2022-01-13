@@ -7,6 +7,8 @@ public class GameUI : MonoBehaviour {
     public static GameUI inst;
     public static UICanvas canvas => inst.m_Canvas;
 
+    public GameObject rootGO;
+
     public SO_PlayerInput playerInput;
 
     public PlayerPanel[] playerPanels;
@@ -55,6 +57,16 @@ public class GameUI : MonoBehaviour {
             playerInput.TriggerOnButtonInput(new ButtonInputEventData() { buttonID = 1 });
         }
         */
+    }
+
+    public void Show(bool show) {
+        rootGO.SetActive(show);
+
+        if (show) { 
+            
+        } else {
+
+        }
     }
 
     public void OnHeroDamageEvent(HeroDamageEvent e) {
