@@ -99,7 +99,6 @@ GameObject:
   - component: {fileID: 2846095526838627188}
   - component: {fileID: 2846095526838627186}
   - component: {fileID: 7702551216970479532}
-  - component: {fileID: 302938953662217073}
   m_Layer: 6
   m_Name: WaterPistol
   m_TagString: Untagged
@@ -216,8 +215,8 @@ MonoBehaviour:
   go: {fileID: 0}
   t: {fileID: 0}
   _subType: default
-  rb: {fileID: 302938953662217073}
-  attachType: 1
+  rb: {fileID: 0}
+  attachType: 0
   canAttachToLimbs: 6
   attachTData:
     position: {x: 1.211, y: 0.3, z: 0}
@@ -228,27 +227,6 @@ MonoBehaviour:
   weaponSO: {fileID: 11400000, guid: e03bcd0491ec3f74c9bfd5cda8f2f751, type: 2}
   hingeJointAnchor: {x: -1.31, y: -0.41}
   hingeJointConnectedAnchor: {x: 0.8, y: 0}
-  hingeJointLimits: {x: -5, y: 5}
+  hingeJointLimits: {x: -1, y: 1}
   shootForce: {x: 50, y: 120}
   shootPoint: {fileID: 4288825302750845908}
---- !u!50 &302938953662217073
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2846095526838627189}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 0.05
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0

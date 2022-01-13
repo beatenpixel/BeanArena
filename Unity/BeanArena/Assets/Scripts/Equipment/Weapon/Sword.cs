@@ -37,11 +37,12 @@ public class Sword : Weapon {
         }
 
         Rigidbody2D otherRb = collider.GetComponentInParent<Rigidbody2D>();
+        
+        Vector2 pointVel = rb.GetRelativePointVelocity(forcePoint);
+        pointVel = Vector2.ClampMagnitude(pointVel, 5);
+        pointVel = pointVel.normalized * Mathf.Clamp(Mathf.Abs(rb.angularVelocity) * 0.01f, 0, 3);
 
-        if(otherRb != null) {
-            Vector2 pointVel = rb.GetRelativePointVelocity(forcePoint);            
-            pointVel = Vector2.ClampMagnitude(pointVel, 5);
-            pointVel = pointVel.normalized * Mathf.Clamp(Mathf.Abs(rb.angularVelocity) * 0.01f, 0, 3);
+        if (otherRb != null) {           
             limb.rb.angularVelocity = limb.rb.angularVelocity * 0.3f;
             rb.angularVelocity = rb.angularVelocity * 0.3f;
 

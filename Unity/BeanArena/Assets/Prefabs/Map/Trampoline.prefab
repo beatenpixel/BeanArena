@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalAngle: 0
-  bounceForce: 100
+  bounceForce: 20
   multiplyByMass: 1
   interactMask:
     serializedVersion: 2

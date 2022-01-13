@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34684ddb14b81c44498bc3a958c258d2, type: 3}
+  m_Name: hero_ouch
+  m_EditorClassIdentifier: 
+  groupName: hero_ouch
+  sounds:
+  - {fileID: 11400000, guid: 598cf759e1667ea4faacd5511c6e6550, type: 2}
+  - {fileID: 11400000, guid: ca6bcce10fe0b1f4bb3fbd039732f9fc, type: 2}
+  - {fileID: 11400000, guid: cbc042059e04caa43b8c4fc22b7c70b4, type: 2}

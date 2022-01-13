@@ -47,7 +47,13 @@ public abstract class HeroLimb : MonoBehaviour {
             }
 
 			float angle = Mathf.LerpAngle(rb.rotation, rot, Time.deltaTime * motion.rotSpeed);
-			rb.MoveRotation(angle);
+
+			if (motion.doTransformRotation) {
+				rb.MoveRotation(rot);
+				//transform.rotation = Quaternion.Euler(0,0,angle);
+			} else {
+				rb.MoveRotation(angle);
+			}
         }
     }
 
@@ -122,6 +128,7 @@ public class LimbMotion {
 	public float targetRot;
 	public bool isGlobal;
 	public float rotSpeed;
+	public bool doTransformRotation;
 
 	public LimbMotion SetR(float rot, bool isGlobal) {
 		targetRot = rot;
