@@ -26,6 +26,12 @@ public class Bullet : Projectile {
             hero.TakeDamage(new PhysicalDamage(10 * (1 + shotCharge), hero, limb));
         }
 
+        Projectile projectile = collision.collider.GetComponentInParent<Projectile>();
+
+        if(projectile != null) {
+            MSound.Play("ricochet", SoundConfig.randVolumePitch01, t.position);
+        }
+
         Push();
     }
 
