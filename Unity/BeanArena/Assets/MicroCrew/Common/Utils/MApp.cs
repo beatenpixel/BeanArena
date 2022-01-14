@@ -27,7 +27,7 @@ public class MApp : Singleton<MApp> {
     }
 
     private void InternalStart() {
-
+        
     }
 
     private void InternalPreUpdate() {

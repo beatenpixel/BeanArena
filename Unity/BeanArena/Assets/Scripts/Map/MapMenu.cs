@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MapMenu : Map {
 
+    public CameraTarget cameraFocusTarget;
+
     public override void Init() {
         base.Init();
     }

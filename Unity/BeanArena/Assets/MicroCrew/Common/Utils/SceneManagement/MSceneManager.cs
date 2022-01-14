@@ -22,7 +22,10 @@ public class MSceneManager : Singleton<MSceneManager> {
         LoadSceneAssets();
 
         Scene startScene = SceneManager.GetActiveScene();
+        Debug.Log("Looking for scene: " + startScene.name);
         currentScene = allScenes.Find(x => x.sceneName == startScene.name);
+
+        Debug.Log("Set currentScene to: " + currentScene.sceneName);
         currentEvent = new SceneEvent() {
             prev = currentScene,
             next = currentScene
@@ -36,8 +39,13 @@ public class MSceneManager : Singleton<MSceneManager> {
     }
 
     private void LoadSceneAssets() {
-        allScenes = new List<GameScene>(Resources.FindObjectsOfTypeAll<GameScene>());
-        allScenes.Log(x => "sceneName: " + x.sceneName);
+        //allScenes = new List<GameScene>(Resources.FindObjectsOfTypeAll<GameScene>());
+        allScenes = new List<GameScene>(Resources.LoadAll<GameScene>("GameScenes"));
+        Debug.Log($"Loaded {allScenes.Count} scenes");
+        for (int i = 0; i < allScenes.Count; i++) {
+            Debug.Log("LoadedScene: " + allScenes[i].sceneName);
+        }
+        //allScenes.Log(x => "sceneName: " + x.sceneName);
     }
 
     private void Internal_LoadScene(string name) {

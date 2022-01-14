@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class MCamera : Singleton<MCamera> {
 
+    public CameraFollowMode followMode;
+
     public Camera cam;
     public Transform camT;
 
@@ -64,6 +66,31 @@ public class MCamera : Singleton<MCamera> {
     }
 
     private void InternalLateUpdate() {
+        
+        if(followMode == CameraFollowMode.TrackTargets) {
+            UpdateTrackTargetsMode();
+        } else if(followMode == CameraFollowMode.Fixed) {
+            UpdateFixedMode();
+        }
+
+        Vector3 newPos = Vector2.SmoothDamp(camT.position, targetPos, ref camPosDamp, config.followTime) + shakeValue;
+        newPos = ClampCameraPosInsideArea(newPos, config.limitsCenter, config.limitsSize, cam);
+        camT.position = newPos.SetZ(startCamPos.z);
+
+        float newSize = Mathf.SmoothDamp(cam.orthographicSize, targetSize, ref targetSizeDamp, config.sizeChangeTime);
+        cam.orthographicSize = newSize;
+
+        shadowCamT.position = camT.position;
+        shadowCam.orthographicSize = cam.orthographicSize;
+
+        gradientBackground.AlignSizeToCamera(cam);
+    }
+
+    private void UpdateFixedMode() {
+
+    }
+
+    private void UpdateTrackTargetsMode() {
         int enabledTargetsCount = 0;
         for (int i = 0; i < targets.Count; i++) {
             enabledTargetsCount += (targets[i].t != null && targets[i].doFollow) ? 1 : 0;
@@ -83,10 +110,22 @@ public class MCamera : Singleton<MCamera> {
 
             targetPos = targetsBounds.center;
 
-            if (targetsBounds.size.y > config.minMaxSize.y) {
-                targetSize = Mathf.Clamp(targetsBounds.size.y * 0.5f, config.minMaxSize.x, config.minMaxSize.y);
+            float minSize, maxSize;
+
+            if (config.useLimits) {
+                minSize = Mathf.Min(config.limitsSize.y * 0.5f, config.minMaxSize.x);
+                maxSize = Mathf.Min(config.limitsSize.y * 0.5f, config.minMaxSize.y);
             } else {
-                targetSize = Mathf.Clamp(targetsBounds.size.x / SCREEN_WH_RATIO * 0.5f, config.minMaxSize.x, config.minMaxSize.y);
+                minSize = config.minMaxSize.x;
+                maxSize = config.minMaxSize.y;
+            }
+
+            MDraw.TextLeft($"maxSize: " + maxSize.ToString("F1"), new Vector2(30, 100));
+
+            if (targetsBounds.size.y > config.minMaxSize.y) {
+                targetSize = Mathf.Clamp(targetsBounds.size.y * 0.5f, minSize, maxSize);
+            } else {
+                targetSize = Mathf.Clamp(targetsBounds.size.x / SCREEN_WH_RATIO * 0.5f, minSize, maxSize);
             }
         } else {
             targetPos = startCamPos;
@@ -95,19 +134,7 @@ public class MCamera : Singleton<MCamera> {
 
         if (config.useLimits) {
             targetPos = ClampCameraPosInsideArea(targetPos, config.limitsCenter, config.limitsSize, cam);
-        }
-
-        Vector3 newPos = Vector2.SmoothDamp(camT.position, targetPos, ref camPosDamp, config.followTime) + shakeValue;
-        newPos = ClampCameraPosInsideArea(newPos, config.limitsCenter, config.limitsSize, cam);
-        camT.position = newPos.SetZ(startCamPos.z);
-
-        float newSize = Mathf.SmoothDamp(cam.orthographicSize, targetSize, ref targetSizeDamp, config.sizeChangeTime);
-        cam.orthographicSize = newSize;
-
-        shadowCamT.position = camT.position;
-        shadowCam.orthographicSize = cam.orthographicSize;
-
-        gradientBackground.AlignSizeToCamera(cam);
+        }       
     }
 
     private void OnDrawGizmosSelected() {
@@ -148,7 +175,7 @@ public class MCamera : Singleton<MCamera> {
     }
     */
 
-    public void SetSizeAccordingToScreen(Vector2 safeAreaSize, ScreenMatchType matchType) {
+    public float GetSizeAccordingToScreen(Vector2 safeAreaSize, ScreenMatchType matchType) {
         float wDivH = Screen.width / (float)Screen.height;
         IMDraw.Label(50, 50, Color.white, 20, LabelPivot.UPPER_LEFT, LabelAlignment.RIGHT, "screen: " + Screen.width + " " + Screen.height);
 
@@ -165,7 +192,7 @@ public class MCamera : Singleton<MCamera> {
             size = Mathf.Max(minSizeToSafeX, minSizeToSafeY);
         }
 
-        cam.orthographicSize = size;
+        return size;
     }
 
     public void ClearTargets() {
@@ -173,8 +200,26 @@ public class MCamera : Singleton<MCamera> {
     }
 
     public CameraTarget AddTarget(CameraTarget target) {
+        SetFollowMode(CameraFollowMode.TrackTargets);
         targets.Add(target);
         return target;
+    }
+
+    public void SetFollowMode(CameraFollowMode _followMode) {
+        followMode = _followMode;
+    }
+
+    public void SetFixedArea(Vector2 center, Vector2 size, ScreenMatchType matchType, bool instant) {
+        ClearTargets();
+        SetFollowMode(CameraFollowMode.Fixed);
+
+        targetSize = GetSizeAccordingToScreen(size, matchType);
+        targetPos = center;
+
+        if(instant) {
+            camT.position = center;
+            cam.orthographicSize = targetSize;
+        }
     }
 
     public void Shake() {
@@ -281,6 +326,12 @@ public class CameraConfig {
 
     public Vector2 followMargin;
     public Vector2 minMaxSize;
+}
+
+public enum CameraFollowMode {
+    None,
+    Fixed,
+    TrackTargets
 }
 
 public enum ScreenMatchType {
