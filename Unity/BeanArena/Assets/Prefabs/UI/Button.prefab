@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7071176786298048626}
   - component: {fileID: 7071176786298048624}
   - component: {fileID: 7071176786298048625}
+  - component: {fileID: 3811465075812773258}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -65,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: "\u043D\u0438\u043A\u0442\u043E"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9aa6326b69cf6fb43b5ac6d834b4f3d3, type: 2}
   m_sharedMaterial: {fileID: 5355257908315070428, guid: 9aa6326b69cf6fb43b5ac6d834b4f3d3, type: 2}
@@ -92,7 +93,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 29.1
+  m_fontSize: 44.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -134,6 +135,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3811465075812773258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7071176786298048627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27798c389c988da48b345a899559ce5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 7071176786298048625}
+  maintainTextAlignment: 1
+  key: NONE
 --- !u!1 &7071176786883213262
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,18 +358,19 @@ MonoBehaviour:
   _subType: default
   rectT: {fileID: 7071176788243918908}
   elementEnabled: 0
-  ClickUnityEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  config:
-    pressScale: 0.87
-    pressDuration: 0.2
-    pressEase: 30
-    tintOnPress: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
   subRectT: {fileID: 7071176787352331383}
   buttonImage: {fileID: 7071176787352331382}
   buttonIcon: {fileID: 7071176786883213260}
   buttonText: {fileID: 7071176786298048625}
+  ClickUnityEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  config:
+    doTint: 1
+    tintOnPress: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
+    pressScale: 0.87
+    pressDuration: 0.2
+    pressEase: 30
 --- !u!222 &7071176788243918905
 CanvasRenderer:
   m_ObjectHideFlags: 0

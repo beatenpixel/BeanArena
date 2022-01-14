@@ -1,8 +1,104 @@
-STRING ID	DESCRIPTION	ENGLISH	FRENCH / FRANÇAIS	SPANISH / ESPAÑOL	GERMAN / DEUTSCH	ITALIAN / ITALIANO	PORTUGUESE / PORTUGUÊS (BR)	PORTUGUESE / PORTUGUÊS (PT)	RUSSIAN / РУССКИЙ
-LANGUAGE_CODE	IETF language tag(s) without dash	enUS enGB	frFR	esES esAR esMX	deDE deCH deAT	itIT itCH	ptBR	ptPT	ruRU
-LANGUAGE_EN	[LanguageName] in english	English	French	Spanish	German	Italian 	Portuguese (Brazil)	Portuguese	Russian
-LANGUAGE_DIRECTION	ltr or rtl (text direction used by game code)	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr
-									
-Polyglot	100								
-SWORD_TYPE	None	Sword Type	Type d'épée	Tipo de espada	Schwertart	Tipo di spada	Tipo de espada	Tipo de espada	Тип меча
-sword_name		Sword {0}	Épée {0}	Espada {0}	Schwert {0}	Spada {0}	Espada {0}	Espada {0}	Меч {0}
+STRING ID	DESCRIPTION	ENGLISH	FRENCH / FRANÇAIS	SPANISH / ESPAÑOL	GERMAN / DEUTSCH	ITALIAN / ITALIANO	PORTUGUESE / PORTUGUÊS (BR)	PORTUGUESE / PORTUGUÊS (PT)	RUSSIAN / РУССКИЙ		*
+LANGUAGE_CODE	IETF language tag(s) without dash	enUS enGB	frFR	esES esAR esMX	deDE deCH deAT	itIT itCH	ptBR	ptPT	ruRU		
+LANGUAGE_EN	[LanguageName] in english	English	French	Spanish	German	Italian 	Portuguese (Brazil)	Portuguese	Russian		
+LANGUAGE_DIRECTION	ltr or rtl (text direction used by game code)	ltr	ltr	ltr	ltr	ltr	ltr	ltr	ltr		
+											
+Polyglot	100										
+SWORD_TYPE	None	Sword Type	Type d'épée	Tipo de espada	Schwertart	Tipo di spada	Tipo de espada	Tipo de espada	Тип меча		
+SWORD_NAME	None	Sword {0}	Épée {0}	Espada {0}	Schwert {0}	Spada {0}	Espada {0}	Espada {0}	Меч {0}		
+EMPTY_SLOT	None	Empty slot	Emplacement vide	Ranura vacía	Leerer Schlitz	Slot vuoto	Slot vazio	Slot vazio	Пустой слот		
+GO_BUTTON	None	GO!	ALLER!	¡VAMOS!	GEHEN!	ANDARE!	VAI!	VAI!	ГО!		
+NONE	None	none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+EDIT_BUTTON		EDIT	ÉDITER	EDITAR	BEARBEITEN	MODIFICARE	EDITAR	EDITAR	РЕДАКТИРОВАТЬ		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		

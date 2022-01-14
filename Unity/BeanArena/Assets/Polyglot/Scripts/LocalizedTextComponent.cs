@@ -41,6 +41,8 @@ namespace Polyglot
             }
         }
 
+        public int maxSymbolsLength = -1;
+
         public List<object> Parameters { get { return parameters; } }
 
         private readonly List<object> parameters = new List<object>();
@@ -76,14 +78,24 @@ namespace Polyglot
             var flags = text != null ? text.hideFlags : HideFlags.None;
             if(text != null) text.hideFlags = HideFlags.DontSave;
 #endif
+            string translationStr = null;
+
             if (parameters != null && parameters.Count > 0)
             {
-                SetText(text, Localization.GetFormat(key, parameters.ToArray()));
+                translationStr = Localization.GetFormat(key, parameters.ToArray());
             }
             else
             {
-                SetText(text, Localization.Get(key));
+                translationStr = Localization.Get(key);
             }
+
+            if (maxSymbolsLength > 0) {
+                if (translationStr.Length > maxSymbolsLength) {
+                    translationStr = translationStr.Substring(0, maxSymbolsLength) + ".";
+                }
+            }
+
+            SetText(text, translationStr);
 
             var direction = Localization.Instance.SelectedLanguageDirection;
 
