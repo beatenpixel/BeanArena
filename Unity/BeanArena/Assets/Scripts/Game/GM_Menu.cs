@@ -48,7 +48,7 @@ public class GM_Menu : GameMode {
 
 		genericMap.AddHero(playerHero);
 
-		MCamera.inst.SetFixedArea(Vector2.zero, new Vector2(10, 5), ScreenMatchType.Vertical, true);
+		MCamera.inst.SetFixedArea(new Vector2(0,1), new Vector2(10, 8), ScreenMatchType.Vertical, true);
 	}
 
 }
