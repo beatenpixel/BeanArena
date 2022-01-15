@@ -12,7 +12,7 @@ namespace Polyglot
         {
             text.text = value;
         }
-
+        
         protected override void UpdateAlignment(TextMeshProUGUI text, LanguageDirection direction)
         {
             if (IsOppositeDirection(text.alignment, direction))

@@ -17,9 +17,9 @@ public class HelperFunctionEditorWindow : EditorWindow {
     private Object[][] cachedObjects = new Object[20][];
     private Vector2 scrollPos;
 
-    [MenuItem("MicroCrew/HelperFuncWindow")]
+    [MenuItem("MicroCrew/Windows/HelperFunctions")]
     public static void ShowWindow() {
-        inst = (HelperFunctionEditorWindow)EditorWindow.GetWindow< HelperFunctionEditorWindow>("HelperWindow");
+        inst = (HelperFunctionEditorWindow)EditorWindow.GetWindow< HelperFunctionEditorWindow>("HelperFunctions");
     }
 
     private void OnEnable() {

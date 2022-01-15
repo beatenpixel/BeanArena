@@ -23,8 +23,9 @@ public class GameStateManager : Singleton<GameStateManager>, IStateMachine<GameC
 
 		this.Wait(() => {
 			GameScene scene = MSceneManager.currentScene;
+			Debug.Log(scene == null);
 
-			if (scene.name == "menu") {
+			if (scene.sceneName == "menu") {
 				SwitchTo(new GameState_Menu());
 			} else {
 				SwitchTo(new GameState_Gameplay());
