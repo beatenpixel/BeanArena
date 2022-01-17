@@ -7,6 +7,8 @@ public class MenuUI : MonoBehaviour {
 
 	public static MenuUI inst;
 
+	public InventoryDrawer inventoryDrawer;
+
 	public UIGroupAppear idleGroup;
 	public UIGroupAppear editGroup;
 
@@ -16,6 +18,9 @@ public class MenuUI : MonoBehaviour {
 
 	public void Init() {
 		inst = this;
+
+		inventoryDrawer.Init();
+		inventoryDrawer.Draw();
 
 		MGameLoop.Update.Register(InternalUpdate);
 	}

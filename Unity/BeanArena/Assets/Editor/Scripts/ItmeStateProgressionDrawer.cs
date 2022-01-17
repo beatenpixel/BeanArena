@@ -42,12 +42,16 @@ public class ItemStatProgressionDrawer : PropertyDrawer {
 
         if (isFoldoutInInspectorProp.boolValue) {
             /*Show folded subproperty*/
-            position = AddLine(position);            
-
-            statTypeProp.enumValueIndex = (int)(StatType)EditorGUI.EnumPopup(position, (StatType)statTypeProp.enumValueIndex);
             position = AddLine(position);
 
-            StatValueType statValueType = (StatValueType)EditorGUI.EnumPopup(position, (StatValueType)statValueTypeProp.enumValueIndex);
+            Rect statTypeRect = position;
+            statTypeRect.width *= 0.5f;
+
+            statTypeProp.enumValueIndex = (int)(StatType)EditorGUI.EnumPopup(statTypeRect, (StatType)statTypeProp.enumValueIndex);
+
+            statTypeRect.x += statTypeRect.width;
+
+            StatValueType statValueType = (StatValueType)EditorGUI.EnumPopup(statTypeRect, (StatValueType)statValueTypeProp.enumValueIndex);
             statValueTypeProp.enumValueIndex = (int)statValueType;
             position = AddLine(position);
 
@@ -70,59 +74,127 @@ public class ItemStatProgressionDrawer : PropertyDrawer {
 
             if (itemInfo != null) {
 
-                if (statValueType == StatValueType.Int) {
-                    if (progressionType == ItemStatProgressionType.Interpolate) {
-                        var intStartEndProp = property.FindPropertyRelative(nameof(ItemStatProgression.intStartEndValue));
+                bool isInt = statValueType == StatValueType.Int;
+
+                if (progressionType == ItemStatProgressionType.Interpolate) {
+                    var intStartEndProp = property.FindPropertyRelative(nameof(ItemStatProgression.intStartEndValue));
+                    var floatStartEndProp = property.FindPropertyRelative(nameof(ItemStatProgression.floatStartEndValue));
+
+                    Vector2 startEnd;
+
+                    if (isInt) {
                         Vector2Int intStartEnd = EditorGUI.Vector2IntField(position, GUIContent.none, intStartEndProp.vector2IntValue);
                         intStartEndProp.vector2IntValue = intStartEnd;
-
-                        position = AddLine(position);
-
-                        var roundAccuracyProp = property.FindPropertyRelative(nameof(ItemStatProgression.roundAccuracy));
-                        GUI.Label(position, new GUIContent("Acc"));
-                        Rect roundAccRect = position; roundAccRect.x += 30;
-                        float roundAccuracy = EditorGUI.FloatField(roundAccRect, roundAccuracyProp.floatValue, new GUIStyle(EditorStyles.numberField) {
-                            fixedWidth = 30
-                        });
-
-                        if(Mathf.Abs(roundAccuracy) < 0.001f) {
-                            roundAccuracy = 1;
-                        }
-
-                        roundAccuracyProp.floatValue = roundAccuracy;
-
-                        position = AddLine(position);
-
-                        for (int i = 0; i < itemInfo.maxLevel; i++) {
-                            float p = i / (float)(itemInfo.maxLevel - 1);
-                            float p2;
-
-                            switch(progressionFunc) {
-                                case StatProgressionFunc.QuadIn:
-                                    p2 = Easing.Quadratic.In(p);
-                                    break;
-                                case StatProgressionFunc.QuadOut:
-                                    p2 = Easing.Quadratic.Out(p);
-                                    break;
-                                case StatProgressionFunc.SineIn:
-                                    p2 = Easing.Sine.In(p);
-                                    break;
-                                case StatProgressionFunc.SineOut:
-                                    p2 = Easing.Sine.Out(p);
-                                    break;
-                                default:
-                                    p2 = Easing.Linear(p);
-                                    break;
-                            }
-
-                            int interpValue = Mathf.RoundToInt(MMath.RoundToAccuracy(Mathf.Lerp(intStartEnd.x, intStartEnd.y, p2), roundAccuracy, false));
-
-                            EditorGUI.LabelField(position, new GUIContent(interpValue.ToString()));
-                            position = AddLine(position);
-                        }
-                    } else if (progressionType == ItemStatProgressionType.Extrapolate) {
-
+                        startEnd = new Vector2(intStartEnd.x, intStartEnd.y);
+                    } else {
+                        Vector2 floatStartEnd = EditorGUI.Vector2Field(position, GUIContent.none, floatStartEndProp.vector2Value);
+                        floatStartEndProp.vector2Value = floatStartEnd;
+                        startEnd = floatStartEnd;
                     }
+
+                    position = AddLine(position);
+
+                    var roundAccuracyProp = property.FindPropertyRelative(nameof(ItemStatProgression.roundAccuracy));
+                    
+                    GUI.Label(position, new GUIContent("Acc"));
+                    Rect roundAccRect = position; roundAccRect.x += 30;
+                    float roundAccuracy = EditorGUI.FloatField(roundAccRect, roundAccuracyProp.floatValue, new GUIStyle(EditorStyles.numberField) {
+                        fixedWidth = 60
+                    });
+
+                    if (Mathf.Abs(roundAccuracy) < 0.0001f) {
+                        roundAccuracy = 1;
+                    }
+
+                    roundAccuracyProp.floatValue = roundAccuracy;
+
+                    position = AddLine(position);
+
+                    var valuesArrayProp = property.FindPropertyRelative(nameof(ItemStatProgression.values));
+
+                    valuesArrayProp.arraySize = itemInfo.maxLevel;
+
+                    for (int i = 0; i < itemInfo.maxLevel; i++) {
+                        var elemProp = valuesArrayProp.GetArrayElementAtIndex(i);
+                        var manual = elemProp.FindPropertyRelative(nameof(StatValue.manual));
+                        var elemIntValue = elemProp.FindPropertyRelative(nameof(StatValue.intValue));
+                        var elemFloatValue = elemProp.FindPropertyRelative(nameof(StatValue.floatValue));
+
+                        float p = i / (float)(itemInfo.maxLevel - 1);
+                        float p2;
+
+                        switch (progressionFunc) {
+                            case StatProgressionFunc.QuadIn:
+                                p2 = Easing.Quadratic.In(p);
+                                break;
+                            case StatProgressionFunc.QuadOut:
+                                p2 = Easing.Quadratic.Out(p);
+                                break;
+                            case StatProgressionFunc.SineIn:
+                                p2 = Easing.Sine.In(p);
+                                break;
+                            case StatProgressionFunc.SineOut:
+                                p2 = Easing.Sine.Out(p);
+                                break;
+                            default:
+                                p2 = Easing.Linear(p);
+                                break;
+                        }
+
+                        float interpValue = MMath.RoundToAccuracy(Mathf.Lerp(startEnd.x, startEnd.y, Mathf.Clamp01(p2)), roundAccuracy, false);
+
+                        if (!manual.boolValue) {
+                            if (isInt) {
+                                elemIntValue.intValue = Mathf.RoundToInt(interpValue);
+                            } else {
+                                elemFloatValue.floatValue = interpValue;
+                            }
+                        } else {
+                            if (isInt) {
+                                interpValue = elemIntValue.intValue;
+                            } else {
+                                interpValue = elemFloatValue.floatValue;
+                            }
+                        }
+
+                        Rect labelRect = position;
+
+                        labelRect.width = 15;
+
+                        EditorGUI.LabelField(labelRect, new GUIContent($"{i}"));
+
+                        labelRect.width = 50;
+                        labelRect.x += 15;
+
+                        if (isInt) {
+                            EditorGUI.LabelField(labelRect, new GUIContent($"{interpValue.ToString("F0")}"));
+                        } else {
+                            EditorGUI.LabelField(labelRect, new GUIContent($"{interpValue}"));
+                        }
+
+                        Rect toggleRect = labelRect;
+                        toggleRect.width = 15;
+                        toggleRect.x += 70;
+
+                        manual.boolValue = EditorGUI.Toggle(toggleRect, manual.boolValue);
+
+                        if (manual.boolValue) {
+                            toggleRect.width = 50;
+                            toggleRect.x += 20;
+
+                            if (isInt) {
+                                elemIntValue.intValue = EditorGUI.IntField(toggleRect, elemIntValue.intValue);
+                            } else {
+                                elemFloatValue.floatValue = EditorGUI.FloatField(toggleRect, elemFloatValue.floatValue);
+                            }
+                        }
+
+                        position = AddLine(position);
+                    }
+                }
+
+                if (statValueType == StatValueType.Int) {
+                    
                 } else if(statValueType == StatValueType.Float) {
                     if (progressionType == ItemStatProgressionType.Interpolate) {
 

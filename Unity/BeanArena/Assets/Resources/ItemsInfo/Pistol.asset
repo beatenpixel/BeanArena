@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b01a7bf1b2c9564aa8315d8830dba41, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: 
+  itemType: 1
+  itemName_LKey: ITEM_NAME_PISTOL
+  itemDescription_LKey: ITEM_DESCR_PISTOL
+  icon: {fileID: 11400000, guid: 19561c3bd6200a74da1d3a82f8ba990d, type: 2}
+  maxLevel: 5
+  stats:
+  - statType: 5
+    valueType: 0
+    progressionType: 0
+    progressionFunc: 3
+    intStartEndValue: {x: 10, y: 1000}
+    floatStartEndValue: {x: 0, y: 0}
+    values:
+    - intValue: 25
+      floatValue: 0
+      manual: 1
+    - intValue: 75
+      floatValue: 0
+      manual: 0
+    - intValue: 275
+      floatValue: 0
+      manual: 0
+    - intValue: 600
+      floatValue: 0
+      manual: 0
+    - intValue: 1000
+      floatValue: 0
+      manual: 0
+    roundAccuracy: 25
+    soItemInfo: {fileID: 11400000}
+    isFoldoutInInspector: 0
+  - statType: 1
+    valueType: 0
+    progressionType: 0
+    progressionFunc: 3
+    intStartEndValue: {x: 5, y: 20}
+    floatStartEndValue: {x: 0, y: 0}
+    values:
+    - intValue: 5
+      floatValue: 0
+      manual: 0
+    - intValue: 6
+      floatValue: 0
+      manual: 0
+    - intValue: 9
+      floatValue: 0
+      manual: 0
+    - intValue: 14
+      floatValue: 0
+      manual: 0
+    - intValue: 20
+      floatValue: 0
+      manual: 0
+    roundAccuracy: 0.1
+    soItemInfo: {fileID: 11400000}
+    isFoldoutInInspector: 0
+  - statType: 4
+    valueType: 1
+    progressionType: 0
+    progressionFunc: 3
+    intStartEndValue: {x: 5, y: 20}
+    floatStartEndValue: {x: 0.5, y: 0.2}
+    values:
+    - intValue: 5
+      floatValue: 0.5
+      manual: 0
+    - intValue: 6
+      floatValue: 0.47
+      manual: 0
+    - intValue: 9
+      floatValue: 0.41
+      manual: 0
+    - intValue: 14
+      floatValue: 0.31
+      manual: 0
+    - intValue: 20
+      floatValue: 0.19999999
+      manual: 0
+    roundAccuracy: 0.01
+    soItemInfo: {fileID: 11400000}
+    isFoldoutInInspector: 0

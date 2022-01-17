@@ -7,6 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class ItemData : GD {
 
+    public ItemType itemType;
     public ItemRareness rareness;
     public int level;
     public int fusePoints;
@@ -20,6 +21,7 @@ public class ItemData : GD {
     }
 
     public ItemData(SerializationInfo info, StreamingContext sc) : base(info, sc) {
+        itemType = (ItemType)info.GetByte("itemType");
         rareness = (ItemRareness)info.GetByte("rareness");
         level = info.GetByte("level");
         fusePoints = info.GetInt32("fusePoints");
@@ -27,6 +29,7 @@ public class ItemData : GD {
 
     public override void GetObjectData(SerializationInfo info, StreamingContext context) {
         base.GetObjectData(info, context);
+        info.AddValue("itemType", (byte)itemType);
         info.AddValue("rareness", (byte)rareness);
         info.AddValue("level", level);
         info.AddValue("fusePoints", fusePoints);
@@ -34,9 +37,10 @@ public class ItemData : GD {
 
     [OnDeserializing]
     protected override void SetDefaults(StreamingContext ds) {
+        itemType = ItemType.None;
         rareness = ItemRareness.Common;
         level = 1;
-        fusePoints = 0;
+        fusePoints = 0;        
     }
 
 }
@@ -49,6 +53,11 @@ public class Item {
         info = _reference;
         data = new ItemData();
     }
+}
+
+public enum ItemType : byte {
+    None,
+    Pistol
 }
 
 public enum ItemRareness : byte {
