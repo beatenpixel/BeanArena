@@ -31,6 +31,22 @@ MonoBehaviour:
     t: {r: 0.67058825, g: 1, b: 0.33333334, a: 1}
   - name: neutral_dot
     t: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
+  - name: star_silver
+    t: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
+  - name: star_gold
+    t: {r: 1, g: 0.8, b: 0.25490198, a: 1}
+  - name: star_diamond
+    t: {r: 1, g: 0.8, b: 0.25490198, a: 1}
+  - name: rareness_common
+    t: {r: 0.8666667, g: 0.8666667, b: 0.8666667, a: 1}
+  - name: rareness_uncommon
+    t: {r: 0.654902, g: 0.99215686, b: 0.50980395, a: 1}
+  - name: rareness_rare
+    t: {r: 0.21176471, g: 0.7058824, b: 1, a: 1}
+  - name: rareness_epic
+    t: {r: 0.8392157, g: 0.27058825, b: 1, a: 1}
+  - name: rareness_legendary
+    t: {r: 1, g: 0.75686276, b: 0.22352941, a: 1}
   m_TextPresets:
   - preset: 0
     fontAsset: {fileID: 11400000, guid: b3e1909bfa2fc3640b6280041d40f338, type: 2}

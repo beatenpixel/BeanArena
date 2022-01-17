@@ -60,7 +60,7 @@ public class UISimpleButton : UIButtonBase {
         OnClickEvent?.Invoke();
         OnClickEventInt?.Invoke(onClickEventIntArg);
 
-        MSound.Play("click");
+        MSound.Play("click", SoundConfig.randVolumePitch01);
     }
 
 }

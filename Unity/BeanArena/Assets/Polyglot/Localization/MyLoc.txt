@@ -10,9 +10,9 @@ EMPTY_SLOT	None	Empty slot	Emplacement vide	Ranura vacía	Leerer Schlitz	Slot vu
 GO_BUTTON	None	GO!	ALLER!	¡VAMOS!	GEHEN!	ANDARE!	VAI!	VAI!	ГО!		
 NONE	None	none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
 EDIT_BUTTON		EDIT	ÉDITER	EDITAR	BEARBEITEN	MODIFICARE	EDITAR	EDITAR	РЕДАКТИРОВАТЬ		
-		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
-		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
-		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
+READY_BUTTON		READY	PRÊT	LISTO	BEREIT	PRONTO	PRONTO	PRONTO	ГОТОВ		
+ITEM_NAME_PISTOL		Pistol	Pistolet	Pistola	Pistole	Pistola	Pistola	Pistola	Пистолет		
+ITEM_DESCR_PISTOL		Pew-pew	Pan Pan	Pew-lew	Pew-Pew	Pew-Pew.	Piu Piu	Piu Piu	Пиу-пиу		
 		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
 		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		
 		none	rien	ninguna	keiner	nessuno	Nenhum	Nenhum	никто		

@@ -33,13 +33,13 @@ namespace Polyglot
 			var key = keyProperty.stringValue;
 			var localizedString = Localization.Get(key);
 
-			EditorGUILayout.LabelField("Localized Text", localizedString);
+			EditorGUI.LabelField(position, "Localized Text", localizedString);
 
 			if (!string.IsNullOrEmpty(key))
 			{
 				if (!Localization.KeyExist(key))
 				{
-					DrawAutoComplete(keyProperty);
+					DrawAutoComplete(position, keyProperty);
 				}
 			}
 
@@ -47,7 +47,7 @@ namespace Polyglot
 		}
 
 
-		private void DrawAutoComplete(SerializedProperty property)
+		private void DrawAutoComplete(Rect position, SerializedProperty property)
 		{
 			var localizedStrings = LocalizationImporter.GetLanguagesStartsWith(property.stringValue);
 
@@ -58,7 +58,7 @@ namespace Polyglot
 
 			var selectedLanguage = (int)Localization.Instance.SelectedLanguage;
 
-			showAutoComplete = EditorGUILayout.Foldout(showAutoComplete, "Auto-Complete");
+			showAutoComplete = EditorGUI.Foldout(position,showAutoComplete, "Auto-Complete");
 			if (showAutoComplete)
 			{
 				EditorGUI.indentLevel++;
