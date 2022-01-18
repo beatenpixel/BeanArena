@@ -92,6 +92,9 @@ TextureImporter:
   - first:
       213: 684093613229026834
     second: ui_tex_0_29
+  - first:
+      213: 7889531768124057266
+    second: notification_dot
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -830,6 +833,27 @@ TextureImporter:
       bones: []
       spriteID: 21e21a944836e7900800000000000000
       internalID: 684093613229026834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: notification_dot
+      rect:
+        serializedVersion: 2
+        x: 1740
+        y: 1578
+        width: 120
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b6a133b75f3d7d60800000000000000
+      internalID: 7889531768124057266
       vertices: []
       indices: 
       edges: []

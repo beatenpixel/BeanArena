@@ -185,7 +185,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: -0.00000035763}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 20.5237}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &1735469020
@@ -339,6 +339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectT: {fileID: 5810063998387132395}
   image: {fileID: 5810063998387132404}
+  rarenessImage: {fileID: 5810063998452478335}
   fuseBarRootGO: {fileID: 630040542}
   fuseBarRectT: {fileID: 1166446678}
   levelText: {fileID: 1735469019}

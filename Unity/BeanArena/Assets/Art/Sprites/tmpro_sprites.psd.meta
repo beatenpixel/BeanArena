@@ -4,13 +4,28 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 3959047777783908238
-    second: coin
+    second: bean_gold
   - first:
       213: 3867287787966158001
     second: gem
   - first:
       213: -5935198479381384675
+    second: coin
+  - first:
+      213: 7374767111035791262
     second: cup
+  - first:
+      213: 2434013178458663610
+    second: damage
+  - first:
+      213: 6234432818899860378
+    second: jump
+  - first:
+      213: 1922921581267463393
+    second: time
+  - first:
+      213: -1043653011585756779
+    second: heart
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -112,27 +127,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: coin
-      rect:
-        serializedVersion: 2
-        x: 13
-        y: 844
-        width: 160
-        height: 170
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e870c9b5afc51f630800000000000000
-      internalID: 3959047777783908238
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: gem
       rect:
         serializedVersion: 2
@@ -157,10 +151,136 @@ TextureImporter:
       name: cup
       rect:
         serializedVersion: 2
+        x: 180
+        y: 739
+        width: 188
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e97a5824d9f685660800000000000000
+      internalID: 7374767111035791262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: damage
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 403
+        width: 166
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abae5a0071a57c120800000000000000
+      internalID: 2434013178458663610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jump
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 412
+        width: 89
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9b309a0e97258650800000000000000
+      internalID: 6234432818899860378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: time
+      rect:
+        serializedVersion: 2
         x: 12
-        y: 445
-        width: 168
-        height: 180
+        y: 289
+        width: 112
+        height: 111
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ec21667df69faa10800000000000000
+      internalID: 1922921581267463393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: heart
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 296
+        width: 117
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5911aaf8d133481f0800000000000000
+      internalID: -1043653011585756779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bean_gold
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 844
+        width: 160
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e870c9b5afc51f630800000000000000
+      internalID: 3959047777783908238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coin
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 881
+        width: 130
+        height: 133
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

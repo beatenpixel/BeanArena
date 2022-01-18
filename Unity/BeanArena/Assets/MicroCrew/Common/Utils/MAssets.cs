@@ -36,8 +36,6 @@ public class MAssets : SingletonScriptableObject<MAssets> {
         }
 
         itemsInfo = new SO_AssetDB<SO_ItemInfo, ItemType>("ItemsInfo");
-
-        MLog.Log(itemsInfo.GetAllAssets().Count, true);
     }
 
     [System.Serializable]

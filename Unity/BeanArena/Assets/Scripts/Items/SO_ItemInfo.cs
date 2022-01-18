@@ -57,14 +57,12 @@ public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType> {
             return false;
         }
 
-        if (level == maxLevel) {
+        if (level == maxLevel - 1) {
             fuseP = 1;
             return true;
         } else {
-            Debug.Log("level: " + level);
-
-            StatValue start = fuseStat.values[level - 1];
-            StatValue end = fuseStat.values[level];
+            StatValue start = fuseStat.values[level];
+            StatValue end = fuseStat.values[level + 1];
 
             fuseP = (fusePoints - start.intValue) / (float)(end.intValue - start.intValue);
             return true;

@@ -10,6 +10,7 @@ public class IconDrawer : MonoBehaviour {
 
 	public RectTransform rectT;
 	public Image image;
+    public Image rarenessImage;
 
     public GameObject fuseBarRootGO;
     public RectTransform fuseBarRectT;
@@ -52,7 +53,9 @@ public class IconDrawer : MonoBehaviour {
     } 
 
     public void DrawItem(GD_Item itemData, SO_ItemInfo itemInfo) {
-        bool hasFuse = itemInfo.GetFusePointsPercent(itemData.fusePoints, itemData.level, out float fuseProgress);
+        bool hasFuse = itemInfo.GetFusePointsPercent(itemData.fusePoints, itemData.levelID, out float fuseProgress);
+
+        rarenessImage.color = MAssets.colors[("rareness_" + itemData.rareness.ToString()).ToLower()].SetA(0.5f);
 
         SetIcon(itemInfo.icon);
         DrawIcon();
@@ -63,7 +66,7 @@ public class IconDrawer : MonoBehaviour {
             DrawBar(null);
         }
 
-        DrawLevel(MFormat.GetLVLString(itemData.level, itemInfo.maxLevel));
+        DrawLevel(MFormat.GetLVLString(itemData.levelID, itemInfo.maxLevel));
     }
 
 #if UNITY_EDITOR

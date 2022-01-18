@@ -60,7 +60,7 @@ public class ItemButton : UIButtonBase {
     }
 
     protected override void OnBecomePressed(PointerEventData eventData) {
-        base.OnBecomePressed(eventData);
+        //base.OnBecomePressed(eventData);
 
         pressStartTime = Time.time;
         pointerPressPos = eventData.position;
@@ -71,7 +71,7 @@ public class ItemButton : UIButtonBase {
     }
 
     protected override void OnBecomeUnpressed(PointerEventData eventData) {
-        base.OnBecomeUnpressed(eventData);
+        //base.OnBecomeUnpressed(eventData);
 
         //subRectT.DOKill(true);
         //subRectT.DOScale(startScale, config.pressDuration).SetUpdate(true).SetEase(Ease.OutBack);

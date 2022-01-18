@@ -9,7 +9,7 @@ public class GD_Item : GD {
 
     public ItemType itemType;
     public ItemRareness rareness;
-    public int level;
+    public int levelID;
     public int fusePoints;
 
     public GD_Item() : base(GDType.ItemData, GDLoadOrder.Default) {
@@ -23,7 +23,7 @@ public class GD_Item : GD {
     public GD_Item(SerializationInfo info, StreamingContext sc) : base(info, sc) {
         itemType = (ItemType)info.GetByte("itemType");
         rareness = (ItemRareness)info.GetByte("rareness");
-        level = info.GetInt32("level");
+        levelID = info.GetInt32("level");
         fusePoints = info.GetInt32("fusePoints");
     }
 
@@ -31,7 +31,7 @@ public class GD_Item : GD {
         base.GetObjectData(info, context);
         info.AddValue("itemType", (byte)itemType);
         info.AddValue("rareness", (byte)rareness);
-        info.AddValue("level", level);
+        info.AddValue("level", levelID);
         info.AddValue("fusePoints", fusePoints);
     }
 
@@ -39,7 +39,7 @@ public class GD_Item : GD {
     protected override void SetDefaults(StreamingContext ds) {
         itemType = ItemType.None;
         rareness = ItemRareness.Common;
-        level = 1;
+        levelID = 0;
         fusePoints = 0;        
     }
 
