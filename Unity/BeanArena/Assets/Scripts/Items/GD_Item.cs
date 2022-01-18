@@ -23,7 +23,7 @@ public class GD_Item : GD {
     public GD_Item(SerializationInfo info, StreamingContext sc) : base(info, sc) {
         itemType = (ItemType)info.GetByte("itemType");
         rareness = (ItemRareness)info.GetByte("rareness");
-        level = info.GetByte("level");
+        level = info.GetInt32("level");
         fusePoints = info.GetInt32("fusePoints");
     }
 

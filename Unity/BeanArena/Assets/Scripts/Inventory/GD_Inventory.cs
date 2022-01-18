@@ -32,13 +32,13 @@ public class GD_Inventory : GD {
         items = new List<GD_Item>();
         items.Add(new GD_Item() {
             itemType = ItemType.Pistol,
-            fusePoints = 0,
-            level = 0,
+            fusePoints = 40,
+            level = 1,
             rareness = ItemRareness.Common
         });
         items.Add(new GD_Item() {
             itemType = ItemType.WaterPistol,
-            fusePoints = 75,
+            fusePoints = 234,
             level = 3,
             rareness = ItemRareness.Epic
         });
