@@ -14,6 +14,8 @@ public class GameDataManager : Singleton<GameDataManager> {
     public static string ASSETS_ROOT_PATH;
     public static string PERSISTENT_DATA_PATH;
 
+    public const string PLAYER_DATA_LOCATION = "/gameData.dat";
+
     public override void Init() {
         ASSETS_ROOT_PATH = Application.dataPath;
         PERSISTENT_DATA_PATH = Application.persistentDataPath;
@@ -33,14 +35,14 @@ public class GameDataManager : Singleton<GameDataManager> {
         GD_Game gdGame = Game.data;
         gdGame.timeInGame = gdGame.timeInGame + (int)Time.realtimeSinceStartup;
 
-        FileStream fs = new FileStream(PERSISTENT_DATA_PATH + "/gameData.dat", FileMode.Create);
+        FileStream fs = new FileStream(PERSISTENT_DATA_PATH + PLAYER_DATA_LOCATION, FileMode.Create);
 
         BinaryFormatter formatter = new BinaryFormatter();
 
         try {
             formatter.Serialize(fs, gdGame);
         } catch (SerializationException e) {
-            Debug.Log("Failed to serialize. Reason: " + e.Message);
+            Debug.Log("[GameDataManager] Failed to serialize. Reason: " + e.Message);
             throw;
         } finally {
             fs.Close();
@@ -48,7 +50,7 @@ public class GameDataManager : Singleton<GameDataManager> {
     }
 
     public GD_Game Load() {
-        GD_Game gdGame = Load<GD_Game>(PERSISTENT_DATA_PATH + "/gameData.dat");
+        GD_Game gdGame = Load<GD_Game>(PERSISTENT_DATA_PATH + PLAYER_DATA_LOCATION);
         if (gdGame == null) {
             gdGame = new GD_Game();
         }

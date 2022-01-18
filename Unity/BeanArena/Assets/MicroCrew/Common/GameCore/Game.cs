@@ -20,6 +20,8 @@ public class Game : Singleton<Game> {
 
 	private bool didSetupGame;
 
+	private MLog logger = new MLog("Game");
+
 	public override void Init() {
 		MSceneManager.OnSceneChangeEnd.Add(-1000,OnSceneLoadEnd);
 
@@ -40,6 +42,8 @@ public class Game : Singleton<Game> {
 		if (didSetupGame)
 			return;
 
+		MLog.Log("Start setting up game..." % MLogColor.Green, true);
+
 		MAssets.InitIfNeeded(null);
 		GameDataManager.InitIfNeeded(null);
 		data = GameDataManager.inst.Load();
@@ -59,6 +63,8 @@ public class Game : Singleton<Game> {
 	}
 
 	private void StartGameLogic() {
+		MLog.Log("StartGameLogic" % MLogColor.Green, true);
+
 		SetupGame();
 
 		map.Init();
@@ -69,9 +75,7 @@ public class Game : Singleton<Game> {
 		FX.inst.EnableDeathScreenEffect(false);
 	}	
 
-	private void OnSceneLoadEnd(SceneEvent e) {
-		Debug.Log("LoadScene");
-
+	private void OnSceneLoadEnd(SceneEvent e) {		
 		gameMode = FindObjectOfType<GameMode>();
 		map = FindObjectOfType<Map>();
 

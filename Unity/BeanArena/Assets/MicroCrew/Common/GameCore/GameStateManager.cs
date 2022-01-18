@@ -145,7 +145,8 @@ public class GameState_Menu : GameState {
 	}
 
 	protected override void OnSwitchedToMe(GameState prevState, GameContext context) {
-		Debug.Log("OnSwitchedToMe: menu");		
+		Debug.Log("OnSwitchedToMe: menu");
+		context.game.SetupGame();
 	}
 
 	protected override bool SwitchTo(GameState state, GameContext context) {

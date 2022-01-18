@@ -37,12 +37,12 @@ namespace MicroCrew.Utils {
             }
         }
 
-        public IPoolObject CreateNew(IPoolObject prefab) {
-            IPoolObject newInstance = MonoBehaviour.Instantiate(prefab.GetGameObject()).GetComponent<IPoolObject>();
+        public IPoolObject CreateNew(IPoolObject prefab, Transform parent = null) {
+            IPoolObject newInstance = MonoBehaviour.Instantiate(prefab.GetGameObject(), parent).GetComponent<IPoolObject>();
             return newInstance;
         }
 
-        private T Internal_Get<T>(string subType) where T : IPoolObject {
+        private T Internal_Get<T>(string subType, Transform parent = null) where T : IPoolObject {
             Type targetType = typeof(T);
 
             if (!objPrefabs.ContainsKey(targetType)) {
@@ -63,7 +63,7 @@ namespace MicroCrew.Utils {
                 obj.OnPop();
                 return obj;
             } else {
-                IPoolObject newObj = CreateNew(objPrefabs[targetType][subType]);
+                IPoolObject newObj = CreateNew(objPrefabs[targetType][subType], parent);
                 newObj.OnCreate();
                 newObj.OnPop();
                 return (T)newObj;
@@ -85,13 +85,13 @@ namespace MicroCrew.Utils {
             obj.OnPush();
         }
 
-        public static T Get<T>(string subType = null) where T : IPoolObject {
+        public static T Get<T>(string subType = null, Transform parent = null) where T : IPoolObject {
             InitIfNeeded(null);
 
             if (subType == null) {
                 subType = MPool.DEFAULT_SUB_TYPE;
             }
-            return inst.Internal_Get<T>(subType);
+            return inst.Internal_Get<T>(subType, parent);
         }
 
         public static List<T> GetPrefabs<T>(bool collectChildTypes) where T : IPoolObject {
