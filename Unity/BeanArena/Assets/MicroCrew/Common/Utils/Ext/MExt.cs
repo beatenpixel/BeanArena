@@ -49,6 +49,21 @@ public static class MExt {
 
     //========= VECTOR_3 ===========
 
+    public static Vector3 AddX(this Vector3 v, float x) {
+        v.x += x;
+        return v;
+    }
+
+    public static Vector3 AddY(this Vector3 v, float y) {
+        v.y += y;
+        return v;
+    }
+
+    public static Vector3 AddZ(this Vector3 v, float z) {
+        v.z += z;
+        return v;
+    }
+
     public static Vector3 SetX(this Vector3 v, float x) {
         v.x = x;
         return v;
@@ -137,6 +152,16 @@ public static class MExt {
 
     public static bool IsZero(this Vector2 a) {
         return (Mathf.Abs(a.x) < Mathf.Epsilon && Mathf.Abs(a.y) < Mathf.Epsilon);
+    }
+
+    public static Vector2 AddX(this Vector2 v, float x) {
+        v.x += x;
+        return v;
+    }
+
+    public static Vector2 AddY(this Vector2 v, float y) {
+        v.y += y;
+        return v;
     }
 
     public static Vector2 SetX(this Vector2 a, float x) {

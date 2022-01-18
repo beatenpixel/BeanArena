@@ -19,7 +19,7 @@ public class MCamera : Singleton<MCamera> {
     public MAudioListener audioListener;
 
     [Header("Config")]
-    public CameraConfig config;
+    public SO_CameraConfig config;
 
     private RaycastHitCache hitCache;
 
@@ -120,7 +120,7 @@ public class MCamera : Singleton<MCamera> {
                 maxSize = config.minMaxSize.y;
             }
 
-            MDraw.TextLeft($"maxSize: " + maxSize.ToString("F1"), new Vector2(30, 100));
+            //MDraw.TextLeft($"maxSize: " + maxSize.ToString("F1"), new Vector2(30, 100));
 
             if (targetsBounds.size.y > config.minMaxSize.y) {
                 targetSize = Mathf.Clamp(targetsBounds.size.y * 0.5f, minSize, maxSize);
@@ -313,19 +313,6 @@ public class CameraTarget {
 
     public Vector2 targetPosition => (Vector2)t.position + offset;
 
-}
-
-[System.Serializable]
-public class CameraConfig {
-    public float followTime = 0.2f;
-    public float sizeChangeTime = 0.3f;
-
-    public bool useLimits;
-    public Vector2 limitsCenter;
-    public Vector2 limitsSize;
-
-    public Vector2 followMargin;
-    public Vector2 minMaxSize;
 }
 
 public enum CameraFollowMode {

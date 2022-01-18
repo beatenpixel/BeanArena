@@ -15,6 +15,8 @@ public class MAssets : SingletonScriptableObject<MAssets> {
     public static Dictionary<string, Color> colors;
     public static Dictionary<TextStylePreset, TextMeshProPreset> textPresets;
 
+    public static SO_AssetDB<SO_ItemInfo, ItemType> itemsInfo; 
+
     public override void Init() {
         m_ui_tex_0 = Resources.LoadAll<Sprite>("Sprites/ui_tex_0");
         ui_tex_0 = new Dictionary<string, Sprite>();
@@ -32,6 +34,10 @@ public class MAssets : SingletonScriptableObject<MAssets> {
         for (int i = 0; i < m_TextPresets.Count; i++) {
             textPresets.Add(m_TextPresets[i].preset, m_TextPresets[i]);
         }
+
+        itemsInfo = new SO_AssetDB<SO_ItemInfo, ItemType>("ItemsInfo");
+
+        MLog.Log(itemsInfo.GetAllAssets().Count, true);
     }
 
     [System.Serializable]
@@ -74,6 +80,10 @@ public class SO_AssetDB<TObject, TKey> where TObject : ScriptableObject, ITypeKe
 
     public TObject GetAsset(TKey _type) {
         return assetDict[_type];
+    }
+
+    public List<TObject> GetAllAssets() {
+        return assetList;
     }
 
 }

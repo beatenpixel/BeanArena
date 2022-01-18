@@ -20,6 +20,7 @@ public abstract class UIButtonBase : UIInteractableElement {
     protected List<Graphic> childGraphics = new List<Graphic>();
     protected Dictionary<Graphic, Color> startColors;
 
+    protected Vector2 startAnchoredPosition;
     protected Vector3 startScale;
     protected Color startImageColor;
 
@@ -34,6 +35,7 @@ public abstract class UIButtonBase : UIInteractableElement {
     protected override void Awake() {
         base.Awake();
 
+        startAnchoredPosition = subRectT.anchoredPosition;
         startScale = subRectT.localScale;
 
         childGraphics = new List<Graphic>(GetComponentsInChildren<Graphic>(true));
@@ -45,7 +47,9 @@ public abstract class UIButtonBase : UIInteractableElement {
             }
         }
 
-        startImageColor = buttonImage.color;
+        if (buttonImage != null) {
+            startImageColor = buttonImage.color;
+        }
     }
 
     public void TintAllGraphics(Color tint) {
@@ -69,38 +73,38 @@ public abstract class UIButtonBase : UIInteractableElement {
         buttonText.text = text;
     }
 
-    protected virtual void OnBecomePressed() {
+    protected virtual void OnBecomePressed(PointerEventData eventData) {
         if (baseConfig.doTint) {
             TintAllGraphics(baseConfig.tintOnPress);
         }
     }
 
-    protected virtual void OnBecomeUnpressed() {
+    protected virtual void OnBecomeUnpressed(PointerEventData eventData) {
         if (baseConfig.doTint) {
             TintAllGraphics(Color.white);
         }
     }
 
-    protected virtual void OnClick() {
+    protected virtual void OnClick(PointerEventData eventData) {
 
     }
 
     #region UIEvents
 
     public override void OnPointerClick(PointerEventData eventData) {
-        OnClick();
+        OnClick(eventData);
     }
 
     public override void OnPointerDown(PointerEventData eventData) {
         base.OnPointerDown(eventData);
 
-        OnBecomePressed();
+        OnBecomePressed(eventData);
     }
 
     public override void OnPointerExit(PointerEventData eventData) {
         base.OnPointerExit(eventData);
 
-        OnBecomeUnpressed();
+        OnBecomeUnpressed(eventData);
     }
 
     public override void OnPointerEnter(PointerEventData eventData) {
@@ -110,7 +114,7 @@ public abstract class UIButtonBase : UIInteractableElement {
     public override void OnPointerUp(PointerEventData eventData) {
         base.OnPointerUp(eventData);
 
-        OnBecomeUnpressed();
+        OnBecomeUnpressed(eventData);
     }
 
     #endregion

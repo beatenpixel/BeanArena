@@ -82,6 +82,12 @@ public class BinaryStateSwitcher {
 		isChangingState = false;
 	}
 
+	public void SetStateForced(bool _state) {
+		state = _state;
+		tempState = _state;
+		isChangingState = false;
+    }
+
 }
 
 public class RefreshableObjectsList<T> where T : MonoBehaviour {

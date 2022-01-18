@@ -5,6 +5,14 @@ using UnityEngine;
 
 public static class MMath {
 
+    public static float RoundToAccuracy(float value, float acc, bool upOrDown) {
+        return value - (value % acc) + (upOrDown?acc:0f);
+    }
+
+    public static int RoundToAccuracy(int value, int acc, bool upOrDown) {
+        return value - (value % acc) + (upOrDown ? acc : 0);
+    }
+
     public static double RoundFirstSignificantDigit(this double input) {
         int precision = 0;
         var val = input;

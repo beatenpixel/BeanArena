@@ -58,8 +58,8 @@ public class UIChargableButton : UIButtonBase {
         }
     }
 
-    protected override void OnBecomePressed() {
-        base.OnBecomePressed();
+    protected override void OnBecomePressed(PointerEventData eventData) {
+        base.OnBecomePressed(eventData);
 
         subRectT.DOKill(true);
         chargeImage.DOKill(true);
@@ -68,12 +68,12 @@ public class UIChargableButton : UIButtonBase {
         charge = 0f;
     }
 
-    protected override void OnBecomeUnpressed() {
-        base.OnBecomeUnpressed();
+    protected override void OnBecomeUnpressed(PointerEventData eventData) {
+        base.OnBecomeUnpressed(eventData);
     }
 
-    protected override void OnClick() {
-        base.OnClick();
+    protected override void OnClick(PointerEventData eventData) {
+        base.OnClick(eventData);
 
         subRectT.DOKill(true);
         subRectT.anchoredPosition = startAnchoredPos;

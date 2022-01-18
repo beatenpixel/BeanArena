@@ -70,7 +70,9 @@ public enum GDLoadOrder : byte {
 public enum GDType : byte {
     None,
     Game,
-    UIWindowData
+    UIWindowData,
+    ItemData,
+    Inventory
 }
 
 [Serializable]

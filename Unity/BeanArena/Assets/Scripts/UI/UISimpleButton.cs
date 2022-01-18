@@ -40,27 +40,27 @@ public class UISimpleButton : UIButtonBase {
         OnClickEventInt = action;
     }
 
-    protected override void OnBecomePressed() {
-        base.OnBecomePressed();
+    protected override void OnBecomePressed(PointerEventData eventData) {
+        base.OnBecomePressed(eventData);
 
         subRectT.DOKill(true);
         subRectT.DOScale(startScale * config.pressScale, config.pressDuration).SetUpdate(true).SetEase(Ease.OutBack);
     }
 
-    protected override void OnBecomeUnpressed() {
-        base.OnBecomeUnpressed();
+    protected override void OnBecomeUnpressed(PointerEventData eventData) {
+        base.OnBecomeUnpressed(eventData);
 
         subRectT.DOKill(true);
         subRectT.DOScale(startScale, config.pressDuration).SetUpdate(true).SetEase(Ease.OutBack);
     }
 
-    protected override void OnClick() {
-        base.OnClick();
+    protected override void OnClick(PointerEventData eventData) {
+        base.OnClick(eventData);
 
         OnClickEvent?.Invoke();
         OnClickEventInt?.Invoke(onClickEventIntArg);
 
-        MSound.Play("click");
+        MSound.Play("click", SoundConfig.randVolumePitch01);
     }
 
 }

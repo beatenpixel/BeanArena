@@ -5,10 +5,15 @@ using UnityEngine;
 
 public class GM_Menu : GameMode {
 
+	public static GM_Menu inst;
+
+	public MenuState menuState;
+
 	private MapMenu map;
 
     public override void InitGame(Game game) {
         base.InitGame(game);
+		inst = this;
 
 		map = (MapMenu)genericMap;
     }
@@ -25,15 +30,17 @@ public class GM_Menu : GameMode {
 
     public override void InternalUpdate() {
         base.InternalUpdate();
-
-		if(Input.GetKeyDown(KeyCode.Keypad4)) {
-			MCamera.inst.SetFixedArea(Vector2.one * 5f, new Vector2(4, 2), ScreenMatchType.Vertical, true);
-		}
-
-		if (Input.GetKeyDown(KeyCode.Keypad5)) {
-			MCamera.inst.SetFixedArea(Vector2.right * -3f, new Vector2(10, 10), ScreenMatchType.Vertical, false);
-		}
 	}
+
+	public void SwitchMenuState(MenuState newState) {
+		menuState = newState;
+
+		if(menuState == MenuState.CustomizingCharacter) {
+			MCamera.inst.SetFixedArea(new Vector2(-3,0), new Vector2(7, 7), ScreenMatchType.Vertical, false);
+		} else if(menuState == MenuState.Idle) {
+			MCamera.inst.SetFixedArea(new Vector2(0, 0), new Vector2(10, 8), ScreenMatchType.Vertical, false);
+		}
+    }
 
     private void Spawn() {
 		Hero playerHero = heroFactory.Create(new HeroConfig() {
@@ -48,8 +55,13 @@ public class GM_Menu : GameMode {
 
 		genericMap.AddHero(playerHero);
 
-		MCamera.inst.SetFixedArea(new Vector2(0,1), new Vector2(10, 8), ScreenMatchType.Vertical, true);
+		MCamera.inst.SetFixedArea(new Vector2(0, 0), new Vector2(10, 8), ScreenMatchType.Vertical, true);
 	}
+
+	public enum MenuState {
+		Idle,
+		CustomizingCharacter
+    }
 
 }
 
