@@ -16,6 +16,9 @@ public class ItemButton : UIButtonBase {
     private bool isDragging;
     private float pressStartTime;
 
+    private Action<ItemButton, object> OnClickEvent;
+    private object onClickArg;
+
     private void Update() {
         if(isPressed) {
             Vector2 newPointerPos = Input.mousePosition;
@@ -51,6 +54,11 @@ public class ItemButton : UIButtonBase {
         isDragging = false;
     }
 
+    public void SetOnClick(Action<ItemButton,object> callback, object arg) {
+        onClickArg = arg;
+        OnClickEvent = callback;
+    }
+
     protected override void OnBecomePressed(PointerEventData eventData) {
         base.OnBecomePressed(eventData);
 
@@ -71,6 +79,8 @@ public class ItemButton : UIButtonBase {
 
     protected override void OnClick(PointerEventData eventData) {
         base.OnClick(eventData);
+
+        OnClickEvent?.Invoke(this, onClickArg);
 
         MSound.Play("click", SoundConfig.randVolumePitch01);
     }

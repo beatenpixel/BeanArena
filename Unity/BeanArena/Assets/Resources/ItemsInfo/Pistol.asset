@@ -42,7 +42,7 @@ MonoBehaviour:
       manual: 0
     roundAccuracy: 25
     soItemInfo: {fileID: 11400000}
-    isFoldoutInInspector: 0
+    isFoldoutInInspector: 1
   - statType: 1
     valueType: 0
     progressionType: 0

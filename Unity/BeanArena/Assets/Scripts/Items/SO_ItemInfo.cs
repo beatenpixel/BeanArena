@@ -44,6 +44,32 @@ public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType> {
             }            
         }
     }
+
+    private ItemStatProgression GetStat(StatType statType) {
+        return stats.Find(x => x.statType == statType);
+    }
+
+    public bool GetFusePointsPercent(int fusePoints, int level, out float fuseP) {
+        ItemStatProgression fuseStat = GetStat(StatType.FusePoints);
+
+        if (fuseStat == null) {
+            fuseP = -1;
+            return false;
+        }
+
+        if (level == maxLevel) {
+            fuseP = 1;
+            return true;
+        } else {
+            Debug.Log("level: " + level);
+
+            StatValue start = fuseStat.values[level - 1];
+            StatValue end = fuseStat.values[level];
+
+            fuseP = (fusePoints - start.intValue) / (float)(end.intValue - start.intValue);
+            return true;
+        }
+    }
 }
 
 [System.Serializable]

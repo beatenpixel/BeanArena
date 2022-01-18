@@ -16,7 +16,7 @@ public class MSound : SingletonFromResources<MSound> {
     public List<MAudioSource> spawnedAudioSources = new List<MAudioSource>();
 
     public override void Init() {
-        Debug.Log("Init MSound");
+        MLog.Log("Init", true);
         LoadSoundsFromResources();
 
         soundGroupsDict = new Dictionary<string, MSoundGroup>();
@@ -31,8 +31,6 @@ public class MSound : SingletonFromResources<MSound> {
 
             soundsDict[sounds[i].soundName] = sounds[i];
             sounds[i].lastPlayTime = 0f;
-
-            Debug.Log("add sound " + sounds[i].name);
         }
     }
 

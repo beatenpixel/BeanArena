@@ -8,6 +8,8 @@ public class InventoryDrawer : MonoBehaviour {
 
 	public RectTransform holderRectT;
 
+	public ItemInfoPanel itemInfoPanel;
+
 	private ObjectListSpawner<ItemButton> itemButtons;
 	private GD_Inventory gdInventory;
 
@@ -25,12 +27,19 @@ public class InventoryDrawer : MonoBehaviour {
 
 			ItemButton button = itemButtons[i];
 
-			MLog.Log(item.itemType, true);
-
-			button.iconDrawer.SetIcon(itemInfo.icon);
-			button.iconDrawer.DrawIcon();
+			button.iconDrawer.DrawItem(item, itemInfo);
+			button.SetOnClick(OnItemButtonClick, i);
         }
     }
+
+	private void OnItemButtonClick(ItemButton button, object clickArg) {
+		int inventorySlotID = (int)clickArg;
+
+		GD_Item item = gdInventory.items[inventorySlotID];
+		SO_ItemInfo itemInfo = MAssets.itemsInfo.GetAsset(item.itemType);
+
+		itemInfoPanel.DrawInfo(itemInfo, item);
+	}
 
 	private ItemButton SpawnItemButton(int ind) {
 		ItemButton button = MPool.Get<ItemButton>(null, holderRectT);

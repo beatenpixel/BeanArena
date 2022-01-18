@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +9,15 @@ using UnityEngine.UI;
 public class IconDrawer : MonoBehaviour {
 
 	public RectTransform rectT;
-	public Image image;	
+	public Image image;
+
+    public GameObject fuseBarRootGO;
+    public RectTransform fuseBarRectT;
+    public TextMeshProUGUI levelText;
 
 	[SerializeField] private SO_IconContent config;
 
-	public void SetIcon(SO_IconContent _config ) {
+    public void SetIcon(SO_IconContent _config ) {
         config = _config;
     }
 
@@ -28,6 +33,37 @@ public class IconDrawer : MonoBehaviour {
         } else {
             Debug.LogError("IconDrawer: No icon to draw");
         }
+    }
+
+    public void DrawBar(float? fuseBarP = null) {
+        if(fuseBarP == null) {
+            fuseBarRootGO.SetActive(false);
+        } else {
+            fuseBarRootGO.SetActive(true);
+            fuseBarRectT.anchorMax = new Vector2(Mathf.Clamp01((float)fuseBarP), 1f);
+            fuseBarRectT.anchorMin = new Vector2(0, 0);
+            fuseBarRectT.offsetMax = Vector2.zero;
+            fuseBarRectT.offsetMin = Vector2.zero;
+        }                
+    }
+
+    public void DrawLevel(string levelStr) {
+        levelText.text = levelStr;
+    } 
+
+    public void DrawItem(GD_Item itemData, SO_ItemInfo itemInfo) {
+        bool hasFuse = itemInfo.GetFusePointsPercent(itemData.fusePoints, itemData.level, out float fuseProgress);
+
+        SetIcon(itemInfo.icon);
+        DrawIcon();
+
+        if (hasFuse) {
+            DrawBar(fuseProgress);
+        } else {
+            DrawBar(null);
+        }
+
+        DrawLevel(MFormat.GetLVLString(itemData.level, itemInfo.maxLevel));
     }
 
 #if UNITY_EDITOR
