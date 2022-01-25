@@ -20,7 +20,7 @@ public class GD_Game : GD {
     }
 
     public void RestoreGame() {
-        
+        inventory.RestoreInventory();
     }
 
     public GD_Game(SerializationInfo info, StreamingContext sc) : base(info, sc) {

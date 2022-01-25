@@ -6,52 +6,99 @@ using UnityEngine;
 
 public class InventoryDrawer : MonoBehaviour {
 
-	public RectTransform holderRectT;
+	public RectTransform tabButtonsHolderRectT;
+	public RectTransform inventoryGroupsHolderT;
 
-	public ItemInfoPanel itemInfoPanel;
+	public InventoryWorldUI worldUI;
 
-	private ObjectListSpawner<ItemButton> itemButtons;
-	private GD_Inventory gdInventory;
+	public List<InventoryGroupDrawer> groupDrawers;
+
+	private ObjectListSpawner<InventoryTabButton> tabButtons;
+
+	private bool generatedElements;
+	private int currentGroupID = 0;
+	private ChangeCheck<bool> isInsideRect = new ChangeCheck<bool>(false);
+
+	[HideInInspector] public ItemButton currentDragedButton;
 
 	public void Init() {
-		itemButtons = new ObjectListSpawner<ItemButton>(SpawnItemButton, UpdateItemButton, DisableItemButton);
-		gdInventory = Game.data.inventory;
+		tabButtons = new ObjectListSpawner<InventoryTabButton>(Spawn_InventoryTabButton, Update_InventoryTabButton, Disable_InventoryTabButton);
+		tabButtons.Spawn(groupDrawers.Count);
+
+		for (int i = 0; i < tabButtons.activeObjectsCount; i++) {
+			tabButtons[i].SetOnClick(OnTabButtonClick, i);
+		}
+
+		groupDrawers[0].Init(new InventoryGroupConfig() {
+			itemCategory = ItemCategory.Weapon,
+			tabButton = tabButtons[0],
+			drawer = this,
+		});
+
+		groupDrawers[1].Init(new InventoryGroupConfig() {
+			itemCategory = ItemCategory.BottomGadget,
+			tabButton = tabButtons[1],
+			drawer = this,
+		});
+
+		if (!generatedElements) {
+			generatedElements = true;
+
+            for (int i = 0; i < groupDrawers.Count; i++) {
+				groupDrawers[i].Generate();
+			}
+		}	
 	}
-	
-	public void Draw() {
-		itemButtons.Spawn(gdInventory.items.Count);
 
-        for (int i = 0; i < itemButtons.activeObjectsCount; i++) {
-			GD_Item item = gdInventory.items[i];
-			SO_ItemInfo itemInfo = MAssets.itemsInfo.GetAsset(item.itemType);
+    private void Update() {
+		if (currentDragedButton != null) {
+			worldUI.SetAreaGlowing(true);
 
-			ItemButton button = itemButtons[i];
+			isInsideRect.Set(worldUI.CheckInsideDropArea());
 
-			button.iconDrawer.DrawItem(item, itemInfo);
-			button.SetOnClick(OnItemButtonClick, i);
+			if (isInsideRect.CheckIsDirtyAndClear()) {
+				Debug.Log("Area: " + isInsideRect.value);
+			}
+		} else {
+			worldUI.SetAreaGlowing(false);
+		}	
+    }
+
+    public void Draw() {
+        for (int i = 0; i < groupDrawers.Count; i++) {
+			tabButtons[i].SetActive(i == currentGroupID);
+
+			if(i == currentGroupID) {
+				groupDrawers[i].Draw();
+				groupDrawers[i].Show(true);
+			} else {
+				groupDrawers[i].Show(false);
+			}
         }
-    }
-
-	private void OnItemButtonClick(ItemButton button, object clickArg) {
-		int inventorySlotID = (int)clickArg;
-
-		GD_Item item = gdInventory.items[inventorySlotID];
-		SO_ItemInfo itemInfo = MAssets.itemsInfo.GetAsset(item.itemType);
-
-		itemInfoPanel.DrawInfo(itemInfo, item);
 	}
 
-	private ItemButton SpawnItemButton(int ind) {
-		ItemButton button = MPool.Get<ItemButton>(null, holderRectT);
-		return button;
+	private void OnTabButtonClick(InventoryTabButton tabButton, object arg) {
+		int tabID = (int)arg;
+
+		currentGroupID = tabID;
+		Draw();
     }
 
-	private void UpdateItemButton(ItemButton obj, int ind, bool isNewObj) {
+	#region InventoryTabButton
+
+	private InventoryTabButton Spawn_InventoryTabButton(int ind) {
+		InventoryTabButton button = MPool.Get<InventoryTabButton>(null, tabButtonsHolderRectT);
+		return button;
+	}
+
+	private void Update_InventoryTabButton(InventoryTabButton obj, int ind, bool isNewObj) {
 		obj.gameObject.SetActive(true);
 	}
 
-	private void DisableItemButton(ItemButton obj, int ind) {
+	private void Disable_InventoryTabButton(InventoryTabButton obj, int ind) {
 		obj.gameObject.SetActive(false);
 	}
+
+    #endregion
 
 }

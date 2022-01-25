@@ -43,15 +43,19 @@ public class UISimpleButton : UIButtonBase {
     protected override void OnBecomePressed(PointerEventData eventData) {
         base.OnBecomePressed(eventData);
 
-        subRectT.DOKill(true);
-        subRectT.DOScale(startScale * config.pressScale, config.pressDuration).SetUpdate(true).SetEase(Ease.OutBack);
+        if (config.doScale) {
+            subRectT.DOKill(true);
+            subRectT.DOScale(startScale * config.pressScale, config.pressDuration).SetUpdate(true).SetEase(Ease.OutBack);
+        }
     }
 
     protected override void OnBecomeUnpressed(PointerEventData eventData) {
         base.OnBecomeUnpressed(eventData);
 
-        subRectT.DOKill(true);
-        subRectT.DOScale(startScale, config.pressDuration).SetUpdate(true).SetEase(Ease.OutBack);
+        if (config.doScale) {
+            subRectT.DOKill(true);
+            subRectT.DOScale(startScale, config.pressDuration).SetUpdate(true).SetEase(Ease.OutBack);
+        }
     }
 
     protected override void OnClick(PointerEventData eventData) {
@@ -107,6 +111,7 @@ public class UIButtonConfig {
 
 [System.Serializable]
 public class AnimatedButtonConfig : UIButtonConfig {
+    public bool doScale = true;
     public float pressScale = 0.87f;
     public float pressDuration = 0.2f;
     public Ease pressEase = Ease.OutBounce;

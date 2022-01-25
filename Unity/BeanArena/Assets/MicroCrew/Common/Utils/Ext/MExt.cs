@@ -7,6 +7,16 @@ using UnityEngine;
 
 public static class MExt {
 
+    public static void SetAnchor(this RectTransform rectT, Vector2 min, Vector2 max) {
+        rectT.anchorMin = min;
+        rectT.anchorMax = max;
+    }
+
+    public static void SetOffset(this RectTransform rectT, Vector2 offsetMin, Vector2 offsetMax) {
+        rectT.offsetMin = offsetMin;
+        rectT.offsetMax = offsetMax;
+    }
+
     public static void Log<T>(this IList<T> list, Func<T,string> func) {
         StringBuilder sb = new StringBuilder();
         sb.AppendLine("Collection log:");

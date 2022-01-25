@@ -12,26 +12,33 @@ public class NotificationDot : MonoBehaviour {
     [SerializeField] private RectTransform rootT;
     [SerializeField] private Image image;
     [SerializeField] private TextMeshProUGUI text;
-    [SerializeField] private UIShiny uiShiny; 
+    [SerializeField] private UIShiny uiShiny;
 
-    private Timer wiggleTimer;
-    private Timer shineTimer;
+    private Coroutine coroutine;
 
-    private void Start() {
-        wiggleTimer = new Timer(MRandom.Range(2f, 4f));
-        shineTimer = new Timer(2f);
+    private void OnEnable() {
+        coroutine = StartCoroutine(Animate());
     }
 
-    private void Update() {
-        if(wiggleTimer) {
-            wiggleTimer.AddFromNow(MRandom.Range(2f, 4f));
+    private void OnDisable() {
+        if (coroutine != null) {
+            StopCoroutine(coroutine);
+        }
+    }
 
-            Wiggle();
+    public void Enable(bool enable, int? number = null) {
+        if(number != null) {
+            text.text = ((int)number).ToString();
         }
 
-        if(shineTimer) {
-            shineTimer.AddFromNow();
+        gameObject.SetActive(enable);
+    }
 
+    private IEnumerator Animate() {
+        while(true) {
+            yield return new WaitForSecondsRealtime(3f);
+            Wiggle();
+            yield return new WaitForSecondsRealtime(0.5f);
             Shine();
         }
     }
@@ -42,7 +49,7 @@ public class NotificationDot : MonoBehaviour {
     }
 
     private void Shine() {
-
+        uiShiny.Play(true);
     }
 
 }

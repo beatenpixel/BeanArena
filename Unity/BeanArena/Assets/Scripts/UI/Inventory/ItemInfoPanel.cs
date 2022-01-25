@@ -21,31 +21,37 @@ public class ItemInfoPanel : MonoBehaviour {
 
         string statsStr = "";
         for (int i = 0; i < itemInfo.stats.Count; i++) {
-            string lineStr = "<sprite name=\"";
-
-            switch(itemInfo.stats[i].statType) {
-                case StatType.Damage:
-                    lineStr += "damage\"> ";
-                    break;
-                case StatType.Health:
-                    lineStr += "heart\"> ";
-                    break;
-                case StatType.Duration:
-                    lineStr += "time\"> ";
-                    break;
-                case StatType.JumpHeight:
-                    lineStr += "jump\"> ";
-                    break;
-                case StatType.FusePoints:
-                    lineStr += "coin\"> ";
-                    break;
-            }
+            string lineStr = GetTMProStringForStatType(itemInfo.stats[i].statType); 
 
             lineStr += itemInfo.stats[i].GetValue(item.levelID);
             statsStr += lineStr + "\n";
         }
 
         itemStatsText.text = statsStr;
+    }
+
+    public static string GetTMProStringForStatType(StatType statType) {
+        string statIconStr = "<sprite name=\"";
+
+        switch (statType) {
+            case StatType.Damage:
+                statIconStr += "damage\"> ";
+                break;
+            case StatType.Health:
+                statIconStr += "heart\"> ";
+                break;
+            case StatType.Duration:
+                statIconStr += "time\"> ";
+                break;
+            case StatType.JumpHeight:
+                statIconStr += "jump\"> ";
+                break;
+            case StatType.FusePoints:
+                statIconStr += "coin\"> ";
+                break;
+        }
+
+        return statIconStr;
     }
 
 }

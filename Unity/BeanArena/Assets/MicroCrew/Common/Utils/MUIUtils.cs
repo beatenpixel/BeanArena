@@ -10,3 +10,13 @@ public static class MUIUtils {
     }
 
 }
+
+public enum UIEventType {
+    None,
+    Click,
+    PointerDown,
+    PointerUp,
+    DragStart,
+    DragUpdate,
+    DragEnd,
+}

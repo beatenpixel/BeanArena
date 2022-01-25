@@ -98,6 +98,18 @@ TextureImporter:
   - first:
       213: 1270405969311979357
     second: red_circle
+  - first:
+      213: -3015479599112616866
+    second: outlined_square_0
+  - first:
+      213: 8150091747698094711
+    second: outlined_square_2
+  - first:
+      213: 6545345903711095465
+    second: outlined_square_1
+  - first:
+      213: 3202421464805995654
+    second: outlined_square_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -870,7 +882,7 @@ TextureImporter:
         width: 88
         height: 92
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -878,6 +890,90 @@ TextureImporter:
       bones: []
       spriteID: d5750698f7361a110800000000000000
       internalID: 1270405969311979357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outlined_square_0
+      rect:
+        serializedVersion: 2
+        x: 1345
+        y: 1146
+        width: 111
+        height: 111
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 37, y: 37, z: 37, w: 37}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e548473084dd626d0800000000000000
+      internalID: -3015479599112616866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outlined_square_2
+      rect:
+        serializedVersion: 2
+        x: 1463
+        y: 1147
+        width: 110
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 37, y: 37, z: 37, w: 37}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77233647341fa1170800000000000000
+      internalID: 8150091747698094711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outlined_square_1
+      rect:
+        serializedVersion: 2
+        x: 1345
+        y: 1022
+        width: 111
+        height: 111
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 37, y: 37, z: 37, w: 37}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9aa02c2bb6db5da50800000000000000
+      internalID: 6545345903711095465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outlined_square_3
+      rect:
+        serializedVersion: 2
+        x: 1464
+        y: 1024
+        width: 109
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 37, y: 37, z: 37, w: 37}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 684f8d6ea59417c20800000000000000
+      internalID: 3202421464805995654
       vertices: []
       indices: 
       edges: []

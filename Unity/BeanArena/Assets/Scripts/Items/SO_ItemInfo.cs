@@ -9,6 +9,7 @@ using UnityEngine;
 public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType> {
 
     public ItemType itemType;
+    public ItemCategory category;
     public string itemName_LKey;
     public string itemDescription_LKey;
     public SO_IconContent icon;

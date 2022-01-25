@@ -11,6 +11,8 @@ public class GD_Item : GD {
     public ItemRareness rareness;
     public int levelID;
     public int fusePoints;
+    public bool isEquiped;
+    [NonSerialized] public SO_ItemInfo info;
 
     public GD_Item() : base(GDType.ItemData, GDLoadOrder.Default) {
         SetDefaults(default);
@@ -25,6 +27,7 @@ public class GD_Item : GD {
         rareness = (ItemRareness)info.GetByte("rareness");
         levelID = info.GetInt32("level");
         fusePoints = info.GetInt32("fusePoints");
+        isEquiped = info.GetBoolean("isEquiped");
     }
 
     public override void GetObjectData(SerializationInfo info, StreamingContext context) {
@@ -33,6 +36,7 @@ public class GD_Item : GD {
         info.AddValue("rareness", (byte)rareness);
         info.AddValue("level", levelID);
         info.AddValue("fusePoints", fusePoints);
+        info.AddValue("isEquiped", isEquiped);
     }
 
     [OnDeserializing]
@@ -40,7 +44,8 @@ public class GD_Item : GD {
         itemType = ItemType.None;
         rareness = ItemRareness.Common;
         levelID = 0;
-        fusePoints = 0;        
+        fusePoints = 0;
+        isEquiped = false;
     }
 
 }
@@ -55,10 +60,21 @@ public class Item {
     }
 }
 
+public enum ItemCategory {
+    Hero,
+    HeroSkin,
+    Weapon,
+    BottomGadget,
+    UpperGadget
+}
+
 public enum ItemType : byte {
     None,
     Pistol,
     WaterPistol,
+    HelicopterHat,
+    JumpyBoots,
+    RocketBoots
 }
 
 public enum ItemRareness : byte {

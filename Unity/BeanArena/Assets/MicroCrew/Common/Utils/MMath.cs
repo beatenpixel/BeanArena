@@ -5,6 +5,11 @@ using UnityEngine;
 
 public static class MMath {
 
+    public static float SinAnimation(float startTime, float time, float speed, float minValue, float maxValue) {
+        float p = Mathf.Sin((time - startTime) * speed - Mathf.PI * 0.5f) * 0.5f + 0.5f;
+        return Mathf.Lerp(minValue, maxValue, p);
+    }
+
     public static float RoundToAccuracy(float value, float acc, bool upOrDown) {
         return value - (value % acc) + (upOrDown?acc:0f);
     }

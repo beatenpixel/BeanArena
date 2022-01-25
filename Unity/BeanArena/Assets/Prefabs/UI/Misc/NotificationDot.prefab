@@ -98,10 +98,10 @@ MonoBehaviour:
   m_Gloss: 1
   m_EffectArea: 0
   m_Player:
-    play: 1
+    play: 0
     initialPlayDelay: 0
     duration: 1
-    loop: 1
+    loop: 0
     loopDelay: 3
     updateMode: 0
 --- !u!114 &68319993761039501

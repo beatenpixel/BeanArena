@@ -16,7 +16,7 @@ public class ItemButton : UIButtonBase {
     private bool isDragging;
     private float pressStartTime;
 
-    private Action<ItemButton, object> OnClickEvent;
+    public event Action<UIEventType, ItemButton, object> OnEvent;
     private object onClickArg;
 
     private void Update() {
@@ -30,12 +30,18 @@ public class ItemButton : UIButtonBase {
         }
 
         if(isDragging) {
-            subRectT.position = Input.mousePosition;
+            subRectT.position = Vector2.Lerp(subRectT.position, Input.mousePosition, Time.deltaTime * 15f);
 
             if(Input.GetMouseButtonUp(0)) {
                 StopDrag();
             }
         }
+    }
+
+    public void AlignToWorldFrame(ItemButtonWorldFrame frame) {
+        rectT.SetParent(frame.rectT);
+        rectT.SetAnchor(Vector2.zero, Vector2.one);
+        rectT.SetOffset(Vector2.zero, Vector2.zero);
     }
 
     private void StartDrag() {
@@ -46,17 +52,20 @@ public class ItemButton : UIButtonBase {
         subRectT.SetAsLastSibling();
 
         isDragging = true;
+
+        OnEvent?.Invoke(UIEventType.DragStart, this, onClickArg);
     }
 
     private void StopDrag() {
         subRectT.SetParent(rectT);
         subRectT.anchoredPosition = startAnchoredPosition;
         isDragging = false;
+
+        OnEvent?.Invoke(UIEventType.DragEnd, this, onClickArg);
     }
 
-    public void SetOnClick(Action<ItemButton,object> callback, object arg) {
+    public void SetArg(object arg) {
         onClickArg = arg;
-        OnClickEvent = callback;
     }
 
     protected override void OnBecomePressed(PointerEventData eventData) {
@@ -80,9 +89,11 @@ public class ItemButton : UIButtonBase {
     protected override void OnClick(PointerEventData eventData) {
         base.OnClick(eventData);
 
-        OnClickEvent?.Invoke(this, onClickArg);
-
+        OnEvent?.Invoke(UIEventType.Click, this, onClickArg);
         MSound.Play("click", SoundConfig.randVolumePitch01);
+
+        subRectT.DOKill(true);
+        subRectT.DOPunchScale(startScale * config.punchScale, 0.2f, 12).SetUpdate(true);
     }
 
 }
@@ -91,4 +102,5 @@ public class ItemButton : UIButtonBase {
 public class ItemButtonConfig : UIButtonConfig {
     public float pressScale = 0.9f;
     public float pressDuration;
+    public float punchScale = 0.1f;
 }

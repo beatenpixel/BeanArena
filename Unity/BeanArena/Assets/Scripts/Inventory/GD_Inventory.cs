@@ -14,8 +14,10 @@ public class GD_Inventory : GD {
         SetDefaults(default);
     }
 
-    public void RestoreGame() {
-
+    public void RestoreInventory() {
+        for (int i = 0; i < items.Count; i++) {
+            items[i].info = MAssets.itemsInfo.GetAsset(items[i].itemType);
+        }
     }
 
     public GD_Inventory(SerializationInfo info, StreamingContext sc) : base(info, sc) {
@@ -41,6 +43,24 @@ public class GD_Inventory : GD {
             fusePoints = 150,
             levelID = 2,
             rareness = ItemRareness.Epic
+        });
+        items.Add(new GD_Item() {
+            itemType = ItemType.JumpyBoots,
+            fusePoints = 100,
+            levelID = 1,
+            rareness = ItemRareness.Uncommon
+        });
+        items.Add(new GD_Item() {
+            itemType = ItemType.RocketBoots,
+            fusePoints = 666,
+            levelID = 3,
+            rareness = ItemRareness.Legendary
+        });
+        items.Add(new GD_Item() {
+            itemType = ItemType.RocketBoots,
+            fusePoints = 666,
+            levelID = 3,
+            rareness = ItemRareness.Legendary
         });
     }
 

@@ -14,6 +14,19 @@ public class MUtils : Singleton<MUtils> {
         
     }
 
+
+	/*
+	1  2
+	0  3
+	*/
+	public static bool PointIsInsideCorners(Vector2 point, Vector3[] corners) {
+		return point.x >= corners[0].x && point.x <= corners[2].x && point.y >= corners[0].y && point.y <= corners[2].y;
+	}
+
+	public static bool PointIsInsideCorners(Vector2 point, Vector2[] corners) {
+		return point.x >= corners[0].x && point.x <= corners[2].x && point.y >= corners[0].y && point.y <= corners[2].y;
+    }
+
 	public static bool LayerInMask(int mask, int layer) {
 		return mask == (mask | (1 << layer));
 	}
@@ -86,6 +99,48 @@ public class BinaryStateSwitcher {
 		state = _state;
 		tempState = _state;
 		isChangingState = false;
+    }
+
+}
+
+public class ChangeCheck<T> where T : IEquatable<T> {
+
+	public T value { get; private set; }
+	private bool hasValue;
+	private bool m_IsDirty;
+
+	public ChangeCheck() {
+		hasValue = false;
+    }
+
+	public ChangeCheck(T initialValue) {
+		value = initialValue;
+		hasValue = true;
+    }
+
+	public bool CheckIsDirtyAndClear() {
+		if (m_IsDirty) {
+			m_IsDirty = false;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void Set(T newValue) {
+		if (!hasValue) {
+			m_IsDirty = true;
+			hasValue = true;
+			value = newValue;
+			return;
+		} else {
+			bool equals = newValue.Equals(value);
+			if (!equals) {
+				m_IsDirty = true;
+			}
+
+			value = newValue;
+		}
     }
 
 }

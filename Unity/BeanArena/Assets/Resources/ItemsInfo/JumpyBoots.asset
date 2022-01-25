@@ -10,50 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b01a7bf1b2c9564aa8315d8830dba41, type: 3}
-  m_Name: WaterPistol
+  m_Name: JumpyBoots
   m_EditorClassIdentifier: 
-  itemType: 2
-  category: 2
-  itemName_LKey: ITEM_NAME_WATER_PISTOL
-  itemDescription_LKey: ITEM_DESCR_WATER_PISTOL
-  icon: {fileID: 11400000, guid: 04f1c03718323f24fa4177496a4596f5, type: 2}
-  maxLevel: 3
+  itemType: 4
+  category: 3
+  itemName_LKey: ITEM_NAME_PISTOL
+  itemDescription_LKey: ITEM_DESCR_PISTOL
+  icon: {fileID: 11400000, guid: 2b84a5d1f1f2f9f49aea9ce286a3be97, type: 2}
+  maxLevel: 5
   stats:
   - statType: 5
     valueType: 0
     progressionType: 0
     progressionFunc: 3
-    intStartEndValue: {x: 100, y: 500}
+    intStartEndValue: {x: 200, y: 2000}
     floatStartEndValue: {x: 0, y: 0}
     values:
-    - intValue: 100
-      floatValue: 0
-      manual: 0
     - intValue: 200
       floatValue: 0
       manual: 0
-    - intValue: 500
+    - intValue: 300
       floatValue: 0
       manual: 0
-    roundAccuracy: 25
-    soItemInfo: {fileID: 11400000}
-    isFoldoutInInspector: 1
-  - statType: 1
-    valueType: 0
-    progressionType: 0
-    progressionFunc: 3
-    intStartEndValue: {x: 5, y: 20}
-    floatStartEndValue: {x: 0, y: 0}
-    values:
-    - intValue: 5
+    - intValue: 700
       floatValue: 0
       manual: 0
-    - intValue: 9
+    - intValue: 1300
       floatValue: 0
       manual: 0
-    - intValue: 20
+    - intValue: 2000
       floatValue: 0
       manual: 0
-    roundAccuracy: 0.1
+    roundAccuracy: 50
     soItemInfo: {fileID: 11400000}
     isFoldoutInInspector: 1
