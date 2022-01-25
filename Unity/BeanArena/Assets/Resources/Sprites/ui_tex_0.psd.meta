@@ -95,6 +95,9 @@ TextureImporter:
   - first:
       213: 7889531768124057266
     second: notification_dot
+  - first:
+      213: 1270405969311979357
+    second: red_circle
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -846,7 +849,7 @@ TextureImporter:
         width: 120
         height: 118
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -854,6 +857,27 @@ TextureImporter:
       bones: []
       spriteID: 2b6a133b75f3d7d60800000000000000
       internalID: 7889531768124057266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red_circle
+      rect:
+        serializedVersion: 2
+        x: 1871
+        y: 1768
+        width: 88
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5750698f7361a110800000000000000
+      internalID: 1270405969311979357
       vertices: []
       indices: 
       edges: []
