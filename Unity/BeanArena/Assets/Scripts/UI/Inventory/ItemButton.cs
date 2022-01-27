@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 
 public class ItemButton : UIButtonBase {
 
+    public ItemButtonState buttonState { get; private set; }
+
     public IconDrawer iconDrawer;
 
     [SerializeField] private ItemButtonConfig config;
@@ -19,12 +21,23 @@ public class ItemButton : UIButtonBase {
     public event Action<UIEventType, ItemButton, object> OnEvent;
     private object onClickArg;
 
+    public GD_Item currentItem { get; private set; }
+
+    private Orientation dragOrientation = Orientation.Right;
+    private InventoryGroupDrawer inventoryGroupDrawer;
+
+    public void Init_ItemButton(InventoryGroupDrawer groupDrawer) {
+        inventoryGroupDrawer = groupDrawer;
+    }
+
     private void Update() {
         if(isPressed) {
             Vector2 newPointerPos = Input.mousePosition;
             Vector2 dd = (newPointerPos - pointerPressPos);
             
-            if(dd.x > Screen.width * 0.05f || (Time.time > pressStartTime + 0.5f && dd.magnitude < Screen.width * 0.05f)) {
+            if((dragOrientation == Orientation.Right && dd.x > Screen.width * 0.05f)
+                ||(dragOrientation == Orientation.Left && dd.x < Screen.width * -0.05f)
+                || (Time.time > pressStartTime + 0.5f && dd.magnitude < Screen.width * 0.05f)) {
                 StartDrag();
             }
         }
@@ -38,10 +51,37 @@ public class ItemButton : UIButtonBase {
         }
     }
 
-    public void AlignToWorldFrame(ItemButtonWorldFrame frame) {
+    public void SetState(ItemButtonState state) {
+        buttonState = state;
+    }
+
+    public void SetDragDirection(Orientation _dragOrientation) {
+        dragOrientation = _dragOrientation;
+    }
+
+    public void SetItem(GD_Item itemData, SO_ItemInfo itemInfo) {
+        currentItem = itemData;
+
+        iconDrawer.DrawItem(itemData, itemInfo);
+    }
+
+    public void AlignToWorldFrame(WUI_EquipmentSlotFrame frame) {
         rectT.SetParent(frame.rectT);
+        rectT.localScale = Vector3.one;
+        subRectT.localScale = Vector3.one;
+
         rectT.SetAnchor(Vector2.zero, Vector2.one);
         rectT.SetOffset(Vector2.zero, Vector2.zero);
+
+        SetDragDirection(Orientation.Left);
+    }
+
+    public void AlignToItemList() {
+        rectT.SetParent(inventoryGroupDrawer.itemsButtonsRootT);
+        rectT.localScale = Vector3.one;
+        subRectT.localScale = Vector3.one;
+
+        SetDragDirection(Orientation.Right);
     }
 
     private void StartDrag() {
@@ -50,6 +90,11 @@ public class ItemButton : UIButtonBase {
 
         subRectT.SetParent(UIWindowManager.inst.uiCanvas.canvasT);
         subRectT.SetAsLastSibling();
+        subRectT.localScale = Vector3.one;
+
+        if(buttonState == ItemButtonState.InHeroSlot) {
+            subRectT.position = Input.mousePosition;
+        }
 
         isDragging = true;
 
@@ -94,6 +139,12 @@ public class ItemButton : UIButtonBase {
 
         subRectT.DOKill(true);
         subRectT.DOPunchScale(startScale * config.punchScale, 0.2f, 12).SetUpdate(true);
+    }
+
+    public enum ItemButtonState {
+        None,
+        InInventory,
+        InHeroSlot
     }
 
 }

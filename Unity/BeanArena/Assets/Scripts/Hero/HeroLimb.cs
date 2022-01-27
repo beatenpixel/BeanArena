@@ -17,13 +17,8 @@ public abstract class HeroLimb : MonoBehaviour {
 	public bool isGrounded { get; private set; }
 	public Vector2 groundNormal { get; private set; }
 
-	[Header("Equipment")]
-	public int maxEquipmentSlots = 1;
-
 	private float ungroundFixedTime;
 	private Vector3 startLocalScale;
-
-	public List<Equipment> equipment = new List<Equipment>();
 
 	protected virtual void Awake() {
 		startLocalScale = transform.localScale;
@@ -57,20 +52,6 @@ public abstract class HeroLimb : MonoBehaviour {
         }
     }
 
-	public bool CanEquip(Equipment equip) {
-		Debug.Log(equip.gameObject.name + " " + gameObject.name + (equipment.Count < maxEquipmentSlots) + " " + equipment.Count);
-		return equipment.Count < maxEquipmentSlots;
-	}
-
-	public bool AddEquipment(Equipment equip) {
-		if (equipment.Count < maxEquipmentSlots) {
-			equipment.Add(equip);
-			return true;
-		} else {
-			return false;
-        }
-    }
-
 	public void SetOrientation(Orientation orientation) {
 		if (limbType == LimbType.Body) {
 			rend.SetOrientation(orientation);
@@ -81,6 +62,10 @@ public abstract class HeroLimb : MonoBehaviour {
 
 	public void SetGrounded(bool isGrounded) {
 		this.isGrounded = isGrounded;
+    }
+
+	public bool CanEquip(Equipment equip) {
+		return true;
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision) {

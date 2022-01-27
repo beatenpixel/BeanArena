@@ -60,12 +60,13 @@ public class Item {
     }
 }
 
+[Flags]
 public enum ItemCategory {
-    Hero,
-    HeroSkin,
-    Weapon,
-    BottomGadget,
-    UpperGadget
+    Hero = 1 << 0,
+    HeroSkin = 1 << 1,
+    Weapon = 1 << 2,
+    BottomGadget = 1 << 3,
+    UpperGadget = 1 << 4
 }
 
 public enum ItemType : byte {

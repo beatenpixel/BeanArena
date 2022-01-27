@@ -6,10 +6,11 @@ using UnityEngine;
 
 public abstract class Weapon : Equipment {
 
-	public SO_Weapon weaponSO;
 	public Vector2 hingeJointAnchor;
 	public Vector2 hingeJointConnectedAnchor;
 	public Vector2 hingeJointLimits = new Vector2(-10, 10);
+
+	private Joint2DCreateResult attachJointResult;
 
 	public void Init() {
 		
@@ -44,11 +45,27 @@ public abstract class Weapon : Equipment {
 		transform.SetParent(limb.transform);
 		transform.ApplyTransformData(attachTData);
 
-
 		if(attachType == EquipmentAttachType.Rigidbody) {
-			Joint2DCreateResult result = Joint2DFactory.Create(
+			attachJointResult = Joint2DFactory.Create(
 				new HingeJoint2DSettings(hingeJointAnchor, hingeJointConnectedAnchor).SetLimits(hingeJointLimits.x, hingeJointLimits.y), rb, limb.rb);
         }
+    }
+
+    public override void UnattachFromHero() {
+        base.UnattachFromHero();
+
+		Debug.Log("UnattachEquipment: 3");
+
+		if (attachJointResult != null) {
+			attachJointResult.DestroyJoint();
+		}
+
+		Debug.Log("UnattachEquipment: 6");
+
+		transform.SetParent(null);
+
+		Debug.Log("UnattachEquipment: 7");
+		Push();
     }
 
     protected override void OnDrawGizmosSelected() {
@@ -60,7 +77,8 @@ public abstract class Weapon : Equipment {
 
     public override string subType {
 		get {
-			return weaponSO.weaponType.ToString();
+			Debug.Log(gameObject.name + "/" + itemInfo.itemType.ToString());
+			return itemInfo.itemType.ToString();
         }
     }
 
@@ -74,11 +92,4 @@ public enum WeaponCategory {
 	None,
 	Melee,
 	Gun
-}
-
-public enum WeaponType {
-	None,
-	Sword,
-	Pistol,
-	WaterPistol
 }

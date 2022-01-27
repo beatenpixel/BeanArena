@@ -8,12 +8,15 @@ public class Hero : PoolObject, IDamageable, ITarget {
 
 	public HeroInfo info { get; private set; }
 
+	[Header("Config")]
 	public MoveConfig moveConfig;
+	[Header("Links")]
+	public HeroEquipment heroEquipment;
 
 	private HeroFaceRend faceRend;
 	[HideInInspector] public HeroBody body;
 	private List<HeroArm> arms;
-	private List<HeroLimb> limbs;
+	public List<HeroLimb> limbs { get; private set; }
 
 	private HeroInput input = new HeroInput();
 
@@ -53,6 +56,9 @@ public class Hero : PoolObject, IDamageable, ITarget {
         for (int i = 0; i < limbs.Count; i++) {
 			limbs[i].Init();
         }
+
+		heroEquipment.InitComponent(this);
+		heroEquipment.Init();
 
 		faceRend.Init();
 
@@ -230,39 +236,8 @@ public class Hero : PoolObject, IDamageable, ITarget {
 			return;
 		}
 
-		HeroLimb limb;
-
-		if(inp.buttonID == 0) {
-			limb = this[LimbType.RArm].First();
-		} else {
-			limb = this[LimbType.LArm].First();
-		}
-
-		if(limb.equipment.Count > 0) {
-			limb.equipment[0].Use(new EquipmentUseArgs() {
-			  charge = inp.chargePercent
-			});
-        }
+		heroEquipment.OnButtonInput(inp);
     }
-
-	public bool AttachEquipment(Equipment equip) {
-		var targetLimbs = limbs.Where(x => MUtils.EnumAnyInMask((int)equip.canAttachToLimbs, (int)x.limbType));
-		
-		if (targetLimbs.Count() > 0) {
-			var freeLimbs = targetLimbs.Where(x => x.CanEquip(equip));
-
-			if (freeLimbs.Count() > 0) {
-				HeroLimb freeLimb = freeLimbs.First();
-
-				equip.AttachToHero(this, freeLimb);
-				freeLimb.AddEquipment(equip);
-
-				return true;
-			}
-		}
-
-		return false;
-	}
 
 	public bool FindClosestTarget() {
 		ITarget enemyTarget = Game.inst.map.GetClosestTarget(this.GetPosition(), (t) => t != (ITarget)this, out TargetAimPoint aimPoint);
@@ -333,6 +308,16 @@ public class Hero : PoolObject, IDamageable, ITarget {
 		Destroy(gameObject);
 		//Push();
     }
+
+}
+
+public class HeroComponent : MonoBehaviour {
+
+	protected Hero hero;
+
+	public void InitComponent(Hero _hero) {
+		hero = _hero;
+	}
 
 }
 

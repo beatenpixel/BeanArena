@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   itemType: 1
-  category: 2
+  category: 4
   itemName_LKey: ITEM_NAME_PISTOL
   itemDescription_LKey: ITEM_DESCR_PISTOL
   icon: {fileID: 11400000, guid: 19561c3bd6200a74da1d3a82f8ba990d, type: 2}
+  prefab: {fileID: 2846095526838627189, guid: ae0f199766662e44a97c3d3327ece0ba, type: 3}
   maxLevel: 5
   stats:
   - statType: 5
@@ -43,7 +44,7 @@ MonoBehaviour:
       manual: 0
     roundAccuracy: 25
     soItemInfo: {fileID: 11400000}
-    isFoldoutInInspector: 1
+    isFoldoutInInspector: 0
   - statType: 1
     valueType: 0
     progressionType: 0

@@ -13,9 +13,6 @@ public class Pistol : Weapon {
         Debug.Log("CHARGE: " + useArgs.charge);
 
         string bulletType = null;
-        if(weaponSO.weaponType == WeaponType.WaterPistol) {
-            bulletType = "WaterBullet";
-        }
 
         Bullet bullet = MPool.Get<Bullet>(bulletType);
         int teamLayer = Game.TeamIDToLayer(hero.info.teamID);

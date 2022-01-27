@@ -56,6 +56,8 @@ public class GM_Menu : GameMode {
 		genericMap.AddHero(playerHero);
 
 		MCamera.inst.SetFixedArea(new Vector2(0, 0), new Vector2(10, 8), ScreenMatchType.Vertical, true);
+
+		MenuUI.inst.inventoryDrawer.worldUI.SetTargetHero(playerHero);
 	}
 
 	public enum MenuState {

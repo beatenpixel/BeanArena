@@ -36,35 +36,40 @@ public class InventoryGroupDrawer : MonoBehaviour {
     public void Draw() {
         itemsToDraw = gdInventory.items.Where(x => x.info.category == config.itemCategory).ToList();
 
-        itemButtons.Spawn(itemsToDraw.Count);
+        itemButtons.Update(itemsToDraw.Count);
 
         for (int i = 0; i < itemButtons.activeObjectsCount; i++) {
             GD_Item item = itemsToDraw[i];  
             ItemButton button = itemButtons[i];
 
-            button.iconDrawer.DrawItem(item, item.info);
+            button.SetItem(item, item.info);
             button.SetArg(i);
+
+            if(item.isEquiped) {
+                //button.SetState(ItemButton.ItemButtonState.InHeroSlot);
+            } else {
+                //button.SetState(ItemButton.ItemButtonState.InInventory);
+            }
         }
     } 
 
-    private void OnItemButtonEvent(UIEventType eventType, ItemButton button, object clickArg) {
+    private void OnItemButtonEvent(UIEventType eventType, ItemButton button, object arg) {
         if (eventType == UIEventType.Click) {
-            int inventorySlotID = (int)clickArg;
+            int inventorySlotID = (int)arg;
 
             GD_Item item = itemsToDraw[inventorySlotID];
-            SO_ItemInfo itemInfo = MAssets.itemsInfo.GetAsset(item.itemType);
 
-            infoDrawer.DrawInfo(itemInfo, item);
-        } else if(eventType == UIEventType.DragStart) {
-            config.drawer.currentDragedButton = button;
-        } else if(eventType == UIEventType.DragEnd) {
-            config.drawer.currentDragedButton = null;
+            infoDrawer.DrawInfo(item.info, item);
         }
+
+        config.drawer.OnItemButtonEvent(eventType, button, arg);
     }
 
     private ItemButton SpawnItemButton(int ind) {
         ItemButton button = MPool.Get<ItemButton>(null, itemsButtonsRootT);
-        button.OnEvent += OnItemButtonEvent;
+        button.Init_ItemButton(this);
+        button.SetState(ItemButton.ItemButtonState.InInventory);
+        button.OnEvent += OnItemButtonEvent;        
         return button;
     }
 

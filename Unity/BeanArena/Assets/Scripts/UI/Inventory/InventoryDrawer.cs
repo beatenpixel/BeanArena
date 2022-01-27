@@ -6,24 +6,28 @@ using UnityEngine;
 
 public class InventoryDrawer : MonoBehaviour {
 
+	public InventoryState inventoryState;
+
 	public RectTransform tabButtonsHolderRectT;
 	public RectTransform inventoryGroupsHolderT;
 
 	public InventoryWorldUI worldUI;
-
 	public List<InventoryGroupDrawer> groupDrawers;
 
 	private ObjectListSpawner<InventoryTabButton> tabButtons;
-
 	private bool generatedElements;
 	private int currentGroupID = 0;
-	private ChangeCheck<bool> isInsideRect = new ChangeCheck<bool>(false);
+	private ChangeCheck<bool> isInsideHeroWorldRect = new ChangeCheck<bool>(false);
+	private ChangeCheck<bool> isInsideInventoryRect = new ChangeCheck<bool>(false);
 
 	[HideInInspector] public ItemButton currentDragedButton;
 
+	private Vector3[] inventoryWorldCorners = new Vector3[4];
+	private InventoryWorldUI.TryPlaceItemResult dragButtonPlaceResult;
+
 	public void Init() {
 		tabButtons = new ObjectListSpawner<InventoryTabButton>(Spawn_InventoryTabButton, Update_InventoryTabButton, Disable_InventoryTabButton);
-		tabButtons.Spawn(groupDrawers.Count);
+		tabButtons.Update(groupDrawers.Count);
 
 		for (int i = 0; i < tabButtons.activeObjectsCount; i++) {
 			tabButtons[i].SetOnClick(OnTabButtonClick, i);
@@ -47,21 +51,41 @@ public class InventoryDrawer : MonoBehaviour {
             for (int i = 0; i < groupDrawers.Count; i++) {
 				groupDrawers[i].Generate();
 			}
-		}	
+		}
+
+		worldUI.Init();
 	}
 
     private void Update() {
 		if (currentDragedButton != null) {
-			worldUI.SetAreaGlowing(true);
+			if (currentDragedButton.buttonState == ItemButton.ItemButtonState.InInventory) {
+				worldUI.SetAreaGlowing(true);
 
-			isInsideRect.Set(worldUI.CheckInsideDropArea());
+				isInsideHeroWorldRect.Set(worldUI.CheckInsideDropArea());
 
-			if (isInsideRect.CheckIsDirtyAndClear()) {
-				Debug.Log("Area: " + isInsideRect.value);
+				if (isInsideHeroWorldRect.CheckIsDirtyAndClear()) {
+					if (isInsideHeroWorldRect.value) {
+						dragButtonPlaceResult = worldUI.TryPlaceItemButton(currentDragedButton);
+						Debug.Log(dragButtonPlaceResult.placeResult);
+
+						if (dragButtonPlaceResult.placeResult == SlotPlaceResult.CanReplace) {
+
+						} else if (dragButtonPlaceResult.placeResult == SlotPlaceResult.CanPlace) {
+							worldUI.EquipTempItem(currentDragedButton, dragButtonPlaceResult.slot);
+						}
+					} else {
+						worldUI.UnequipTempItem(currentDragedButton);
+					}
+				}
+			} else if(currentDragedButton.buttonState == ItemButton.ItemButtonState.InHeroSlot) {			
+
+				worldUI.SetAreaGlowing(false);
+
+				isInsideInventoryRect.Set(CheckInsideItemsInventoryArea());
 			}
 		} else {
 			worldUI.SetAreaGlowing(false);
-		}	
+		}
     }
 
     public void Draw() {
@@ -75,6 +99,68 @@ public class InventoryDrawer : MonoBehaviour {
 				groupDrawers[i].Show(false);
 			}
         }
+	}
+
+	public void OnItemButtonEvent(UIEventType e, ItemButton button, object arg) {
+		switch(e) {
+			case UIEventType.DragEnd:			
+				if(currentDragedButton.buttonState == ItemButton.ItemButtonState.InHeroSlot) {					
+					if (isInsideInventoryRect.value) {
+						worldUI.RemoveItemButton(button, false);
+						worldUI.UnequipItem(button);
+						button.SetState(ItemButton.ItemButtonState.InInventory);						
+					} else {
+						worldUI.ReturnItemButtonToFrame(button);
+                    }
+				} else if(currentDragedButton.buttonState == ItemButton.ItemButtonState.InInventory) {
+					if (isInsideHeroWorldRect.value) {
+						dragButtonPlaceResult = worldUI.TryPlaceItemButton(currentDragedButton);
+
+						if (dragButtonPlaceResult.placeResult == SlotPlaceResult.CanReplace) {
+							Debug.Log("Replace");
+
+							if (dragButtonPlaceResult.slot.itemButton != null) {
+								Debug.Log("Not null");
+								worldUI.RemoveItemButton(dragButtonPlaceResult.slot.itemButton, false);
+								worldUI.UnequipItem(dragButtonPlaceResult.slot.itemButton);								
+							}
+
+							worldUI.EquipItem(currentDragedButton, dragButtonPlaceResult.slot);
+							worldUI.PlaceItemButton(button, dragButtonPlaceResult);
+
+							button.SetState(ItemButton.ItemButtonState.InHeroSlot);
+						} else if (dragButtonPlaceResult.placeResult == SlotPlaceResult.CanPlace) {
+							worldUI.UnequipTempItem(currentDragedButton);
+
+							worldUI.EquipItem(button, dragButtonPlaceResult.slot);
+							worldUI.PlaceItemButton(button, dragButtonPlaceResult);
+							button.SetState(ItemButton.ItemButtonState.InHeroSlot);
+						} else {
+
+						}						
+					}
+				}				
+
+				currentDragedButton = null;
+				break;
+			case UIEventType.DragStart:
+				currentDragedButton = button;
+
+				if(currentDragedButton.buttonState == ItemButton.ItemButtonState.InHeroSlot) {
+
+                } else if(currentDragedButton.buttonState == ItemButton.ItemButtonState.InInventory) {
+
+                }
+
+				break;
+        }
+    }
+
+	public bool CheckInsideItemsInventoryArea() {
+		Vector2 screenPos = Input.mousePosition;
+		inventoryGroupsHolderT.GetWorldCorners(inventoryWorldCorners);
+		bool isInside = MUtils.PointIsInsideCorners(screenPos, inventoryWorldCorners);
+		return isInside;
 	}
 
 	private void OnTabButtonClick(InventoryTabButton tabButton, object arg) {
@@ -100,5 +186,11 @@ public class InventoryDrawer : MonoBehaviour {
 	}
 
     #endregion
+
+	public enum InventoryState {
+		None,
+		DragFromInventoryToHero,
+		DragFromHeroToInventory
+    }
 
 }

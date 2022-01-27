@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: RocketBoots
   m_EditorClassIdentifier: 
   itemType: 5
-  category: 3
+  category: 8
   itemName_LKey: ITEM_NAME_PISTOL
   itemDescription_LKey: ITEM_DESCR_PISTOL
   icon: {fileID: 11400000, guid: 296a197a49e7b5c47b8730b6d584f3ec, type: 2}
+  prefab: {fileID: 0}
   maxLevel: 5
   stats:
   - statType: 5

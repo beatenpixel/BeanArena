@@ -9,3 +9,9 @@ public abstract class SO_Equipment : ScriptableObject {
 	public string equipName_LKey;
 	public string equipDescr_LKey;
 }
+
+public enum EquipmentCategory {
+	None,
+	Weapon,
+	Boots
+}

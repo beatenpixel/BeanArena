@@ -12,6 +12,8 @@ public abstract class Equipment : PoolObject {
     public TransformData attachTData;
     public float useDelay = 0.5f;
 
+    public SO_ItemInfo itemInfo;
+
     protected float nextUseTime;
 
     protected HeroLimb limb;
@@ -20,6 +22,11 @@ public abstract class Equipment : PoolObject {
     public virtual void AttachToHero(Hero hero, HeroLimb limb) {
         this.hero = hero;
         this.limb = limb;
+        //limb.AddEquipment(this);
+    }
+
+    public virtual void UnattachFromHero() {
+        //limb.RemoveEquipment(this);
     }
 
     public virtual void Use(EquipmentUseArgs useArgs) {
@@ -45,13 +52,6 @@ public abstract class Equipment : PoolObject {
 public enum EquipmentAttachType {
     Transform,
     Rigidbody
-}
-
-public enum EquipmentCategory {
-    None,
-    Weapon,
-    Helmet,
-    Boots
 }
 
 public class EquipmentUseArgs {

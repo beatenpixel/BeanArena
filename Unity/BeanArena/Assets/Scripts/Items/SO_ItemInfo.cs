@@ -13,7 +13,8 @@ public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType> {
     public string itemName_LKey;
     public string itemDescription_LKey;
     public SO_IconContent icon;
-
+    public GameObject prefab;
+    
     public int maxLevel = 5;
 
     public List<ItemStatProgression> stats;

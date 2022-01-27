@@ -224,7 +224,7 @@ MonoBehaviour:
     scale: {x: 0.5717, y: 0.5717, z: 0.5717}
     isLocal: 1
   useDelay: 0.5
-  weaponSO: {fileID: 11400000, guid: 62a7b599a6937e14989c07e7124698b3, type: 2}
+  itemInfo: {fileID: 11400000, guid: 63fd98d3a9d116047b11568758acb892, type: 2}
   hingeJointAnchor: {x: -0.4, y: -0.2}
   hingeJointConnectedAnchor: {x: 0.8, y: 0}
   hingeJointLimits: {x: -10, y: 10}

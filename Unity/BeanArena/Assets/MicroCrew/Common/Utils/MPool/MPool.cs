@@ -16,6 +16,8 @@ namespace MicroCrew.Utils {
         [HideInInspector] public Dictionary<Type, Dictionary<string, IPoolObject>> objPrefabs;
 
         public override void Init() {
+            MAssets.InitIfNeeded(null);
+
             objects = new Dictionary<Type, Dictionary<string, List<IPoolObject>>>();
             objPrefabs = new Dictionary<Type, Dictionary<string, IPoolObject>>();
 

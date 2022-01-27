@@ -7,5 +7,4 @@ using UnityEngine;
 public class SO_Weapon : SO_Equipment {
 	[Header("Weapon")]
 	public WeaponCategory weaponCategory;
-	public WeaponType weaponType;
 }

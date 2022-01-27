@@ -9,12 +9,15 @@ public class EquipmentFactory : MonoBehaviour {
 
     }
 
-    public Equipment Create(EquipmentConfig config, Vector2 position) {
-        if(config.category == EquipmentCategory.Weapon) {
-            WeaponConfig weaponConfig = (WeaponConfig)config;
+    public Equipment Create(SO_ItemInfo itemInfo, Vector2 position) {
 
-            Debug.Log("weapon: " + weaponConfig.weaponType.ToString());
-            Weapon weapon = MPool.Get<Weapon>(weaponConfig.weaponType.ToString());
+        Debug.Log("CREATE WAPON");
+
+        if (itemInfo.category == ItemCategory.Weapon) {
+            Weapon weaponPrefab = itemInfo.prefab.GetComponent<Weapon>();
+
+            Weapon weapon = MPool.Get<Weapon>(weaponPrefab.subType);
+            weapon.itemInfo = itemInfo;
             weapon.t.position = position;
 
             return weapon;
@@ -23,20 +26,4 @@ public class EquipmentFactory : MonoBehaviour {
         return null;
     }
 
-}
-
-public abstract class EquipmentConfig {
-    public EquipmentCategory category;
-
-    public EquipmentConfig(EquipmentCategory cat) {
-        category = cat;
-    }
-}
-
-public class WeaponConfig : EquipmentConfig {
-    public WeaponType weaponType;
-
-    public WeaponConfig(WeaponType _weaponType) : base(EquipmentCategory.Weapon) {
-        weaponType = _weaponType;
-    }
 }

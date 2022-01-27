@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: JumpyBoots
   m_EditorClassIdentifier: 
   itemType: 4
-  category: 3
+  category: 8
   itemName_LKey: ITEM_NAME_PISTOL
   itemDescription_LKey: ITEM_DESCR_PISTOL
   icon: {fileID: 11400000, guid: 2b84a5d1f1f2f9f49aea9ce286a3be97, type: 2}
+  prefab: {fileID: 0}
   maxLevel: 5
   stats:
   - statType: 5
@@ -29,10 +30,10 @@ MonoBehaviour:
     - intValue: 200
       floatValue: 0
       manual: 0
-    - intValue: 300
+    - intValue: 325
       floatValue: 0
       manual: 0
-    - intValue: 700
+    - intValue: 725
       floatValue: 0
       manual: 0
     - intValue: 1300
@@ -41,6 +42,6 @@ MonoBehaviour:
     - intValue: 2000
       floatValue: 0
       manual: 0
-    roundAccuracy: 50
+    roundAccuracy: 25
     soItemInfo: {fileID: 11400000}
     isFoldoutInInspector: 1

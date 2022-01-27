@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ObjectListSpawner<T> where T : MonoBehaviour {
 
-	private List<T> objs = new List<T>();
+	public List<T> objects { get; private set; }
 
 	private Func<int,T> spawnFunc;
 	private Action<T, int, bool> updateFunc;
@@ -14,25 +14,26 @@ public class ObjectListSpawner<T> where T : MonoBehaviour {
 	public int activeObjectsCount { get; private set; }
 
 	public ObjectListSpawner(Func<int, T> spawnFunc, Action<T,int,bool> updateFunc, Action<T, int> disableFunc) {
+		objects = new List<T>();
 		this.spawnFunc = spawnFunc;
 		this.updateFunc = updateFunc;
 		this.disableFunc = disableFunc;
 	}
 
-	public void Spawn(int count) {
-		int n = Mathf.Max(objs.Count, count);
+	public void Update(int count) {
+		int n = Mathf.Max(objects.Count, count);
         for (int i = 0; i < n; i++) {
 			if(i < count) {
-				if(i >= objs.Count) {
+				if(i >= objects.Count) {
 					T newObj = spawnFunc(i);
-					objs.Add(newObj);
+					objects.Add(newObj);
 
-					updateFunc(objs[i], i, true);
+					updateFunc(objects[i], i, true);
 				} else {
-					updateFunc(objs[i], i, false);
+					updateFunc(objects[i], i, false);
                 }
             } else {
-				disableFunc(objs[i], i);
+				disableFunc(objects[i], i);
             }
         }
 
@@ -41,7 +42,7 @@ public class ObjectListSpawner<T> where T : MonoBehaviour {
 
 	public T this[int ind] {
 		get {
-			return objs[ind];
+			return objects[ind];
         }
     }
 	

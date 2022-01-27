@@ -17,6 +17,7 @@ public class GD_Inventory : GD {
     public void RestoreInventory() {
         for (int i = 0; i < items.Count; i++) {
             items[i].info = MAssets.itemsInfo.GetAsset(items[i].itemType);
+            Debug.Log(items[i].info.category);
         }
     }
 
@@ -36,7 +37,7 @@ public class GD_Inventory : GD {
             itemType = ItemType.Pistol,
             fusePoints = 40,
             levelID = 1,
-            rareness = ItemRareness.Common
+            rareness = ItemRareness.Common,
         });
         items.Add(new GD_Item() {
             itemType = ItemType.WaterPistol,

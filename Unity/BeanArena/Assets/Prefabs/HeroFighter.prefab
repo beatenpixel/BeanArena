@@ -231,6 +231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6186975834321502701}
   - component: {fileID: 2582720005879347001}
+  - component: {fileID: 7610001874787510047}
   m_Layer: 6
   m_Name: HeroFighter
   m_TagString: Untagged
@@ -271,7 +272,20 @@ MonoBehaviour:
   moveConfig:
     moveForce: 600
     jumpForce: 1200
+  heroEquipment: {fileID: 7610001874787510047}
   body: {fileID: 0}
+--- !u!114 &7610001874787510047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6186975834321502702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 249d0edf120edb64994cca255eef9dca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6186975834423308998
 GameObject:
   m_ObjectHideFlags: 0
