@@ -7,7 +7,7 @@ public class MenuUI : MonoBehaviour {
 
 	public static MenuUI inst;
 
-	public InventoryDrawer inventoryDrawer;
+	public InventoryUI inventoryDrawer;
 	public InventoryWorldUI editCharacterWorldUI;
 
 	public UIGroupAppear idleGroup;

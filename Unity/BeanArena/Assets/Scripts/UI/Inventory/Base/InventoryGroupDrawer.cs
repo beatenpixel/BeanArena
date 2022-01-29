@@ -86,5 +86,5 @@ public class InventoryGroupDrawer : MonoBehaviour {
 public class InventoryGroupConfig {
     public ItemCategory itemCategory;
     public InventoryTabButton tabButton;
-    public InventoryDrawer drawer;
+    public InventoryUI drawer;
 }

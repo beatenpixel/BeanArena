@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WaterPistol
   m_EditorClassIdentifier: 
   itemType: 2
-  category: 4
+  category: 2
   itemName_LKey: ITEM_NAME_WATER_PISTOL
   itemDescription_LKey: ITEM_DESCR_WATER_PISTOL
   icon: {fileID: 11400000, guid: 04f1c03718323f24fa4177496a4596f5, type: 2}

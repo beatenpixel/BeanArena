@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: JumpyBoots
   m_EditorClassIdentifier: 
   itemType: 4
-  category: 8
+  category: 3
   itemName_LKey: ITEM_NAME_PISTOL
   itemDescription_LKey: ITEM_DESCR_PISTOL
   icon: {fileID: 11400000, guid: 2b84a5d1f1f2f9f49aea9ce286a3be97, type: 2}

@@ -14,18 +14,17 @@ public class InventoryWorldUI : MonoBehaviour {
 	public RectTransform framesHolderT;
 	public RectTransform areaRectT;
 
-	public WUI_EquipmentSlotFrame slotFramePrefab;
+	public WorldItemSlot slotFramePrefab;
 
 	private Vector3[] areaWorldCorners = new Vector3[4];
 
 	private ChangeCheck<bool> areaIsGlowing = new ChangeCheck<bool>(false);
 	private float glowStartTime;
 
-	private Dictionary<ItemButton, Equipment> spawnedEquipment = new Dictionary<ItemButton, Equipment>();
-	private ObjectListSpawner<WUI_EquipmentSlotFrame> slotFrames;
+	private ObjectListSpawner<WorldItemSlot> worldSlots;
 
 	public void Init() {
-		slotFrames = new ObjectListSpawner<WUI_EquipmentSlotFrame>(SlotFrame_Create, SlotFrame_Enable, SlotFrame_Update);
+		worldSlots = new ObjectListSpawner<WorldItemSlot>(SlotFrame_Create, SlotFrame_Enable, SlotFrame_Update);
 	}
 
     private void Update() {
@@ -58,76 +57,44 @@ public class InventoryWorldUI : MonoBehaviour {
     }
 
 	private void GenerateFrames() {
-		slotFrames.Update(targetHero.heroEquipment.slots.Count);
+		worldSlots.Update(targetHero.heroEquipment.GetSlotsCount());
 
-        for (int i = 0; i < targetHero.heroEquipment.slots.Count; i++) {
-			EquipmentSlot slot = targetHero.heroEquipment.slots[i];
-			WUI_EquipmentSlotFrame frame = slotFrames[i];
-
-			frame.equipmentSlot = slot;
+        for (int i = 0; i < targetHero.heroEquipment.GetSlotsCount(); i++) {
+			worldSlots[i].Init(targetHero.heroEquipment.GetEquipmentSlot(i));
         }
     }
 
-	private WUI_EquipmentSlotFrame SlotFrame_Create(int id) {
-		WUI_EquipmentSlotFrame newFrame = Instantiate(slotFramePrefab, framesHolderT);
-		newFrame.Init();
+	private WorldItemSlot SlotFrame_Create(int id) {
+		WorldItemSlot newFrame = Instantiate(slotFramePrefab, framesHolderT);
 		return newFrame;
     }
 
-	private void SlotFrame_Enable(WUI_EquipmentSlotFrame frame, int id, bool enable) {
+	private void SlotFrame_Enable(WorldItemSlot frame, int id, bool enable) {
 		frame.gameObject.SetActive(enable);
     }
 
-	private void SlotFrame_Update(WUI_EquipmentSlotFrame frame, int id) {
+	private void SlotFrame_Update(WorldItemSlot frame, int id) {
 
 	}
 
-	public Equipment EquipTempItem(ItemButton button, WUI_EquipmentSlotFrame slot) {
-		Equipment newEquipment = Game.inst.equipmentFactory.Create(button.currentItem.info, Vector2.zero);
-
-		slot.tempItemButton = button;
-		targetHero.heroEquipment.AttachEquipment(newEquipment, slot.equipmentSlot);
-		//spawnedEquipment[button] = newEquipment;
-
-		return newEquipment;
-	}
-
-	public void UnequipTempItem(ItemButton button) {
-        for (int i = 0; i < slotFrames.activeObjectsCount; i++) {
-			if(slotFrames[i].tempItemButton == button) {
-				Debug.Log("UnequipTempItem " + button.currentItem.itemType);
-				targetHero.heroEquipment.UnattachEquipment(slotFrames[i].equipmentSlot);
-				slotFrames[i].tempItemButton = null;
-            }
-        }
-	}
-
-	public void UnequipItem(ItemButton button) {
-		for (int i = 0; i < slotFrames.activeObjectsCount; i++) {
-			if (slotFrames[i].itemButton == button) {
-				Debug.Log("UnequipItem " + button.currentItem.itemType);
-				targetHero.heroEquipment.UnattachEquipment(slotFrames[i].equipmentSlot);
-				slotFrames[i].itemButton = null;
-				slotFrames[i].tempItemButton = null;
+	public WorldItemSlot GetWorldSlot(ItemButton item) {
+		for (int i = 0; i < worldSlots.activeObjectsCount; i++) {
+			if (worldSlots[i].CompareItemButton(item)) {
+				return worldSlots[i];
 			}
 		}
+
+		return null;
 	}
 
-	public Equipment EquipItem(ItemButton button, WUI_EquipmentSlotFrame slot) {
-		Equipment newEquipment = Game.inst.equipmentFactory.Create(button.currentItem.info, Vector2.zero);
+	public WorldItemSlot GetWorldSlot(EquipmentSlot heroSlot) {
+        for (int i = 0; i < worldSlots.activeObjectsCount; i++) {
+			if(worldSlots[i].CompareHeroEquipmentSlots(heroSlot)) {
+				return worldSlots[i];
+            }
+        }
 
-		slot.itemButton = button;
-		targetHero.heroEquipment.AttachEquipment(newEquipment, slot.equipmentSlot);
-		//spawnedEquipment[button] = newEquipment;
-
-		return newEquipment;
-		/*
-		Equipment newEquipment = Game.inst.equipmentFactory.Create(button.currentItem.info, Vector2.zero);
-		targetHero.heroEquipment.CanAttachEquipment(newEquipment);
-		spawnedEquipment[button] = newEquipment;
-
-		return newEquipment;
-		*/
+		return null;
     }
 
 	public bool CheckInsideDropArea() {
@@ -139,55 +106,4 @@ public class InventoryWorldUI : MonoBehaviour {
 		return isInside;
 	}
 
-	public void ReturnItemButtonToFrame(ItemButton itemButton) {
-		WUI_EquipmentSlotFrame frame = slotFrames.objects.Find(x => x.itemButton == itemButton);
-
-		if(frame != null) {
-			itemButton.AlignToWorldFrame(frame);
-		}		
-	}
-
-	public TryPlaceItemResult TryPlaceItemButton(ItemButton button) {
-		TryPlaceItemResult result = new TryPlaceItemResult();
-		Debug.Log("TryPlaceItemButton");
-
-        for (int i = 0; i < slotFrames.activeObjectsCount; i++) {
-			SlotPlaceResult framePlaceResult = slotFrames[i].equipmentSlot.CheckPlace(button.currentItem);
-
-			Debug.Log("slotFrameTry: i " + i+ " " + framePlaceResult );
-
-			if ((int)framePlaceResult > (int)result.placeResult) {
-				result.placeResult = framePlaceResult;
-				result.slot = slotFrames[i];
-			}
-        }
-
-		return result;
-    }
-
-	public void PlaceItemButton(ItemButton itemButton, TryPlaceItemResult placeResult) {
-		placeResult.slot.itemButton = itemButton;
-		itemButton.AlignToWorldFrame(placeResult.slot);
-	}
-
-	public void RemoveItemButton(ItemButton itemButton, bool clearItemButton) {
-		WUI_EquipmentSlotFrame frame = slotFrames.objects.Find(x => x.itemButton == itemButton);		
-		itemButton.AlignToItemList();
-		if (clearItemButton) {
-			frame.itemButton = null;
-		}
-	}
-
-	public class TryPlaceItemResult {
-		public SlotPlaceResult placeResult;
-		public WUI_EquipmentSlotFrame slot;
-    }
-
-}
-
-public enum SlotPlaceResult {
-	None = 0,
-	CanNotPlace = 1 << 0,
-	CanReplace = 1 << 1,
-	CanPlace = 1 << 2,	
 }

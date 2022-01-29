@@ -52,8 +52,8 @@ public class GM_Arena : GameMode {
 
 			MCamera.inst.AddTarget(new CameraTarget(enemy.hero.body.transform, new Vector2(0, -2), Vector2.one * 2));
 
-			Pistol epistol = (Pistol)equipmentFactory.Create(MAssets.itemsInfo.GetAsset(ItemType.Pistol), Vector2.zero);
-			enemyHero.heroEquipment.CanAttachEquipment(epistol);
+			//Pistol epistol = (Pistol)equipmentFactory.Create(MAssets.itemsInfo.GetAsset(ItemType.Pistol), Vector2.zero);
+			//enemyHero.heroEquipment.CanAttachEquipment(epistol);
 		}
 
 		MCamera.inst.AddTarget(new CameraTarget(player.hero.body.transform, new Vector2(0, -2), Vector2.one * 2));
@@ -69,8 +69,8 @@ public class GM_Arena : GameMode {
 		//Pistol waterPistol = (Pistol)equipmentFactory.Create(new WeaponConfig(WeaponType.WaterPistol), Vector2.zero);
 		//playerHero.AttachEquipment(waterPistol);
 
-		Pistol pistol2 = (Pistol)equipmentFactory.Create(MAssets.itemsInfo.GetAsset(ItemType.Pistol), Vector2.zero);
-		playerHero.heroEquipment.CanAttachEquipment(pistol2);
+		//Pistol pistol2 = (Pistol)equipmentFactory.Create(MAssets.itemsInfo.GetAsset(ItemType.Pistol), Vector2.zero);
+		//playerHero.heroEquipment.CanAttachEquipment(pistol2);
 
 		GameUI.inst.playerPanels[0].SetHero(playerHero);
 		GameUI.inst.playerPanels[1].SetHero(enemies[0].hero);

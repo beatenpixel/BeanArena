@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryDrawer : MonoBehaviour {
+public class InventoryUI : MonoBehaviour {
 
 	public InventoryState inventoryState;
 
@@ -23,7 +23,6 @@ public class InventoryDrawer : MonoBehaviour {
 	[HideInInspector] public ItemButton currentDragedButton;
 
 	private Vector3[] inventoryWorldCorners = new Vector3[4];
-	private InventoryWorldUI.TryPlaceItemResult dragButtonPlaceResult;
 
 	public void Init() {
 		tabButtons = new ObjectListSpawner<InventoryTabButton>(Spawn_InventoryTabButton, Update_InventoryTabButton, Disable_InventoryTabButton);
@@ -58,33 +57,11 @@ public class InventoryDrawer : MonoBehaviour {
 
     private void Update() {
 		if (currentDragedButton != null) {
-			if (currentDragedButton.buttonState == ItemButton.ItemButtonState.InInventory) {
-				worldUI.SetAreaGlowing(true);
+			if (currentDragedButton.buttonState == ItemButton.ItemButtonState.InInventory) {				
 
-				isInsideHeroWorldRect.Set(worldUI.CheckInsideDropArea());
-
-				if (isInsideHeroWorldRect.CheckIsDirtyAndClear()) {
-					if (isInsideHeroWorldRect.value) {
-						dragButtonPlaceResult = worldUI.TryPlaceItemButton(currentDragedButton);
-						Debug.Log(dragButtonPlaceResult.placeResult);
-
-						if (dragButtonPlaceResult.placeResult == SlotPlaceResult.CanReplace) {
-
-						} else if (dragButtonPlaceResult.placeResult == SlotPlaceResult.CanPlace) {
-							worldUI.EquipTempItem(currentDragedButton, dragButtonPlaceResult.slot);
-						}
-					} else {
-						worldUI.UnequipTempItem(currentDragedButton);
-					}
-				}
 			} else if(currentDragedButton.buttonState == ItemButton.ItemButtonState.InHeroSlot) {			
-
-				worldUI.SetAreaGlowing(false);
-
-				isInsideInventoryRect.Set(CheckInsideItemsInventoryArea());
+				
 			}
-		} else {
-			worldUI.SetAreaGlowing(false);
 		}
     }
 
@@ -102,56 +79,35 @@ public class InventoryDrawer : MonoBehaviour {
 	}
 
 	public void OnItemButtonEvent(UIEventType e, ItemButton button, object arg) {
-		switch(e) {
-			case UIEventType.DragEnd:			
-				if(currentDragedButton.buttonState == ItemButton.ItemButtonState.InHeroSlot) {					
-					if (isInsideInventoryRect.value) {
-						worldUI.RemoveItemButton(button, false);
-						worldUI.UnequipItem(button);
-						button.SetState(ItemButton.ItemButtonState.InInventory);						
-					} else {
-						worldUI.ReturnItemButtonToFrame(button);
-                    }
-				} else if(currentDragedButton.buttonState == ItemButton.ItemButtonState.InInventory) {
-					if (isInsideHeroWorldRect.value) {
-						dragButtonPlaceResult = worldUI.TryPlaceItemButton(currentDragedButton);
+		switch (e) {
+			case UIEventType.DragEnd:
 
-						if (dragButtonPlaceResult.placeResult == SlotPlaceResult.CanReplace) {
-							Debug.Log("Replace");
+				if (button.buttonState == ItemButton.ItemButtonState.InInventory) {
+					if (worldUI.CheckInsideDropArea()) {
+						GD_Item item = button.currentItem;
 
-							if (dragButtonPlaceResult.slot.itemButton != null) {
-								Debug.Log("Not null");
-								worldUI.RemoveItemButton(dragButtonPlaceResult.slot.itemButton, false);
-								worldUI.UnequipItem(dragButtonPlaceResult.slot.itemButton);								
-							}
+						List<EquipmentSlot> heroFreeSlots = worldUI.targetHero.heroEquipment.GetFreeSlots(item);
+						if (heroFreeSlots.Count > 0) {
+							EquipmentSlot slot = heroFreeSlots[0];
+							worldUI.targetHero.heroEquipment.PreviewItem(item, slot);
 
-							worldUI.EquipItem(currentDragedButton, dragButtonPlaceResult.slot);
-							worldUI.PlaceItemButton(button, dragButtonPlaceResult);
-
-							button.SetState(ItemButton.ItemButtonState.InHeroSlot);
-						} else if (dragButtonPlaceResult.placeResult == SlotPlaceResult.CanPlace) {
-							worldUI.UnequipTempItem(currentDragedButton);
-
-							worldUI.EquipItem(button, dragButtonPlaceResult.slot);
-							worldUI.PlaceItemButton(button, dragButtonPlaceResult);
-							button.SetState(ItemButton.ItemButtonState.InHeroSlot);
-						} else {
-
-						}						
+							WorldItemSlot worldSlot = worldUI.GetWorldSlot(slot);
+							worldSlot.SetItemButton(button);
+						}
 					}
-				}				
+				} else if(button.buttonState == ItemButton.ItemButtonState.InHeroSlot) {
+					if(CheckInsideItemsInventoryArea()) {
+						GD_Item item = button.currentItem;
+
+						WorldItemSlot worldSlot = worldUI.GetWorldSlot(button);
+
+                    }
+                }				
 
 				currentDragedButton = null;
 				break;
 			case UIEventType.DragStart:
 				currentDragedButton = button;
-
-				if(currentDragedButton.buttonState == ItemButton.ItemButtonState.InHeroSlot) {
-
-                } else if(currentDragedButton.buttonState == ItemButton.ItemButtonState.InInventory) {
-
-                }
-
 				break;
         }
     }

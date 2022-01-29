@@ -6,24 +6,41 @@ using UnityEngine;
 
 public class HeroEquipment : HeroComponent {
 
-	public List<EquipmentSlot> slots;
+	private List<EquipmentSlot> slots;
+
+	public int GetSlotsCount() {
+		return slots.Count;
+    }
+
+	public EquipmentSlot GetEquipmentSlot(int ind) {
+		return slots[ind];
+    }
 
 	public void Init() {
 		slots = new List<EquipmentSlot>() {
-			new EquipmentSlot() {
-				allowedCategory = ItemCategory.Weapon,
-				limb = hero[LimbType.LArm].First()
-			},
-			new EquipmentSlot() {
-				allowedCategory = ItemCategory.BottomGadget,
-				limb = hero[LimbType.Body].First()
-			},
-			new EquipmentSlot() {
-				allowedCategory = ItemCategory.UpperGadget,
-				limb = hero[LimbType.Body].First()
-			},
+			new EquipmentSlot(hero, new ItemFilter(ItemCategory.Weapon)).SetLimb(hero[LimbType.LArm].First()),
+			new EquipmentSlot(hero, new ItemFilter(ItemCategory.BottomGadget)).SetLimb(hero[LimbType.Body].First()),
+			new EquipmentSlot(hero, new ItemFilter(ItemCategory.UpperGadget)).SetLimb(hero[LimbType.Body].First()),
+			new EquipmentSlot(hero, new ItemFilter(ItemCategory.Weapon)).SetLimb(hero[LimbType.RArm].First()),
 		};
 	}
+
+	public void PreviewItem(GD_Item item, EquipmentSlot slot) {
+		Equipment itemPreviewInstance = Game.inst.equipmentFactory.Create(item.info, Vector2.zero);
+		slot.EquipPreviewItem(item, itemPreviewInstance);
+    }
+
+	public List<EquipmentSlot> GetFreeSlots(GD_Item item) {
+		List<EquipmentSlot> freeSlots = new List<EquipmentSlot>();
+
+        for (int i = 0; i < slots.Count; i++) {
+			if(slots[i].IsFree() && slots[i].ItemFits(item)) {
+				freeSlots.Add(slots[i]);
+            }
+        }
+
+		return freeSlots;
+    }
 
 	public void OnButtonInput(ButtonInputEventData inp) {
 		HeroLimb limb;
@@ -33,98 +50,44 @@ public class HeroEquipment : HeroComponent {
 		} else {
 			limb = hero[LimbType.LArm].First();
 		}
-
-		/*
-		if (limb.equipment.Count > 0) {
-			limb.equipment[0].Use(new EquipmentUseArgs() {
-				charge = inp.chargePercent
-			});
-		}
-		*/
 	}
-
-	public void AttachEquipment(Equipment equip, EquipmentSlot slot) {
-		equip.AttachToHero(hero, slot.limb);
-		slot.AttachEquipment(equip);
-	}
-
-	public void UnattachEquipment(EquipmentSlot slot) {
-		Debug.Log("UnattachEquipment: 2");
-		
-		slot.equipment.UnattachFromHero();
-		slot.UnattachEquipment();
-	}
-
-	public bool CanAttachEquipment(Equipment equip) {
-		/*
-		var freeSlots = slots.Where(x =>x.allowedCategory == equip.itemInfo.category
-		&& MUtils.EnumAnyInMask((int)equip.canAttachToLimbs, (int)x.limb.limbType)
-		&& x.limb.CanEquip(equip));
-
-		if(freeSlots.Count() > 0) {
-			EquipmentSlot slot = freeSlots.First();
-
-
-		}
-		*/
-		/*
-		if (targetLimbs.Count() > 0) {
-			var freeLimbs = targetLimbs.Where(x => x.CanEquip(equip));
-
-			if (freeLimbs.Count() > 0) {
-				HeroLimb freeLimb = freeLimbs.First();
-
-				equip.AttachToHero(hero, freeLimb);
-
-				attachedEquipment.Add(equip);
-
-				return true;
-			}
-		}
-		*/
-
-		return false;
-	}
-
-	/*
-	public void ClearEquipment(Equipment equip) {
-        if(attachedEquipment.Contains(equip)) {
-			equip.UnattachFromHero();
-			attachedEquipment.Remove(equip);
-        }
-    }
-	*/
-
 }
 
 [System.Serializable]
-public class EquipmentSlot {	
-	public ItemCategory allowedCategory;
-	public HeroLimb limb;
-	public Equipment equipment { get; private set; }
+public class EquipmentSlot {
+	private ItemFilter filter;
 
-	public void AttachEquipment(Equipment equip) {
-		equipment = equip;
-    }
+	private GD_Item equipedItem;
+	private Equipment equipedEquipment;
 
-	public void UnattachEquipment() {
-		equipment = null;
-		Debug.Log("UnattachEquipment: 5");
+	private GD_Item previewItem;
+	private Equipment previewEquipment;
+
+	private Hero hero;
+	private HeroLimb limb;
+
+	public EquipmentSlot(Hero hero, ItemFilter filter) {
+		this.hero = hero;
+		this.filter = filter;
 	}
 
-	public SlotPlaceResult CheckPlace(GD_Item item) {
-		if (MUtils.EnumAllInMask((int)allowedCategory, (int)item.info.category)) {
-			if (equipment == null) {
-				return SlotPlaceResult.CanPlace;
-			} else {
-				return SlotPlaceResult.CanReplace;
-            }
-		} else {
-			return SlotPlaceResult.CanNotPlace;
-        }		
+	public EquipmentSlot SetLimb(HeroLimb limb) {
+		this.limb = limb;
+		return this;
+    }
+
+	public void EquipPreviewItem(GD_Item item, Equipment equipmentinstance) {
+		previewItem = item;
+		previewEquipment = equipmentinstance;
+		equipmentinstance.AttachToHero(hero, limb);
+	}
+
+	public bool ItemFits(GD_Item item) {
+		return filter.Check(item);
     }
 
 	public bool IsFree() {
-		return equipment == null;
+		return equipedEquipment == null;
     }
+
 }

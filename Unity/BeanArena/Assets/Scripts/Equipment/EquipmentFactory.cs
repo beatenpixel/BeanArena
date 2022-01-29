@@ -11,8 +11,6 @@ public class EquipmentFactory : MonoBehaviour {
 
     public Equipment Create(SO_ItemInfo itemInfo, Vector2 position) {
 
-        Debug.Log("CREATE WAPON");
-
         if (itemInfo.category == ItemCategory.Weapon) {
             Weapon weaponPrefab = itemInfo.prefab.GetComponent<Weapon>();
 

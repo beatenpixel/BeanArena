@@ -63,18 +63,7 @@ public class ItemButton : UIButtonBase {
         currentItem = itemData;
 
         iconDrawer.DrawItem(itemData, itemInfo);
-    }
-
-    public void AlignToWorldFrame(WUI_EquipmentSlotFrame frame) {
-        rectT.SetParent(frame.rectT);
-        rectT.localScale = Vector3.one;
-        subRectT.localScale = Vector3.one;
-
-        rectT.SetAnchor(Vector2.zero, Vector2.one);
-        rectT.SetOffset(Vector2.zero, Vector2.zero);
-
-        SetDragDirection(Orientation.Left);
-    }
+    }   
 
     public void AlignToItemList() {
         rectT.SetParent(inventoryGroupDrawer.itemsButtonsRootT);
@@ -88,13 +77,19 @@ public class ItemButton : UIButtonBase {
         if (isDragging)
             return;
 
+        Vector3 savePos;
+
+        if (buttonState == ItemButtonState.InHeroSlot) {
+            savePos = MCamera.inst.cam.WorldToScreenPoint(subRectT.position);
+        } else {
+            savePos = subRectT.position;
+        }
+
         subRectT.SetParent(UIWindowManager.inst.uiCanvas.canvasT);
         subRectT.SetAsLastSibling();
         subRectT.localScale = Vector3.one;
 
-        if(buttonState == ItemButtonState.InHeroSlot) {
-            subRectT.position = Input.mousePosition;
-        }
+        subRectT.position = savePos.SetZ(0);
 
         isDragging = true;
 
@@ -104,6 +99,7 @@ public class ItemButton : UIButtonBase {
     private void StopDrag() {
         subRectT.SetParent(rectT);
         subRectT.anchoredPosition = startAnchoredPosition;
+        subRectT.localScale = Vector3.one;
         isDragging = false;
 
         OnEvent?.Invoke(UIEventType.DragEnd, this, onClickArg);

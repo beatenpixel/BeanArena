@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   itemType: 1
-  category: 4
+  category: 2
   itemName_LKey: ITEM_NAME_PISTOL
   itemDescription_LKey: ITEM_DESCR_PISTOL
   icon: {fileID: 11400000, guid: 19561c3bd6200a74da1d3a82f8ba990d, type: 2}

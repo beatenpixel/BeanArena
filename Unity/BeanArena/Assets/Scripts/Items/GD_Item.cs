@@ -60,13 +60,36 @@ public class Item {
     }
 }
 
-[Flags]
+public class ItemFilter {
+
+    private ItemCategory category;
+    private bool useCategoryFilter;
+
+    public ItemFilter(ItemCategory itemCategory) {
+        category = itemCategory;
+        useCategoryFilter = true;
+    }
+
+    public bool Check(GD_Item item) {
+        bool canPass = true;
+
+        if(useCategoryFilter) {
+            if(item.info.category != category) {
+                return false;
+            }
+        }
+
+        return canPass;
+    }
+
+}
+
 public enum ItemCategory {
-    Hero = 1 << 0,
-    HeroSkin = 1 << 1,
-    Weapon = 1 << 2,
-    BottomGadget = 1 << 3,
-    UpperGadget = 1 << 4
+    Hero,
+    HeroSkin,
+    Weapon,
+    BottomGadget,
+    UpperGadget
 }
 
 public enum ItemType : byte {
