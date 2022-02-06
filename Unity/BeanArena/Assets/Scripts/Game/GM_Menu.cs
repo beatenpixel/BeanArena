@@ -60,9 +60,9 @@ public class GM_Menu : GameMode {
 		MenuUI.inst.inventoryDrawer.worldUI.SetTargetHero(playerHero);
 	}
 
-	public enum MenuState {
-		Idle,
-		CustomizingCharacter
+    public enum MenuState {
+        Idle,
+        CustomizingCharacter
     }
 
 }

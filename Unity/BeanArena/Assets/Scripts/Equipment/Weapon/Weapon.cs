@@ -54,17 +54,12 @@ public abstract class Weapon : Equipment {
     public override void UnattachFromHero() {
         base.UnattachFromHero();
 
-		Debug.Log("UnattachEquipment: 3");
-
 		if (attachJointResult != null) {
 			attachJointResult.DestroyJoint();
 		}
 
-		Debug.Log("UnattachEquipment: 6");
-
 		transform.SetParent(null);
 
-		Debug.Log("UnattachEquipment: 7");
 		Push();
     }
 
@@ -77,7 +72,6 @@ public abstract class Weapon : Equipment {
 
     public override string subType {
 		get {
-			Debug.Log(gameObject.name + "/" + itemInfo.itemType.ToString());
 			return itemInfo.itemType.ToString();
         }
     }

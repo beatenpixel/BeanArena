@@ -29,7 +29,14 @@ public class WorldItemSlot : MonoBehaviour {
     }
 
     public void ClearItemButton() {
-        currentItemButton = null;
+        currentItemButton.SetState(ItemButton.ItemButtonState.InInventory);
+        currentItemButton.AlignToItemList();
+
+        currentItemButton = null;        
+    }
+
+    public void ClearPreviewItem() {
+        heroEquipmentSlot.ClearPreviewItem();
     }
 
     public bool CompareHeroEquipmentSlots(EquipmentSlot slot) {

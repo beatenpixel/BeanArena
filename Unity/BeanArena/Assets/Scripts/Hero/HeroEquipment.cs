@@ -30,6 +30,10 @@ public class HeroEquipment : HeroComponent {
 		slot.EquipPreviewItem(item, itemPreviewInstance);
     }
 
+	public void ClearPreviewItem(EquipmentSlot slot) {
+		slot.ClearPreviewItem();
+    }
+
 	public List<EquipmentSlot> GetFreeSlots(GD_Item item) {
 		List<EquipmentSlot> freeSlots = new List<EquipmentSlot>();
 
@@ -76,14 +80,29 @@ public class EquipmentSlot {
 		return this;
     }
 
+	public void ClearPreviewItem() {
+		if (previewEquipment != null) {
+			previewEquipment.UnattachFromHero();
+			previewEquipment.Push();
+			previewEquipment = null;
+		}
+		
+		previewItem = null;
+	}
+
 	public void EquipPreviewItem(GD_Item item, Equipment equipmentinstance) {
 		previewItem = item;
 		previewEquipment = equipmentinstance;
+
 		equipmentinstance.AttachToHero(hero, limb);
 	}
 
 	public bool ItemFits(GD_Item item) {
 		return filter.Check(item);
+    }
+
+	public bool HasPreviewItem() {
+		return previewItem != null;
     }
 
 	public bool IsFree() {

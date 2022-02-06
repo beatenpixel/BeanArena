@@ -48,6 +48,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -304,6 +305,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      heart: -1043653011585756779
+      jump: 6234432818899860378
+      damage: 2434013178458663610
+      time: 1922921581267463393
+      cup: 7374767111035791262
+      coin: -5935198479381384675
+      bean_gold: 3959047777783908238
+      gem: 3867287787966158001
   spritePackingTag: 
   pSDRemoveMatte: 1
   pSDShowRemoveMatteOption: 1

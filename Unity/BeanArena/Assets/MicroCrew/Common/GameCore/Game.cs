@@ -22,13 +22,13 @@ public class Game : Singleton<Game> {
 
 	private MLog logger = new MLog("Game");
 
-	public override void Init() {
-		MSceneManager.OnSceneChangeEnd.Add(-1000,OnSceneLoadEnd);
+    public override void Init() {
+        MSceneManager.OnSceneChangeEnd.Add(-1000, OnSceneLoadEnd);
 
-		HeroDieEvent.Register(GameEvent_HeroDie);
-	}
+        HeroDieEvent.Register(GameEvent_HeroDie);
+    }
 
-	protected override void Shutdown() {
+    protected override void Shutdown() {
 
 	}
 

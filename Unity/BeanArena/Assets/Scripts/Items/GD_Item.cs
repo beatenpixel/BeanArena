@@ -98,7 +98,8 @@ public enum ItemType : byte {
     WaterPistol,
     HelicopterHat,
     JumpyBoots,
-    RocketBoots
+    RocketBoots,
+    Wheel
 }
 
 public enum ItemRareness : byte {

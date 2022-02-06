@@ -88,19 +88,28 @@ public class InventoryUI : MonoBehaviour {
 
 						List<EquipmentSlot> heroFreeSlots = worldUI.targetHero.heroEquipment.GetFreeSlots(item);
 						if (heroFreeSlots.Count > 0) {
-							EquipmentSlot slot = heroFreeSlots[0];
-							worldUI.targetHero.heroEquipment.PreviewItem(item, slot);
 
-							WorldItemSlot worldSlot = worldUI.GetWorldSlot(slot);
-							worldSlot.SetItemButton(button);
+                            for (int i = 0; i < heroFreeSlots.Count; i++) {
+								EquipmentSlot slot = heroFreeSlots[0];
+								WorldItemSlot worldSlot = worldUI.GetWorldSlot(slot);
+
+								if (slot.HasPreviewItem()) {
+									worldSlot.ClearItemButton();
+									worldSlot.ClearPreviewItem();
+								}
+
+								worldUI.targetHero.heroEquipment.PreviewItem(item, slot);								
+								worldSlot.SetItemButton(button);
+							}							
 						}
 					}
 				} else if(button.buttonState == ItemButton.ItemButtonState.InHeroSlot) {
 					if(CheckInsideItemsInventoryArea()) {
 						GD_Item item = button.currentItem;
+						WorldItemSlot worldSlot = worldUI.GetWorldSlot(button);						
 
-						WorldItemSlot worldSlot = worldUI.GetWorldSlot(button);
-
+						worldSlot.ClearItemButton();
+						worldSlot.ClearPreviewItem();						
                     }
                 }				
 

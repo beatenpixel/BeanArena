@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b01a7bf1b2c9564aa8315d8830dba41, type: 3}
+  m_Name: Wheel
+  m_EditorClassIdentifier: 
+  itemType: 6
+  category: 3
+  itemName_LKey: ITEM_NAME_PISTOL
+  itemDescription_LKey: ITEM_DESCR_PISTOL
+  icon: {fileID: 11400000, guid: c473d31935e875443a3cdcccb17370e7, type: 2}
+  prefab: {fileID: 416318777461901068, guid: bc1f5fe8a4c72634ebe8a3683aad358d, type: 3}
+  maxLevel: 5
+  stats:
+  - statType: 5
+    valueType: 0
+    progressionType: 0
+    progressionFunc: 3
+    intStartEndValue: {x: 100, y: 900}
+    floatStartEndValue: {x: 0, y: 0}
+    values:
+    - intValue: 100
+      floatValue: 0
+      manual: 0
+    - intValue: 150
+      floatValue: 0
+      manual: 0
+    - intValue: 325
+      floatValue: 0
+      manual: 0
+    - intValue: 575
+      floatValue: 0
+      manual: 0
+    - intValue: 900
+      floatValue: 0
+      manual: 0
+    roundAccuracy: 25
+    soItemInfo: {fileID: 11400000}
+    isFoldoutInInspector: 1

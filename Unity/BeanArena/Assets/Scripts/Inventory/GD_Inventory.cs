@@ -46,22 +46,16 @@ public class GD_Inventory : GD {
             rareness = ItemRareness.Epic
         });
         items.Add(new GD_Item() {
-            itemType = ItemType.JumpyBoots,
-            fusePoints = 100,
-            levelID = 1,
-            rareness = ItemRareness.Uncommon
-        });
-        items.Add(new GD_Item() {
-            itemType = ItemType.RocketBoots,
+            itemType = ItemType.Wheel,
             fusePoints = 666,
             levelID = 3,
             rareness = ItemRareness.Legendary
         });
         items.Add(new GD_Item() {
-            itemType = ItemType.RocketBoots,
-            fusePoints = 666,
-            levelID = 3,
-            rareness = ItemRareness.Legendary
+            itemType = ItemType.Wheel,
+            fusePoints = 0,
+            levelID = 0,
+            rareness = ItemRareness.Common
         });
     }
 
