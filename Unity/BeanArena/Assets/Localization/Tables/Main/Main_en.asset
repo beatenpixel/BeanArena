@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Main_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 550b6b2c45beb234cbd3b8b240c52b45, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 918299570176
+    m_Localized: PLAY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918333124608
+    m_Localized: MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918333124609
+    m_Localized: Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918333124610
+    m_Localized: Pain World
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318912
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318913
+    m_Localized: '[No translation]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318914
+    m_Localized: Are you sure you want to buy {0} for {1}?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318915
+    m_Localized: Button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318916
+    m_Localized: Text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318917
+    m_Localized: OK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318918
+    m_Localized: THANKS, NO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318919
+    m_Localized: THANKS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318920
+    m_Localized: NO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318921
+    m_Localized: Are you sure?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318922
+    m_Localized: YES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318923
+    m_Localized: 'Error #{0} occured: {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318924
+    m_Localized: Unknown error
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318925
+    m_Localized: No internet connection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318926
+    m_Localized: RETRY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318927
+    m_Localized: ERROR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318928
+    m_Localized: Loading level{0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318929
+    m_Localized: Loading level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318930
+    m_Localized: Sword Type
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318931
+    m_Localized: Sword {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318932
+    m_Localized: Empty slot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318933
+    m_Localized: GO!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318934
+    m_Localized: NONE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318935
+    m_Localized: EDIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318936
+    m_Localized: READY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318937
+    m_Localized: Pistol
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318938
+    m_Localized: Pew-pew
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318939
+    m_Localized: Water Gun
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318940
+    m_Localized: Mmmmm... wet beans...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318941
+    m_Localized: MAX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 918337318942
+    m_Localized: LVL {0}
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

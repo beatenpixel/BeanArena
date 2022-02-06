@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using Polyglot;
 
 public class ItemInfoPanel : MonoBehaviour {
 
@@ -17,7 +16,7 @@ public class ItemInfoPanel : MonoBehaviour {
 
     public void DrawInfo(SO_ItemInfo itemInfo, GD_Item item) {
         isevIconDrawer.DrawItem(item, itemInfo);
-        itemNameText.text = Localization.Get(itemInfo.itemName_LKey);
+        itemNameText.text = MLocalization.Get(itemInfo.itemName_LKey);
 
         string statsStr = "";
         for (int i = 0; i < itemInfo.stats.Count; i++) {
