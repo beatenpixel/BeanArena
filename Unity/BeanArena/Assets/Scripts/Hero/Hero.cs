@@ -41,6 +41,8 @@ public class Hero : PoolObject, IDamageable, ITarget {
 	// ITarget
 
 	private bool hadMoveInputLastFrame;
+    private HeroConfig initConfig;
+    private Vector2 spawnPos;
 
     protected override void Awake() {
         base.Awake();
@@ -68,14 +70,17 @@ public class Hero : PoolObject, IDamageable, ITarget {
 	}
 
 	public virtual void InitInFactory(HeroConfig config) {
-		info = new HeroInfo();
+        initConfig = config;
+
+        info = new HeroInfo();
 		info.maxHealth = 100;
-		info.health = 100;
+		info.health = 100;        
 		info.teamID = config.teamID;
 		info.state = HeroState.Alive;
 		info.role = config.role;
+        info.nickname = config.nickname;
 
-		if (config.role == HeroRole.Enemy) {
+        if (config.role == HeroRole.Enemy) {
 			WUI_TextStyle style = WUI_TextStyle.beanNickname;
 			style.textColor = Color.white.SetA(0.3f);
 			nicknameText = WorldUI.inst.AddText(config.nickname, body.transform, Vector2.up * 1.5f, style);
@@ -95,9 +100,26 @@ public class Hero : PoolObject, IDamageable, ITarget {
 		SetOrientation(config.orientation);
 	}
 
+
     public void Init() {
 		
 	}
+
+    public void SetSpawnPosition(Vector2 pos) {
+        spawnPos = pos;
+        t.position = spawnPos;
+    }
+
+    public void ReturnToSpawnPosition() {        
+        body.transform.position = spawnPos;
+
+        foreach (var limb in limbs) {
+            if (limb.rb != null) {
+                limb.rb.velocity = Vector2.zero;
+                limb.rb.angularVelocity = 0f;
+            }
+        }
+    }
 
 	public void InternalUpdate() {
 		targetAimPoints[0].worldPos = body.transform.position;
@@ -256,6 +278,18 @@ public class Hero : PoolObject, IDamageable, ITarget {
 		HeroDieEvent.Invoke(new HeroDieEvent(this));
     }
 
+    public void Revive() {
+        info.health = info.maxHealth;
+        info.state = HeroState.Alive;          
+
+        ReturnToSpawnPosition();
+        SetOrientation(initConfig.orientation);
+
+        faceRend.SetFace(HeroFace.Normal);
+
+        HeroDamageEvent.Invoke(new HeroDamageEvent(this));
+    }
+
 	public Vector2 GetPosition() {
 		return body.transform.position;
     }
@@ -280,10 +314,15 @@ public class Hero : PoolObject, IDamageable, ITarget {
 					float dmg = physDmg.GetDamage();
 					info.health -= dmg;
 
-					Debug.Log($"physDmg:{physDmg.limb == null} physDmg.limb.rend:{physDmg.limb.rend}");
+					//Debug.Log($"physDmg:{physDmg.limb == null} physDmg.limb.rend:{physDmg.limb.rend}");
 
 					physDmg.limb.rend.TakeDamage(Mathf.Clamp01(dmg / info.maxHealth * 4));					
 				}break;
+            case DamageCause.DEV:
+                DevDamage devDmg = (DevDamage)damage;
+
+                info.health -= devDmg.GetDamage();
+                break;
 		}
 
 		if (info.state != HeroState.Alive) {
@@ -305,8 +344,11 @@ public class Hero : PoolObject, IDamageable, ITarget {
 	// IDamageable
 
 	public void DestroyHero() {
-		Destroy(gameObject);
-		//Push();
+        heroEquipment.DestroyEquipment();
+        WorldUI.inst.RemoveText(nicknameText);
+
+        Destroy(gameObject);
+        //Push();
     }
 
 }
@@ -341,6 +383,9 @@ public class HeroInfo {
 	public float health;
 	public float maxHealth;
 	public int teamID;
+
+    public string nickname;
+    public int mmr;
 }
 
 public enum HeroControllType {

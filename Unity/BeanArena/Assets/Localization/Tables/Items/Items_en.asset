@@ -42,6 +42,26 @@ MonoBehaviour:
     m_Localized: Just a regular dude
     m_Metadata:
       m_Items: []
+  - m_Id: 91213913616384
+    m_Localized: Hero
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91213926199296
+    m_Localized: Skin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91441840484352
+    m_Localized: Weapon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91441844678656
+    m_Localized: Bot Gadget
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91441844678657
+    m_Localized: Top Gadget
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

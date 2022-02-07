@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7071176786298048624}
   - component: {fileID: 7071176786298048625}
   - component: {fileID: 5027965653698730237}
+  - component: {fileID: 7466876539281726135}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -94,7 +95,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.5
+  m_fontSize: 33.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -161,9 +162,9 @@ MonoBehaviour:
   m_UpdateString:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7071176786298048625}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
+      - m_Target: {fileID: 7466876539281726135}
+        m_TargetAssemblyTypeName: LocalizedTextUI, Assembly-CSharp
+        m_MethodName: Localize
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -176,6 +177,20 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &7466876539281726135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7071176786298048627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016c47e1c6c9e47438d5cd268623bc73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 7071176786298048625}
+  maxLength: -1
 --- !u!1 &7071176786883213262
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,8 +335,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 6390131276126905485, guid: d32db92b880007c4fa0d062b47d79bf2, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -429,8 +444,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 6390131276126905485, guid: d32db92b880007c4fa0d062b47d79bf2, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

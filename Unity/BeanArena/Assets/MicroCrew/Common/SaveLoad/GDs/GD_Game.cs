@@ -14,13 +14,15 @@ public class GD_Game : GD {
     public List<GD> objects;
 
     public GD_Inventory inventory;
+    public GD_Player player;
 
     public GD_Game() : base(GDType.Game, GDLoadOrder.Pre_0) {
         SetDefaults(default);
     }
 
     public void RestoreGame() {
-        inventory.RestoreInventory();
+        inventory.Restore();
+        player.Restore();
     }
 
     public GD_Game(SerializationInfo info, StreamingContext sc) : base(info, sc) {
@@ -28,6 +30,7 @@ public class GD_Game : GD {
         gameEntersCount = info.GetInt32("gameEntersCount");
         soundOn = info.GetBoolean("soundOn");
         inventory = (GD_Inventory)info.GetValue("playerInventory", typeof(GD_Inventory));
+        player = (GD_Player)info.GetValue("player", typeof(GD_Player));
     }
 
     public override void GetObjectData(SerializationInfo info, StreamingContext context) {
@@ -36,6 +39,7 @@ public class GD_Game : GD {
         info.AddValue("gameEntersCount", gameEntersCount);
         info.AddValue("soundOn", soundOn);
         info.AddValue("playerInventory", inventory);
+        info.AddValue("player", player);
     }
 
     [OnDeserializing]
@@ -46,6 +50,7 @@ public class GD_Game : GD {
         objects = new List<GD>();
 
         inventory = new GD_Inventory();
+        player = new GD_Player();
     }
 
 }

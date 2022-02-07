@@ -48,6 +48,10 @@ public class InventoryTabButton : PoolObject {
         OnClickEvent = callback;
     }
 
+    public void SetGroupName(string strName) {
+        tabName.text = strName;
+    }
+
     public void SetActive(bool active) {
         if(active) {
             tabBackgroundImage.color = activeColor;

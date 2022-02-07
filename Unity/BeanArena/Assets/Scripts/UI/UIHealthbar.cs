@@ -17,47 +17,66 @@ public class UIHealthbar : MonoBehaviour {
 	public float value {
 		get; private set;
 	}
-	private float valueLerp;
+	[SerializeField] private float valueLerp;
 
-	private Vector2 startFillSize;
+	[SerializeField] private Vector2 startFillSize;
 	private Tween colorTween;
 	private Tween rectTween;
 
-	private void Awake() {
-		startFillSize = fillRectT.rect.size;
-		fillRectT.anchorMin = new Vector2(0, 0.5f);
-		fillRectT.anchorMax = new Vector2(0, 0.5f);
+    private bool isInitialized;
 
-		SetValue(defaultValue, true);
+	private void Awake() {
+        InternalInit();
+        SetValue(defaultValue, true);
 	}
 
+    private void InternalInit() {
+        if (isInitialized) {
+            return;
+        }
+
+        startFillSize = fillRectT.rect.size;
+        fillRectT.anchorMin = new Vector2(0, 0.5f);
+        fillRectT.anchorMax = new Vector2(0, 0.5f);
+
+        isInitialized = true;
+    }
+
 	public void SetValue(float v, bool instant) {
-		v = Mathf.Clamp(v, 0, 1);
-		if (v == value)
-			return;
+        InternalInit();
+
+        v = Mathf.Clamp(v, 0, 1);
+
+        if (v == value) {
+            if(instant) {
+                fillRectT.sizeDelta = startFillSize.MulX(value);
+            }
+
+            return;
+        }
 
 		if (instant) {
 			KillTweens();
 			value = v;
 
 			fillRectT.sizeDelta = startFillSize.MulX(value);
-		} else {
+        } else {
 			KillTweens();
 
 			if (v < value) {
 				fillImg.color = blinkColor;
-				colorTween = fillImg.DOColor(startColor, 0.2f).SetDelay(0.15f);
+				colorTween = fillImg.DOColor(startColor, 0.2f).SetUpdate(true).SetDelay(0.15f);
 			} else {
-				colorTween = fillImg.DOColor(startColor, 0.2f);
+				colorTween = fillImg.DOColor(startColor, 0.2f).SetUpdate(true);
 			}
 
 			valueLerp = value;
 			value = v;
 
-			rectTween = DOTween.To(() => valueLerp, x => valueLerp = x, v, 0.2f).OnUpdate(() => {
+			rectTween = DOTween.To(() => valueLerp, x => valueLerp = x, v, 0.2f).SetUpdate(true).OnUpdate(() => {
 				fillRectT.sizeDelta = startFillSize.MulX(valueLerp);
 			});
-		}
+        }
 	}
 
 	private void KillTweens() {

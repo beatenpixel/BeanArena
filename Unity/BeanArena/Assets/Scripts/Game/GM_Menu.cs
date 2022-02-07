@@ -9,13 +9,13 @@ public class GM_Menu : GameMode {
 
 	public MenuState menuState;
 
-	private MapMenu map;
+	private Map_Menu map;
 
     public override void InitGame(Game game) {
         base.InitGame(game);
 		inst = this;
 
-		map = (MapMenu)genericMap;
+		map = (Map_Menu)genericMap;
     }
 
     public override bool StartGame() {
@@ -32,6 +32,11 @@ public class GM_Menu : GameMode {
         base.InternalUpdate();
 	}
 
+    public void GoToFight() {
+        genericMap.OnGameExit();
+        SceneTransitionManager.inst.LoadLevelAsync(MSceneManager.ARENA_SCENE_NAME);
+    }
+
 	public void SwitchMenuState(MenuState newState) {
 		menuState = newState;
 
@@ -43,6 +48,8 @@ public class GM_Menu : GameMode {
     }
 
     private void Spawn() {
+        Debug.Log("GM_Menu:Spawn");
+
 		Hero playerHero = heroFactory.Create(new HeroConfig() {
 			nickname = "Lorg",
 			orientation = Orientation.Right,
@@ -58,6 +65,8 @@ public class GM_Menu : GameMode {
 		MCamera.inst.SetFixedArea(new Vector2(0, 0), new Vector2(10, 8), ScreenMatchType.Vertical, true);
 
 		MenuUI.inst.inventoryDrawer.worldUI.SetTargetHero(playerHero);
+
+        playerHero.heroEquipment.LoadEquipmentFromGameData();
 	}
 
     public enum MenuState {
@@ -73,6 +82,8 @@ public abstract class GameMode : MonoBehaviour {
 
 	public GameModeType type;
 	public GameModeState state { get; private set; }
+
+    public bool heroesInputAllowed;
 
 	protected HeroFactory heroFactory;
 	protected EquipmentFactory equipmentFactory;
@@ -92,11 +103,16 @@ public abstract class GameMode : MonoBehaviour {
 		state = GameModeState.Ready;
 
 		enemies = new List<Enemy>();
-	}
+
+        HeroDieEvent.Register(OnGameEvent_HeroDie);
+    }
 
 	public virtual bool StartGame() {
 		state = GameModeState.Running;
-		return true;
+
+        heroesInputAllowed = true;
+
+        return true;
 	}
 
 	public virtual void InternalUpdate() {
@@ -114,7 +130,19 @@ public abstract class GameMode : MonoBehaviour {
     }
 
 	public virtual void ExitGame() {
+        HeroDieEvent.Unregister(OnGameEvent_HeroDie);
 
+        genericMap.OnGameExit();
+        SceneTransitionManager.inst.LoadLevelAsync(MSceneManager.MENU_SCENE_NAME);
+    }
+
+    public virtual void RestartGame() {
+        genericMap.OnGameExit();
+        SceneTransitionManager.inst.LoadLevelAsync(MSceneManager.ARENA_SCENE_NAME);
+    }
+
+    protected virtual void OnGameEvent_HeroDie(HeroDieEvent e) {
+        
     }
 
 }

@@ -302,6 +302,10 @@ PrefabInstance:
       propertyPath: m_VerticalAlignment
       value: 512
       objectReference: {fileID: 0}
+    - target: {fileID: 3495540149611267829, guid: 2a91a405b5d4c92469969479f6da1ab8, type: 3}
+      propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
+      value: 918337318932
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a91a405b5d4c92469969479f6da1ab8, type: 3}
 --- !u!224 &8193908544982436770 stripped

@@ -14,7 +14,7 @@ public class GD_Inventory : GD {
         SetDefaults(default);
     }
 
-    public void RestoreInventory() {
+    public void Restore() {
         for (int i = 0; i < items.Count; i++) {
             items[i].info = MAssets.itemsInfo.GetAsset(items[i].itemType);
             Debug.Log(items[i].info.category);

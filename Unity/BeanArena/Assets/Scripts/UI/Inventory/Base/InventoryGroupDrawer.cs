@@ -18,10 +18,14 @@ public class InventoryGroupDrawer : MonoBehaviour {
 
     private InventoryGroupConfig config;
 
+    public InventoryGroupConfig GetConfig() => config;
+
+    public int groupID => config.groupID;
+
     public void Init(InventoryGroupConfig config) {
         this.config = config;
 
-        itemButtons = new ObjectListSpawner<ItemButton>(SpawnItemButton, UpdateItemButton, DisableItemButton);
+        itemButtons = new ObjectListSpawner<ItemButton>(SpawnItemButton, Enable_ItemButton, Update_ItemButton);
         gdInventory = Game.data.inventory;
     }
 
@@ -46,6 +50,7 @@ public class InventoryGroupDrawer : MonoBehaviour {
             button.SetArg(i);
 
             if(item.isEquiped) {
+                config.drawer.SetItemButtonEquiped(button);
                 //button.SetState(ItemButton.ItemButtonState.InHeroSlot);
             } else {
                 //button.SetState(ItemButton.ItemButtonState.InInventory);
@@ -58,6 +63,8 @@ public class InventoryGroupDrawer : MonoBehaviour {
             int inventorySlotID = (int)arg;
 
             GD_Item item = itemsToDraw[inventorySlotID];
+
+            Debug.Log("GD_Item: " + item.itemGUID);
 
             infoDrawer.DrawInfo(item.info, item);
         }
@@ -73,17 +80,18 @@ public class InventoryGroupDrawer : MonoBehaviour {
         return button;
     }
 
-    private void UpdateItemButton(ItemButton obj, int ind, bool isNewObj) {
-        obj.gameObject.SetActive(true);
+    private void Enable_ItemButton(ItemButton obj, int ind, bool enable) {
+        obj.gameObject.SetActive(enable);
     }
 
-    private void DisableItemButton(ItemButton obj, int ind) {
-        obj.gameObject.SetActive(false);
+    private void Update_ItemButton(ItemButton obj, int ind) {
+        
     }
 
 }
 
 public class InventoryGroupConfig {
+    public int groupID;
     public ItemCategory itemCategory;
     public InventoryTabButton tabButton;
     public InventoryUI drawer;

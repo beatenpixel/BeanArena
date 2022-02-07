@@ -23,28 +23,39 @@ public class InventoryUI : MonoBehaviour {
 	[HideInInspector] public ItemButton currentDragedButton;
 
 	private Vector3[] inventoryWorldCorners = new Vector3[4];
+    private bool groupsAreSetup;
 
 	public void Init() {
-		tabButtons = new ObjectListSpawner<InventoryTabButton>(Spawn_InventoryTabButton, Update_InventoryTabButton, Disable_InventoryTabButton);
+        groupsAreSetup = false;
+
+        tabButtons = new ObjectListSpawner<InventoryTabButton>(Spawn_InventoryTabButton, Enable_InventoryTabButton, Update_InventoryTabButton);
 		tabButtons.Update(groupDrawers.Count);
 
 		for (int i = 0; i < tabButtons.activeObjectsCount; i++) {
 			tabButtons[i].SetOnClick(OnTabButtonClick, i);
 		}
 
-		groupDrawers[0].Init(new InventoryGroupConfig() {
-			itemCategory = ItemCategory.Weapon,
-			tabButton = tabButtons[0],
-			drawer = this,
-		});
+        List<ItemCategory> groupsCategory = new List<ItemCategory>() {
+            ItemCategory.Weapon,
+            ItemCategory.BottomGadget,
+            ItemCategory.UpperGadget,
+            ItemCategory.Hero
+        };
 
-		groupDrawers[1].Init(new InventoryGroupConfig() {
-			itemCategory = ItemCategory.BottomGadget,
-			tabButton = tabButtons[1],
-			drawer = this,
-		});
+        for (int i = 0; i < 4; i++) {
+            groupDrawers[i].Init(new InventoryGroupConfig() {
+                groupID = i,
+                itemCategory = groupsCategory[i],
+                tabButton = tabButtons[i],
+                drawer = this,
+            });
+        }       
 
-		if (!generatedElements) {
+        groupsAreSetup = true;
+
+        tabButtons.Update(groupDrawers.Count);
+
+        if (!generatedElements) {
 			generatedElements = true;
 
             for (int i = 0; i < groupDrawers.Count; i++) {
@@ -65,16 +76,26 @@ public class InventoryUI : MonoBehaviour {
 		}
     }
 
-    public void Draw() {
+    public void Draw(bool updateAll) {
         for (int i = 0; i < groupDrawers.Count; i++) {
 			tabButtons[i].SetActive(i == currentGroupID);
 
-			if(i == currentGroupID) {
-				groupDrawers[i].Draw();
-				groupDrawers[i].Show(true);
-			} else {
-				groupDrawers[i].Show(false);
-			}
+            if(updateAll) {
+                groupDrawers[i].Draw();
+
+                if (i == currentGroupID) {
+                    groupDrawers[i].Show(true);
+                } else {
+                    groupDrawers[i].Show(false);
+                }
+            } else {
+                if (i == currentGroupID) {
+                    groupDrawers[i].Draw();
+                    groupDrawers[i].Show(true);
+                } else {
+                    groupDrawers[i].Show(false);
+                }
+            }			
         }
 	}
 
@@ -84,24 +105,7 @@ public class InventoryUI : MonoBehaviour {
 
 				if (button.buttonState == ItemButton.ItemButtonState.InInventory) {
 					if (worldUI.CheckInsideDropArea()) {
-						GD_Item item = button.currentItem;
-
-						List<EquipmentSlot> heroFreeSlots = worldUI.targetHero.heroEquipment.GetFreeSlots(item);
-						if (heroFreeSlots.Count > 0) {
-
-                            for (int i = 0; i < heroFreeSlots.Count; i++) {
-								EquipmentSlot slot = heroFreeSlots[0];
-								WorldItemSlot worldSlot = worldUI.GetWorldSlot(slot);
-
-								if (slot.HasPreviewItem()) {
-									worldSlot.ClearItemButton();
-									worldSlot.ClearPreviewItem();
-								}
-
-								worldUI.targetHero.heroEquipment.PreviewItem(item, slot);								
-								worldSlot.SetItemButton(button);
-							}							
-						}
+                        SetItemButtonEquiped(button);
 					}
 				} else if(button.buttonState == ItemButton.ItemButtonState.InHeroSlot) {
 					if(CheckInsideItemsInventoryArea()) {
@@ -109,7 +113,13 @@ public class InventoryUI : MonoBehaviour {
 						WorldItemSlot worldSlot = worldUI.GetWorldSlot(button);						
 
 						worldSlot.ClearItemButton();
-						worldSlot.ClearPreviewItem();						
+						worldSlot.ClearPreviewItem();
+
+                        item.isEquiped = false;
+                    }
+
+                    if(currentGroupID != button.inventoryGroupDrawer.groupID) {
+                        SwitchTab(button.inventoryGroupDrawer.groupID);
                     }
                 }				
 
@@ -119,6 +129,64 @@ public class InventoryUI : MonoBehaviour {
 				currentDragedButton = button;
 				break;
         }
+    }
+
+    public void SpawnPreviewItems() {
+        for (int i = 0; i < Game.data.inventory.items.Count; i++) {
+            GD_Item item = Game.data.inventory.items[i];
+
+            if (!item.isEquiped) {
+                continue;
+            }
+
+            List<EquipmentSlot> heroFreeSlots = worldUI.targetHero.heroEquipment.GetFreeSlots(item);
+            if (heroFreeSlots.Count > 0) {
+                EquipmentSlot equipSlot = heroFreeSlots[0];
+                WorldItemSlot worldSlot = worldUI.GetWorldSlot(equipSlot);
+
+                for (int x = 0; x < heroFreeSlots.Count; x++) {
+                    if (equipSlot.HasPreviewItem()) {
+                        equipSlot.ClearPreviewItem();
+                        worldSlot.ClearItemButton();
+                        worldSlot.ClearPreviewItem();
+                    }
+
+                    worldUI.targetHero.heroEquipment.PreviewItem(item, equipSlot);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void SetItemButtonEquiped(ItemButton button) {
+        GD_Item item = button.currentItem;
+
+        List<EquipmentSlot> heroFreeSlots = worldUI.targetHero.heroEquipment.GetFreeSlots(item);
+        if (heroFreeSlots.Count > 0) {
+
+            for (int i = 0; i < heroFreeSlots.Count; i++) {
+                EquipmentSlot slot = heroFreeSlots[0];
+                WorldItemSlot worldSlot = worldUI.GetWorldSlot(slot);
+
+                SetItemButtonEquiped(button, slot, worldSlot);
+                item.isEquiped = true;
+
+                break;
+            }
+        }
+    }
+
+    public void SetItemButtonEquiped(ItemButton button, EquipmentSlot equipSlot, WorldItemSlot worldSlot) {
+        GD_Item item = button.currentItem;
+
+        if (equipSlot.HasPreviewItem()) {            
+            worldSlot.ClearItemButton();
+            worldSlot.ClearPreviewItem();
+            equipSlot.ClearPreviewItem();
+        }
+
+        worldUI.targetHero.heroEquipment.PreviewItem(item, equipSlot);
+        worldSlot.SetItemButton(button);
     }
 
 	public bool CheckInsideItemsInventoryArea() {
@@ -131,8 +199,12 @@ public class InventoryUI : MonoBehaviour {
 	private void OnTabButtonClick(InventoryTabButton tabButton, object arg) {
 		int tabID = (int)arg;
 
-		currentGroupID = tabID;
-		Draw();
+        SwitchTab(tabID);		
+    }
+
+    private void SwitchTab(int tabID) {
+        currentGroupID = tabID;
+        Draw(false);
     }
 
 	#region InventoryTabButton
@@ -142,12 +214,17 @@ public class InventoryUI : MonoBehaviour {
 		return button;
 	}
 
-	private void Update_InventoryTabButton(InventoryTabButton obj, int ind, bool isNewObj) {
-		obj.gameObject.SetActive(true);
-	}
+	private void Enable_InventoryTabButton(InventoryTabButton obj, int ind, bool enable) {
+        obj.gameObject.SetActive(enable);
+    }
 
-	private void Disable_InventoryTabButton(InventoryTabButton obj, int ind) {
-		obj.gameObject.SetActive(false);
+	private void Update_InventoryTabButton(InventoryTabButton obj, int ind) {
+        obj.gameObject.SetActive(true);
+
+        if (groupsAreSetup) {
+            InventoryGroupConfig groupConfig = groupDrawers[ind].GetConfig();
+            obj.SetGroupName(MLocalization.Get(MFormat.GetItemCategoryNameKey(groupConfig.itemCategory), LocalizationGroup.Items));
+        }        
 	}
 
     #endregion

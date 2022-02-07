@@ -24,20 +24,30 @@ public class ItemButton : UIButtonBase {
     public GD_Item currentItem { get; private set; }
 
     private Orientation dragOrientation = Orientation.Right;
-    private InventoryGroupDrawer inventoryGroupDrawer;
+    private InventoryGroupDrawer m_InventoryGroupDrawer;
+
+    public InventoryGroupDrawer inventoryGroupDrawer {
+        get { return m_InventoryGroupDrawer; }
+    }
 
     public void Init_ItemButton(InventoryGroupDrawer groupDrawer) {
-        inventoryGroupDrawer = groupDrawer;
+        m_InventoryGroupDrawer = groupDrawer;
     }
 
     private void Update() {
         if(isPressed) {
             Vector2 newPointerPos = Input.mousePosition;
             Vector2 dd = (newPointerPos - pointerPressPos);
-            
+
+            /*
             if((dragOrientation == Orientation.Right && dd.x > Screen.width * 0.05f)
                 ||(dragOrientation == Orientation.Left && dd.x < Screen.width * -0.05f)
                 || (Time.time > pressStartTime + 0.5f && dd.magnitude < Screen.width * 0.05f)) {
+                StartDrag();
+            }
+            */
+
+            if (dd.magnitude > Screen.width * 0.05f || (Time.time > pressStartTime + 0.5f && dd.magnitude < Screen.width * 0.05f)) {
                 StartDrag();
             }
         }
@@ -52,6 +62,12 @@ public class ItemButton : UIButtonBase {
     }
 
     public void SetState(ItemButtonState state) {
+        if (state == ItemButtonState.InInventory) {
+            if (currentItem != null) {
+                currentItem.isEquiped = false;
+            }
+        }
+
         buttonState = state;
     }
 
@@ -66,7 +82,7 @@ public class ItemButton : UIButtonBase {
     }   
 
     public void AlignToItemList() {
-        rectT.SetParent(inventoryGroupDrawer.itemsButtonsRootT);
+        rectT.SetParent(m_InventoryGroupDrawer.itemsButtonsRootT);
         rectT.localScale = Vector3.one;
         subRectT.localScale = Vector3.one;
 

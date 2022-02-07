@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapMenu : Map {
+public class Map_Menu : Map {
 
     public CameraTarget cameraFocusTarget;
 

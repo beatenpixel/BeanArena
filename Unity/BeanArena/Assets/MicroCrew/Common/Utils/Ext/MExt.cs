@@ -260,6 +260,16 @@ public static class MExt {
 
     //==============================
 
+    public static bool SafeCastTo<T>(object obj, out T outObj) {
+        if(obj is T) {
+            outObj = (T)obj;
+            return true;
+        } else {
+            outObj = default(T);
+            return false;
+        }
+    }
+
 }
 
 [System.Serializable]

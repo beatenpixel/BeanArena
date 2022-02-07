@@ -22,13 +22,7 @@ public abstract class Map : MonoBehaviour {
 	}
 
 	protected virtual void OnDestroy() {
-        for (int i = heroes.Count - 1; i >= 0; i--) {
-			if (heroes[i] != null) {
-				heroes[i].DestroyHero();
-			}
-
-			heroes.RemoveAt(i);
-		}
+        
     }
 	
 	public virtual void InternalUpdate() {
@@ -49,6 +43,19 @@ public abstract class Map : MonoBehaviour {
 		heroes.Add(hero);
 		targets.Add(hero);
 	}
+
+    public void ResetMap() {
+        for (int i = 0; i < heroes.Count; i++) {
+            heroes[i].Revive();
+        }
+    }
+
+    public void OnGameExit() {
+        for (int i = heroes.Count - 1; i >= 0; i--) {
+            heroes[i].DestroyHero();
+            heroes.RemoveAt(i);
+        }
+    }
 
 	public ITarget GetClosestTarget(Vector2 worldPos, Func<ITarget, bool> targetFilter, out TargetAimPoint aimPoint) {
 		float minDst = 1000000;

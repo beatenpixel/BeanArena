@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 703198675787853828}
   - component: {fileID: 703198675787853829}
   - component: {fileID: 3495540149611267829}
+  - component: {fileID: 1726814260677668421}
   m_Layer: 0
   m_Name: LocalizedText
   m_TagString: Untagged
@@ -161,9 +162,9 @@ MonoBehaviour:
   m_UpdateString:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 703198675787853829}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
+      - m_Target: {fileID: 1726814260677668421}
+        m_TargetAssemblyTypeName: LocalizedTextUI, Assembly-CSharp
+        m_MethodName: Localize
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -176,3 +177,17 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &1726814260677668421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703198675787853824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016c47e1c6c9e47438d5cd268623bc73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 703198675787853829}
+  maxLength: -1

@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6186975835021420595}
   m_Father: {fileID: 6186975834962897325}
@@ -76,11 +77,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6186975833157792510}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.10099997, z: 0}
+  m_LocalPosition: {x: 0, y: 0.10099995, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7660119133513143358}
-  m_Father: {fileID: 6186975834729439896}
+  m_Father: {fileID: 6186975834769051762}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &6186975833157792508
@@ -168,8 +170,6 @@ MonoBehaviour:
     isGlobal: 1
     rotSpeed: 0
     doTransformRotation: 0
-  maxEquipmentSlots: 1
-  equipment: []
   joint: {fileID: 6186975833157792498}
 --- !u!1 &6186975833600708484
 GameObject:
@@ -198,6 +198,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.569, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6186975834600973597}
   m_Father: {fileID: 4385982326928216924}
@@ -249,6 +250,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.76199996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6186975834729439896}
   m_Father: {fileID: 0}
@@ -313,6 +315,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.3683, y: 0, z: 0}
   m_LocalScale: {x: 0.1138043, y: 0.11380432, z: 0.1138043}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7660119133513143358}
   m_RootOrder: 0
@@ -396,6 +399,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.28670776, y: 0.28670776, z: 0.28670776}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4385982326928216924}
   m_RootOrder: 0
@@ -479,6 +483,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.135, y: 0.011, z: 0}
   m_LocalScale: {x: 0.4099, y: 0.4099, z: 0.4099}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6186975833600708507}
   m_RootOrder: 0
@@ -561,10 +566,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6186975834769051762}
-  - {fileID: 6186975833157792509}
-  - {fileID: 6186975834962897325}
   m_Father: {fileID: 6186975834321502701}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -597,8 +601,11 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4385982326928216924}
+  - {fileID: 6186975833157792509}
+  - {fileID: 6186975834962897325}
   m_Father: {fileID: 6186975834729439896}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -642,8 +649,6 @@ MonoBehaviour:
     isGlobal: 1
     rotSpeed: 20
     doTransformRotation: 0
-  maxEquipmentSlots: 1
-  equipment: []
 --- !u!50 &519264284961741208
 Rigidbody2D:
   serializedVersion: 4
@@ -693,11 +698,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6186975834962897326}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.101, z: 0}
+  m_LocalPosition: {x: 0, y: 0.10100001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2793393746697595622}
-  m_Father: {fileID: 6186975834729439896}
+  m_Father: {fileID: 6186975834769051762}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &6186975834962897315
@@ -785,8 +791,6 @@ MonoBehaviour:
     isGlobal: 1
     rotSpeed: 0
     doTransformRotation: 0
-  maxEquipmentSlots: 1
-  equipment: []
   joint: {fileID: 6186975834962897314}
 --- !u!1 &6186975835021420604
 GameObject:
@@ -815,6 +819,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.3683, y: 0, z: 0}
   m_LocalScale: {x: 0.1138043, y: 0.11380432, z: 0.1138043}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2793393746697595622}
   m_RootOrder: 0
@@ -898,6 +903,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6186975834542924119}
   - {fileID: 6186975833600708507}
@@ -947,6 +953,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6186975834423308997}
   m_Father: {fileID: 6186975833157792509}

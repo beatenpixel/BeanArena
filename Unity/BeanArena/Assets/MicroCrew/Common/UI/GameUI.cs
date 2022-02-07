@@ -69,16 +69,27 @@ public class GameUI : MonoBehaviour {
         }
     }
 
+    public void ShowGameEndScreen() {
+
+    }
+
+    public void OnRoundStart() {
+
+    }
+
     public void OnHeroDamageEvent(HeroDamageEvent e) {
+        Debug.Log("HeroDamageEvent");
+
         for (int i = 0; i < playerPanels.Length; i++) {
             if(playerPanels[i].attachedHero == e.hero) {
                 playerPanels[i].healthbar.SetValue(e.hero.info.health / (float)e.hero.info.maxHealth, false);
+                Debug.Log("Damage 123");
             }
         }
     }
 
     public void RestartGame() {
-        MSceneManager.ReloadScene();
+        GameMode.current.ExitGame();
     }
 
 }

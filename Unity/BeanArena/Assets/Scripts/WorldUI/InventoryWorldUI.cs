@@ -57,6 +57,8 @@ public class InventoryWorldUI : MonoBehaviour {
     }
 
 	private void GenerateFrames() {
+        Debug.Log("Generate Frames: " + targetHero.heroEquipment.GetSlotsCount());
+
 		worldSlots.Update(targetHero.heroEquipment.GetSlotsCount());
 
         for (int i = 0; i < targetHero.heroEquipment.GetSlotsCount(); i++) {
@@ -74,8 +76,8 @@ public class InventoryWorldUI : MonoBehaviour {
     }
 
 	private void SlotFrame_Update(WorldItemSlot frame, int id) {
-
-	}
+        
+    }
 
 	public WorldItemSlot GetWorldSlot(ItemButton item) {
 		for (int i = 0; i < worldSlots.activeObjectsCount; i++) {

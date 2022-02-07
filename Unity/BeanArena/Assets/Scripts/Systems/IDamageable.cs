@@ -28,6 +28,17 @@ public abstract class HeroDamage : DamageInfo {
 
 }
 
+public class DevDamage : DamageInfo {
+
+    public DevDamage() : base(DamageCause.DEV) {
+        
+    }
+
+    public override float GetDamage() {
+        return 1000000;
+    }
+}
+
 public class PhysicalDamage : HeroDamage {
     public float damage;
 
@@ -47,5 +58,6 @@ public class DamageResponse {
 
 public enum DamageCause {
     NONE = 0,
-    PHYSICS = 1 << 0
+    PHYSICS = 1 << 0,
+    DEV = 1 << 1
 }

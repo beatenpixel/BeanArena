@@ -28,6 +28,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4171124042631066412}
   m_RootOrder: 0
@@ -164,6 +165,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4171124042631066412}
   m_Father: {fileID: 0}
@@ -265,8 +267,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 6390131276126905485, guid: d32db92b880007c4fa0d062b47d79bf2, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -303,6 +305,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1422197125848814475}
   - {fileID: 1422197126066539965}
@@ -342,8 +345,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 6390131276126905485, guid: d32db92b880007c4fa0d062b47d79bf2, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -449,11 +452,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4b887b0fd3d3a547bfaac00488549c6, type: 3}
---- !u!224 &1422197126066539965 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 68319993761039497, guid: a4b887b0fd3d3a547bfaac00488549c6, type: 3}
-  m_PrefabInstance: {fileID: 1391067392505284916}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1422197126066539961 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 68319993761039501, guid: a4b887b0fd3d3a547bfaac00488549c6, type: 3}
@@ -465,3 +463,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239ea3425df3c724d961423946965dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1422197126066539965 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 68319993761039497, guid: a4b887b0fd3d3a547bfaac00488549c6, type: 3}
+  m_PrefabInstance: {fileID: 1391067392505284916}
+  m_PrefabAsset: {fileID: 0}

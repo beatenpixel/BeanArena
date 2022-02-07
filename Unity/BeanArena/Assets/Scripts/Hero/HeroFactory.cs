@@ -13,8 +13,7 @@ public class HeroFactory : MonoBehaviour {
         Hero hero = MPool.Get<Hero>();
 
         hero.InitInFactory(config);
-
-        hero.t.position = position;
+        hero.SetSpawnPosition(position);
 
         return hero;
     }

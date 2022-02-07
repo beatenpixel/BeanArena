@@ -1,4 +1,5 @@
 using MicroCrew.Utils;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,12 @@ public class MSceneManager : Singleton<MSceneManager> {
 
     private static SceneEvent currentEvent;
 
+    private static Action<SceneLoadState> SceneLoadStateCallback;
+
     private List<GameScene> allScenes;
+
+    public const string MENU_SCENE_NAME = "menu";
+    public const string ARENA_SCENE_NAME = "game";
 
     public override void Init() {
         LoadSceneAssets();
@@ -58,10 +64,34 @@ public class MSceneManager : Singleton<MSceneManager> {
         OnSceneChangeEnd?.Invoke(currentEvent);
     }
 
+    private void Internal_LoadSceneAsync(string sceneName) {
+        StartCoroutine(LoadSceneAsync_Coroutine(sceneName));
+    }
+
+    private IEnumerator LoadSceneAsync_Coroutine(string sceneName) {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+        SceneLoadStateCallback?.Invoke(SceneLoadState.Begin);
+
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone) {
+            SceneLoadStateCallback?.Invoke(SceneLoadState.Update);
+            yield return new WaitForSecondsRealtime(1f / 60f);
+        }
+
+        SceneLoadStateCallback?.Invoke(SceneLoadState.Finish);
+        SceneLoadStateCallback = null;
+    }
+
     #region Wrappers
 
     public static void LoadScene(string name) {
         inst.Internal_LoadScene(name);
+    }
+
+    public static void LoadSceneAsync(string sceneName, Action<SceneLoadState> stateCallback) {
+        SceneLoadStateCallback = stateCallback;
+        inst.Internal_LoadSceneAsync(sceneName);
     }
 
     public static void ReloadScene() {
@@ -69,6 +99,12 @@ public class MSceneManager : Singleton<MSceneManager> {
     }
 
     #endregion
+
+    public enum SceneLoadState {
+        Begin,
+        Update,
+        Finish
+    }
 
 }
 

@@ -17,11 +17,17 @@ public class PlayerPanel : MonoBehaviour {
 
 	public void Init() {
 		winCounter.Init(2);
-		winCounter.SetWinsCount(MRandom.Range(0, 3));
+		winCounter.SetWinsCount(0);
+        healthbar.SetValue(1f, true);
     }
 
-	public void SetHero(Hero hero) {
+	public void SetHero(Hero hero) {        
 		attachedHero = hero;
-	}
+        winCounter.SetWinsCount(0);
+        healthbar.SetValue(1f, true);
+
+        cupsText.text = MFormat.GetCupsStr(hero.info.mmr, MFormat.Sign.None);
+        playerNameText.text = hero.info.nickname;
+    }
 	
 }

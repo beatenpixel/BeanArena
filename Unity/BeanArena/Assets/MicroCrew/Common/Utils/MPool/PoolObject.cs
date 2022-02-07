@@ -11,6 +11,8 @@ public abstract class PoolObject : MonoBehaviour, IPoolObject {
     [HideInInspector] public GameObject go;
     [HideInInspector] public Transform t;
 
+    private bool isInPool;
+
     [SerializeField] private string _subType = DEFAULT_SUB_TYPE;
     public virtual string subType {
         get {
@@ -29,19 +31,24 @@ public abstract class PoolObject : MonoBehaviour, IPoolObject {
     }
 
     public virtual void OnCreate() {
+        isInPool = false;
         DontDestroyOnLoad(gameObject);
     }
 
     public virtual void OnPush() {
+        isInPool = true;
         gameObject.SetActive(false);
     }
 
     public virtual void OnPop() {
+        isInPool = false;
         gameObject.SetActive(true);
     }
 
     public void Push() {
-        MPool.Push(this);
+        if (!isInPool) {
+            MPool.Push(this);
+        }
     }
 
     public GameObject GetGameObject() {

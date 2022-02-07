@@ -24,19 +24,11 @@ public class Game : Singleton<Game> {
 
     public override void Init() {
         MSceneManager.OnSceneChangeEnd.Add(-1000, OnSceneLoadEnd);
-
-        HeroDieEvent.Register(GameEvent_HeroDie);
     }
 
     protected override void Shutdown() {
 
 	}
-
-	private void GameEvent_HeroDie(HeroDieEvent e) {
-		if(e.hero == player.hero) {
-			FX.inst.EnableDeathScreenEffect(true);
-        }
-    } 
 
 	public void SetupGame() {
 		if (didSetupGame)

@@ -9,7 +9,7 @@ public class MicroCrewEditorWindow : EditorWindow {
 
     public static MicroCrewEditorWindow inst;
 
-    [MenuItem("MicroCrew/DeletePlayerData")]
+    [MenuItem("MicroCrew/PlayerData/DeleteAll")]
     public static void DeletePlayerData() {
         string path = Application.persistentDataPath + GameDataManager.PLAYER_DATA_LOCATION;
 

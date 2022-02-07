@@ -29,8 +29,10 @@ public class WorldItemSlot : MonoBehaviour {
     }
 
     public void ClearItemButton() {
-        currentItemButton.SetState(ItemButton.ItemButtonState.InInventory);
-        currentItemButton.AlignToItemList();
+        if (currentItemButton != null) {
+            currentItemButton.SetState(ItemButton.ItemButtonState.InInventory);
+            currentItemButton.AlignToItemList();
+        }
 
         currentItemButton = null;        
     }

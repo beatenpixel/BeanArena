@@ -39,6 +39,26 @@ MonoBehaviour:
     m_Key: ITEM_DESC_HUMAN
     m_Metadata:
       m_Items: []
+  - m_Id: 91213913616384
+    m_Key: ITEM_CATEGORY_HERO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91213926199296
+    m_Key: ITEM_CATEGORY_HERO_SKIN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91441840484352
+    m_Key: ITEM_CATEGORY_WEAPON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91441844678656
+    m_Key: ITEM_CATEGORY_BOTTOMGADGET
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91441844678657
+    m_Key: ITEM_CATEGORY_UPPERGADGET
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

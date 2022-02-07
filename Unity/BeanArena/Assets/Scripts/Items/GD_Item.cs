@@ -13,6 +13,7 @@ public class GD_Item : GD {
     public int fusePoints;
     public bool isEquiped;
     [NonSerialized] public SO_ItemInfo info;
+    public string itemGUID;
 
     public GD_Item() : base(GDType.ItemData, GDLoadOrder.Default) {
         SetDefaults(default);
@@ -28,6 +29,7 @@ public class GD_Item : GD {
         levelID = info.GetInt32("level");
         fusePoints = info.GetInt32("fusePoints");
         isEquiped = info.GetBoolean("isEquiped");
+        itemGUID = info.GetString("itemGUID");
     }
 
     public override void GetObjectData(SerializationInfo info, StreamingContext context) {
@@ -37,6 +39,7 @@ public class GD_Item : GD {
         info.AddValue("level", levelID);
         info.AddValue("fusePoints", fusePoints);
         info.AddValue("isEquiped", isEquiped);
+        info.AddValue("itemGUID", itemGUID);
     }
 
     [OnDeserializing]
@@ -46,6 +49,7 @@ public class GD_Item : GD {
         levelID = 0;
         fusePoints = 0;
         isEquiped = false;
+        itemGUID = Guid.NewGuid().ToString();
     }
 
 }
@@ -108,4 +112,10 @@ public enum ItemRareness : byte {
 	Rare,
 	Epic,
 	Legendary
+}
+
+public enum ChestRareness : byte {
+    Common,
+    Epic,
+    Legendary
 }

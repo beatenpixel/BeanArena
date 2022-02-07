@@ -8,32 +8,35 @@ public class ObjectListSpawner<T> where T : MonoBehaviour {
 	public List<T> objects { get; private set; }
 
 	private Func<int,T> spawnFunc;
-	private Action<T, int, bool> updateFunc;
-	private Action<T, int> disableFunc;
+	private Action<T, int, bool> enableFunc;
+	private Action<T, int> updateFunc;
 
 	public int activeObjectsCount { get; private set; }
 
-	public ObjectListSpawner(Func<int, T> spawnFunc, Action<T,int,bool> updateFunc, Action<T, int> disableFunc) {
+	public ObjectListSpawner(Func<int, T> spawnFunc, Action<T,int,bool> enableFunc, Action<T, int> updateFunc) {
 		objects = new List<T>();
 		this.spawnFunc = spawnFunc;
+		this.enableFunc = enableFunc;
 		this.updateFunc = updateFunc;
-		this.disableFunc = disableFunc;
 	}
 
 	public void Update(int count) {
+        int prevCount = activeObjectsCount;
+
 		int n = Mathf.Max(objects.Count, count);
         for (int i = 0; i < n; i++) {
 			if(i < count) {
-				if(i >= objects.Count) {
-					T newObj = spawnFunc(i);
-					objects.Add(newObj);
-
-					updateFunc(objects[i], i, true);
-				} else {
-					updateFunc(objects[i], i, false);
+				if(i < objects.Count) {
+                    
+                } else {
+                    T newObj = spawnFunc(i);
+                    objects.Add(newObj);
                 }
+
+                enableFunc(objects[i], i, true);
+                updateFunc(objects[i], i);
             } else {
-				disableFunc(objects[i], i);
+				enableFunc(objects[i], i, false);
             }
         }
 

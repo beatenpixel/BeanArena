@@ -107,14 +107,20 @@ Shader "Demonixis/FastPostProcessing"
 		float fadeP = (_MapBaseLineCameraSpaceY - uv.y) / _MapBaseLineCameraSpaceY;
 		half4 shadowSample = tex2D(_ShadowTex, float2(uv.x - offsetX * fadeP, _MapBaseLineCameraSpaceY - (uv.y - _MapBaseLineCameraSpaceY)*3));
 
+		fixed below = step(_MapBaseLineWorldY, i.vertexWorldPos.y);
+		float shadowSample2 = step(0.5,shadowSample.a);
+		col.rgb *= 1 - (1 - below) * shadowSample2 * clamp(shadowSample * 100,0,1) * 0.3 * (1 - fadeP);
+
+		/*
 		if (i.vertexWorldPos.y < _MapBaseLineWorldY) {		
 
-			if (shadowSample.a > 0.5) {
-				col.rgb *= 1 - clamp(shadowSample * 100,0,1) * 0.3 * (1 - fadeP);
-				//col.r = 1 - fadeP;
-				//col.g = fadeP;
+				if (shadowSample.a > 0.5) {
+					col.rgb *= 1 - clamp(shadowSample * 100,0,1) * 0.3 * (1 - fadeP);
+					//col.r = 1 - fadeP;
+					//col.g = fadeP;
+				}
 			}
-		}
+		*/
 
 		// Grayscale
 		col.rgb = lerp(col.rgb, (col.r + col.g + col.b) * 0.3333, _GrayscaleValue);

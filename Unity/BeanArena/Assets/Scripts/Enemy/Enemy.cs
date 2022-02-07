@@ -21,7 +21,12 @@ public class Enemy {
 
     public void InternalUpdate() {
         if(hero != null) {
-            if(changeDirTimer) {
+            if(!GameMode.current.heroesInputAllowed) {
+                hero.MoveInput(Vector2.zero);
+                return;
+            }
+
+            if (changeDirTimer) {
                 changeDirTimer.AddFromNow(MRandom.Range(0.5f, 3f));
                 RandomizeInput();
             }

@@ -25,7 +25,33 @@ public class HeroEquipment : HeroComponent {
 		};
 	}
 
-	public void PreviewItem(GD_Item item, EquipmentSlot slot) {
+    public void LoadEquipmentFromGameData() {
+        for (int i = 0; i < Game.data.inventory.items.Count; i++) {
+            GD_Item item = Game.data.inventory.items[i];
+
+            if (!item.isEquiped) {
+                continue;
+            }
+
+            List<EquipmentSlot> heroFreeSlots = GetFreeSlots(item);
+            if (heroFreeSlots.Count > 0) {
+                EquipmentSlot equipSlot = heroFreeSlots[0];
+
+                for (int x = 0; x < heroFreeSlots.Count; x++) {                    
+                    PreviewItem(item, equipSlot);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void DestroyEquipment() {
+        for (int i = 0; i < slots.Count; i++) {
+            slots[i].DestroyEquipment();
+        }
+    }
+
+    public void PreviewItem(GD_Item item, EquipmentSlot slot) {
 		Equipment itemPreviewInstance = Game.inst.equipmentFactory.Create(item.info, Vector2.zero);
 		slot.EquipPreviewItem(item, itemPreviewInstance);
     }
@@ -54,6 +80,13 @@ public class HeroEquipment : HeroComponent {
 		} else {
 			limb = hero[LimbType.LArm].First();
 		}
+
+        Equipment equipment =  slots[0].GetCurrentEquipment();
+        if(equipment != null) {
+            equipment.Use(new EquipmentUseArgs() {
+                charge = inp.chargePercent
+            });
+        }
 	}
 }
 
@@ -80,10 +113,17 @@ public class EquipmentSlot {
 		return this;
     }
 
+    public void DestroyEquipment() {
+        if (previewEquipment != null) {
+            previewEquipment.UnattachFromHero();
+            previewEquipment.Push();
+            previewEquipment = null;
+        }
+    }
+
 	public void ClearPreviewItem() {
 		if (previewEquipment != null) {
 			previewEquipment.UnattachFromHero();
-			previewEquipment.Push();
 			previewEquipment = null;
 		}
 		
@@ -96,6 +136,10 @@ public class EquipmentSlot {
 
 		equipmentinstance.AttachToHero(hero, limb);
 	}
+
+    public Equipment GetCurrentEquipment() {
+        return previewEquipment;
+    }
 
 	public bool ItemFits(GD_Item item) {
 		return filter.Check(item);

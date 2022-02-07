@@ -13,7 +13,6 @@ public class Trampoline : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         ProcessCollision(collision);
-        Debug.Log("coll: " + collision.gameObject.name);
     }
 
     private void OnCollisionStay2D(Collision2D collision) {
