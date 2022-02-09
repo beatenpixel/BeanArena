@@ -9,6 +9,7 @@ public class MenuUI : MonoBehaviour {
 	public static MenuUI inst;
 
     public MenuTopPanel topPanel;
+    public ChestPanel chestPanel;
 
 	public InventoryUI inventoryDrawer;
 	public InventoryWorldUI editCharacterWorldUI;
@@ -25,6 +26,7 @@ public class MenuUI : MonoBehaviour {
 
 		inventoryDrawer.Init();
         topPanel.Init();
+        chestPanel.Init();
 
         DrawMMRText();
         topPanel.Draw();
@@ -33,8 +35,8 @@ public class MenuUI : MonoBehaviour {
 	}
 	
 	public void InternalUpdate() {
-		
-	}
+        chestPanel.InternalUpdate();
+    }
 
 	public void EditButton_Click() {
 		GM_Menu.inst.SwitchMenuState(GM_Menu.MenuState.CustomizingCharacter);

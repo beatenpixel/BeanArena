@@ -73,7 +73,8 @@ public enum GDType : byte {
     UIWindowData,
     ItemData,
     Inventory,
-    Player
+    Player,
+    ChestData
 }
 
 [Serializable]

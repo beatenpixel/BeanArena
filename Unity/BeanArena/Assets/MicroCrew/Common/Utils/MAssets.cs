@@ -15,7 +15,8 @@ public class MAssets : SingletonScriptableObject<MAssets> {
     public static Dictionary<string, Color> colors;
     public static Dictionary<TextStylePreset, TextMeshProPreset> textPresets;
 
-    public static SO_AssetDB<SO_ItemInfo, ItemType> itemsInfo; 
+    public static SO_AssetDB<SO_ItemInfo, ItemType> itemsInfo;
+    public static SO_AssetDB<SO_ChestInfo, ChestType> chestsInfo;
 
     public override void Init() {
         m_ui_tex_0 = Resources.LoadAll<Sprite>("Sprites/ui_tex_0");
@@ -36,6 +37,7 @@ public class MAssets : SingletonScriptableObject<MAssets> {
         }
 
         itemsInfo = new SO_AssetDB<SO_ItemInfo, ItemType>("ItemsInfo");
+        chestsInfo = new SO_AssetDB<SO_ChestInfo, ChestType>("ChestInfo");
     }
 
     [System.Serializable]

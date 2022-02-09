@@ -84,3 +84,24 @@ public class GameDataManager : Singleton<GameDataManager> {
     }
 
 }
+
+public static class GameDataExt {
+
+    public static T GetValueSafe<T>(this SerializationInfo info, string name) {
+        Type type = typeof(T);
+
+        object obj = info.GetValue(name, type);
+
+        if (obj == null) {
+            return default(T);
+        } else {
+            return (T)obj;
+        }
+    }
+
+}
+
+public static class ValueTypeHelper {
+    public static bool IsNullable<T>(T t) { return false; }
+    public static bool IsNullable<T>(T? t) where T : struct { return true; }
+}

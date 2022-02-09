@@ -5,6 +5,28 @@ using UnityEngine;
 
 public class MFormat {
 
+    public static string TimeSpan(int h, int m, int s) {
+        string hStr = ToTwoDigits(h);
+        string mStr = ToTwoDigits(m);
+        string sStr = ToTwoDigits(s);
+
+        if (h > 0) {
+            return MLocalization.Get("TIME_HM", LocalizationGroup.Main, hStr, mStr);
+        } else if(m > 0) {
+            return MLocalization.Get("TIME_MS", LocalizationGroup.Main, mStr, sStr);
+        } else {
+            return MLocalization.Get("TIME_S", LocalizationGroup.Main, sStr);
+        }
+    }
+
+    public static string ToTwoDigits(int d) {
+        if(d < 10) {
+            return "0" + d;
+        } else {
+            return d.ToString("");
+        }
+    }
+
     public static string GetCupsStr(int cups, Sign sign) {
         return $"<sprite name=\"cup\">{GetSignStr(sign)}{cups}";
     }

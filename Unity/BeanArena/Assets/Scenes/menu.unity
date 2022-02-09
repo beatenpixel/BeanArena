@@ -216,13 +216,9 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5235363805277835029, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5235363805277859855, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000061035156
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5235363806201991139, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
       propertyPath: m_RootOrder
@@ -436,4 +432,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  heroesInputAllowed: 0
   menuState: 0

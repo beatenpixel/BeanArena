@@ -21,6 +21,7 @@ public class Game : Singleton<Game> {
 	private bool didSetupGame;
 
 	private MLog logger = new MLog("Game");
+    private MAudioSource musicSource;
 
     public override void Init() {
         MSceneManager.OnSceneChangeEnd.Add(-1000, OnSceneLoadEnd);
@@ -51,6 +52,15 @@ public class Game : Singleton<Game> {
 		equipmentFactory.Init();
 		heroFactory.Init();
 
+        this.Wait(() => {
+            if (musicSource == null) {
+                musicSource = MSound.Play("music_0", new SoundConfig() {
+                    loop = true,
+                    threeDimensional = false
+                });
+            }
+        }, 3);
+
 		didSetupGame = true;
 	}
 
@@ -64,7 +74,7 @@ public class Game : Singleton<Game> {
 		gameMode.InitGame(this);
 		gameMode.StartGame();
 
-		FX.inst.EnableDeathScreenEffect(false);
+		FX.inst.EnableDeathScreenEffect(false);        
 	}	
 
 	private void OnSceneLoadEnd(SceneEvent e) {		

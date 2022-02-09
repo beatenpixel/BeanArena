@@ -54,16 +54,6 @@ public class GD_Item : GD {
 
 }
 
-public class Item {
-    public GD_Item data;
-    public SO_ItemInfo info;
-
-    public Item(SO_ItemInfo _reference) {
-        info = _reference;
-        data = new GD_Item();
-    }
-}
-
 public class ItemFilter {
 
     private ItemCategory category;
@@ -112,10 +102,4 @@ public enum ItemRareness : byte {
 	Rare,
 	Epic,
 	Legendary
-}
-
-public enum ChestRareness : byte {
-    Common,
-    Epic,
-    Legendary
 }

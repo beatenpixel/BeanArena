@@ -9,6 +9,7 @@ using UnityEngine;
 public class GD_Inventory : GD {
 
     public List<GD_Item> items;
+    public List<GD_Chest> chests;
 
     public GD_Inventory() : base(GDType.Inventory, GDLoadOrder.Default) {
         SetDefaults(default);
@@ -17,17 +18,22 @@ public class GD_Inventory : GD {
     public void Restore() {
         for (int i = 0; i < items.Count; i++) {
             items[i].info = MAssets.itemsInfo.GetAsset(items[i].itemType);
-            Debug.Log(items[i].info.category);
+        }
+
+        for (int i = 0; i < chests.Count; i++) {
+            chests[i].info = MAssets.chestsInfo.GetAsset(chests[i].type);
         }
     }
 
     public GD_Inventory(SerializationInfo info, StreamingContext sc) : base(info, sc) {
         items = (List<GD_Item>)info.GetValue("items", typeof(List<GD_Item>));
+        chests = info.GetValueSafe<List<GD_Chest>>("chests");
     }
 
     public override void GetObjectData(SerializationInfo info, StreamingContext context) {
         base.GetObjectData(info, context);
         info.AddValue("items", items);
+        info.AddValue("chests", chests);
     }
 
     [OnDeserializing]
@@ -56,6 +62,12 @@ public class GD_Inventory : GD {
             fusePoints = 0,
             levelID = 0,
             rareness = ItemRareness.Common
+        });
+
+        chests = new List<GD_Chest>();
+        chests.Add(new GD_Chest());
+        chests.Add(new GD_Chest() {
+            type = ChestType.Legendary
         });
     }
 

@@ -69,6 +69,17 @@ public class IconDrawer : MonoBehaviour {
         DrawLevel(MFormat.GetLVLString(itemData.levelID, itemInfo.maxLevel));
     }
 
+    public void DrawChest(GD_Chest chestData, SO_ChestInfo chestInfo) {
+
+        rarenessImage.color = Color.white.SetA(0f);
+
+        SetIcon(chestInfo.icon);
+        DrawIcon();
+
+        DrawBar(null);
+        DrawLevel("");
+    }
+
 #if UNITY_EDITOR
     private void Update() {
         if(!Application.isPlaying) {
