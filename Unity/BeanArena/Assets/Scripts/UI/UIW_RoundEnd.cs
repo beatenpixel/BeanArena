@@ -16,7 +16,7 @@ public class UIW_RoundEnd : UIWindow {
 
     private UIWData_RoundEnd data;
 
-    public override void OnInit() {
+    public override void OnInitBeforeOpen() {
         data = (UIWData_RoundEnd)genericWindowData;        
 
         if (data.win) {

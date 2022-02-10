@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2793393746697595622}
   - component: {fileID: 1478013083768556725}
-  m_Layer: 6
+  m_Layer: 17
   m_Name: LArm_Rend
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 6186975833157792499}
   - component: {fileID: 6186975833157792498}
   - component: {fileID: 473871930}
-  m_Layer: 6
+  m_Layer: 17
   m_Name: RArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6186975833600708507}
   - component: {fileID: 113707857}
-  m_Layer: 6
+  m_Layer: 17
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 6186975834321502701}
   - component: {fileID: 2582720005879347001}
   - component: {fileID: 7610001874787510047}
-  m_Layer: 6
+  m_Layer: 17
   m_Name: HeroFighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6186975834423308997}
   - component: {fileID: 6186975834423308996}
-  m_Layer: 6
+  m_Layer: 17
   m_Name: capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,7 +382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6186975834542924119}
   - component: {fileID: 6186975834542924118}
-  m_Layer: 6
+  m_Layer: 17
   m_Name: capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +466,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6186975834600973597}
   - component: {fileID: 6186975834600973596}
-  m_Layer: 6
+  m_Layer: 17
   m_Name: emote_0_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -549,7 +549,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6186975834729439896}
-  m_Layer: 6
+  m_Layer: 17
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -584,7 +584,7 @@ GameObject:
   - component: {fileID: 6186975834769051761}
   - component: {fileID: 2082510011}
   - component: {fileID: 519264284961741208}
-  m_Layer: 6
+  m_Layer: 17
   m_Name: Body_Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -683,7 +683,7 @@ GameObject:
   - component: {fileID: 6186975834962897324}
   - component: {fileID: 6186975834962897314}
   - component: {fileID: 1905716586}
-  m_Layer: 6
+  m_Layer: 17
   m_Name: LArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -802,7 +802,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6186975835021420595}
   - component: {fileID: 6186975835021420594}
-  m_Layer: 6
+  m_Layer: 17
   m_Name: capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -886,7 +886,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4385982326928216924}
   - component: {fileID: 6575555475605969700}
-  m_Layer: 6
+  m_Layer: 17
   m_Name: Body_Rend
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -936,7 +936,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7660119133513143358}
   - component: {fileID: 6817978492918955729}
-  m_Layer: 6
+  m_Layer: 17
   m_Name: RArm_Rend
   m_TagString: Untagged
   m_Icon: {fileID: 0}

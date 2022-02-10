@@ -103,6 +103,48 @@ public class BinaryStateSwitcher {
 
 }
 
+public class RefreshableObjectsList<T> where T : MonoBehaviour {
+
+    private Func<int, T> spawnNew;
+    private Action<int, T> refresh;
+    private Action<int, T, bool> enable;
+
+    private List<T> objects;
+
+    public RefreshableObjectsList(Func<int, T> _spawnNew, Action<int, T, bool> _enable, Action<int, T> _refresh) {
+        spawnNew = _spawnNew;
+        refresh = _refresh;
+        enable = _enable;
+
+        objects = new List<T>();
+    }
+
+    public void Refresh(int targetObjectsCount) {
+        for (int i = 0; i < Mathf.Max(targetObjectsCount, objects.Count); i++) {
+            if (i < targetObjectsCount) {
+                T targetObject;
+
+                if (i >= objects.Count) {
+                    targetObject = spawnNew(i);
+                    objects.Add(targetObject);
+                } else {
+                    targetObject = objects[i];
+                }
+
+                enable(i, targetObject, true);
+                refresh(i, targetObject);
+            } else {
+                enable(i, objects[i], false);
+            }
+        }
+    }
+
+    public T GetObject(int ind) {
+        return objects[ind];
+    }
+
+}
+
 public class ChangeCheck<T> where T : IEquatable<T> {
 
 	public T value { get; private set; }

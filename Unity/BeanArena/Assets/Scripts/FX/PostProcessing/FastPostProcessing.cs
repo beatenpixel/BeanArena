@@ -16,6 +16,9 @@ public sealed class FastPostProcessing : MonoBehaviour {
     private bool m_UserLutEnabled = true;
     private Camera cam;
 
+    [Header("MyStuff")]
+    public Camera shadowCam;
+
     [Header("Material")]
     [SerializeField]
     private Shader m_Shader = null;
@@ -169,7 +172,10 @@ public sealed class FastPostProcessing : MonoBehaviour {
         if (m_PostProcessMaterial == null)
             m_PostProcessMaterial = new Material(m_Shader);
 
-        m_PostProcessMaterial.SetTexture("_ShadowTex", shadowTexture);
+        shadowTexture = new RenderTexture(Screen.width / 4, Screen.height / 4, 0, RenderTextureFormat.ARGB32, 0);
+        shadowCam.targetTexture = shadowTexture;
+
+        m_PostProcessMaterial.SetTexture("_ShadowTex", shadowTexture);                
 
         m_UserLutEnabled = m_UserLutTexture != null;
 
@@ -184,6 +190,10 @@ public sealed class FastPostProcessing : MonoBehaviour {
         //SetDefine("VIGNETTE", m_Vignette);
 
         UpdateTonemapperDefines();
+    }
+
+    private void OnDestroy() {
+        shadowTexture.Release();
     }
 
     private void UpdateTonemapperDefines() {

@@ -7,6 +7,8 @@ public class GM_Menu : GameMode {
 
 	public static GM_Menu inst;
 
+    public ChestOpener chestOpener;
+
 	public MenuState menuState;
 
 	private Map_Menu map;
@@ -16,6 +18,8 @@ public class GM_Menu : GameMode {
 		inst = this;
 
 		map = (Map_Menu)genericMap;
+
+        chestOpener.Init();
     }
 
     public override bool StartGame() {
@@ -30,6 +34,10 @@ public class GM_Menu : GameMode {
 
     public override void InternalUpdate() {
         base.InternalUpdate();
+
+        if(Input.GetKeyDown(KeyCode.Keypad1)) {
+            chestOpener.ShowChestScreen(ChestType.Common);
+        }
 	}
 
     public void GoToFight() {

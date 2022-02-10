@@ -199,6 +199,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: filler_bg
+      rect:
+        serializedVersion: 2
+        x: 1624
+        y: 1732
+        width: 308
+        height: 308
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3994fad50bd584543905a6fff4d203fe
+      internalID: 212379815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -211,6 +232,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       bg_0_2: -2031864737441705993
+      filler_bg: 212379815
       bg_0_1: 932110826067113497
       bg_0_3: -5485100389190070991
       bg_0_0: -372114562080597852

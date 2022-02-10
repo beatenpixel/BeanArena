@@ -13,8 +13,8 @@ public class UISimpleButton : UIButtonBase {
     public UnityEvent ClickUnityEvent;
 
     public Action OnClickEvent;
-    public Action<int> OnClickEventInt;
-    private int onClickEventIntArg;
+    public Action<object> OnClickEventWithArg;
+    private object onClickEventArg;
     public AnimatedButtonConfig config;
 
     public override Type GetPoolObjectType() {
@@ -35,9 +35,9 @@ public class UISimpleButton : UIButtonBase {
         OnClickEvent = action;
     }
 
-    public void SetOnClick(int arg, Action<int> action) {
-        onClickEventIntArg = arg;
-        OnClickEventInt = action;
+    public void SetOnClick(object arg, Action<object> action) {
+        onClickEventArg = arg;
+        OnClickEventWithArg = action;
     }
 
     protected override void OnBecomePressed(PointerEventData eventData) {
@@ -62,7 +62,7 @@ public class UISimpleButton : UIButtonBase {
         base.OnClick(eventData);
 
         OnClickEvent?.Invoke();
-        OnClickEventInt?.Invoke(onClickEventIntArg);
+        OnClickEventWithArg?.Invoke(onClickEventArg);
 
         MSound.Play("click", SoundConfig.randVolumePitch01);
     }
@@ -106,7 +106,7 @@ public class UIGraphicsElement {
 [System.Serializable]
 public class UIButtonConfig {
     public bool doTint = true;
-    public Color tintOnPress = new Color(1,1,1,1);
+    public Color tintOnPress = new Color(1, 1, 1, 1);
 }
 
 [System.Serializable]
@@ -115,61 +115,4 @@ public class AnimatedButtonConfig : UIButtonConfig {
     public float pressScale = 0.87f;
     public float pressDuration = 0.2f;
     public Ease pressEase = Ease.OutBounce;
-}
-
-public interface IUIInteractableElement : IPointerDownHandler, IPointerUpHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler {
-
-}
-
-public abstract class UIInteractableElement : UIElement, IUIInteractableElement {
-
-    protected bool isHovered;
-    protected bool isPressed;
-
-    public virtual void OnPointerClick(PointerEventData eventData) {
-        isHovered = false;
-        isPressed = false;
-    }
-
-    public virtual void OnPointerDown(PointerEventData eventData) {
-        isHovered = true;
-        isPressed = true;
-    }
-
-    public virtual void OnPointerEnter(PointerEventData eventData) {
-        isHovered = true;
-    }
-
-    public virtual void OnPointerExit(PointerEventData eventData) {
-        isHovered = false;
-    }
-
-    public virtual void OnPointerUp(PointerEventData eventData) {
-        isHovered = false;
-        isPressed = false;
-    }
-
-}
-
-public abstract class UIElement : PoolObject {
-
-    public abstract UIElementType GetElementType();
-
-    public RectTransform rectT;
-    [HideInInspector] public bool elementEnabled;
-
-    protected override void Awake() {
-        base.Awake();
-
-        if (go == null) {
-            go = gameObject;
-        }
-        elementEnabled = go.activeSelf;
-    }
-
-    public virtual void Enable(bool enable) {
-        elementEnabled = enable;
-        go.SetActive(enable);
-    }
-
 }

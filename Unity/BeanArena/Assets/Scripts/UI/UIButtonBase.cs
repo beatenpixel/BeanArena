@@ -67,6 +67,11 @@ public abstract class UIButtonBase : UIInteractableElement {
         buttonIcon.sprite = sprite;
         buttonIcon.color = color;
         startColors[buttonIcon] = color;
+        EnableIcon(true);
+    }
+
+    public void EnableIcon(bool enable) {
+        buttonIcon.gameObject.SetActive(enable);
     }
 
     public void SetText(string text) {

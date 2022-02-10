@@ -131,14 +131,14 @@ public class UIWindowLayer {
     }
 
     private void OpenIGN(UIW_Data ignData) {
-        Debug.Log(ignData.GetType());
         currentExecutingWindow = ignData;
         currentExecutingWindow.executeWindow.Init(ignData, sessionInfo);
         currentExecutingWindow.BeforeOpenWindow();
         currentExecutingWindow.executeWindow.Open(true);
 
         //PlayerInput.SetInputAllowed(PlayerInputAllowFlag.IN_GAME_NOTIFIACTION, false);
-        layerHolder.EnableBackgroundImage(true);
+
+        layerHolder.EnableBackgroundImage(true, ignData.fadeBlackBackground);
     }
 
     private void TryOpenNextIGN() {
@@ -146,7 +146,7 @@ public class UIWindowLayer {
             OpenIGN(queuedWindows[0]);
         } else {
             //PlayerInput.SetInputAllowed(PlayerInputAllowFlag.IN_GAME_NOTIFIACTION, true);
-            layerHolder.EnableBackgroundImage(false);
+            layerHolder.EnableBackgroundImage(false, true);
         }
     }
 
@@ -207,6 +207,7 @@ public class UIW_SessionInfo {
 public abstract class UIW_Data : GD {
 
     [NonSerialized] public UIWindow executeWindow;
+    public bool fadeBlackBackground = true;
 
     public virtual void BeforeOpenWindow() {
 

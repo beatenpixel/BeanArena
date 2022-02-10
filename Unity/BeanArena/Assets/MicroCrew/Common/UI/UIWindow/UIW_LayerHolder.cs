@@ -18,12 +18,15 @@ public class UIW_LayerHolder : MonoBehaviour {
         backgroundImageStartColor = backgroundImage.color;
     }
 
-    public void EnableBackgroundImage(bool enable) {
-        backgroundImage.enabled = true;
+    public void EnableBackgroundImage(bool enable, bool fadeColor) {
+        backgroundImage.enabled = enable;
         backgroundImage.DOKill(false);
-        backgroundImage.DOColor(enable ? backgroundImageStartColor : backgroundImageStartColor.SetA(0f), 0.3f).SetUpdate(true).OnComplete(() => {
-            backgroundImage.enabled = backgroundImage.color.a > 0.05f;
-        });
+
+        if(fadeColor) {
+            backgroundImage.DOColor(enable ? backgroundImageStartColor : backgroundImageStartColor.SetA(0f), 0.3f).SetUpdate(true);
+        } else {
+            backgroundImage.color = backgroundImageStartColor.SetA(0f);
+        }
     }
 
 }

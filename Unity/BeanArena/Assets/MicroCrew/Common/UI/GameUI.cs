@@ -26,7 +26,7 @@ public class GameUI : MonoBehaviour {
 
         for (int i = 0; i < abilityButtons.Length; i++) {
             abilityButtons[i].SetOnClick(i, (x) => playerInput.TriggerOnButtonInput(new ButtonInputEventData() {
-                buttonID = x
+                buttonID = (int)x
             }));
         }
 

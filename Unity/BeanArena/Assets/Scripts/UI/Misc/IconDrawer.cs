@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [ExecuteInEditMode]
-public class IconDrawer : MonoBehaviour {
+public class IconDrawer : PoolObject {
 
 	public RectTransform rectT;
 	public Image image;
@@ -78,6 +78,10 @@ public class IconDrawer : MonoBehaviour {
 
         DrawBar(null);
         DrawLevel("");
+    }
+
+    public override Type GetPoolObjectType() {
+        return typeof(IconDrawer);
     }
 
 #if UNITY_EDITOR

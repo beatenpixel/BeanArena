@@ -30,7 +30,7 @@ public abstract class UIWindow : PoolObject, IUIWindow {
 
         cachedWindowOpener.Init(this, windowSessionInfo);
 
-        OnInit();
+        OnInitBeforeOpen();
     }
 
     public void Open(bool open) {
@@ -38,7 +38,7 @@ public abstract class UIWindow : PoolObject, IUIWindow {
         cachedWindowOpener.Open(open);
     }
 
-    public abstract void OnInit();
+    public abstract void OnInitBeforeOpen();
     public abstract void InternalUpdate();
     public abstract void OnStartOpening();
     public abstract void OnOpened();

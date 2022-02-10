@@ -2284,7 +2284,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294966473
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8600000, guid: 371637e0d631333458e47af69622dbdd, type: 2}
+  m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -6599,6 +6599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93add118328f6f446a70ab4f55ca1a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shadowCam: {fileID: 789588633}
   m_Shader: {fileID: 4800000, guid: 51a50fde2faeacb45a7436045b649734, type: 3}
   m_Sharpen: 0
   m_SharpenIntensity: 4
@@ -6614,7 +6615,7 @@ MonoBehaviour:
   m_Dithering: 1
   m_GammaCorrectionEnabled: 0
   m_Vignette: 1
-  shadowTexture: {fileID: 8600000, guid: 371637e0d631333458e47af69622dbdd, type: 2}
+  shadowTexture: {fileID: 0}
   grayscaleValue: 0
 --- !u!114 &1779316971
 MonoBehaviour:
