@@ -10,9 +10,10 @@ public class MenuUI : MonoBehaviour {
 
     public MenuTopPanel topPanel;
     public ChestPanel chestPanel;
+    public ChestOpener chestOpener;
 
 	public InventoryUI inventoryDrawer;
-	public InventoryWorldUI editCharacterWorldUI;
+	public InventoryWorldUI editCharacterWorldUI;    
 
 	public UIGroupAppear idleGroup;
 	public UIGroupAppear editGroup;
@@ -26,7 +27,8 @@ public class MenuUI : MonoBehaviour {
 
 		inventoryDrawer.Init();
         topPanel.Init();
-        chestPanel.Init();
+        chestOpener.Init();
+        chestPanel.Init();        
 
         DrawMMRText();
         topPanel.Draw();

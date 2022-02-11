@@ -16,8 +16,8 @@ public abstract class ItemInfoDrawerBase : MonoBehaviour {
         panelRootGO.SetActive(show);
     }
 
-    public virtual void DrawInfo(SO_ItemInfo itemInfo, GD_Item item) {
-        itemInfoPanel.DrawInfo(itemInfo, item);
+    public virtual void DrawInfo(object item) {
+        itemInfoPanel.DrawInfo((GD_Item)item);
     }
 
 }

@@ -43,5 +43,6 @@ MonoBehaviour:
       floatValue: 0
       manual: 0
     roundAccuracy: 25
-    soItemInfo: {fileID: 11400000}
+    maxLevel: 5
+    statContainer: {fileID: 11400000}
     isFoldoutInInspector: 1

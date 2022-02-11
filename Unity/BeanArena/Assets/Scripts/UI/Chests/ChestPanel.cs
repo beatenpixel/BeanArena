@@ -67,7 +67,7 @@ public class ChestPanel : MonoBehaviour {
     }
 
     private void ForceOpenSlot(ChestSlotUI slot) {
-        GM_Menu.inst.chestOpener.ShowChestScreen(slot.chest);
+        MenuUI.inst.chestOpener.ShowChestScreen(slot.chest);
         Game.data.inventory.chests.Remove(slot.chest);
         Draw();
 

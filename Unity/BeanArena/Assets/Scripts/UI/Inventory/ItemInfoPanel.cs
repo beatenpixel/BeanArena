@@ -14,7 +14,9 @@ public class ItemInfoPanel : MonoBehaviour {
         
     }
 
-    public void DrawInfo(SO_ItemInfo itemInfo, GD_Item item) {
+    public void DrawInfo(GD_Item item) {
+        SO_ItemInfo itemInfo = item.info;
+
         isevIconDrawer.DrawItem(item, itemInfo);
         itemNameText.text = MLocalization.Get(itemInfo.itemName_LKey);
 

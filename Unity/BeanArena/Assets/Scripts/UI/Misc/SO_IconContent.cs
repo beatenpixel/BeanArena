@@ -11,4 +11,5 @@ public class SO_IconContent : ScriptableObject {
     public Vector2 anchorMax = new Vector2(0.9f, 0.9f);
     public Vector2 offsetMin;
     public Vector2 offsetMax;
+    public Vector2 pivot = new Vector2(0.5f, 0.5f);
 }

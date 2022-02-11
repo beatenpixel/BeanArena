@@ -7,8 +7,6 @@ public class GM_Menu : GameMode {
 
 	public static GM_Menu inst;
 
-    public ChestOpener chestOpener;
-
 	public MenuState menuState;
 
 	private Map_Menu map;
@@ -18,8 +16,6 @@ public class GM_Menu : GameMode {
 		inst = this;
 
 		map = (Map_Menu)genericMap;
-
-        chestOpener.Init();
     }
 
     public override bool StartGame() {

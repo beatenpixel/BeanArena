@@ -59,6 +59,38 @@ MonoBehaviour:
     m_Key: ITEM_CATEGORY_UPPERGADGET
     m_Metadata:
       m_Items: []
+  - m_Id: 1905797435715584
+    m_Key: BEAN_NAME_DEFAULTBEAN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1905797465075712
+    m_Key: BEAN_DESCR_DEFAULTBEAN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1905797465075713
+    m_Key: BEAN_NAME_SHARK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1905797465075714
+    m_Key: BEAN_DESCR_SHARK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1905797465075715
+    m_Key: BEAN_NAME_SKELETON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1905797465075716
+    m_Key: BEAN_DESCR_SKELETON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1905797465075717
+    m_Key: BEAN_NAME_CLOWN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1905797465075718
+    m_Key: BEAN_DESCR_CLOWN
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -62,6 +62,38 @@ MonoBehaviour:
     m_Localized: Top Gadget
     m_Metadata:
       m_Items: []
+  - m_Id: 1905797435715584
+    m_Localized: Bean-Man
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1905797465075712
+    m_Localized: I'm just a regular bean (or not?)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1905797465075713
+    m_Localized: Shbark
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1905797465075714
+    m_Localized: Earlier she swam in a soup
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1905797465075715
+    m_Localized: Skelebean
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1905797465075716
+    m_Localized: Do beans have bones?!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1905797465075717
+    m_Localized: Blown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1905797465075718
+    m_Localized: did you get it? Clown but B first
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

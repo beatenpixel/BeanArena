@@ -206,6 +206,10 @@ MonoBehaviour:
     m_Localized: '{0}h {1}m {2}s'
     m_Metadata:
       m_Items: []
+  - m_Id: 1908288227340288
+    m_Localized: BEAN!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

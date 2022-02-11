@@ -28,6 +28,7 @@ public class IconDrawer : PoolObject {
             rectT.anchorMax = config.anchorMax;
             rectT.offsetMin = config.offsetMin;
             rectT.offsetMax = -config.offsetMax;
+            rectT.pivot = config.pivot;
 
             image.sprite = config.sprite;
             image.color = config.color;
@@ -69,8 +70,17 @@ public class IconDrawer : PoolObject {
         DrawLevel(MFormat.GetLVLString(itemData.levelID, itemInfo.maxLevel));
     }
 
-    public void DrawChest(GD_Chest chestData, SO_ChestInfo chestInfo) {
+    public void DrawHero(GD_HeroItem item) {
+        rarenessImage.color = MAssets.colors[("rareness_" + item.info.heroRareness.ToString()).ToLower()].SetA(0.5f);
 
+        SetIcon(item.info.icon);
+        DrawIcon();
+
+        DrawBar(null);
+        DrawLevel(MFormat.GetLVLString(item.levelID, item.info.maxLevel));
+    }
+
+    public void DrawChest(GD_Chest chestData, SO_ChestInfo chestInfo) {
         rarenessImage.color = Color.white.SetA(0f);
 
         SetIcon(chestInfo.icon);

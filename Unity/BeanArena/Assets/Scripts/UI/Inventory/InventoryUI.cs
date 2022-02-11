@@ -85,6 +85,7 @@ public class InventoryUI : MonoBehaviour {
 
                 if (i == currentGroupID) {
                     groupDrawers[i].Show(true);
+                    groupDrawers[currentGroupID].ShowInfoPanel(true);
                 } else {
                     groupDrawers[i].Show(false);
                 }
@@ -92,6 +93,7 @@ public class InventoryUI : MonoBehaviour {
                 if (i == currentGroupID) {
                     groupDrawers[i].Draw();
                     groupDrawers[i].Show(true);
+                    groupDrawers[currentGroupID].ShowInfoPanel(true);
                 } else {
                     groupDrawers[i].Show(false);
                 }
@@ -99,7 +101,11 @@ public class InventoryUI : MonoBehaviour {
         }
 	}
 
-	public void OnItemButtonEvent(UIEventType e, ItemButton button, object arg) {
+    public void OnHeroItemButtonEvent(UIEventType e, HeroItemButton button, object arg) {
+
+    }
+
+    public void OnItemButtonEvent(UIEventType e, ItemButton button, object arg) {
 		switch (e) {
 			case UIEventType.DragEnd:
 
@@ -210,6 +216,10 @@ public class InventoryUI : MonoBehaviour {
     }
 
     private void SwitchTab(int tabID) {
+        if (currentGroupID != -1) {
+            groupDrawers[currentGroupID].ShowInfoPanel(false);
+        }
+
         currentGroupID = tabID;
         Draw(false);
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 [ExecuteInEditMode]
 [CreateAssetMenu(menuName = "BeanArena/ItemInfo")]
-public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType> {
+public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType>, IStatContainer {
 
     public ItemType itemType;
     public ItemCategory category;
@@ -16,17 +16,19 @@ public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType> {
     
     public int maxLevel = 5;
 
-    public List<ItemStatProgression> stats;
+    public List<ItemStatProgression> stats = new List<ItemStatProgression>();
 
     public ItemType GetKey() {
         return itemType;
     }
 
+    public int statsMaxLevel => maxLevel;
+
     private void OnEnable() {        
         for (int i = 0; i < stats.Count; i++) {
-            stats[i].soItemInfo = this;
+            stats[i].maxLevel = maxLevel;
 
-            if(stats[i].values == null) {
+            if (stats[i].values == null) {
                 stats[i].values = new StatValue[maxLevel];
                 for (int x = 0; x < stats[i].values.Length; x++) {
                     stats[i].values[x] = new StatValue();
@@ -43,6 +45,12 @@ public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType> {
                     Array.Copy(prevArray, stats[i].values, prevArray.Length);
                 }
             }            
+        }
+    }
+
+    private void OnValidate() {
+        for (int i = 0; i < stats.Count; i++) {
+            stats[i].maxLevel = maxLevel;
         }
     }
 
@@ -94,6 +102,10 @@ public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType> {
     }
 }
 
+public interface IStatContainer {
+    int statsMaxLevel { get; }
+}
+
 [System.Serializable]
 public class GenericItemState<T> {
     public StatType statType;
@@ -114,7 +126,7 @@ public class ItemStatProgression {
 
     public float roundAccuracy = 5;
 
-    public SO_ItemInfo soItemInfo;
+    public int maxLevel;
     [HideInInspector] public bool isFoldoutInInspector;
 
     public object GetValue(int lvl) {

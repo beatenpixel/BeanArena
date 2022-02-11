@@ -203,6 +203,10 @@ MonoBehaviour:
     m_Key: CHEST_LEGENDARY
     m_Metadata:
       m_Items: []
+  - m_Id: 1908288227340288
+    m_Key: GAME_NAME
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
