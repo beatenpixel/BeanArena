@@ -71,14 +71,14 @@ MonoBehaviour:
   m_text: "\u043D\u0438\u043A\u0442\u043E"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9aa6326b69cf6fb43b5ac6d834b4f3d3, type: 2}
-  m_sharedMaterial: {fileID: 5355257908315070428, guid: 9aa6326b69cf6fb43b5ac6d834b4f3d3, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 47e793def0c741e409527bb3a28f2b1c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279900698
-  m_fontColor: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37
+  m_fontSize: 33.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

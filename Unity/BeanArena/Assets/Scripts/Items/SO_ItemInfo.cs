@@ -50,6 +50,29 @@ public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType> {
         return stats.Find(x => x.statType == statType);
     }
 
+    public Vector2Int GetFusePointsBounds(int itemLevel) {
+        ItemStatProgression fuseStat = GetStat(StatType.FusePoints);
+
+        if (fuseStat == null) {
+            return new Vector2Int(-1, -1);
+        }
+
+        if(itemLevel > fuseStat.values.Length) {
+            Debug.LogError("Level is too big!!!");
+            return new Vector2Int(-1, -1);
+        }
+
+        StatValue start = fuseStat.values[itemLevel];
+        StatValue end;
+
+        if(itemLevel == maxLevel - 1) {
+            return new Vector2Int(start.intValue, start.intValue);
+        } else {
+            end = fuseStat.values[itemLevel + 1];
+            return new Vector2Int(start.intValue, end.intValue);
+        }        
+    }
+
     public bool GetFusePointsPercent(int fusePoints, int level, out float fuseP) {
         ItemStatProgression fuseStat = GetStat(StatType.FusePoints);
 

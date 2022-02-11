@@ -163,6 +163,46 @@ MonoBehaviour:
     m_Key: LOSE
     m_Metadata:
       m_Items: []
+  - m_Id: 1780215154700288
+    m_Key: TIME_HMS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1707340905279488
+    m_Key: TIME_HM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1707340947222528
+    m_Key: TIME_MS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1707340947222529
+    m_Key: TIME_S
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1743367569108992
+    m_Key: OPEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1775247504928768
+    m_Key: CHEST_OPEN_NOW
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1777422725509120
+    m_Key: ANOTHER_CHEST_IS_OPENING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1777422729703424
+    m_Key: CHEST_COMMON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1777422729703425
+    m_Key: CHET_EPIC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1777422729703426
+    m_Key: CHEST_LEGENDARY
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

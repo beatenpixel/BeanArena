@@ -8192,7 +8192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slots:
-  - {fileID: 1094036346077364178}
+  - {fileID: 0}
   - {fileID: 400648555}
   - {fileID: 587005816}
   - {fileID: 1074362070}
@@ -8239,17 +8239,6 @@ CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 4440953019259945376, guid: 5aef8042e72b9384ca40d535c56b59d1, type: 3}
   m_PrefabInstance: {fileID: 4391063837653480863}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1094036346077364178 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3737702955963943501, guid: 5aef8042e72b9384ca40d535c56b59d1, type: 3}
-  m_PrefabInstance: {fileID: 4391063837653480863}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce91ef6736cb6aa4a94f43fbbfb584a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &7284685960186033019 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6478522636070536932, guid: 5aef8042e72b9384ca40d535c56b59d1, type: 3}

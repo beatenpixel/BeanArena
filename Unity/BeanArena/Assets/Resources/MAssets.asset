@@ -51,6 +51,14 @@ MonoBehaviour:
     t: {r: 0.8392157, g: 0.27058825, b: 1, a: 1}
   - name: rareness_legendary
     t: {r: 1, g: 0.75686276, b: 0.22352941, a: 1}
+  - name: BUTTON_GREEN
+    t: {r: 0.7137255, g: 0.9607844, b: 0.2627451, a: 1}
+  - name: BUTTON_RED
+    t: {r: 0.8588236, g: 0.2392157, b: 0.2392157, a: 1}
+  - name: BUTTON_GRAY
+    t: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
+  - name: BUTTON_GOLD
+    t: {r: 1, g: 0.75686276, b: 0.22352941, a: 1}
   m_TextPresets:
   - preset: 0
     fontAsset: {fileID: 11400000, guid: b3e1909bfa2fc3640b6280041d40f338, type: 2}

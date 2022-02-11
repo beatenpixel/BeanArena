@@ -15,5 +15,7 @@ MonoBehaviour:
   chestType: 0
   chestName_LKey: CHEST_NAME_COMMON
   chestDescr_LKey: CHEST_DESCR_COMMON
+  openDurationInSec: 30
+  gemSkipPrice: {x: 1, y: 5}
   icon: {fileID: 11400000, guid: a0472dd767ad8e74e920cdd536d3d96e, type: 2}
   prefab: {fileID: 0}

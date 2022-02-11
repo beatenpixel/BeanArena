@@ -67,6 +67,9 @@ public class GD_Inventory : GD {
         chests = new List<GD_Chest>();
         chests.Add(new GD_Chest());
         chests.Add(new GD_Chest() {
+            type = ChestType.Epic
+        });
+        chests.Add(new GD_Chest() {
             type = ChestType.Legendary
         });
     }

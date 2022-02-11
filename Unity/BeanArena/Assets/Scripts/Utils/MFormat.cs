@@ -5,13 +5,44 @@ using UnityEngine;
 
 public class MFormat {
 
+    public static string GetTMProIcon(TMProIcon icon) {
+        string statIconStr = "<sprite name=\"";
+
+        switch (icon) {
+            case TMProIcon.Coin:
+                statIconStr += "coin\"> ";
+            break;
+            case TMProIcon.Damage:
+                statIconStr += "damage\"> ";
+                break;
+            case TMProIcon.Heart:
+                statIconStr += "heart\"> ";
+                break;
+            case TMProIcon.Time:
+                statIconStr += "time\"> ";
+                break;
+            case TMProIcon.Jump:
+                statIconStr += "jump\"> ";
+                break;
+            case TMProIcon.Fuse:
+                statIconStr += "coin\"> ";
+                break;
+            case TMProIcon.Gem:
+                statIconStr += "gem\"> ";
+                break;
+        }
+
+        return statIconStr;
+    }
+
     public static string TimeSpan(int h, int m, int s) {
         string hStr = ToTwoDigits(h);
         string mStr = ToTwoDigits(m);
         string sStr = ToTwoDigits(s);
 
         if (h > 0) {
-            return MLocalization.Get("TIME_HM", LocalizationGroup.Main, hStr, mStr);
+            return MLocalization.Get("TIME_HMS", LocalizationGroup.Main, hStr, mStr, sStr);
+            //return MLocalization.Get("TIME_HM", LocalizationGroup.Main, hStr, mStr);
         } else if(m > 0) {
             return MLocalization.Get("TIME_MS", LocalizationGroup.Main, mStr, sStr);
         } else {
@@ -62,4 +93,16 @@ public class MFormat {
         Plus = 1
     }
 	
+}
+
+public enum TMProIcon {
+    None,
+    Coin,
+    Time,
+    Cup,
+    Fuse,
+    Damage,
+    Heart,
+    Jump,
+    Gem
 }

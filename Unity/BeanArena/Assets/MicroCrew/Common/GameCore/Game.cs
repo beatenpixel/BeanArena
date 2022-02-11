@@ -42,6 +42,7 @@ public class Game : Singleton<Game> {
 		data = GameDataManager.inst.Load();
 
 		Economy.InitIfNeeded(null);
+        GameRandom.Init();
 
 		MGameLoop.Update.Register(InternalUpdate);
 		MGameLoop.FixedUpdate.Register(InternalFixedUpdate);

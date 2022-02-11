@@ -15,5 +15,7 @@ MonoBehaviour:
   chestType: 1
   chestName_LKey: CHEST_NAME_EPIC
   chestDescr_LKey: CHEST_DESCR_EPIC
+  openDurationInSec: 900
+  gemSkipPrice: {x: 5, y: 15}
   icon: {fileID: 11400000, guid: f9cea4910f05f514aa48dc24fae3ec49, type: 2}
   prefab: {fileID: 0}

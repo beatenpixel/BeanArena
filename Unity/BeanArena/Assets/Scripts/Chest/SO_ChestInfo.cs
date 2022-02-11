@@ -9,6 +9,8 @@ public class SO_ChestInfo : ScriptableObject, ITypeKey<ChestType> {
     public ChestType chestType;
     public string chestName_LKey;
     public string chestDescr_LKey;
+    public int openDurationInSec;
+    public Vector2Int gemSkipPrice;
     public SO_IconContent icon;
     public GameObject prefab;
 

@@ -638,7 +638,7 @@ TextureImporter:
         width: 296
         height: 238
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -659,7 +659,7 @@ TextureImporter:
         width: 116
         height: 37
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -680,7 +680,7 @@ TextureImporter:
         width: 362
         height: 323
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -701,7 +701,7 @@ TextureImporter:
         width: 284
         height: 84
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -709,6 +709,69 @@ TextureImporter:
       bones: []
       spriteID: aa93f52b9cc1159c0800000000000000
       internalID: -3940336546365883990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chest_common
+      rect:
+        serializedVersion: 2
+        x: 1093
+        y: 1852
+        width: 188
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2bcafe5a68d10c4080252e451955e62
+      internalID: 538634505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chest_epic
+      rect:
+        serializedVersion: 2
+        x: 1289
+        y: 1864
+        width: 181
+        height: 164
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e74ae7b13093af547a20865b445af252
+      internalID: 1464966154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chest_legendary
+      rect:
+        serializedVersion: 2
+        x: 1480
+        y: 1871
+        width: 179
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4f14f94a0b9df9478ca9a31f2210495
+      internalID: 1059245388
       vertices: []
       indices: 
       edges: []
@@ -732,6 +795,7 @@ TextureImporter:
       tex_0_9: -307186218552904950
       drop_4: 8344815454573176662
       drop_2: 2079128524816627004
+      chest_epic: 1464966154
       tex_0_4: -40810238627940632
       tex_0_1: 8036309752053734007
       tex_0_17: 7804612495321305686
@@ -742,11 +806,13 @@ TextureImporter:
       tex_0_8: -2149578559650092762
       tex_0_10: 5504138388294342362
       tex_0_24: -3940336546365883990
+      chest_legendary: 1059245388
       tex_0_22: 3349988611915878177
       tex_0_3: -5692604581601830981
       tex_0_19: 6530401923317716584
       tex_0_2: 1894656480312254778
       tex_0_23: 9171183186283799205
+      chest_common: 538634505
       water_pistol: -882657101450742125
       tex_0_20: 8984777409455169079
   spritePackingTag: 

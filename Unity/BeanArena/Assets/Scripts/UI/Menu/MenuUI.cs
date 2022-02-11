@@ -70,6 +70,7 @@ public class MenuUI : MonoBehaviour {
 		if (show) {
             topPanel.Draw();
             DrawMMRText();
+            chestPanel.Draw();
             //inventoryDrawer.SpawnPreviewItems();
         } else {
 

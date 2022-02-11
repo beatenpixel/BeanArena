@@ -18,6 +18,18 @@ public static class MRandom {
         return items[randomIndexesCache[UnityEngine.Random.Range(0, ind)]];
     }
 
+    public static T Get<T>(params RandomEntry<T>[] entries) {
+        int ind = -1;
+
+        for (int i = 0; i < entries.Length; i++) {
+            for (int x = 0; x < entries[i].probability; x++) {
+                randomIndexesCache[++ind] = i;
+            }
+        }
+
+        return entries[randomIndexesCache[UnityEngine.Random.Range(0, ind)]].item;
+    }
+
     public static T GetRandom<T>(this T[] arr) {
         return arr[UnityEngine.Random.Range(0, arr.Length)];
     }
@@ -28,6 +40,10 @@ public static class MRandom {
 
     public static int Range(int min, int max) {
         return UnityEngine.Random.Range(min, max);
+    }
+
+    public static float SignedRange(float absMin, float absMax) {
+        return Range(absMin, absMax) * Sign();
     }
 
     public static int Sign() {
@@ -84,4 +100,15 @@ public static class MRandom {
         "Dorothy",  "Sharon",   "Melissa",  "Amanda",   "Diane",    "Mildred",  "Christina",    "Marilyn",  "Ruby", "Robin"
     };
 
+}
+
+public struct RandomEntry<T> {
+
+    public int probability;
+    public T item;
+
+    public RandomEntry(T item, int probability) {
+        this.item = item;
+        this.probability = probability;
+    }
 }

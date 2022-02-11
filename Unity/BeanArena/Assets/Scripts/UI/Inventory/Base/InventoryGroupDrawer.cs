@@ -38,7 +38,7 @@ public class InventoryGroupDrawer : MonoBehaviour {
     }
 
     public void Draw() {
-        itemsToDraw = gdInventory.items.Where(x => x.info.category == config.itemCategory).ToList();
+        itemsToDraw = gdInventory.items.Where(x => x.info.category == config.itemCategory).OrderByDescending(x => x.rareness).ToList();
 
         itemButtons.Update(itemsToDraw.Count);
 
@@ -48,6 +48,7 @@ public class InventoryGroupDrawer : MonoBehaviour {
 
             button.SetItem(item, item.info);
             button.SetArg(i);
+            button.rectT.SetAsLastSibling();
 
             if(item.isEquiped) {
                 config.drawer.SetItemButtonEquiped(button);
@@ -55,7 +56,7 @@ public class InventoryGroupDrawer : MonoBehaviour {
             } else {
                 //button.SetState(ItemButton.ItemButtonState.InInventory);
             }
-        }
+        }        
     } 
 
     private void OnItemButtonEvent(UIEventType eventType, ItemButton button, object arg) {

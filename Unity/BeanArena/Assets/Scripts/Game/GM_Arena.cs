@@ -148,6 +148,8 @@ public class GM_Arena : GameMode {
                 GameUI.inst.Show(false);
 
                 if(e.hero == player.hero) {
+                    // LOOSE
+
                     int mmrPenalty = MRandom.Range(5, 10);
                     int coinsGain = MRandom.Range(10, 15);
 
@@ -160,6 +162,8 @@ public class GM_Arena : GameMode {
                         coinCount = coinsGain
                     });
                 } else {
+                    // WIN
+
                     int mmrGain = MRandom.Range(10, 15);
                     int coinsGain = MRandom.Range(20, 30);
 
@@ -171,6 +175,10 @@ public class GM_Arena : GameMode {
                         mmrCount = mmrGain,
                         coinCount = coinsGain
                     });
+
+                    if(Game.data.inventory.chests.Count < 4) {
+                        Game.data.inventory.chests.Add(GameRandom.GenerateRoundRewardChest());
+                    }
                 }                
             } else {                
                 genericMap.ResetMap();

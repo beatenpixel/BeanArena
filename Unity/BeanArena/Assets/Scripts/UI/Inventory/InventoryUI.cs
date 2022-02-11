@@ -120,6 +120,8 @@ public class InventoryUI : MonoBehaviour {
 
                     if(currentGroupID != button.inventoryGroupDrawer.groupID) {
                         SwitchTab(button.inventoryGroupDrawer.groupID);
+                    } else {
+                        Draw(false);
                     }
                 }				
 
@@ -128,6 +130,11 @@ public class InventoryUI : MonoBehaviour {
 			case UIEventType.DragStart:
 				currentDragedButton = button;
 				break;
+            case UIEventType.Click:
+                if(currentGroupID != button.inventoryGroupDrawer.groupID) {
+                    SwitchTab(button.inventoryGroupDrawer.groupID);
+                }
+                break;
         }
     }
 

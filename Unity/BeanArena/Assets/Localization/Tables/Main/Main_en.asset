@@ -166,6 +166,46 @@ MonoBehaviour:
     m_Localized: LOSE
     m_Metadata:
       m_Items: []
+  - m_Id: 1707340905279488
+    m_Localized: '{0}h {1}m'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1707340947222528
+    m_Localized: '{0}m {1}s'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1707340947222529
+    m_Localized: '{0}s'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1743367569108992
+    m_Localized: OPEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1775247504928768
+    m_Localized: Open now for {0}{1} ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1777422725509120
+    m_Localized: Another chest is opening right now
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1777422729703424
+    m_Localized: Common Chest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1777422729703425
+    m_Localized: Epic Chest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1777422729703426
+    m_Localized: Legendary Chest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1780215154700288
+    m_Localized: '{0}h {1}m {2}s'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

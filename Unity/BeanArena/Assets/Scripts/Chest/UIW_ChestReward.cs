@@ -27,8 +27,10 @@ public class UIW_ChestReward : UIWindow {
     public override void OnInitBeforeOpen() {
         data = (UIWData_ChestReward)genericWindowData;
         openedItems = new List<GD_Item>();
-        totalIcons.Refresh(data.items.Count);
+        totalIcons.Refresh(data.content.items.Count);
         waitingForClickToClose = false;
+
+        Game.data.inventory.items.AddRange(data.content.items);
     }
 
     public override void InternalUpdate() {        
@@ -46,15 +48,15 @@ public class UIW_ChestReward : UIWindow {
     }
 
     private void NextItem() {
-        if (openedItems.Count < data.items.Count) {
-            GD_Item nextItem = data.items[openedItems.Count];
+        if (openedItems.Count < data.content.items.Count) {
+            GD_Item nextItem = data.content.items[openedItems.Count];
             openedItems.Add(nextItem);
 
             iconDrawer.gameObject.SetActive(true);
             iconDrawer.DrawItem(nextItem, nextItem.info);
             anim.Play("next_item", 0, 0f);
 
-            if (openedItems.Count == data.items.Count) {
+            if (openedItems.Count == data.content.items.Count) {
                 this.WaitRealtime(() => {
                     iconDrawer.gameObject.SetActive(false);
                     ShowTotalIcons();
@@ -100,7 +102,7 @@ public class UIW_ChestReward : UIWindow {
 
     private void Icons_Refresh(int id, IconDrawer icon) {
         icon.t.localScale = new Vector3(0, 1, 1);
-        icon.DrawItem(data.items[id], data.items[id].info);
+        icon.DrawItem(data.content.items[id], data.content.items[id].info);
     }
 
     public override Type GetPoolObjectType() {
@@ -122,7 +124,7 @@ public class UIW_ChestReward : UIWindow {
 
 public class UIWData_ChestReward : UIW_Data {
 
-    public List<GD_Item> items;
+    public ChestContent content;
     public Action CloseChestOpenerCallback;
 
     public UIWData_ChestReward() {

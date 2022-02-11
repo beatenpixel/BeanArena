@@ -58,6 +58,11 @@ public class MAssets : SingletonScriptableObject<MAssets> {
         public Material material;
     }
 
+    public const string COLOR_BUTTON_GREEN = "BUTTON_GREEN";
+    public const string COLOR_BUTTON_RED = "BUTTON_RED";
+    public const string COLOR_BUTTON_GRAY = "BUTTON_GRAY";
+    public const string COLOR_BUTTON_GOLD = "BUTTON_GOLD";
+
 }
 
 public interface ITypeKey<TKey> {

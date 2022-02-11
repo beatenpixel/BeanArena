@@ -163,6 +163,11 @@ public sealed class FastPostProcessing : MonoBehaviour {
 
     #endregion
 
+    private void Awake() {
+        shadowTexture = new RenderTexture(Screen.width / 4, Screen.height / 4, 0, RenderTextureFormat.ARGB32, 0);
+        shadowCam.targetTexture = shadowTexture;
+    }
+
     private void OnEnable() {
         cam = GetComponent<Camera>();
 
@@ -171,9 +176,6 @@ public sealed class FastPostProcessing : MonoBehaviour {
 
         if (m_PostProcessMaterial == null)
             m_PostProcessMaterial = new Material(m_Shader);
-
-        shadowTexture = new RenderTexture(Screen.width / 4, Screen.height / 4, 0, RenderTextureFormat.ARGB32, 0);
-        shadowCam.targetTexture = shadowTexture;
 
         m_PostProcessMaterial.SetTexture("_ShadowTex", shadowTexture);                
 

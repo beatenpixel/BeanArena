@@ -8,9 +8,14 @@ public class ChestOpener : MonoBehaviour {
     public Animator anim;
     public Camera chestCam;
 
+    public Transform chestHolderT;
+    public GameObject[] chestPrefabs;
+    public GameObject currentChestGO;
+
     public ChestOpenerState state;
 
     private float timeOfDelay;
+    private GD_Chest openingChest;
 
     public void Init() {
 
@@ -30,16 +35,30 @@ public class ChestOpener : MonoBehaviour {
         }        
     }
 
-    public void ShowChestScreen(ChestType chestType) {
+    public void ShowChestScreen(GD_Chest chest) {
         if(state != ChestOpenerState.None) {
             return;
         }
+
+        if(currentChestGO != null) {
+            Destroy(currentChestGO);
+        }
+
+        //anim.enabled = false;
+
+        currentChestGO = Instantiate(chestPrefabs[(int)chest.type], chestHolderT);
+        currentChestGO.name = "chest";
+        currentChestGO.transform.SetAsFirstSibling();
+        anim.Rebind();
+
+        openingChest = chest;
 
         state = ChestOpenerState.WaitToClick;
         timeOfDelay = Time.realtimeSinceStartup;
 
         MenuUI.inst.Show(false);
         chestCam.enabled = true;
+        //anim.enabled = true;
         anim.Play("common_chest_open");
     }
 
@@ -58,13 +77,13 @@ public class ChestOpener : MonoBehaviour {
         state = ChestOpenerState.None;
         MenuUI.inst.Show(true);
         chestCam.enabled = false;
-        anim.Play("idle");
+        anim.Play("idle");        
     }
 
     public void Exit() {
         state = ChestOpenerState.Exit;
         UIWindowManager.CreateWindow(new UIWData_ChestReward() {
-            items = Game.data.inventory.items,
+            content = GameRandom.GenerateChestContent(openingChest),
             fadeBlackBackground = false,
             CloseChestOpenerCallback = CloseChestOpener
         });

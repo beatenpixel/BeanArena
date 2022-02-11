@@ -52,6 +52,10 @@ public class GD_Item : GD {
         itemGUID = Guid.NewGuid().ToString();
     }
 
+    public override string ToString() {
+        return $"GD_Item[{itemType}] R:{rareness} LVL:{levelID} F:{fusePoints}";
+    }
+
 }
 
 public class ItemFilter {
