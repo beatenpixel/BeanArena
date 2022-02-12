@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Hero : PoolObject, IDamageable, ITarget {
+public class HeroBase : PoolObject, IDamageable, ITarget {
 
 	public HeroInfo info { get; private set; }
 
@@ -297,7 +297,7 @@ public class Hero : PoolObject, IDamageable, ITarget {
     }
 
 	public override Type GetPoolObjectType() {
-		return typeof(Hero);
+		return typeof(HeroBase);
     }
 
 	public IEnumerable<HeroLimb> this[LimbType type] {
@@ -357,9 +357,9 @@ public class Hero : PoolObject, IDamageable, ITarget {
 
 public class HeroComponent : MonoBehaviour {
 
-	protected Hero hero;
+	protected HeroBase hero;
 
-	public void InitComponent(Hero _hero) {
+	public void InitComponent(HeroBase _hero) {
 		hero = _hero;
 	}
 
@@ -420,18 +420,18 @@ public enum Orientation {
 
 public class HeroDamageEvent : MGameEvent<HeroDamageEvent> {
 
-	public Hero hero;
+	public HeroBase hero;
 
-	public HeroDamageEvent(Hero hero) {
+	public HeroDamageEvent(HeroBase hero) {
 		this.hero = hero;
 	}
 }
 
 public class HeroDieEvent : MGameEvent<HeroDieEvent> {
 
-	public Hero hero;
+	public HeroBase hero;
 
-	public HeroDieEvent(Hero hero) {
+	public HeroDieEvent(HeroBase hero) {
 		this.hero = hero;
 	}
 }

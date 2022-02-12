@@ -17,9 +17,9 @@ public abstract class Equipment : PoolObject {
     protected float nextUseTime;
 
     protected HeroLimb limb;
-    protected Hero hero;
+    protected HeroBase hero;
 
-    public virtual void AttachToHero(Hero hero, HeroLimb limb) {
+    public virtual void AttachToHero(HeroBase hero, HeroLimb limb) {
         this.hero = hero;
         this.limb = limb;
     }

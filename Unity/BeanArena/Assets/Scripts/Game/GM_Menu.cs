@@ -50,7 +50,7 @@ public class GM_Menu : GameMode {
     private void Spawn() {
         Debug.Log("GM_Menu:Spawn");
 
-		Hero playerHero = heroFactory.Create(new HeroConfig() {
+		HeroBase playerHero = heroFactory.Create(new HeroConfig() {
 			nickname = "Lorg",
 			orientation = Orientation.Right,
 			teamID = 0,

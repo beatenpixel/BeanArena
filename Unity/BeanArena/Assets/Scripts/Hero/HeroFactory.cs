@@ -9,8 +9,8 @@ public class HeroFactory : MonoBehaviour {
 
     }
 
-    public Hero Create(HeroConfig config, Vector2 position) {
-        Hero hero = MPool.Get<Hero>();
+    public HeroBase Create(HeroConfig config, Vector2 position) {
+        HeroBase hero = MPool.Get<HeroBase>();
 
         hero.InitInFactory(config);
         hero.SetSpawnPosition(position);

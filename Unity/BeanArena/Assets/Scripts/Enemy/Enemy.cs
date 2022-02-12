@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy {
 
-    public Hero hero { get; private set; }
+    public HeroBase hero { get; private set; }
 
     private Timer changeDirTimer;
     private Vector2 moveInput;
@@ -47,7 +47,7 @@ public class Enemy {
         //armInput = Quaternion.Euler(0, 0, MRandom.Range(0, 360f)) * Vector3.right;
     }
 
-    public void AssignHero(Hero _hero) {
+    public void AssignHero(HeroBase _hero) {
         hero = _hero;
     }
 

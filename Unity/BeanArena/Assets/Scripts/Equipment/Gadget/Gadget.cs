@@ -32,7 +32,7 @@ public abstract class Gadget : Equipment {
 
 	}
 
-	public override void AttachToHero(Hero hero, HeroLimb limb) {
+	public override void AttachToHero(HeroBase hero, HeroLimb limb) {
 		base.AttachToHero(hero, limb);
 
 		Renderer[] rends = GetComponentsInChildren<Renderer>();

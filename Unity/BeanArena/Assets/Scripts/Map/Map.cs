@@ -8,7 +8,7 @@ public abstract class Map : MonoBehaviour {
 
 	public Transform groundBaseLineY;
 
-	public List<Hero> heroes = new List<Hero>();
+	public List<HeroBase> heroes = new List<HeroBase>();
 	public List<ITarget> targets = new List<ITarget>();
 
 	[SerializeField] private List<MapArea> areas;
@@ -39,7 +39,7 @@ public abstract class Map : MonoBehaviour {
 		}
 	}
 
-	public void AddHero(Hero hero) {
+	public void AddHero(HeroBase hero) {
 		heroes.Add(hero);
 		targets.Add(hero);
 	}

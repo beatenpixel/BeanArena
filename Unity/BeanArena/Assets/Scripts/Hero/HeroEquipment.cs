@@ -100,10 +100,10 @@ public class EquipmentSlot {
 	private GD_Item previewItem;
 	private Equipment previewEquipment;
 
-	private Hero hero;
+	private HeroBase hero;
 	private HeroLimb limb;
 
-	public EquipmentSlot(Hero hero, ItemFilter filter) {
+	public EquipmentSlot(HeroBase hero, ItemFilter filter) {
 		this.hero = hero;
 		this.filter = filter;
 	}

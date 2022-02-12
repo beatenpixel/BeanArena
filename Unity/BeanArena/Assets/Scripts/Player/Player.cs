@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-	public Hero hero { get; private set; }
+	public HeroBase hero { get; private set; }
 
 	public SO_PlayerInput playerInput;
 
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour {
 		
 	}
 
-	public void AssignHero(Hero _hero) {
+	public void AssignHero(HeroBase _hero) {
 		hero = _hero;
 	}
 

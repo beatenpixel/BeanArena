@@ -30,7 +30,7 @@ public class Sword : Weapon {
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {
-        Hero hero = collider.GetComponentInParent<Hero>();
+        HeroBase hero = collider.GetComponentInParent<HeroBase>();
 
         if (hero != null) {
 

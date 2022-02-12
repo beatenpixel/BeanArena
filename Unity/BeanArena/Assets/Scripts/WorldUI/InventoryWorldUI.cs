@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class InventoryWorldUI : MonoBehaviour {
 
-	public Hero targetHero;
+	public HeroBase targetHero;
 
 	public UIGroupAppear worldEditGroup;
 
@@ -50,7 +50,7 @@ public class InventoryWorldUI : MonoBehaviour {
 		areaIsGlowing.Set(glowing);
 	}
 
-	public void SetTargetHero(Hero hero) {
+	public void SetTargetHero(HeroBase hero) {
 		targetHero = hero;
 
 		GenerateFrames();

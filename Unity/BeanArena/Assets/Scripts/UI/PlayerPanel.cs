@@ -13,7 +13,7 @@ public class PlayerPanel : MonoBehaviour {
 	public TextMeshProUGUI cupsText;
 	public WinCounter winCounter;
 
-	[HideInInspector] public Hero attachedHero;
+	[HideInInspector] public HeroBase attachedHero;
 
 	public void Init() {
 		winCounter.Init(2);
@@ -21,7 +21,7 @@ public class PlayerPanel : MonoBehaviour {
         healthbar.SetValue(1f, true);
     }
 
-	public void SetHero(Hero hero) {        
+	public void SetHero(HeroBase hero) {        
 		attachedHero = hero;
         winCounter.SetWinsCount(0);
         healthbar.SetValue(1f, true);

@@ -49,7 +49,7 @@ public class GM_Arena : GameMode {
     }
 
     private void SpawnHeroes() {
-		Hero playerHero = heroFactory.Create(new HeroConfig() {
+		HeroBase playerHero = heroFactory.Create(new HeroConfig() {
 			nickname = "Lorg",
 			orientation = Orientation.Right,
 			teamID = 0,
@@ -72,7 +72,7 @@ public class GM_Arena : GameMode {
 		for (int i = 0; i < enemyCount; i++) {
 			Enemy enemy = new Enemy();
 
-			Hero enemyHero = heroFactory.Create(new HeroConfig() {
+			HeroBase enemyHero = heroFactory.Create(new HeroConfig() {
 				nickname = "Evil Bean " + (i + 1),
 				orientation = Orientation.Left,
 				teamID = 1,
@@ -193,7 +193,7 @@ public class GM_Arena : GameMode {
 
 public class OpponentInfo {
     public int score;
-    public Hero connectedHero;
+    public HeroBase connectedHero;
     public PlayerPanel panel;
 
     public OpponentInfo() {

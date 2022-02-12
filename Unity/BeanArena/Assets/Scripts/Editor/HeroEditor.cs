@@ -4,15 +4,15 @@ using UnityEngine;
 
 using UnityEditor;
 
-[CustomEditor(typeof(Hero))]
+[CustomEditor(typeof(HeroBase))]
 public class HeroEditor : Editor {
 
-    private Hero inst;
+    private HeroBase inst;
     private SO_HeroInfo heroInfo;
 
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();
-        inst = (Hero)target;
+        inst = (HeroBase)target;
 
         if (string.IsNullOrEmpty(inst.gameObject.scene.name)) {
             return;

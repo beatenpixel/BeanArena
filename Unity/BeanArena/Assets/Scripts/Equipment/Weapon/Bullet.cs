@@ -19,7 +19,7 @@ public class Bullet : Projectile {
         }
 
         HeroLimb limb = collision.collider.gameObject.GetComponentInParent<HeroLimb>();
-        Hero hero = collision.collider.gameObject.GetComponentInParent<Hero>();
+        HeroBase hero = collision.collider.gameObject.GetComponentInParent<HeroBase>();
 
         if (hero != null && limb != null) {
             MSound.Play("bullet_bodyhit", SoundConfig.randVolumePitch01, t.position);

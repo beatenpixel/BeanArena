@@ -18,10 +18,10 @@ public abstract class DamageInfo {
 
 public abstract class HeroDamage : DamageInfo {
 
-    public Hero hero;
+    public HeroBase hero;
     public HeroLimb limb;
 
-    protected HeroDamage(Hero _hero, HeroLimb _limb, DamageCause _causeType) : base(_causeType) {
+    protected HeroDamage(HeroBase _hero, HeroLimb _limb, DamageCause _causeType) : base(_causeType) {
         hero = _hero;
         limb = _limb;
     }
@@ -42,7 +42,7 @@ public class DevDamage : DamageInfo {
 public class PhysicalDamage : HeroDamage {
     public float damage;
 
-    public PhysicalDamage(float damage, Hero _hero, HeroLimb _limb) : base(_hero, _limb, DamageCause.PHYSICS) {
+    public PhysicalDamage(float damage, HeroBase _hero, HeroLimb _limb) : base(_hero, _limb, DamageCause.PHYSICS) {
         this.damage = damage;
     }
 
