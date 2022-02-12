@@ -44,6 +44,8 @@ public class Hero : PoolObject, IDamageable, ITarget {
     private HeroConfig initConfig;
     private Vector2 spawnPos;
 
+    [HideInInspector] public SO_HeroInfo editorPreviewHeroInfo;
+
     protected override void Awake() {
         base.Awake();
 

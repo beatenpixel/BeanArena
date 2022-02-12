@@ -16,6 +16,8 @@ public class SO_HeroInfo : ScriptableObject, ITypeKey<HeroType>, IStatContainer 
 
     public List<ItemStatProgression> stats = new List<ItemStatProgression>();
 
+    public HeroModel heroModel;
+
     public HeroType GetKey() {
         return heroType;
     }
@@ -99,4 +101,11 @@ public class SO_HeroInfo : ScriptableObject, ITypeKey<HeroType>, IStatContainer 
             return true;
         }
     }
+}
+
+[System.Serializable]
+public class HeroModel {
+
+
+
 }

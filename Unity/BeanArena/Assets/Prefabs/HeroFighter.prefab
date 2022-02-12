@@ -276,6 +276,7 @@ MonoBehaviour:
     jumpForce: 1200
   heroEquipment: {fileID: 7610001874787510047}
   body: {fileID: 0}
+  editorPreviewHeroInfo: {fileID: 0}
 --- !u!114 &7610001874787510047
 MonoBehaviour:
   m_ObjectHideFlags: 0

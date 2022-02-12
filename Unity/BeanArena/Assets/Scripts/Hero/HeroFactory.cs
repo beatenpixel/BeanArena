@@ -25,4 +25,5 @@ public class HeroConfig {
     public int teamID;
     public Orientation orientation;
     public HeroRole role;
+    public HeroType heroType;
 }
