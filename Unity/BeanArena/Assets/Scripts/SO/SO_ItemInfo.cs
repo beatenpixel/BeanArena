@@ -13,7 +13,7 @@ public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType>, IStatContainer 
     public string itemDescription_LKey;
     public SO_IconContent icon;
     public GameObject prefab;
-    
+
     public int maxLevel = 5;
 
     public List<ItemStatProgression> stats = new List<ItemStatProgression>();
@@ -177,7 +177,25 @@ public class ItemStatProgression {
                 int posOrNeg = diffSign * signedUpgradeDirection;
                 str += $"{((posOrNeg == 1) ? posStr : negStr)} ({MFormat.GetSignStr((MFormat.Sign)diffSign)}{Mathf.Abs(diff)}){MFormat.TextColorTagEnd}";
             }
-        } else if(valueType == StatValueType.Float) {
+        } else if (valueType == StatValueType.Float) {
+            StatValue valueA = values[levelA];
+            StatValue valueB = values[levelB];
+
+            str += valueA.decimalValue;
+
+            decimal diff = valueB.decimalValue - valueA.decimalValue;
+            int diffSign = Math.Sign(diff);
+
+            int signedUpgradeDirection = (upgradeDirection == ItemStatUpgradeDirection.HigherIsBetter ? 1 : -1);
+
+            if (diff != 0) {
+                int posOrNeg = diffSign * signedUpgradeDirection;
+                str += $"{((posOrNeg == 1) ? posStr : negStr)} ({MFormat.GetSignStr((MFormat.Sign)diffSign)}{Math.Abs(diff)}){MFormat.TextColorTagEnd}";
+            }
+        } 
+        
+        /*
+        else if(valueType == StatValueType.Float) {
             StatValue valueA = values[levelA];
             StatValue valueB = values[levelB];
 
@@ -193,6 +211,7 @@ public class ItemStatProgression {
                 str += $"{((posOrNeg == 1) ? posStr : negStr)} ({MFormat.GetSignStr((MFormat.Sign)diffSign)}{Mathf.Abs(diff)}){MFormat.TextColorTagEnd}";
             }
         }
+        */
 
         return str;
     }
@@ -200,7 +219,8 @@ public class ItemStatProgression {
     public object GetValue(int lvl) {
         switch(valueType) {
             case StatValueType.Int: return values[lvl].intValue;
-            case StatValueType.Float: return values[lvl].floatValue;                
+            case StatValueType.Float: return values[lvl].floatValue;
+            case StatValueType.Decimal: return values[lvl].decimalValue;
         }
 
         return null;
@@ -211,6 +231,7 @@ public class ItemStatProgression {
 public class StatValue {
     public int intValue;
     public float floatValue;
+    public decimal decimalValue => (decimal)floatValue;
     public bool manual;
 }
 
@@ -235,7 +256,8 @@ public enum ItemStatUpgradeDirection {
 
 public enum StatValueType {
     Int,
-    Float
+    Float,
+    Decimal
 }
 
 public enum StatType {
