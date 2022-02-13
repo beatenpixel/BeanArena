@@ -53,7 +53,7 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
             GM_Menu.inst.DestroyPreviewHero();
             GM_Menu.inst.SpawnPreviewHero();
 
-            infoDrawer.DrawInfo(item);
+            infoDrawer.DrawHeroInfo(item);
         }
 
         config.drawer.OnHeroItemButtonEvent(eventType, button, arg);

@@ -54,7 +54,7 @@ public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType>, IStatContainer 
         }
     }
 
-    private ItemStatProgression GetStat(StatType statType) {
+    public ItemStatProgression GetStat(StatType statType) {
         return stats.Find(x => x.statType == statType);
     }
 
@@ -118,6 +118,7 @@ public class ItemStatProgression {
     public StatValueType valueType = StatValueType.Int;
     public ItemStatProgressionType progressionType = ItemStatProgressionType.Interpolate;
     public StatProgressionFunc progressionFunc = StatProgressionFunc.SineIn;
+    public ItemStatUpgradeDirection upgradeDirection = ItemStatUpgradeDirection.HigherIsBetter;
 
     public Vector2Int intStartEndValue;
     public Vector2 floatStartEndValue;
@@ -128,6 +129,73 @@ public class ItemStatProgression {
 
     public int maxLevel;
     [HideInInspector] public bool isFoldoutInInspector;
+
+    public int GetLevelByValue(object value) {
+        if (valueType == StatValueType.Int) {
+            int intValue = (int)value;
+
+            for (int i = 0; i < values.Length - 1; i++) {
+                if(intValue > values[i].intValue && intValue < values[i + 1].intValue) {
+                    return i;
+                }
+            }
+
+            return maxLevel - 1;
+        } else if(valueType == StatValueType.Float) {
+            float floatValue = (float)value;
+
+            for (int i = 0; i < values.Length - 1; i++) {
+                if (floatValue > values[i].floatValue && floatValue < values[i + 1].floatValue) {
+                    return i;
+                }
+            }
+
+            return maxLevel - 1;
+        }
+
+        return -1;
+    }
+
+    public string GetDifferenceStr(int levelA, int levelB) {
+        string str = "";
+
+        string posStr = MFormat.TextColorTag(MAssets.colors["STAT_UPGRADE_COLOR"]);
+        string negStr = MFormat.TextColorTag(MAssets.colors["STAT_DOWNGRADE_COLOR"]);
+
+        if (valueType == StatValueType.Int) {
+            StatValue valueA = values[levelA];
+            StatValue valueB = values[levelB];
+
+            str += valueA.intValue;
+
+            int diff = valueB.intValue - valueA.intValue;
+            int diffSign = MMath.SignInt(diff);
+
+            int signedUpgradeDirection = (upgradeDirection == ItemStatUpgradeDirection.HigherIsBetter ? 1 : -1);
+
+            if(diff != 0) {
+                int posOrNeg = diffSign * signedUpgradeDirection;
+                str += $"{((posOrNeg == 1) ? posStr : negStr)} ({MFormat.GetSignStr((MFormat.Sign)diffSign)}{Mathf.Abs(diff)}){MFormat.TextColorTagEnd}";
+            }
+        } else if(valueType == StatValueType.Float) {
+            StatValue valueA = values[levelA];
+            StatValue valueB = values[levelB];
+
+            str += valueA.floatValue;
+
+            float diff = valueB.floatValue - valueA.floatValue;
+            int diffSign = MMath.SignInt(diff);
+
+            int signedUpgradeDirection = (upgradeDirection == ItemStatUpgradeDirection.HigherIsBetter ? 1 : -1);
+
+            if (diff != 0) {
+                int posOrNeg = diffSign * signedUpgradeDirection;
+                str += $"{((posOrNeg == 1) ? posStr : negStr)} ({MFormat.GetSignStr((MFormat.Sign)diffSign)}{Mathf.Abs(diff)}){MFormat.TextColorTagEnd}";
+            }
+        }
+
+        return str;
+    }
 
     public object GetValue(int lvl) {
         switch(valueType) {
@@ -158,6 +226,11 @@ public enum ItemStatProgressionType {
     Interpolate,
     Extrapolate,
     Manual
+}
+
+public enum ItemStatUpgradeDirection {
+    LowerIsBetter = 0,
+    HigherIsBetter = 1
 }
 
 public enum StatValueType {

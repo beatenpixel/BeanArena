@@ -18,31 +18,46 @@ MonoBehaviour:
   itemDescription_LKey: ITEM_DESCR_PISTOL
   icon: {fileID: 11400000, guid: 2b84a5d1f1f2f9f49aea9ce286a3be97, type: 2}
   prefab: {fileID: 0}
-  maxLevel: 5
+  maxLevel: 10
   stats:
   - statType: 5
     valueType: 0
     progressionType: 0
     progressionFunc: 3
-    intStartEndValue: {x: 200, y: 2000}
+    upgradeDirection: 1
+    intStartEndValue: {x: 25, y: 500}
     floatStartEndValue: {x: 0, y: 0}
     values:
-    - intValue: 200
+    - intValue: 25
+      floatValue: 0
+      manual: 0
+    - intValue: 25
+      floatValue: 0
+      manual: 0
+    - intValue: 50
+      floatValue: 0
+      manual: 0
+    - intValue: 75
+      floatValue: 0
+      manual: 0
+    - intValue: 125
+      floatValue: 0
+      manual: 0
+    - intValue: 175
+      floatValue: 0
+      manual: 0
+    - intValue: 250
       floatValue: 0
       manual: 0
     - intValue: 325
       floatValue: 0
       manual: 0
-    - intValue: 725
+    - intValue: 400
       floatValue: 0
       manual: 0
-    - intValue: 1300
-      floatValue: 0
-      manual: 0
-    - intValue: 2000
+    - intValue: 500
       floatValue: 0
       manual: 0
     roundAccuracy: 25
-    maxLevel: 5
-    statContainer: {fileID: 11400000}
+    maxLevel: 10
     isFoldoutInInspector: 1

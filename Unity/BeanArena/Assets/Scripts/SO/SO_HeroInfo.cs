@@ -12,7 +12,7 @@ public class SO_HeroInfo : ScriptableObject, ITypeKey<HeroType>, IStatContainer 
     public SO_IconContent icon;
     public GameObject prefab;
 
-    public int maxLevel = 5;
+    public int maxLevelsCount = 5;
 
     public List<ItemStatProgression> stats = new List<ItemStatProgression>();
 
@@ -22,23 +22,23 @@ public class SO_HeroInfo : ScriptableObject, ITypeKey<HeroType>, IStatContainer 
         return heroType;
     }
 
-    public int statsMaxLevel => maxLevel; 
+    public int statsMaxLevel => maxLevelsCount; 
 
     private void OnEnable() {
         for (int i = 0; i < stats.Count; i++) {
             //stats[i].statContainer = this;
-            stats[i].maxLevel = maxLevel;
+            stats[i].maxLevel = maxLevelsCount;
 
             if (stats[i].values == null) {
-                stats[i].values = new StatValue[maxLevel];
+                stats[i].values = new StatValue[maxLevelsCount];
                 for (int x = 0; x < stats[i].values.Length; x++) {
                     stats[i].values[x] = new StatValue();
                 }
             }
 
-            if (stats[i].values.Length != maxLevel) {
+            if (stats[i].values.Length != maxLevelsCount) {
                 StatValue[] prevArray = stats[i].values;
-                stats[i].values = new StatValue[maxLevel];
+                stats[i].values = new StatValue[maxLevelsCount];
 
                 if (prevArray.Length > stats[i].values.Length) {
                     Array.Copy(prevArray, stats[i].values, stats[i].values.Length);
@@ -51,7 +51,7 @@ public class SO_HeroInfo : ScriptableObject, ITypeKey<HeroType>, IStatContainer 
 
     private void OnValidate() {
         for (int i = 0; i < stats.Count; i++) {
-            stats[i].maxLevel = maxLevel;
+            stats[i].maxLevel = maxLevelsCount;
         }
     }
 
@@ -74,7 +74,7 @@ public class SO_HeroInfo : ScriptableObject, ITypeKey<HeroType>, IStatContainer 
         StatValue start = fuseStat.values[itemLevel];
         StatValue end;
 
-        if (itemLevel == maxLevel - 1) {
+        if (itemLevel == maxLevelsCount - 1) {
             return new Vector2Int(start.intValue, start.intValue);
         } else {
             end = fuseStat.values[itemLevel + 1];
@@ -90,7 +90,7 @@ public class SO_HeroInfo : ScriptableObject, ITypeKey<HeroType>, IStatContainer 
             return false;
         }
 
-        if (level == maxLevel - 1) {
+        if (level == maxLevelsCount - 1) {
             fuseP = 1;
             return true;
         } else {

@@ -18,30 +18,87 @@ MonoBehaviour:
   itemDescription_LKey: ITEM_DESCR_PISTOL
   icon: {fileID: 11400000, guid: c473d31935e875443a3cdcccb17370e7, type: 2}
   prefab: {fileID: 416318777461901068, guid: bc1f5fe8a4c72634ebe8a3683aad358d, type: 3}
-  maxLevel: 5
+  maxLevel: 10
   stats:
   - statType: 5
     valueType: 0
     progressionType: 0
     progressionFunc: 3
-    intStartEndValue: {x: 100, y: 900}
+    upgradeDirection: 1
+    intStartEndValue: {x: 0, y: 1000}
     floatStartEndValue: {x: 0, y: 0}
     values:
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 15
+      floatValue: 0
+      manual: 0
+    - intValue: 60
+      floatValue: 0
+      manual: 0
+    - intValue: 130
+      floatValue: 0
+      manual: 0
+    - intValue: 230
+      floatValue: 0
+      manual: 0
+    - intValue: 355
+      floatValue: 0
+      manual: 0
+    - intValue: 500
+      floatValue: 0
+      manual: 0
+    - intValue: 655
+      floatValue: 0
+      manual: 0
+    - intValue: 825
+      floatValue: 0
+      manual: 0
+    - intValue: 1000
+      floatValue: 0
+      manual: 0
+    roundAccuracy: 5
+    maxLevel: 10
+    isFoldoutInInspector: 1
+  - statType: 0
+    valueType: 0
+    progressionType: 0
+    progressionFunc: 3
+    upgradeDirection: 1
+    intStartEndValue: {x: 500, y: 100}
+    floatStartEndValue: {x: 0, y: 0}
+    values:
+    - intValue: 500
+      floatValue: 0
+      manual: 0
+    - intValue: 490
+      floatValue: 0
+      manual: 0
+    - intValue: 475
+      floatValue: 0
+      manual: 0
+    - intValue: 445
+      floatValue: 0
+      manual: 0
+    - intValue: 405
+      floatValue: 0
+      manual: 0
+    - intValue: 355
+      floatValue: 0
+      manual: 0
+    - intValue: 300
+      floatValue: 0
+      manual: 0
+    - intValue: 235
+      floatValue: 0
+      manual: 0
+    - intValue: 165
+      floatValue: 0
+      manual: 0
     - intValue: 100
       floatValue: 0
       manual: 0
-    - intValue: 150
-      floatValue: 0
-      manual: 0
-    - intValue: 325
-      floatValue: 0
-      manual: 0
-    - intValue: 575
-      floatValue: 0
-      manual: 0
-    - intValue: 900
-      floatValue: 0
-      manual: 0
-    roundAccuracy: 25
-    soItemInfo: {fileID: 11400000}
+    roundAccuracy: 5
+    maxLevel: 10
     isFoldoutInInspector: 1

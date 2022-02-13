@@ -94,8 +94,14 @@ public class GM_Arena : GameMode {
 
 			MCamera.inst.AddTarget(new CameraTarget(enemy.hero.body.transform, new Vector2(0, -2), Vector2.one * 2));
 
-            GD_Item item = Game.data.inventory.items[0];
-            enemyHero.heroEquipment.PreviewItem(item, enemyHero.heroEquipment.GetFreeSlots(item)[0]);
+            GD_Item enemyPistol = new GD_Item() {
+                itemType = ItemType.Pistol,
+                levelID = 3,
+                rareness = ItemRareness.Common,
+                info = MAssets.itemsInfo.GetAsset(ItemType.Pistol)
+            };
+
+            enemyHero.heroEquipment.PreviewItem(enemyPistol, enemyHero.heroEquipment.GetFreeSlots(enemyPistol)[0]);
 
 
 

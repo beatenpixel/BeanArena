@@ -40,6 +40,14 @@ public class InventoryGroupDrawer : MonoBehaviour {
         
     } 
 
+    public virtual void PreviewMergeItems(ItemButton button, bool bringItemIn) {
+
+    }
+
+    public virtual void MergeItems(ItemButton button) {
+
+    }
+
 }
 
 public class InventoryGroupConfig {

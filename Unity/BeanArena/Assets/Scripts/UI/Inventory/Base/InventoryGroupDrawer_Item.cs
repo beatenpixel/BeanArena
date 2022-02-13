@@ -9,6 +9,7 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
     private ObjectListSpawner<ItemButton> itemButtons;
 
     private List<GD_Item> itemsToDraw;
+    private ItemButton selectedItemButton;
 
     public override void Init(InventoryGroupConfig config) {
         base.Init(config);
@@ -48,11 +49,10 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
         if (eventType == UIEventType.Click) {
             int inventorySlotID = (int)arg;
 
-            GD_Item item = itemsToDraw[inventorySlotID];
+            config.drawer.Select(button.iconDrawer.rarenessImage.rectTransform);
 
-            Debug.Log("GD_Item: " + item.itemGUID);
-
-            infoDrawer.DrawInfo(item);
+            selectedItemButton = button;
+            infoDrawer.DrawItemInfo(selectedItemButton.currentItem, selectedItemButton);
         }
 
         config.drawer.OnItemButtonEvent(eventType, button, arg);
@@ -74,4 +74,43 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
 
     }
 
+    public override void PreviewMergeItems(ItemButton button, bool bringItemIn) {
+        base.PreviewMergeItems(button, bringItemIn);
+
+        if (bringItemIn) {
+
+            if (infoDrawer.lastItemButton != null && button.currentItem != null && button != infoDrawer.lastItemButton) {
+                GD_Item itemA = infoDrawer.lastDrawnItem;
+                GD_Item itemB = button.currentItem;
+
+                infoDrawer.itemInfoPanel.DrawInfoMerge(infoDrawer.lastItemButton,button);
+            }
+        } else {
+            infoDrawer.DrawItemInfo(infoDrawer.lastDrawnItem, infoDrawer.lastItemButton);
+        }
+    }
+
+    public override void MergeItems(ItemButton button) {
+        base.MergeItems(button);
+
+        if (infoDrawer.lastItemButton != null && button.currentItem != null && button != infoDrawer.lastItemButton) {
+            GD_Item itemA = infoDrawer.lastDrawnItem;
+            GD_Item itemB = button.currentItem;
+
+            ItemStatProgression itemAFuseProg = itemA.info.GetStat(StatType.FusePoints);
+            int itemAMaxFusePoints = itemAFuseProg.values[itemAFuseProg.maxLevel - 1].intValue;
+
+            int fusePoints = Mathf.Clamp(itemA.fusePoints + itemB.fusePoints, 0, itemAMaxFusePoints);
+            int newLevel = itemAFuseProg.GetLevelByValue(fusePoints);
+
+            itemA.fusePoints = fusePoints;
+            itemA.levelID = newLevel;
+
+            Game.data.inventory.items.Remove(itemB);
+            button.Push();
+
+            infoDrawer.DrawItemInfo(itemA, null);
+            Draw();
+        }
+    }
 }

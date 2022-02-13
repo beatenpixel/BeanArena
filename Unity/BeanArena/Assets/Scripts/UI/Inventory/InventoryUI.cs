@@ -10,6 +10,10 @@ public class InventoryUI : MonoBehaviour {
 
 	public RectTransform tabButtonsHolderRectT;
 	public RectTransform inventoryGroupsHolderT;
+    public RectTransform itemsInfoRectT;
+    [SerializeField]private RectTransform selectionRect;
+
+    public GameObject[] onDragItemButtonScrollingLines;
 
 	public InventoryWorldUI worldUI;
 	public List<InventoryGroupDrawer> groupDrawers;
@@ -18,15 +22,17 @@ public class InventoryUI : MonoBehaviour {
 	private bool generatedElements;
 	private int currentGroupID = 0;
 	private ChangeCheck<bool> isInsideHeroWorldRect = new ChangeCheck<bool>(false);
-	private ChangeCheck<bool> isInsideInventoryRect = new ChangeCheck<bool>(false);
+	private ChangeCheck<bool> isInsideInfoRect = new ChangeCheck<bool>(false);
 
 	[HideInInspector] public ItemButton currentDragedButton;
 
-	private Vector3[] inventoryWorldCorners = new Vector3[4];
+	private Vector3[] worldCornersCache = new Vector3[4];
     private bool groupsAreSetup;
 
 	public void Init() {
         groupsAreSetup = false;
+
+        isInsideInfoRect = new ChangeCheck<bool>(false);
 
         tabButtons = new ObjectListSpawner<InventoryTabButton>(Spawn_InventoryTabButton, Enable_InventoryTabButton, Update_InventoryTabButton);
 		tabButtons.Update(groupDrawers.Count);
@@ -107,12 +113,30 @@ public class InventoryUI : MonoBehaviour {
 
     public void OnItemButtonEvent(UIEventType e, ItemButton button, object arg) {
 		switch (e) {
+            case UIEventType.DragUpdate:
+                if (button.buttonState == ItemButton.ItemButtonState.InInventory) {
+                    isInsideInfoRect.Set(CheckInsideItemsInfoArea());
+
+                    if (isInsideInfoRect.CheckIsDirtyAndClear()) {
+                        Debug.Log("isInsideInfoRect");
+
+                        if(isInsideInfoRect.value) {
+                            PreivewMergeItems(button, true);
+                        } else {
+                            PreivewMergeItems(button, false);
+                        }                        
+                    }
+                }
+                break;
+
 			case UIEventType.DragEnd:
 
 				if (button.buttonState == ItemButton.ItemButtonState.InInventory) {
 					if (worldUI.CheckInsideDropArea()) {
                         SetItemButtonEquiped(button);
-					}
+					} else if(CheckInsideItemsInfoArea()) {
+                        MergeItems(button);
+                    }
 				} else if(button.buttonState == ItemButton.ItemButtonState.InHeroSlot) {
 					if(CheckInsideItemsInventoryArea()) {
 						GD_Item item = button.currentItem;
@@ -132,10 +156,20 @@ public class InventoryUI : MonoBehaviour {
                 }				
 
 				currentDragedButton = null;
-				break;
+
+                onDragItemButtonScrollingLines[0].SetActive(false);
+                onDragItemButtonScrollingLines[1].SetActive(false);
+                break;
 			case UIEventType.DragStart:
 				currentDragedButton = button;
-				break;
+
+                if (button.buttonState == ItemButton.ItemButtonState.InHeroSlot) {
+
+                } else {
+                    onDragItemButtonScrollingLines[0].SetActive(true);
+                    onDragItemButtonScrollingLines[1].SetActive(true);
+                }
+                break;
             case UIEventType.Click:
                 if(currentGroupID != button.inventoryGroupDrawer.groupID) {
                     SwitchTab(button.inventoryGroupDrawer.groupID);
@@ -202,14 +236,29 @@ public class InventoryUI : MonoBehaviour {
         worldSlot.SetItemButton(button);
     }
 
-	public bool CheckInsideItemsInventoryArea() {
+    public void PreivewMergeItems(ItemButton button, bool bringItemIn) {
+        groupDrawers[currentGroupID].PreviewMergeItems(button, bringItemIn);
+    }
+
+    public void MergeItems(ItemButton button) {
+        groupDrawers[currentGroupID].MergeItems(button);
+    }
+
+    public bool CheckInsideItemsInventoryArea() {
 		Vector2 screenPos = Input.mousePosition;
-		inventoryGroupsHolderT.GetWorldCorners(inventoryWorldCorners);
-		bool isInside = MUtils.PointIsInsideCorners(screenPos, inventoryWorldCorners);
+		inventoryGroupsHolderT.GetWorldCorners(worldCornersCache);
+		bool isInside = MUtils.PointIsInsideCorners(screenPos, worldCornersCache);
 		return isInside;
 	}
 
-	private void OnTabButtonClick(InventoryTabButton tabButton, object arg) {
+    public bool CheckInsideItemsInfoArea() {
+        Vector2 screenPos = Input.mousePosition;
+        itemsInfoRectT.GetWorldCorners(worldCornersCache);
+        bool isInside = MUtils.PointIsInsideCorners(screenPos, worldCornersCache);
+        return isInside;
+    }
+
+    private void OnTabButtonClick(InventoryTabButton tabButton, object arg) {
 		int tabID = (int)arg;
 
         SwitchTab(tabID);		
@@ -223,6 +272,24 @@ public class InventoryUI : MonoBehaviour {
         currentGroupID = tabID;
         Draw(false);
     }
+
+    public void Select(RectTransform target) {
+        selectionRect.gameObject.SetActive(true);
+        selectionRect.SetParent(target);
+        selectionRect.localScale = Vector3.one;
+        selectionRect.anchorMin = Vector2.zero;
+        selectionRect.anchorMax = Vector2.one;
+        selectionRect.offsetMin = new Vector2(-4, -4);
+        selectionRect.offsetMax = new Vector2(4, 4);
+        selectionRect.SetParent(target.parent);
+        selectionRect.SetSiblingIndex(Mathf.Clamp(target.GetSiblingIndex() - 1, 0, int.MaxValue));
+    }
+
+    public void Unselect() {
+        selectionRect.gameObject.SetActive(false);
+        selectionRect.SetParent(null);
+    }
+
 
 	#region InventoryTabButton
 

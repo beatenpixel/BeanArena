@@ -18,62 +18,95 @@ MonoBehaviour:
   itemDescription_LKey: ITEM_DESCR_PISTOL
   icon: {fileID: 11400000, guid: 19561c3bd6200a74da1d3a82f8ba990d, type: 2}
   prefab: {fileID: 2846095526838627189, guid: ae0f199766662e44a97c3d3327ece0ba, type: 3}
-  maxLevel: 5
+  maxLevel: 10
   stats:
   - statType: 5
     valueType: 0
     progressionType: 0
-    progressionFunc: 3
-    intStartEndValue: {x: 10, y: 1000}
+    progressionFunc: 1
+    upgradeDirection: 1
+    intStartEndValue: {x: 0, y: 2000}
     floatStartEndValue: {x: 0, y: 0}
     values:
-    - intValue: 25
-      floatValue: 0
-      manual: 1
-    - intValue: 75
-      floatValue: 0
-      manual: 0
-    - intValue: 275
-      floatValue: 0
-      manual: 0
-    - intValue: 600
-      floatValue: 0
-      manual: 0
-    - intValue: 1000
-      floatValue: 0
-      manual: 0
-    roundAccuracy: 25
-    soItemInfo: {fileID: 11400000}
-    isFoldoutInInspector: 0
-  - statType: 1
-    valueType: 0
-    progressionType: 0
-    progressionFunc: 3
-    intStartEndValue: {x: 5, y: 20}
-    floatStartEndValue: {x: 0, y: 0}
-    values:
-    - intValue: 5
-      floatValue: 0
-      manual: 0
-    - intValue: 6
-      floatValue: 0
-      manual: 0
-    - intValue: 9
-      floatValue: 0
-      manual: 0
-    - intValue: 14
+    - intValue: 0
       floatValue: 0
       manual: 0
     - intValue: 20
       floatValue: 0
       manual: 0
-    roundAccuracy: 0.1
-    soItemInfo: {fileID: 11400000}
+    - intValue: 95
+      floatValue: 0
+      manual: 0
+    - intValue: 220
+      floatValue: 0
+      manual: 0
+    - intValue: 395
+      floatValue: 0
+      manual: 0
+    - intValue: 615
+      floatValue: 0
+      manual: 0
+    - intValue: 885
+      floatValue: 0
+      manual: 0
+    - intValue: 1205
+      floatValue: 0
+      manual: 0
+    - intValue: 1580
+      floatValue: 0
+      manual: 0
+    - intValue: 2000
+      floatValue: 0
+      manual: 0
+    roundAccuracy: 5
+    maxLevel: 10
     isFoldoutInInspector: 0
+  - statType: 1
+    valueType: 0
+    progressionType: 0
+    progressionFunc: 1
+    upgradeDirection: 1
+    intStartEndValue: {x: 5, y: 40}
+    floatStartEndValue: {x: 0, y: 0}
+    values:
+    - intValue: 5
+      floatValue: 0
+      manual: 0
+    - intValue: 5
+      floatValue: 0
+      manual: 0
+    - intValue: 7
+      floatValue: 0
+      manual: 0
+    - intValue: 9
+      floatValue: 0
+      manual: 0
+    - intValue: 12
+      floatValue: 0
+      manual: 0
+    - intValue: 16
+      floatValue: 0
+      manual: 0
+    - intValue: 20
+      floatValue: 0
+      manual: 0
+    - intValue: 26
+      floatValue: 0
+      manual: 0
+    - intValue: 33
+      floatValue: 0
+      manual: 0
+    - intValue: 40
+      floatValue: 0
+      manual: 0
+    roundAccuracy: 0.1
+    maxLevel: 10
+    isFoldoutInInspector: 1
   - statType: 4
     valueType: 1
     progressionType: 0
-    progressionFunc: 3
+    progressionFunc: 1
+    upgradeDirection: 1
     intStartEndValue: {x: 5, y: 20}
     floatStartEndValue: {x: 0.5, y: 0.2}
     values:
@@ -81,17 +114,32 @@ MonoBehaviour:
       floatValue: 0.5
       manual: 0
     - intValue: 6
-      floatValue: 0.47
+      floatValue: 0.48999998
       manual: 0
     - intValue: 9
-      floatValue: 0.41
+      floatValue: 0.48
       manual: 0
     - intValue: 14
+      floatValue: 0.45999998
+      manual: 0
+    - intValue: 20
+      floatValue: 0.44
+      manual: 0
+    - intValue: 20
+      floatValue: 0.39999998
+      manual: 0
+    - intValue: 20
+      floatValue: 0.35999998
+      manual: 0
+    - intValue: 20
       floatValue: 0.31
+      manual: 0
+    - intValue: 20
+      floatValue: 0.26
       manual: 0
     - intValue: 20
       floatValue: 0.19999999
       manual: 0
     roundAccuracy: 0.01
-    soItemInfo: {fileID: 11400000}
-    isFoldoutInInspector: 0
+    maxLevel: 10
+    isFoldoutInInspector: 1

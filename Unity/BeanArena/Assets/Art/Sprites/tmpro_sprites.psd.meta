@@ -262,7 +262,7 @@ TextureImporter:
         width: 160
         height: 170
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -283,7 +283,7 @@ TextureImporter:
         width: 130
         height: 133
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -291,6 +291,27 @@ TextureImporter:
       bones: []
       spriteID: d12b805dd60f1ada0800000000000000
       internalID: -5935198479381384675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: upgrade
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 876
+        width: 138
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad111cf7e0711d14d8af9bf9184cf40d
+      internalID: -822885012
       vertices: []
       indices: 
       edges: []
@@ -312,6 +333,7 @@ TextureImporter:
       time: 1922921581267463393
       cup: 7374767111035791262
       coin: -5935198479381384675
+      upgrade: -822885012
       bean_gold: 3959047777783908238
       gem: 3867287787966158001
   spritePackingTag: 

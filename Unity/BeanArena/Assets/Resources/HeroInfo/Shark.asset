@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shark
   m_EditorClassIdentifier: 
   heroType: 2
-  heroRareness: 0
+  heroRareness: 3
   icon: {fileID: 11400000, guid: 56025a7f6cfb46048affaee911ffbf44, type: 2}
   prefab: {fileID: 0}
   maxLevel: 5

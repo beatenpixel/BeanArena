@@ -14,6 +14,46 @@ public class ItemInfoPanel : MonoBehaviour {
         
     }
 
+    public void DrawInfoMerge(ItemButton itemAButton, ItemButton itemBButton) {
+        GD_Item itemA = itemAButton.currentItem;
+        GD_Item itemB = itemBButton.currentItem;
+
+        Debug.Log("Preview 3");
+
+        ItemStatProgression itemAFuseProg = itemA.info.GetStat(StatType.FusePoints);
+        int itemAMaxFusePoints = itemAFuseProg.values[itemAFuseProg.maxLevel - 1].intValue;
+
+        int fusePoints = Mathf.Clamp(itemA.fusePoints + itemB.fusePoints, 0, itemAMaxFusePoints);
+        int newLevel = itemAFuseProg.GetLevelByValue(fusePoints);
+
+        Debug.Log($"Fuse {fusePoints} Level: {newLevel}");
+
+        bool hasFuse = itemA.info.GetFusePointsPercent(fusePoints, newLevel, out float fuseProgress);
+
+        isevIconDrawer.DrawItemMerged(itemA, new MergedItemInfo() {
+            prevLevel = itemA.levelID,
+            newLevel = newLevel,
+            levelChanged = itemA.levelID != newLevel,
+            progressBar = fuseProgress
+        });
+
+        itemNameText.text = MLocalization.Get(itemA.info.itemName_LKey);
+
+        string statsStr = "";
+        for (int i = 0; i < itemA.info.stats.Count; i++) {
+            if (itemA.info.stats[i].statType == StatType.FusePoints)
+                continue;
+
+            string lineStr = GetTMProStringForStatType(itemA.info.stats[i].statType);            
+
+            lineStr += itemA.info.stats[i].GetDifferenceStr(itemA.levelID, newLevel);
+
+            statsStr += lineStr + "\n";
+        }
+
+        itemStatsText.text = statsStr;
+    }
+
     public void DrawInfo(GD_Item item) {
         SO_ItemInfo itemInfo = item.info;
 
@@ -22,9 +62,17 @@ public class ItemInfoPanel : MonoBehaviour {
 
         string statsStr = "";
         for (int i = 0; i < itemInfo.stats.Count; i++) {
-            string lineStr = GetTMProStringForStatType(itemInfo.stats[i].statType); 
+            if (itemInfo.stats[i].statType == StatType.FusePoints)
+                continue;
 
-            lineStr += itemInfo.stats[i].GetValue(item.levelID);
+            string lineStr = GetTMProStringForStatType(itemInfo.stats[i].statType);
+
+            if (itemInfo.stats[i].statType == StatType.FusePoints) {
+                lineStr += item.fusePoints;
+            } else {                
+                lineStr += itemInfo.stats[i].GetValue(item.levelID);
+            }
+
             statsStr += lineStr + "\n";
         }
 

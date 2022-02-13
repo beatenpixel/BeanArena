@@ -18,31 +18,54 @@ MonoBehaviour:
   itemDescription_LKey: ITEM_DESCR_WATER_PISTOL
   icon: {fileID: 11400000, guid: 04f1c03718323f24fa4177496a4596f5, type: 2}
   prefab: {fileID: 2846095526838627189, guid: 0f981e59cf3d67d43997661846b1340a, type: 3}
-  maxLevel: 3
+  maxLevel: 10
   stats:
   - statType: 5
     valueType: 0
     progressionType: 0
     progressionFunc: 3
-    intStartEndValue: {x: 100, y: 500}
+    upgradeDirection: 1
+    intStartEndValue: {x: 25, y: 500}
     floatStartEndValue: {x: 0, y: 0}
     values:
-    - intValue: 100
+    - intValue: 25
       floatValue: 0
       manual: 0
-    - intValue: 200
+    - intValue: 25
+      floatValue: 0
+      manual: 0
+    - intValue: 50
+      floatValue: 0
+      manual: 0
+    - intValue: 75
+      floatValue: 0
+      manual: 0
+    - intValue: 125
+      floatValue: 0
+      manual: 0
+    - intValue: 175
+      floatValue: 0
+      manual: 0
+    - intValue: 250
+      floatValue: 0
+      manual: 0
+    - intValue: 325
+      floatValue: 0
+      manual: 0
+    - intValue: 400
       floatValue: 0
       manual: 0
     - intValue: 500
       floatValue: 0
       manual: 0
     roundAccuracy: 25
-    soItemInfo: {fileID: 11400000}
+    maxLevel: 10
     isFoldoutInInspector: 1
   - statType: 1
     valueType: 0
     progressionType: 0
     progressionFunc: 3
+    upgradeDirection: 1
     intStartEndValue: {x: 5, y: 20}
     floatStartEndValue: {x: 0, y: 0}
     values:
@@ -55,6 +78,27 @@ MonoBehaviour:
     - intValue: 20
       floatValue: 0
       manual: 0
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 0
+      floatValue: 0
+      manual: 0
     roundAccuracy: 0.1
-    soItemInfo: {fileID: 11400000}
+    maxLevel: 10
     isFoldoutInInspector: 1

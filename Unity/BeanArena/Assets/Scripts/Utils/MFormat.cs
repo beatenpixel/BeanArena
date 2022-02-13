@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class MFormat {
 
+    public static string TextColorTag(Color color) {
+        return "<color=#" + ColorUtility.ToHtmlStringRGB(color) + ">";
+    }
+
+    public static string TextColorTagEnd => "</color>";
+
     public static string GetTMProIcon(TMProIcon icon) {
         string statIconStr = "<sprite name=\"";
 
@@ -75,11 +81,11 @@ public class MFormat {
         }
     }
 
-    public static string GetLVLString(int level, int maxLevel) {
-        if (level == maxLevel) {
+    public static string GetLVLString(int levelID, int maxLevelsCount) {
+        if (levelID == maxLevelsCount - 1) {
             return MLocalization.Get("LVL_MAX_STR");
         } else {
-            return MLocalization.Get("LVL_STR", LocalizationGroup.Main, level);
+            return MLocalization.Get("LVL_STR", LocalizationGroup.Main, levelID);
         }
     }
 

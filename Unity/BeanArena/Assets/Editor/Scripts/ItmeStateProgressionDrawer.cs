@@ -82,6 +82,14 @@ public class ItemStatProgressionDrawer : PropertyDrawer {
             progressionFuncProp.enumValueIndex = (int)progressionFunc;
 
             position = AddLine(position);
+            Rect upgradeDirectionRect = position;
+            progressionTypeRect.width *= 0.5f;
+
+            var upgradeDirectionProp = property.FindPropertyRelative(nameof(ItemStatProgression.upgradeDirection));
+            ItemStatUpgradeDirection upgradeDirection = (ItemStatUpgradeDirection)EditorGUI.EnumPopup(upgradeDirectionRect, (ItemStatUpgradeDirection)upgradeDirectionProp.enumValueIndex);
+            upgradeDirectionProp.enumValueIndex = (int)upgradeDirection;
+
+            position = AddLine(position);
 
             bool isInt = statValueType == StatValueType.Int;
 

@@ -210,6 +210,14 @@ MonoBehaviour:
     m_Localized: BEAN!
     m_Metadata:
       m_Items: []
+  - m_Id: 2536358068056064
+    m_Localized: <sprite name="upgrade">Upgrade!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2536358101610496
+    m_Localized: Equip
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

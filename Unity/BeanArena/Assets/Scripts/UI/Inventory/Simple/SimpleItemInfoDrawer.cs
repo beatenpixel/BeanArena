@@ -9,8 +9,4 @@ public class SimpleItemInfoDrawer : ItemInfoDrawerBase {
         base.Init();
     }
 
-    public override void DrawInfo(object item) {
-        base.DrawInfo(item);
-    }
-
 }

@@ -46,35 +46,14 @@ public class GD_Inventory : GD {
     [OnDeserializing]
     protected override void SetDefaults(StreamingContext ds) {
         items = new List<GD_Item>();
-        items.Add(new GD_Item() {
-            itemType = ItemType.Pistol,
-            fusePoints = 40,
-            levelID = 1,
-            rareness = ItemRareness.Common,
-        });
-        items.Add(new GD_Item() {
-            itemType = ItemType.WaterPistol,
-            fusePoints = 150,
-            levelID = 2,
-            rareness = ItemRareness.Epic
-        });
-        items.Add(new GD_Item() {
-            itemType = ItemType.Wheel,
-            fusePoints = 666,
-            levelID = 3,
-            rareness = ItemRareness.Legendary
-        });
-        items.Add(new GD_Item() {
-            itemType = ItemType.Wheel,
-            fusePoints = 0,
-            levelID = 0,
-            rareness = ItemRareness.Common
-        });
 
         chests = new List<GD_Chest>();
         chests.Add(new GD_Chest());
         chests.Add(new GD_Chest() {
             type = ChestType.Epic
+        });
+        chests.Add(new GD_Chest() {
+            type = ChestType.Legendary
         });
         chests.Add(new GD_Chest() {
             type = ChestType.Legendary

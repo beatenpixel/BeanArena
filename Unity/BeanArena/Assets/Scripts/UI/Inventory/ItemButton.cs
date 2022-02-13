@@ -55,7 +55,9 @@ public class ItemButton : UIButtonBase {
         if(isDragging) {
             subRectT.position = Vector2.Lerp(subRectT.position, Input.mousePosition, Time.deltaTime * 15f);
 
-            if(Input.GetMouseButtonUp(0)) {
+            OnEvent?.Invoke(UIEventType.DragUpdate, this, onClickArg);
+
+            if (Input.GetMouseButtonUp(0)) {
                 StopDrag();
             }
         }

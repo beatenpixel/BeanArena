@@ -49,9 +49,21 @@ public class IconDrawer : PoolObject {
         }                
     }
 
-    public void DrawLevel(string levelStr) {
+    public void DrawLevel(string levelStr, Color? color = null) {
         levelText.text = levelStr;
-    } 
+        levelText.color = color ?? Color.white;
+    }
+
+    public void DrawItemMerged(GD_Item item, MergedItemInfo info) {        
+        rarenessImage.color = MAssets.colors[("rareness_" + item.rareness.ToString()).ToLower()].SetA(0.5f);
+
+        SetIcon(item.info.icon);
+        DrawIcon();
+
+        DrawBar(info.progressBar);
+
+        DrawLevel(MFormat.GetLVLString(info.newLevel, item.info.maxLevel), info.levelChanged ? MAssets.colors["STAT_MAGENTA"] : null);
+    }
 
     public void DrawItem(GD_Item itemData, SO_ItemInfo itemInfo) {
         bool hasFuse = itemInfo.GetFusePointsPercent(itemData.fusePoints, itemData.levelID, out float fuseProgress);
@@ -77,7 +89,7 @@ public class IconDrawer : PoolObject {
         DrawIcon();
 
         DrawBar(null);
-        DrawLevel(MFormat.GetLVLString(item.levelID, item.info.maxLevel));
+        DrawLevel(MFormat.GetLVLString(item.levelID, item.info.maxLevelsCount));
     }
 
     public void DrawChest(GD_Chest chestData, SO_ChestInfo chestInfo) {
@@ -106,4 +118,11 @@ public class IconDrawer : PoolObject {
     }
 #endif
 
+}
+
+public struct MergedItemInfo {
+    public int prevLevel;
+    public int newLevel;
+    public bool levelChanged;
+    public float progressBar;
 }

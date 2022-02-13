@@ -14,11 +14,11 @@ public static class GameRandom  {
     };
 
     private static int[] ITEM_LEVEL_CHANCE = new int[] {
-        50, 20, 10, 5, 1
+        50, 15, 7, 3
     };
 
     private static int[] LEVELS_ARRAY = new int[] {
-        1,2,3,4,5
+        0,1,2,3
     };
 
     private static ChestType[] chestTypes;
