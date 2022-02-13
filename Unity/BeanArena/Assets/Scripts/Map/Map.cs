@@ -44,6 +44,11 @@ public abstract class Map : MonoBehaviour {
 		targets.Add(hero);
 	}
 
+    public void RemoveHero(HeroBase hero) {
+        hero.DestroyHero();
+        heroes.Remove(hero);
+    }
+
     public void ResetMap() {
         for (int i = 0; i < heroes.Count; i++) {
             heroes[i].Revive();
@@ -52,8 +57,7 @@ public abstract class Map : MonoBehaviour {
 
     public void OnGameExit() {
         for (int i = heroes.Count - 1; i >= 0; i--) {
-            heroes[i].DestroyHero();
-            heroes.RemoveAt(i);
+            RemoveHero(heroes[i]);
         }
     }
 

@@ -81,7 +81,7 @@ public class GD_Inventory : GD {
         });
 
         heroes = new List<GD_HeroItem>();
-        heroes.Add(new GD_HeroItem() { heroType = HeroType.DefaultBean });
+        heroes.Add(new GD_HeroItem() { heroType = HeroType.DefaultBean, isEquiped = true });
         heroes.Add(new GD_HeroItem() { heroType = HeroType.Shark });
         heroes.Add(new GD_HeroItem() { heroType = HeroType.Skeleton });
         heroes.Add(new GD_HeroItem() { heroType = HeroType.Clown });

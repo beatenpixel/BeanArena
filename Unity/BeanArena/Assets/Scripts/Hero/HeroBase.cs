@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class HeroBase : PoolObject, IDamageable, ITarget {
+public abstract class HeroBase : PoolObject, IDamageable, ITarget {
 
 	public HeroInfo info { get; private set; }
 
@@ -13,7 +13,6 @@ public class HeroBase : PoolObject, IDamageable, ITarget {
 	[Header("Links")]
 	public HeroEquipment heroEquipment;
 
-	private HeroFaceRend faceRend;
 	[HideInInspector] public HeroBody body;
 	private List<HeroArm> arms;
 	public List<HeroLimb> limbs { get; private set; }
@@ -49,27 +48,28 @@ public class HeroBase : PoolObject, IDamageable, ITarget {
     protected override void Awake() {
         base.Awake();
 
-		body = GetComponentInChildren<HeroBody>();
-		arms = new List<HeroArm>(GetComponentsInChildren<HeroArm>());
-		faceRend = GetComponentInChildren<HeroFaceRend>();
+        InitOnAwake();
+	}
 
-		limbs = new List<HeroLimb>();
-		limbs.Add(body);
-		limbs.AddRange(arms);
+    protected virtual void InitOnAwake() {
+        body = GetComponentInChildren<HeroBody>();
+        arms = new List<HeroArm>(GetComponentsInChildren<HeroArm>());
+
+        limbs = new List<HeroLimb>();
+        limbs.Add(body);
+        limbs.AddRange(arms);
 
         for (int i = 0; i < limbs.Count; i++) {
-			limbs[i].Init();
+            limbs[i].Init();
         }
 
-		heroEquipment.InitComponent(this);
-		heroEquipment.Init();
+        heroEquipment.InitComponent(this);
+        heroEquipment.Init();
 
-		faceRend.Init();
-
-		m_TargetAimPoints.Add(new TargetAimPoint() {
-			worldPos = body.transform.position
-		});
-	}
+        m_TargetAimPoints.Add(new TargetAimPoint() {
+            worldPos = body.transform.position
+        });
+    }
 
 	public virtual void InitInFactory(HeroConfig config) {
         initConfig = config;
@@ -85,16 +85,14 @@ public class HeroBase : PoolObject, IDamageable, ITarget {
         if (config.role == HeroRole.Enemy) {
 			WUI_TextStyle style = WUI_TextStyle.beanNickname;
 			style.textColor = Color.white.SetA(0.3f);
-			nicknameText = WorldUI.inst.AddText(config.nickname, body.transform, Vector2.up * 1.5f, style);
+			//nicknameText = WorldUI.inst.AddText(config.nickname, body.transform, Vector2.up * 1.5f, style);
 
 			t.localScale = Vector3.one * 1.1f;
 		}
 
-		Color beanColor = MAssets.colors["bean_team_" + config.teamID];
-		
         for (int i = 0; i < limbs.Count; i++) {
-			limbs[i].rend.SetBaseColor(beanColor);
-			limbs[i].gameObject.layer = Game.TeamIDToLayer(config.teamID);
+            limbs[i].rend.SetBaseColor(Color.white);
+            limbs[i].gameObject.layer = Game.TeamIDToLayer(config.teamID);
 		}
 
 		gameObject.layer = Game.TeamIDToLayer(config.teamID);
@@ -123,7 +121,7 @@ public class HeroBase : PoolObject, IDamageable, ITarget {
         }
     }
 
-	public void InternalUpdate() {
+	public virtual void InternalUpdate() {
 		targetAimPoints[0].worldPos = body.transform.position;
 	}
 
@@ -274,30 +272,23 @@ public class HeroBase : PoolObject, IDamageable, ITarget {
 		return false;
 	}
 
-	private void Die() {
+	protected virtual void Die() {
 		info.state = HeroState.Dead;
-		faceRend.SetFace(HeroFace.Dead);
 		HeroDieEvent.Invoke(new HeroDieEvent(this));
     }
 
-    public void Revive() {
+    public virtual void Revive() {
         info.health = info.maxHealth;
         info.state = HeroState.Alive;          
 
         ReturnToSpawnPosition();
-        SetOrientation(initConfig.orientation);
-
-        faceRend.SetFace(HeroFace.Normal);
+        SetOrientation(initConfig.orientation);        
 
         HeroDamageEvent.Invoke(new HeroDamageEvent(this));
     }
 
 	public Vector2 GetPosition() {
 		return body.transform.position;
-    }
-
-	public override Type GetPoolObjectType() {
-		return typeof(HeroBase);
     }
 
 	public IEnumerable<HeroLimb> this[LimbType type] {
@@ -307,7 +298,7 @@ public class HeroBase : PoolObject, IDamageable, ITarget {
     }
 
 	// IDamageable
-    public DamageResponse TakeDamage(DamageInfo damage) {
+    public virtual DamageResponse TakeDamage(DamageInfo damage) {
 
 		switch(damage.causeType) {
 			case DamageCause.PHYSICS: {
@@ -315,8 +306,6 @@ public class HeroBase : PoolObject, IDamageable, ITarget {
 
 					float dmg = physDmg.GetDamage();
 					info.health -= dmg;
-
-					//Debug.Log($"physDmg:{physDmg.limb == null} physDmg.limb.rend:{physDmg.limb.rend}");
 
 					physDmg.limb.rend.TakeDamage(Mathf.Clamp01(dmg / info.maxHealth * 4));					
 				}break;
@@ -343,11 +332,12 @@ public class HeroBase : PoolObject, IDamageable, ITarget {
 
 		return new DamageResponse();
     }
+
 	// IDamageable
 
-	public void DestroyHero() {
+	public virtual void DestroyHero() {
         heroEquipment.DestroyEquipment();
-        WorldUI.inst.RemoveText(nicknameText);
+        //WorldUI.inst.RemoveText(nicknameText);
 
         Destroy(gameObject);
         //Push();
@@ -374,8 +364,8 @@ public class HeroInput {
 
 [System.Serializable]
 public class MoveConfig {
-	public float moveForce = 200f;
-	public float jumpForce = 800f;
+	public float moveForce = 400;
+	public float jumpForce = 1200f;
 }
 
 [System.Serializable]

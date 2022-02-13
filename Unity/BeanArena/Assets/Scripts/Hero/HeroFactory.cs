@@ -10,7 +10,13 @@ public class HeroFactory : MonoBehaviour {
     }
 
     public HeroBase Create(HeroConfig config, Vector2 position) {
-        HeroBase hero = MPool.Get<HeroBase>();
+        //Hero_DefaultBean hero = MPool.Get<Hero_DefaultBean>();
+        HeroBase hero = null;
+
+        switch(config.heroType) {
+            case HeroType.Shark: hero = MPool.Get<Hero_Shbark>(); break;
+            default: hero = MPool.Get<Hero_DefaultBean>(); break;
+        } 
 
         hero.InitInFactory(config);
         hero.SetSpawnPosition(position);

@@ -48,6 +48,11 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
 
             GD_HeroItem item = heroesToDraw[inventorySlotID];
 
+            Game.data.SetEquipedHero(item);
+
+            GM_Menu.inst.DestroyPreviewHero();
+            GM_Menu.inst.SpawnPreviewHero();
+
             infoDrawer.DrawInfo(item);
         }
 

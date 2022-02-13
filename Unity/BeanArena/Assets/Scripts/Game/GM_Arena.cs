@@ -49,11 +49,14 @@ public class GM_Arena : GameMode {
     }
 
     private void SpawnHeroes() {
+        GD_HeroItem equipedHero = Game.data.GetEquipedHero();
+
 		HeroBase playerHero = heroFactory.Create(new HeroConfig() {
 			nickname = "Lorg",
 			orientation = Orientation.Right,
 			teamID = 0,
 			role = HeroRole.Player,
+            heroType = equipedHero.heroType
 		}, genericMap.GetArea("PlayerSpawn").GetRandomPosition());
 
 		player.AssignHero(playerHero);
@@ -77,6 +80,7 @@ public class GM_Arena : GameMode {
 				orientation = Orientation.Left,
 				teamID = 1,
 				role = HeroRole.Enemy,
+                heroType = HeroType.DefaultBean
 			}, genericMap.GetArea("EnemySpawn").GetRandomPosition());
 
             enemyHero.info.mmr = MRandom.Range(30, 100);

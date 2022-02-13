@@ -25,6 +25,25 @@ public class GD_Game : GD {
         player.Restore();
     }
 
+    public void SetEquipedHero(GD_HeroItem hero) {
+        for (int i = 0; i < inventory.heroes.Count; i++) {
+            inventory.heroes[i].isEquiped = false;
+        }
+
+        hero.isEquiped = true;
+    }
+
+    public GD_HeroItem GetEquipedHero() {
+        for (int i = 0; i < inventory.heroes.Count; i++) {
+            if(inventory.heroes[i].isEquiped) {
+                return inventory.heroes[i];
+            }
+        }
+
+        inventory.heroes[0].isEquiped = true;
+        return inventory.heroes[0];
+    }
+
     public GD_Game(SerializationInfo info, StreamingContext sc) : base(info, sc) {
         timeInGame = info.GetInt32("timeInGame");
         gameEntersCount = info.GetInt32("gameEntersCount");

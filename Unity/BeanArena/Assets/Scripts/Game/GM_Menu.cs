@@ -11,6 +11,8 @@ public class GM_Menu : GameMode {
 
 	private Map_Menu map;
 
+    private HeroBase previewHero;
+
     public override void InitGame(Game game) {
         base.InitGame(game);
 		inst = this;
@@ -20,12 +22,14 @@ public class GM_Menu : GameMode {
 
     public override bool StartGame() {
 
-		Spawn();
+		SpawnPreviewHero();
 
 		GameUI.inst.Show(false);
 		MenuUI.inst.Show(true);
 
-		return base.StartGame();
+        MCamera.inst.SetFixedArea(new Vector2(0, 0), new Vector2(10, 8), ScreenMatchType.Vertical, true);
+
+        return base.StartGame();
     }
 
     public override void InternalUpdate() {
@@ -47,27 +51,32 @@ public class GM_Menu : GameMode {
 		}
     }
 
-    private void Spawn() {
+    public void SpawnPreviewHero() {
         Debug.Log("GM_Menu:Spawn");
 
-		HeroBase playerHero = heroFactory.Create(new HeroConfig() {
+        GD_HeroItem equipedHero = Game.data.GetEquipedHero();
+
+        previewHero = heroFactory.Create(new HeroConfig() {
 			nickname = "Lorg",
 			orientation = Orientation.Right,
 			teamID = 0,
 			role = HeroRole.Player,
+            heroType = equipedHero.heroType
 		}, genericMap.GetArea("PlayerSpawn").GetRandomPosition());
 
-		player.AssignHero(playerHero);
+		player.AssignHero(previewHero);
 		player.Init();
 
-		genericMap.AddHero(playerHero);
+		genericMap.AddHero(previewHero);
 
-		MCamera.inst.SetFixedArea(new Vector2(0, 0), new Vector2(10, 8), ScreenMatchType.Vertical, true);
+		MenuUI.inst.inventoryDrawer.worldUI.SetTargetHero(previewHero);
 
-		MenuUI.inst.inventoryDrawer.worldUI.SetTargetHero(playerHero);
-
-        playerHero.heroEquipment.LoadEquipmentFromGameData();
+        previewHero.heroEquipment.LoadEquipmentFromGameData();
 	}
+
+    public void DestroyPreviewHero() {
+        genericMap.RemoveHero(previewHero);
+    }
 
     public enum MenuState {
         Idle,
