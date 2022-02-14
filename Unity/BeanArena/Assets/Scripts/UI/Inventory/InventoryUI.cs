@@ -34,7 +34,7 @@ public class InventoryUI : MonoBehaviour {
 
         isInsideInfoRect = new ChangeCheck<bool>(false);
 
-        tabButtons = new ObjectListSpawner<InventoryTabButton>(Spawn_InventoryTabButton, Enable_InventoryTabButton, Update_InventoryTabButton);
+        tabButtons = new ObjectListSpawner<InventoryTabButton>(Spawn_InventoryTabButton, Enable_InventoryTabButton, Update_InventoryTabButton, Destroy_InventoryTabButton);
 		tabButtons.Update(groupDrawers.Count);
 
 		for (int i = 0; i < tabButtons.activeObjectsCount; i++) {
@@ -130,6 +130,8 @@ public class InventoryUI : MonoBehaviour {
                 break;
 
 			case UIEventType.DragEnd:
+
+                Debug.Log("DragEnd" + Time.time);
 
 				if (button.buttonState == ItemButton.ItemButtonState.InInventory) {
 					if (worldUI.CheckInsideDropArea()) {
@@ -311,9 +313,13 @@ public class InventoryUI : MonoBehaviour {
         }        
 	}
 
+    private void Destroy_InventoryTabButton(InventoryTabButton obj, int ind) {
+
+    }
+
     #endregion
 
-	public enum InventoryState {
+    public enum InventoryState {
 		None,
 		DragFromInventoryToHero,
 		DragFromHeroToInventory

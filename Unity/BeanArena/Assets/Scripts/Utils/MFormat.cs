@@ -85,7 +85,7 @@ public class MFormat {
         if (levelID == maxLevelsCount - 1) {
             return MLocalization.Get("LVL_MAX_STR");
         } else {
-            return MLocalization.Get("LVL_STR", LocalizationGroup.Main, levelID);
+            return MLocalization.Get("LVL_STR", LocalizationGroup.Main, (levelID + 1));
         }
     }
 

@@ -135,7 +135,7 @@ public class ItemStatProgression {
             int intValue = (int)value;
 
             for (int i = 0; i < values.Length - 1; i++) {
-                if(intValue > values[i].intValue && intValue < values[i + 1].intValue) {
+                if(intValue >= values[i].intValue && intValue < values[i + 1].intValue) {
                     return i;
                 }
             }

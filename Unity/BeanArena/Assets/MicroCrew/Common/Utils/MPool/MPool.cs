@@ -62,6 +62,7 @@ namespace MicroCrew.Utils {
             if (objects[targetType][subType].Count > 0) {
                 T obj = (T)objects[targetType][subType][0];
                 objects[targetType][subType].RemoveAt(0);
+                obj.GetGameObject().transform.SetParent(parent);
                 obj.OnPop();
                 return obj;
             } else {

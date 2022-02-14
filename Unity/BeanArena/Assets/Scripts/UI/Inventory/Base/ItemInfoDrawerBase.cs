@@ -8,8 +8,8 @@ public abstract class ItemInfoDrawerBase : MonoBehaviour {
     public GameObject panelRootGO;
     public ItemInfoPanel itemInfoPanel;
 
-    [HideInInspector] public GD_Item lastDrawnItem;
-    [HideInInspector] public ItemButton lastItemButton;
+    [HideInInspector] public GD_Item lastDrawnItem { get; private set; }
+    [HideInInspector] public ItemButton lastItemButton { get; private set; }
 
     public virtual void Init() {
         itemInfoPanel.Init();

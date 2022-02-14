@@ -10,15 +10,26 @@ public class ObjectListSpawner<T> where T : MonoBehaviour {
 	private Func<int,T> spawnFunc;
 	private Action<T, int, bool> enableFunc;
 	private Action<T, int> updateFunc;
+    private Action<T, int> destroyFunc;
 
 	public int activeObjectsCount { get; private set; }
 
-	public ObjectListSpawner(Func<int, T> spawnFunc, Action<T,int,bool> enableFunc, Action<T, int> updateFunc) {
+	public ObjectListSpawner(Func<int, T> spawnFunc, Action<T,int,bool> enableFunc, Action<T, int> updateFunc, Action<T,int> destroyFunc) {
 		objects = new List<T>();
 		this.spawnFunc = spawnFunc;
 		this.enableFunc = enableFunc;
 		this.updateFunc = updateFunc;
-	}
+        this.destroyFunc = destroyFunc;
+    }
+
+    public void Remove(T obj) {
+        if(objects.Contains(obj)) {
+            int ind = objects.IndexOf(obj);
+            destroyFunc(obj, ind);
+            objects.Remove(obj);
+            activeObjectsCount -= 1;
+        }
+    }
 
 	public void Update(int count) {
         int prevCount = activeObjectsCount;

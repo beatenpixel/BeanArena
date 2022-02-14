@@ -12,7 +12,7 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
     public override void Init(InventoryGroupConfig config) {
         base.Init(config);
 
-        itemButtons = new ObjectListSpawner<HeroItemButton>(SpawnItemButton, Enable_ItemButton, Update_ItemButton);
+        itemButtons = new ObjectListSpawner<HeroItemButton>(SpawnItemButton, Enable_ItemButton, Update_ItemButton, Destroy_ItemButton);
     }
 
     public override void Show(bool show) {
@@ -70,6 +70,10 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
     }
 
     private void Update_ItemButton(HeroItemButton obj, int ind) {
+
+    }
+
+    private void Destroy_ItemButton(HeroItemButton obj, int ind) {
 
     }
 

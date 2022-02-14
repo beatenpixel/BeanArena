@@ -24,7 +24,7 @@ public class InventoryWorldUI : MonoBehaviour {
 	private ObjectListSpawner<WorldItemSlot> worldSlots;
 
 	public void Init() {
-		worldSlots = new ObjectListSpawner<WorldItemSlot>(SlotFrame_Create, SlotFrame_Enable, SlotFrame_Update);
+		worldSlots = new ObjectListSpawner<WorldItemSlot>(SlotFrame_Create, SlotFrame_Enable, SlotFrame_Update, SlotFrame_Destroy);
 	}
 
     private void Update() {
@@ -79,7 +79,11 @@ public class InventoryWorldUI : MonoBehaviour {
         
     }
 
-	public WorldItemSlot GetWorldSlot(ItemButton item) {
+    private void SlotFrame_Destroy(WorldItemSlot frame, int id) {
+
+    }
+
+    public WorldItemSlot GetWorldSlot(ItemButton item) {
 		for (int i = 0; i < worldSlots.activeObjectsCount; i++) {
 			if (worldSlots[i].CompareItemButton(item)) {
 				return worldSlots[i];
