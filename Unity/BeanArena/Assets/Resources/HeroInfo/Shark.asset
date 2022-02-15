@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: Shark
   m_EditorClassIdentifier: 
   heroType: 2
-  heroRareness: 3
+  rarenessInfo: {fileID: 11400000, guid: e7f3a12553908074ea6d6fc3207c13ad, type: 2}
   icon: {fileID: 11400000, guid: 56025a7f6cfb46048affaee911ffbf44, type: 2}
   prefab: {fileID: 0}
-  maxLevel: 5
+  maxLevelsCount: 5
   stats:
   - statType: 0
     valueType: 0
     progressionType: 0
     progressionFunc: 0
+    upgradeDirection: 1
     intStartEndValue: {x: 10, y: 100}
     floatStartEndValue: {x: 0, y: 0}
     values:
@@ -34,12 +35,12 @@ MonoBehaviour:
     - intValue: 55
       floatValue: 0
       manual: 0
-    - intValue: 77
+    - intValue: 78
       floatValue: 0
       manual: 0
     - intValue: 100
       floatValue: 0
       manual: 0
-    roundAccuracy: 1
+    decimalsCount: 2
     maxLevel: 5
     isFoldoutInInspector: 1

@@ -18,22 +18,14 @@ public class ItemInfoPanel : MonoBehaviour {
         GD_Item itemA = itemAButton.currentItem;
         GD_Item itemB = itemBButton.currentItem;
 
-        Debug.Log("Preview 3");
+        ItemsMergeResult mergeResult = GD_Item.TestMerge(itemA, itemB);
 
-        ItemStatProgression itemAFuseProg = itemA.info.GetStat(StatType.FusePoints);
-        int itemAMaxFusePoints = itemAFuseProg.values[itemAFuseProg.maxLevel - 1].intValue;
-
-        int fusePoints = Mathf.Clamp(itemA.fusePoints + itemB.fusePoints, 0, itemAMaxFusePoints);
-        int newLevel = itemAFuseProg.GetLevelByValue(fusePoints);
-
-        Debug.Log($"Fuse {fusePoints} Level: {newLevel}");
-
-        bool hasFuse = itemA.info.GetFusePointsPercent(fusePoints, newLevel, out float fuseProgress);
+        bool hasFuse = itemA.info.GetFusePointsPercent(mergeResult.newFusePoints, mergeResult.newLevel, out float fuseProgress);
 
         isevIconDrawer.DrawItemMerged(itemA, new MergedItemInfo() {
             prevLevel = itemA.levelID,
-            newLevel = newLevel,
-            levelChanged = itemA.levelID != newLevel,
+            newLevel = mergeResult.newLevel,
+            levelChanged = itemA.levelID != mergeResult.newLevel,
             progressBar = fuseProgress
         });
 
@@ -46,7 +38,7 @@ public class ItemInfoPanel : MonoBehaviour {
 
             string lineStr = GetTMProStringForStatType(itemA.info.stats[i].statType);            
 
-            lineStr += itemA.info.stats[i].GetDifferenceStr(itemA.levelID, newLevel);
+            lineStr += itemA.info.stats[i].GetDifferenceStr(itemA.levelID, mergeResult.newLevel);
 
             statsStr += lineStr + "\n";
         }
@@ -58,6 +50,8 @@ public class ItemInfoPanel : MonoBehaviour {
         SO_ItemInfo itemInfo = item.info;
 
         isevIconDrawer.DrawItem(item, itemInfo);
+        isevIconDrawer.EnableRedDot(false);
+
         itemNameText.text = MLocalization.Get(itemInfo.itemName_LKey);
 
         string statsStr = "";
@@ -70,7 +64,7 @@ public class ItemInfoPanel : MonoBehaviour {
             if (itemInfo.stats[i].statType == StatType.FusePoints) {
                 lineStr += item.fusePoints;
             } else {                
-                lineStr += itemInfo.stats[i].GetValue(item.levelID);
+                lineStr += itemInfo.stats[i].GetValueStr(item.levelID);
             }
 
             statsStr += lineStr + "\n";

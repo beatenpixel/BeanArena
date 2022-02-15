@@ -14,10 +14,11 @@ public class UIW_ChestReward : UIWindow {
     public RectTransform totalIconDrawersRoot;
 
     private UIWData_ChestReward data;
-    private List<GD_Item> openedItems;
+    private List<ItemToOpen> itemsToOpen;
     private RefreshableObjectsList<IconDrawer> totalIcons;
 
     private bool waitingForClickToClose;
+    private int openedItemsCount;
 
     protected override void Awake() {
         base.Awake();
@@ -26,11 +27,30 @@ public class UIW_ChestReward : UIWindow {
 
     public override void OnInitBeforeOpen() {
         data = (UIWData_ChestReward)genericWindowData;
-        openedItems = new List<GD_Item>();
-        totalIcons.Refresh(data.content.items.Count);
+        itemsToOpen = new List<ItemToOpen>();
         waitingForClickToClose = false;
+        openedItemsCount = 0;
 
         Game.data.inventory.items.AddRange(data.content.items);
+
+
+        for (int i = 0; i < data.content.items.Count; i++) {
+            itemsToOpen.Add(new ItemToOpen() {
+                item = data.content.items[i]
+            });
+        }
+
+        for (int i = 0; i < data.content.heroCards.Count; i++) {
+            GD_HeroItem itemData = Game.data.inventory.heroes.Find(x => x.heroType == data.content.heroCards[i].heroType);
+            itemData.cardsCollected += data.content.heroCards[i].amount; 
+
+            itemsToOpen.Add(new ItemToOpen() {
+                item = null,
+                heroCard = data.content.heroCards[i]
+            });
+        }
+
+        totalIcons.Refresh(itemsToOpen.Count);
     }
 
     public override void InternalUpdate() {        
@@ -48,22 +68,27 @@ public class UIW_ChestReward : UIWindow {
     }
 
     private void NextItem() {
-        if (openedItems.Count < data.content.items.Count) {
-            GD_Item nextItem = data.content.items[openedItems.Count];
-            openedItems.Add(nextItem);
-
+        if (openedItemsCount < itemsToOpen.Count) {
+            ItemToOpen itemToOpen = itemsToOpen[openedItemsCount];
+            
             iconDrawer.gameObject.SetActive(true);
-            iconDrawer.DrawItem(nextItem, nextItem.info);
+            if (itemToOpen.item != null) {
+                iconDrawer.DrawItem(itemToOpen.item, itemToOpen.item.info);
+            } else {
+                iconDrawer.DrawHeroDrop(itemToOpen.heroCard.heroType, itemToOpen.heroCard.amount);
+            }
+            
+            iconDrawer.EnableRedDot(false);
             anim.Play("next_item", 0, 0f);
 
-            if (openedItems.Count == data.content.items.Count) {
-                this.WaitRealtime(() => {
-                    iconDrawer.gameObject.SetActive(false);
-                    ShowTotalIcons();
+            openedItemsCount++;
+        } else {
+            this.WaitRealtime(() => {
+                iconDrawer.gameObject.SetActive(false);
+                ShowTotalIcons();
 
-                    waitingForClickToClose = true;
-                }, 0.3f);
-            }
+                waitingForClickToClose = true;
+            }, 0.3f);
         }
     }
 
@@ -102,7 +127,16 @@ public class UIW_ChestReward : UIWindow {
 
     private void Icons_Refresh(int id, IconDrawer icon) {
         icon.t.localScale = new Vector3(0, 1, 1);
-        icon.DrawItem(data.content.items[id], data.content.items[id].info);
+
+        ItemToOpen itemToOpen = itemsToOpen[id];
+
+        if (itemToOpen.item != null) {
+            icon.DrawItem(itemToOpen.item, itemToOpen.item.info);
+        } else {
+            icon.DrawHeroDrop(itemToOpen.heroCard.heroType, itemToOpen.heroCard.amount);
+        }
+        //icon.DrawItem(data.content.items[id], data.content.items[id].info);
+        icon.EnableRedDot(false);
     }
 
     public override Type GetPoolObjectType() {
@@ -120,6 +154,12 @@ public class UIW_ChestReward : UIWindow {
             layer = UIWindowLayerType.Notification
         };
     }
+
+    public class ItemToOpen {
+        public GD_Item item;
+        public HeroCardsContainer heroCard;
+    }
+
 }
 
 public class UIWData_ChestReward : UIW_Data {

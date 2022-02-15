@@ -32,10 +32,6 @@ public class InventoryGroupDrawer : MonoBehaviour {
         allObjectsRootGO.SetActive(show);
     }
 
-    public virtual void ShowInfoPanel(bool show) {
-        infoDrawer.Show(show);
-    }
-
     public virtual void Draw() {
         
     } 

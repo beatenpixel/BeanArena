@@ -1030,7 +1030,7 @@ TextureImporter:
         width: 300
         height: 242
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1038,6 +1038,27 @@ TextureImporter:
       bones: []
       spriteID: 0a6f2c141321ada408eeac07d683dff9
       internalID: 1214459604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lock
+      rect:
+        serializedVersion: 2
+        x: 1582
+        y: 1206
+        width: 112
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8100a6eea3500a94f9b5f2c60cef01dc
+      internalID: 1279629441
       vertices: []
       indices: 
       edges: []
@@ -1088,6 +1109,7 @@ TextureImporter:
       ui_tex_0_15: 3695785943852260640
       ui_tex_0_28: -8032843666640372647
       outlined_square_2: 8150091747698094711
+      lock: 1279629441
       red_circle: 1270405969311979357
       outlined_square_0: -3015479599112616866
       circle_hollow_1: 1533761465559781216

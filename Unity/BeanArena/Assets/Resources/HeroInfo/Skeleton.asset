@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: Skeleton
   m_EditorClassIdentifier: 
   heroType: 3
-  heroRareness: 2
+  rarenessInfo: {fileID: 11400000, guid: 1a1acced7d599a948a3c8fa5a5515eb2, type: 2}
   icon: {fileID: 11400000, guid: d44d53e1ecd7cda449fbca4990cef834, type: 2}
   prefab: {fileID: 0}
-  maxLevel: 5
+  maxLevelsCount: 5
   stats:
   - statType: 0
     valueType: 0
     progressionType: 0
     progressionFunc: 0
+    upgradeDirection: 1
     intStartEndValue: {x: 10, y: 100}
     floatStartEndValue: {x: 0, y: 0}
     values:
@@ -34,12 +35,12 @@ MonoBehaviour:
     - intValue: 55
       floatValue: 0
       manual: 0
-    - intValue: 77
+    - intValue: 78
       floatValue: 0
       manual: 0
     - intValue: 100
       floatValue: 0
       manual: 0
-    roundAccuracy: 1
+    decimalsCount: 2
     maxLevel: 5
     isFoldoutInInspector: 1

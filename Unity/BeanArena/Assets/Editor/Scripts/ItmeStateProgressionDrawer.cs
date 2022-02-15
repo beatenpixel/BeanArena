@@ -111,19 +111,15 @@ public class ItemStatProgressionDrawer : PropertyDrawer {
 
                 position = AddLine(position);
 
-                var roundAccuracyProp = property.FindPropertyRelative(nameof(ItemStatProgression.roundAccuracy));
+                var roundAccuracyProp = property.FindPropertyRelative(nameof(ItemStatProgression.decimalsCount));
 
                 GUI.Label(position, new GUIContent("Acc"));
                 Rect roundAccRect = position; roundAccRect.x += 30;
-                float roundAccuracy = EditorGUI.FloatField(roundAccRect, roundAccuracyProp.floatValue, new GUIStyle(EditorStyles.numberField) {
+                int roundAccuracy = EditorGUI.IntField(roundAccRect, roundAccuracyProp.intValue, new GUIStyle(EditorStyles.numberField) {
                     fixedWidth = 60
                 });
 
-                if (Mathf.Abs(roundAccuracy) < 0.0001f) {
-                    roundAccuracy = 1;
-                }
-
-                roundAccuracyProp.floatValue = roundAccuracy;
+                roundAccuracyProp.intValue = roundAccuracy;
 
                 position = AddLine(position);
 
@@ -158,7 +154,7 @@ public class ItemStatProgressionDrawer : PropertyDrawer {
                             break;
                     }
 
-                    float interpValue = MMath.RoundToAccuracy(Mathf.Lerp(startEnd.x, startEnd.y, Mathf.Clamp01(p2)), roundAccuracy, false);
+                    float interpValue = MMath.RoundToAccuracy(Mathf.Lerp(startEnd.x, startEnd.y, Mathf.Clamp01(p2)), Mathf.Pow(10, -roundAccuracy), false);
 
                     if (!manual.boolValue) {
                         if (isInt) {

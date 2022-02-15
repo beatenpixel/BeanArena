@@ -14,6 +14,7 @@ public class GD_Item : GD {
     public bool isEquiped;
     [NonSerialized] public SO_ItemInfo info;
     public string itemGUID;
+    public bool isNew;
 
     public GD_Item() : base(GDType.ItemData, GDLoadOrder.Default) {
         SetDefaults(default);
@@ -30,6 +31,7 @@ public class GD_Item : GD {
         fusePoints = info.GetInt32("fusePoints");
         isEquiped = info.GetBoolean("isEquiped");
         itemGUID = info.GetString("itemGUID");
+        isNew = info.GetBoolean("isNew");
     }
 
     public override void GetObjectData(SerializationInfo info, StreamingContext context) {
@@ -40,6 +42,7 @@ public class GD_Item : GD {
         info.AddValue("fusePoints", fusePoints);
         info.AddValue("isEquiped", isEquiped);
         info.AddValue("itemGUID", itemGUID);
+        info.AddValue("isNew", isNew);
     }
 
     [OnDeserializing]
@@ -50,10 +53,35 @@ public class GD_Item : GD {
         fusePoints = 0;
         isEquiped = false;
         itemGUID = Guid.NewGuid().ToString();
+        isNew = true;
     }
 
     public override string ToString() {
         return $"GD_Item[{itemType}] R:{rareness} LVL:{levelID} F:{fusePoints}";
+    }
+
+    public StatValue GetStatValue(StatType statType) {
+        return info.GetStat(statType).values[levelID];
+    }
+
+    public static ItemsMergeResult TestMerge(GD_Item itemA, GD_Item itemB) {
+        ItemsMergeResult result = new ItemsMergeResult();
+
+        ItemStatProgression itemAFuseProg = itemA.info.GetStat(StatType.FusePoints);
+        int itemAMaxFusePoints = itemAFuseProg.values[itemAFuseProg.maxLevel - 1].intValue;
+
+        float rarenessCoeff = MUtils.rarenessFuseCoeff[itemB.rareness] / MUtils.rarenessFuseCoeff[itemA.rareness];
+
+        if((int)itemB.rareness > (int)itemA.rareness) {
+            rarenessCoeff *= 0.8f;
+        }
+
+        int fuseAdd = Mathf.RoundToInt(itemB.fusePoints * rarenessCoeff);
+
+        result.newFusePoints = Mathf.Clamp(itemA.fusePoints + fuseAdd, 0, itemAMaxFusePoints);
+        result.newLevel = itemAFuseProg.GetLevelByValue(result.newFusePoints);
+
+        return result;
     }
 
 }

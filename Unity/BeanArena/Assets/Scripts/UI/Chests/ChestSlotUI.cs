@@ -72,7 +72,7 @@ public class ChestSlotUI : MonoBehaviour {
 
         emptySlotText.gameObject.SetActive(false);
         iconDrawer.gameObject.SetActive(true);
-        iconDrawer.DrawChest(chest, chest.info);
+        iconDrawer.DrawChest(chest);
 
         if(chest.isOpening) {
             openButton.Enable(false);

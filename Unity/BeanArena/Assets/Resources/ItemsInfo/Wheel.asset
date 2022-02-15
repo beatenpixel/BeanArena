@@ -37,28 +37,28 @@ MonoBehaviour:
     - intValue: 60
       floatValue: 0
       manual: 0
-    - intValue: 130
+    - intValue: 134
       floatValue: 0
       manual: 0
-    - intValue: 230
+    - intValue: 234
       floatValue: 0
       manual: 0
-    - intValue: 355
+    - intValue: 357
       floatValue: 0
       manual: 0
     - intValue: 500
       floatValue: 0
       manual: 0
-    - intValue: 655
+    - intValue: 658
       floatValue: 0
       manual: 0
-    - intValue: 825
+    - intValue: 826
       floatValue: 0
       manual: 0
     - intValue: 1000
       floatValue: 0
       manual: 0
-    roundAccuracy: 5
+    decimalsCount: 2
     maxLevel: 10
     isFoldoutInInspector: 1
   - statType: 0
@@ -72,33 +72,33 @@ MonoBehaviour:
     - intValue: 500
       floatValue: 0
       manual: 0
-    - intValue: 490
+    - intValue: 494
       floatValue: 0
       manual: 0
-    - intValue: 475
+    - intValue: 476
       floatValue: 0
       manual: 0
-    - intValue: 445
+    - intValue: 446
       floatValue: 0
       manual: 0
-    - intValue: 405
+    - intValue: 406
       floatValue: 0
       manual: 0
-    - intValue: 355
+    - intValue: 357
       floatValue: 0
       manual: 0
     - intValue: 300
       floatValue: 0
       manual: 0
-    - intValue: 235
+    - intValue: 237
       floatValue: 0
       manual: 0
-    - intValue: 165
+    - intValue: 169
       floatValue: 0
       manual: 0
     - intValue: 100
       floatValue: 0
       manual: 0
-    roundAccuracy: 5
+    decimalsCount: 2
     maxLevel: 10
     isFoldoutInInspector: 1

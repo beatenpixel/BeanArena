@@ -7,8 +7,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "BeanArena/HeroInfo")]
 public class SO_HeroInfo : ScriptableObject, ITypeKey<HeroType>, IStatContainer {
 
-    public HeroType heroType;
-    public ItemRareness heroRareness;
+    public HeroType heroType;    
+    public SO_HeroRarenessInfo rarenessInfo;
     public SO_IconContent icon;
     public GameObject prefab;
 

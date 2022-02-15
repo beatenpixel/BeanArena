@@ -12,12 +12,17 @@ public abstract class Equipment : PoolObject {
     public TransformData attachTData;
     public float useDelay = 0.5f;
 
+    protected GD_Item itemData { get; private set; }
     public SO_ItemInfo itemInfo;
 
     protected float nextUseTime;
 
     protected HeroLimb limb;
     protected HeroBase hero;
+
+    public void SetItemData(GD_Item _itemData) {
+        itemData = _itemData;
+    }
 
     public virtual void AttachToHero(HeroBase hero, HeroLimb limb) {
         this.hero = hero;

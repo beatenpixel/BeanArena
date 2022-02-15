@@ -14,6 +14,13 @@ public class MUtils : Singleton<MUtils> {
         
     }
 
+    public static Dictionary<ItemRareness, float> rarenessFuseCoeff = new Dictionary<ItemRareness, float>() {
+        { ItemRareness.Common, 1f },
+        { ItemRareness.Uncommon, 2f },
+        { ItemRareness.Rare, 4f },
+        { ItemRareness.Epic, 8f },
+        { ItemRareness.Legendary, 16f },
+    };
 
 	/*
 	1  2

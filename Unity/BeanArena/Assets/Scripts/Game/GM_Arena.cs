@@ -169,7 +169,8 @@ public class GM_Arena : GameMode {
                     UIWindowManager.CreateWindow(new UIWData_RoundEnd() {
                         win = false,
                         mmrCount = mmrPenalty,
-                        coinCount = coinsGain
+                        coinCount = coinsGain,
+                        earnedChest = null
                     });
                 } else {
                     // WIN
@@ -180,15 +181,19 @@ public class GM_Arena : GameMode {
                     Economy.inst.AddCurrency(CurrencyType.Coin, coinsGain);
                     Game.data.player.mmr = Mathf.Clamp(Game.data.player.mmr + mmrGain, 0, int.MaxValue);
 
+                    GD_Chest m_EarnedChest = null; 
+                    
+                    if (Game.data.inventory.chests.Count < 4) {
+                        m_EarnedChest = GameRandom.GenerateRoundRewardChest();
+                        Game.data.inventory.chests.Add(m_EarnedChest);
+                    }
+
                     UIWindowManager.CreateWindow(new UIWData_RoundEnd() {
                         win = true,
                         mmrCount = mmrGain,
-                        coinCount = coinsGain
-                    });
-
-                    if(Game.data.inventory.chests.Count < 4) {
-                        Game.data.inventory.chests.Add(GameRandom.GenerateRoundRewardChest());
-                    }
+                        coinCount = coinsGain,
+                        earnedChest = m_EarnedChest
+                    });                    
                 }                
             } else {                
                 genericMap.ResetMap();

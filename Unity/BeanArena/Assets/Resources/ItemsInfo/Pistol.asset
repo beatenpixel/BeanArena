@@ -58,7 +58,7 @@ MonoBehaviour:
     - intValue: 2000
       floatValue: 0
       manual: 0
-    roundAccuracy: 5
+    decimalsCount: 2
     maxLevel: 10
     isFoldoutInInspector: 0
   - statType: 1
@@ -66,80 +66,80 @@ MonoBehaviour:
     progressionType: 0
     progressionFunc: 1
     upgradeDirection: 1
-    intStartEndValue: {x: 5, y: 40}
+    intStartEndValue: {x: 15, y: 45}
     floatStartEndValue: {x: 0, y: 0}
     values:
-    - intValue: 5
+    - intValue: 15
       floatValue: 0
       manual: 0
-    - intValue: 5
-      floatValue: 0
-      manual: 0
-    - intValue: 7
-      floatValue: 0
-      manual: 0
-    - intValue: 9
-      floatValue: 0
-      manual: 0
-    - intValue: 12
+    - intValue: 15
       floatValue: 0
       manual: 0
     - intValue: 16
       floatValue: 0
       manual: 0
-    - intValue: 20
+    - intValue: 18
       floatValue: 0
       manual: 0
-    - intValue: 26
+    - intValue: 21
+      floatValue: 0
+      manual: 0
+    - intValue: 24
+      floatValue: 0
+      manual: 0
+    - intValue: 28
       floatValue: 0
       manual: 0
     - intValue: 33
       floatValue: 0
       manual: 0
-    - intValue: 40
+    - intValue: 39
       floatValue: 0
       manual: 0
-    roundAccuracy: 0.1
+    - intValue: 45
+      floatValue: 0
+      manual: 0
+    decimalsCount: 2
     maxLevel: 10
-    isFoldoutInInspector: 1
+    isFoldoutInInspector: 0
   - statType: 4
     valueType: 1
     progressionType: 0
     progressionFunc: 1
     upgradeDirection: 1
     intStartEndValue: {x: 5, y: 20}
-    floatStartEndValue: {x: 0.5, y: 0.2}
+    floatStartEndValue: {x: 1, y: 0.2}
     values:
     - intValue: 5
-      floatValue: 0.5
+      floatValue: 1
       manual: 0
     - intValue: 6
-      floatValue: 0.48999998
+      floatValue: 0.98999995
       manual: 0
     - intValue: 9
-      floatValue: 0.48
+      floatValue: 0.96
       manual: 0
     - intValue: 14
-      floatValue: 0.45999998
+      floatValue: 0.90999997
       manual: 0
     - intValue: 20
-      floatValue: 0.44
+      floatValue: 0.84
       manual: 0
     - intValue: 20
-      floatValue: 0.39999998
+      floatValue: 0.75
+      manual: 0
+    - intValue: 20
+      floatValue: 0.64
+      manual: 0
+    - intValue: 20
+      floatValue: 0.51
       manual: 0
     - intValue: 20
       floatValue: 0.35999998
       manual: 0
     - intValue: 20
-      floatValue: 0.31
-      manual: 0
-    - intValue: 20
-      floatValue: 0.26
-      manual: 0
-    - intValue: 20
       floatValue: 0.19999999
       manual: 0
-    roundAccuracy: 0.01
+    decimalsCount: 2
     maxLevel: 10
     isFoldoutInInspector: 1

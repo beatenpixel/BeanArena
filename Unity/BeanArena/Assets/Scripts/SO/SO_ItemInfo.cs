@@ -125,7 +125,7 @@ public class ItemStatProgression {
 
     public StatValue[] values;
 
-    public float roundAccuracy = 5;
+    public int decimalsCount = 2;
 
     public int maxLevel;
     [HideInInspector] public bool isFoldoutInInspector;
@@ -181,9 +181,9 @@ public class ItemStatProgression {
             StatValue valueA = values[levelA];
             StatValue valueB = values[levelB];
 
-            str += valueA.decimalValue;
+            str += Math.Round(valueA.decimalValue, decimalsCount);
 
-            decimal diff = valueB.decimalValue - valueA.decimalValue;
+            decimal diff = Math.Round(valueB.decimalValue - valueA.decimalValue, decimalsCount);
             int diffSign = Math.Sign(diff);
 
             int signedUpgradeDirection = (upgradeDirection == ItemStatUpgradeDirection.HigherIsBetter ? 1 : -1);
@@ -216,11 +216,21 @@ public class ItemStatProgression {
         return str;
     }
 
+    public string GetValueStr(int lvl) {
+        switch (valueType) {
+            case StatValueType.Int:                
+                return values[lvl].intValue.ToString();
+            case StatValueType.Float:
+                return Math.Round(values[lvl].decimalValue, decimalsCount).ToString();
+        }
+
+        return null;
+    }
+
     public object GetValue(int lvl) {
         switch(valueType) {
             case StatValueType.Int: return values[lvl].intValue;
             case StatValueType.Float: return values[lvl].floatValue;
-            case StatValueType.Decimal: return values[lvl].decimalValue;
         }
 
         return null;
@@ -256,8 +266,7 @@ public enum ItemStatUpgradeDirection {
 
 public enum StatValueType {
     Int,
-    Float,
-    Decimal
+    Float
 }
 
 public enum StatType {

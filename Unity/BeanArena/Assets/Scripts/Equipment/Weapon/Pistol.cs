@@ -20,6 +20,11 @@ public class Pistol : Weapon {
 
         bullet.t.position = shootPoint.position;
         bullet.SetShotCharge(useArgs.charge);
+
+        float damage = itemData.GetStatValue(StatType.Damage).intValue;
+        Debug.Log("damage: " + damage + " level: " + itemData.levelID);
+
+        bullet.SetDamage(damage);
         bullet.Shoot(shootPoint.right * Mathf.Lerp(shootForce.x, shootForce.y, useArgs.charge));
 
         if (hero.info.role != HeroRole.Player) {

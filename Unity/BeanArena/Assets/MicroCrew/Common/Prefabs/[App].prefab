@@ -1764,7 +1764,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &376065871
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1801,14 +1801,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panelRootGO: {fileID: 376065870}
   itemInfoPanel: {fileID: 376065872}
-  lastDrawnItem:
-    itemType: 0
-    rareness: 0
-    levelID: 0
-    fusePoints: 0
-    isEquiped: 0
-    itemGUID: 1230bf51-34d5-4030-a5f1-c65874b34d20
-  lastItemButton: {fileID: 0}
 --- !u!114 &376065872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2421,8 +2413,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -70.60667, y: -64.999}
-  m_SizeDelta: {x: 128.8553, y: 130.59}
+  m_AnchoredPosition: {x: -63.228695, y: -65.295}
+  m_SizeDelta: {x: 126.4582, y: 130.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &665428494
 CanvasRenderer:
@@ -2452,7 +2444,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<sprite name="heart"> 50
+  m_text: '50 (-0.001)F
 
     <sprite name="time"> 15 <color=#00FF00>(+5)</color>
 
@@ -2505,7 +2497,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -5189,14 +5181,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panelRootGO: {fileID: 1537775008}
   itemInfoPanel: {fileID: 0}
-  lastDrawnItem:
-    itemType: 0
-    rareness: 0
-    levelID: 0
-    fusePoints: 0
-    isEquiped: 0
-    itemGUID: da7133a2-fd52-4bc4-83af-b94d4ae571ad
-  lastItemButton: {fileID: 0}
   heroInfoPanel: {fileID: 1537775011}
 --- !u!1 &1622920258
 GameObject:

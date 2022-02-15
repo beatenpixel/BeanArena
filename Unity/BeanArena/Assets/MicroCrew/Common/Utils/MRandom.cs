@@ -30,6 +30,18 @@ public static class MRandom {
         return entries[randomIndexesCache[UnityEngine.Random.Range(0, ind)]].item;
     }
 
+    public static T Get<T>(List<RandomEntry<T>> entries) {
+        int ind = -1;
+
+        for (int i = 0; i < entries.Count; i++) {
+            for (int x = 0; x < entries[i].probability; x++) {
+                randomIndexesCache[++ind] = i;
+            }
+        }
+
+        return entries[randomIndexesCache[UnityEngine.Random.Range(0, ind)]].item;
+    }
+
     public static T GetRandom<T>(this T[] arr) {
         return arr[UnityEngine.Random.Range(0, arr.Length)];
     }

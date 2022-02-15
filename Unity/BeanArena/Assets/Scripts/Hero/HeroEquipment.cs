@@ -52,7 +52,7 @@ public class HeroEquipment : HeroComponent {
     }
 
     public void PreviewItem(GD_Item item, EquipmentSlot slot) {
-		Equipment itemPreviewInstance = Game.inst.equipmentFactory.Create(item.info, Vector2.zero);
+		Equipment itemPreviewInstance = Game.inst.equipmentFactory.Create(item, Vector2.zero);
 		slot.EquipPreviewItem(item, itemPreviewInstance);
     }
 

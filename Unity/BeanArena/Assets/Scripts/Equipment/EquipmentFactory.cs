@@ -9,21 +9,21 @@ public class EquipmentFactory : MonoBehaviour {
 
     }
 
-    public Equipment Create(SO_ItemInfo itemInfo, Vector2 position) {
+    public Equipment Create(GD_Item itemData, Vector2 position) {
 
-        if (itemInfo.category == ItemCategory.Weapon) {
-            Weapon weaponPrefab = itemInfo.prefab.GetComponent<Weapon>();
+        if (itemData.info.category == ItemCategory.Weapon) {
+            Weapon weaponPrefab = itemData.info.prefab.GetComponent<Weapon>();
 
             Weapon weapon = MPool.Get<Weapon>(weaponPrefab.subType);
-            weapon.itemInfo = itemInfo;
+            weapon.SetItemData(itemData);
             weapon.t.position = position;
 
             return weapon;
-        } else if (itemInfo.category == ItemCategory.BottomGadget) {
-            Gadget gadgetPrefab = itemInfo.prefab.GetComponent<Gadget>();
+        } else if (itemData.info.category == ItemCategory.BottomGadget) {
+            Gadget gadgetPrefab = itemData.info.prefab.GetComponent<Gadget>();
 
             Gadget gadget = MPool.Get<Gadget>(gadgetPrefab.subType);
-            gadget.itemInfo = itemInfo;
+            gadget.SetItemData(itemData);
             gadget.t.position = position;
 
             return gadget;

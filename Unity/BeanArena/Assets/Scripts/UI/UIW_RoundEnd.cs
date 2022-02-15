@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIW_RoundEnd : UIWindow {
 
@@ -14,10 +15,19 @@ public class UIW_RoundEnd : UIWindow {
     public TextMeshProUGUI MMRCountText;
     public TextMeshProUGUI CoinsCountText;
 
+    public IconDrawer chestIconDrawer;
+
     private UIWData_RoundEnd data;
 
     public override void OnInitBeforeOpen() {
-        data = (UIWData_RoundEnd)genericWindowData;        
+        data = (UIWData_RoundEnd)genericWindowData;
+
+        if (data.earnedChest != null) {
+            chestIconDrawer.Show(true);
+            chestIconDrawer.DrawChest(data.earnedChest);            
+        } else {
+            chestIconDrawer.Show(false);
+        }
 
         if (data.win) {
             logoText.text = MLocalization.Get("WIN");
@@ -79,6 +89,7 @@ public class UIWData_RoundEnd : UIW_Data {
     public bool win;
     public int mmrCount;
     public int coinCount;
+    public GD_Chest earnedChest;
 
     public UIWData_RoundEnd() {
     }

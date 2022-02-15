@@ -21,12 +21,47 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
 
     public override void Show(bool show) {
         base.Show(show);
+
+        CollectItemsToDraw();
+
+        int newItemsCount = 0;
+        for (int i = 0; i < itemsToDraw.Count; i++) {
+            if (itemsToDraw[i].isNew)
+                newItemsCount += 1;
+        }
+
+        if (newItemsCount > 0) {
+            config.tabButton.notificationDot.Enable(true, newItemsCount);
+        } else {
+            config.tabButton.notificationDot.Enable(false);
+        }
+
+        if (show) {
+            if (!config.drawer.showedAnyItemInfo) {
+
+                if (itemsToDraw.Count > 0) {
+                    infoDrawer.Show(true);
+                    infoDrawer.DrawItemInfo(itemsToDraw[0], itemButtons[0]);
+                    config.drawer.Select(itemButtons[0].iconDrawer.rarenessImage.rectTransform);
+
+                    config.drawer.showedAnyItemInfo = true;
+                }
+            }
+
+            if (config.drawer.showedAnyItemInfo) {
+                infoDrawer.Show(true);
+            }
+        }        
+    }
+
+    private void CollectItemsToDraw() {
+        itemsToDraw = gdInventory.items.Where(x => x.info.category == config.itemCategory).OrderByDescending(x => x.rareness).ToList();
     }
 
     public override void Draw() {
-        itemsToDraw = gdInventory.items.Where(x => x.info.category == config.itemCategory).OrderByDescending(x => x.rareness).ToList();
+        CollectItemsToDraw();
 
-        itemButtons.Update(itemsToDraw.Count);
+        itemButtons.Update(itemsToDraw.Count);       
 
         for (int i = 0; i < itemButtons.activeObjectsCount; i++) {
             GD_Item item = itemsToDraw[i];
@@ -106,17 +141,10 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
             GD_Item itemA = infoDrawer.lastDrawnItem;
             GD_Item itemB = button.currentItem;
 
-            Debug.Log("ItemA: " + itemA.itemGUID);
-            Debug.Log("ItemB: " + itemB.itemGUID);
+            ItemsMergeResult mergeResult = GD_Item.TestMerge(itemA, itemB);            
 
-            ItemStatProgression itemAFuseProg = itemA.info.GetStat(StatType.FusePoints);
-            int itemAMaxFusePoints = itemAFuseProg.values[itemAFuseProg.maxLevel - 1].intValue;
-
-            int fusePoints = Mathf.Clamp(itemA.fusePoints + itemB.fusePoints, 0, itemAMaxFusePoints);
-            int newLevel = itemAFuseProg.GetLevelByValue(fusePoints);
-
-            itemA.fusePoints = fusePoints;
-            itemA.levelID = newLevel;
+            itemA.fusePoints = mergeResult.newFusePoints;
+            itemA.levelID = mergeResult.newLevel;
 
             Game.data.inventory.items.Remove(itemB);
             itemButtons.Remove(button);
@@ -125,4 +153,9 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
             Draw();
         }
     }
+}
+
+public struct ItemsMergeResult {
+    public int newFusePoints;
+    public int newLevel;
 }

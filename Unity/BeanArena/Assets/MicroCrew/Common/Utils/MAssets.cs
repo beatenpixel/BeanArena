@@ -18,6 +18,7 @@ public class MAssets : SingletonScriptableObject<MAssets> {
     public static SO_AssetDB<SO_ItemInfo, ItemType> itemsInfo;
     public static SO_AssetDB<SO_ChestInfo, ChestType> chestsInfo;
     public static SO_AssetDB<SO_HeroInfo, HeroType> heroesInfo;
+    public static SO_AssetDB<SO_HeroRarenessInfo, ItemRareness> heroesRarenessInfo;
 
     public override void Init() {
         m_ui_tex_0 = Resources.LoadAll<Sprite>("Sprites/ui_tex_0");
@@ -40,6 +41,7 @@ public class MAssets : SingletonScriptableObject<MAssets> {
         itemsInfo = new SO_AssetDB<SO_ItemInfo, ItemType>("ItemsInfo");
         chestsInfo = new SO_AssetDB<SO_ChestInfo, ChestType>("ChestInfo");
         heroesInfo = new SO_AssetDB<SO_HeroInfo, HeroType>("HeroInfo");
+        heroesRarenessInfo = new SO_AssetDB<SO_HeroRarenessInfo, ItemRareness>("HeroRarenessInfo");
     }
 
     [System.Serializable]

@@ -53,6 +53,8 @@ public class MenuUI : MonoBehaviour {
 	public void EditReadyButton_Click() {
 		GM_Menu.inst.SwitchMenuState(GM_Menu.MenuState.Idle);
 
+        inventoryDrawer.OnClose();
+
 		idleGroup.Show(true);
 		editGroup.Show(false);
 		editCharacterWorldUI.Show(false);

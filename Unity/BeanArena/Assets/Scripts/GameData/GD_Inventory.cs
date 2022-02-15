@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
+using System.Linq;
 
 [System.Serializable]
 public class GD_Inventory : GD {
@@ -23,6 +24,20 @@ public class GD_Inventory : GD {
 
         for (int i = 0; i < chests.Count; i++) {
             chests[i].info = MAssets.chestsInfo.GetAsset(chests[i].type);
+        }
+
+
+        List<SO_HeroInfo> allHeroesInfo = MAssets.heroesInfo.GetAllAssets();
+
+        if (heroes.Count < allHeroesInfo.Count) {
+            for (int i = 0; i < allHeroesInfo.Count; i++) {
+                var r = heroes.Where(x => x.heroType == allHeroesInfo[i].heroType);
+                if (r == null || r.Count() <= 0) {
+                    heroes.Add(new GD_HeroItem() {
+                        heroType = allHeroesInfo[i].heroType,
+                    });
+                }
+            }
         }
 
         for (int i = 0; i < heroes.Count; i++) {
@@ -60,10 +75,7 @@ public class GD_Inventory : GD {
         });
 
         heroes = new List<GD_HeroItem>();
-        heroes.Add(new GD_HeroItem() { heroType = HeroType.DefaultBean, isEquiped = true });
-        heroes.Add(new GD_HeroItem() { heroType = HeroType.Shark });
-        heroes.Add(new GD_HeroItem() { heroType = HeroType.Skeleton });
-        heroes.Add(new GD_HeroItem() { heroType = HeroType.Clown });
+        heroes.Add(new GD_HeroItem() { heroType = HeroType.DefaultBean, isEquiped = true, cardsCollected = 1 });
     }
 
 }

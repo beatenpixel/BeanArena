@@ -31,33 +31,33 @@ MonoBehaviour:
     - intValue: 25
       floatValue: 0
       manual: 0
-    - intValue: 25
+    - intValue: 32
       floatValue: 0
       manual: 0
-    - intValue: 50
+    - intValue: 54
       floatValue: 0
       manual: 0
-    - intValue: 75
+    - intValue: 89
       floatValue: 0
       manual: 0
-    - intValue: 125
+    - intValue: 136
       floatValue: 0
       manual: 0
-    - intValue: 175
+    - intValue: 195
       floatValue: 0
       manual: 0
-    - intValue: 250
+    - intValue: 262
       floatValue: 0
       manual: 0
-    - intValue: 325
+    - intValue: 338
       floatValue: 0
       manual: 0
-    - intValue: 400
+    - intValue: 418
       floatValue: 0
       manual: 0
     - intValue: 500
       floatValue: 0
       manual: 0
-    roundAccuracy: 25
+    decimalsCount: 2
     maxLevel: 10
     isFoldoutInInspector: 1

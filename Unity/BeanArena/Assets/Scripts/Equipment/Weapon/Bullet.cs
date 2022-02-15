@@ -6,6 +6,7 @@ using UnityEngine;
 public class Bullet : Projectile {
 
     private float shotCharge;
+    private float damage;
 
     protected override void Interact(Collision2D collision) {
         base.Interact(collision);
@@ -23,7 +24,7 @@ public class Bullet : Projectile {
 
         if (hero != null && limb != null) {
             MSound.Play("bullet_bodyhit", SoundConfig.randVolumePitch01, t.position);
-            hero.TakeDamage(new PhysicalDamage(10 * (1 + shotCharge), hero, limb));
+            hero.TakeDamage(new PhysicalDamage(damage, hero, limb));
         }
 
         Projectile projectile = collision.collider.GetComponentInParent<Projectile>();
@@ -33,6 +34,10 @@ public class Bullet : Projectile {
         }
 
         Push();
+    }
+
+    public void SetDamage(float damage) {
+        this.damage = damage;
     }
 
     public void SetShotCharge(float charge) {

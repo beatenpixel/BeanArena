@@ -965,6 +965,90 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: tex_0_15
+      rect:
+        serializedVersion: 2
+        x: 1287
+        y: 1471
+        width: 203
+        height: 368
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dc8e7f7be41dae43b06f81a85aa86fd
+      internalID: 1761533502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tex_0_16
+      rect:
+        serializedVersion: 2
+        x: 1279
+        y: 1369
+        width: 203
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 195ad2cc6605c5d4eb06119dcfa3fa92
+      internalID: 1045647409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: nakedman_icon
+      rect:
+        serializedVersion: 2
+        x: 1287
+        y: 1666
+        width: 202
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cf6dc5413c3166408db8fc6d9b747e5
+      internalID: 1362259204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tex_0_25
+      rect:
+        serializedVersion: 2
+        x: 1127
+        y: 1520
+        width: 147
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69cf9a8a2c7aa974e85f623f64f161f1
+      internalID: 1361083388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -992,6 +1076,7 @@ TextureImporter:
       tex_0_4: -40810238627940632
       tex_0_1: 8036309752053734007
       hero_icon_bean: 5504138388294342362
+      tex_0_15: 1761533502
       tex_0_0: -1866947196
       tex_0_17: 7804612495321305686
       tex_0_21: -2142735356839987325
@@ -1010,9 +1095,12 @@ TextureImporter:
       tex_0_2: 1894656480312254778
       tex_0_23: 9171183186283799205
       chest_common: 538634505
+      tex_0_16: 1045647409
       water_pistol: -882657101450742125
       hero_icon_skeleton: -656622605
       tex_0_20: 8984777409455169079
+      nakedman_icon: 1362259204
+      tex_0_25: 1361083388
   spritePackingTag: 
   pSDRemoveMatte: 1
   pSDShowRemoveMatteOption: 1

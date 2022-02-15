@@ -1,3 +1,4 @@
+using Coffee.UIEffects;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,30 +9,77 @@ using UnityEngine.UI;
 [ExecuteInEditMode]
 public class IconDrawer : PoolObject {
 
-	public RectTransform rectT;
-	public Image image;
+    public RectTransform imageRectT;
+    public RectTransform textRectT;
+    public Image image;
     public Image rarenessImage;
+    public Image redDotImage;
+    public Image imageWithEffects;
+    public UIEffect imageEffects;
+    public RectTransform imageWithEffectRectT;
 
     public GameObject fuseBarRootGO;
     public RectTransform fuseBarRectT;
     public TextMeshProUGUI levelText;
 
-	[SerializeField] private SO_IconContent config;
+    [SerializeField] private SO_IconContent config;
 
-    public void SetIcon(SO_IconContent _config ) {
+    public void Show(bool show) {
+        go.SetActive(show);
+    }
+
+    public void SetIcon(SO_IconContent _config) {
         config = _config;
+    }
+
+    public void EnableRedDot(bool enable) {
+        redDotImage.enabled = enable;
     }
 
     public void DrawIcon() {
         if (config != null) {
-            rectT.anchorMin = config.anchorMin;
-            rectT.anchorMax = config.anchorMax;
-            rectT.offsetMin = config.offsetMin;
-            rectT.offsetMax = -config.offsetMax;
-            rectT.pivot = config.pivot;
+            image.enabled = true;
+            imageWithEffects.enabled = false;
+            imageEffects.enabled = false;
+
+            imageRectT.anchorMin = config.anchorMin;
+            imageRectT.anchorMax = config.anchorMax;
+            imageRectT.offsetMin = config.offsetMin;
+            imageRectT.offsetMax = -config.offsetMax;
+            imageRectT.pivot = config.pivot;
+
+            SetTextRect(new Vector2(0.1f, 0.1f), new Vector2(0.9f, 0.4f), Vector2.zero, Vector2.zero);
 
             image.sprite = config.sprite;
             image.color = config.color;
+        } else {
+            Debug.LogError("IconDrawer: No icon to draw");
+        }
+    }
+
+    private void SetTextRect(Vector2 anchorMin, Vector2 anchorMax, Vector2 offsetMin, Vector2 offsetMax) {
+        textRectT.anchorMin = anchorMin;
+        textRectT.anchorMax = anchorMax;
+        textRectT.offsetMin = offsetMin;
+        textRectT.offsetMax = offsetMax;
+    }
+
+    public void DrawIconWithEffects() {
+        if (config != null) {
+            image.enabled = false;
+            imageWithEffects.enabled = true;
+            imageEffects.enabled = true;
+
+            imageEffects.effectMode = EffectMode.Grayscale;
+
+            imageWithEffectRectT.anchorMin = config.anchorMin;
+            imageWithEffectRectT.anchorMax = config.anchorMax;
+            imageWithEffectRectT.offsetMin = config.offsetMin;
+            imageWithEffectRectT.offsetMax = -config.offsetMax;
+            imageWithEffectRectT.pivot = config.pivot;
+
+            imageWithEffects.sprite = config.sprite;
+            imageWithEffects.color = Color.Lerp(config.color, Color.black, 0.8f);
         } else {
             Debug.LogError("IconDrawer: No icon to draw");
         }
@@ -49,7 +97,7 @@ public class IconDrawer : PoolObject {
         }                
     }
 
-    public void DrawLevel(string levelStr, Color? color = null) {
+    public void DrawText(string levelStr, Color? color = null) {
         levelText.text = levelStr;
         levelText.color = color ?? Color.white;
     }
@@ -61,8 +109,9 @@ public class IconDrawer : PoolObject {
         DrawIcon();
 
         DrawBar(info.progressBar);
+        EnableRedDot(false);
 
-        DrawLevel(MFormat.GetLVLString(info.newLevel, item.info.maxLevel), info.levelChanged ? MAssets.colors["STAT_MAGENTA"] : null);
+        DrawText(MFormat.GetLVLString(info.newLevel, item.info.maxLevel), info.levelChanged ? MAssets.colors["STAT_MAGENTA"] : null);
     }
 
     public void DrawItem(GD_Item itemData, SO_ItemInfo itemInfo) {
@@ -73,33 +122,61 @@ public class IconDrawer : PoolObject {
         SetIcon(itemInfo.icon);
         DrawIcon();
 
+        if (itemData.isNew) {
+            EnableRedDot(true);
+        } else {
+            EnableRedDot(false);
+        }
+
         if (hasFuse) {
             DrawBar(fuseProgress);
         } else {
             DrawBar(null);
         }
 
-        DrawLevel(MFormat.GetLVLString(itemData.levelID, itemInfo.maxLevel));
+        DrawText(MFormat.GetLVLString(itemData.levelID, itemInfo.maxLevel));
     }
 
-    public void DrawHero(GD_HeroItem item) {
-        rarenessImage.color = MAssets.colors[("rareness_" + item.info.heroRareness.ToString()).ToLower()].SetA(0.5f);
+    public void DrawHeroDrop(HeroType heroType, int amount) {
+        GD_HeroItem item = Game.data.inventory.heroes.Find(x => x.heroType == heroType);
+
+        rarenessImage.color = MAssets.colors[("rareness_" + item.info.rarenessInfo.heroRareness.ToString()).ToLower()].SetA(0.5f);
 
         SetIcon(item.info.icon);
         DrawIcon();
+        DrawText("x" + amount.ToString());
+        
+        EnableRedDot(false);
 
         DrawBar(null);
-        DrawLevel(MFormat.GetLVLString(item.levelID, item.info.maxLevelsCount));
     }
 
-    public void DrawChest(GD_Chest chestData, SO_ChestInfo chestInfo) {
+    public void DrawHero(GD_HeroItem item) {
+        rarenessImage.color = MAssets.colors[("rareness_" + item.info.rarenessInfo.heroRareness.ToString()).ToLower()].SetA(0.5f);
+
+        SetIcon(item.info.icon);
+        if (item.isUnlocked) {
+            DrawIcon();
+            DrawText(MFormat.GetLVLString(item.levelID, item.info.rarenessInfo.maxLevel));
+        } else {
+            DrawIconWithEffects();
+            DrawText("");
+        }
+        SetTextRect(new Vector2(0.1f, 0.0f), new Vector2(0.9f, 0.3f), Vector2.zero, Vector2.zero);
+        EnableRedDot(false);
+
+        DrawBar(null);        
+    }
+
+    public void DrawChest(GD_Chest chestData) {
         rarenessImage.color = Color.white.SetA(0f);
 
-        SetIcon(chestInfo.icon);
+        SetIcon(chestData.info.icon);
         DrawIcon();
+        EnableRedDot(false);
 
         DrawBar(null);
-        DrawLevel("");
+        DrawText("");
     }
 
     public override Type GetPoolObjectType() {

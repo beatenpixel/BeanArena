@@ -26,11 +26,14 @@ public class InventoryUI : MonoBehaviour {
 
 	[HideInInspector] public ItemButton currentDragedButton;
 
+    public bool showedAnyItemInfo;
+
 	private Vector3[] worldCornersCache = new Vector3[4];
     private bool groupsAreSetup;
 
 	public void Init() {
         groupsAreSetup = false;
+        showedAnyItemInfo = false;
 
         isInsideInfoRect = new ChangeCheck<bool>(false);
 
@@ -91,7 +94,7 @@ public class InventoryUI : MonoBehaviour {
 
                 if (i == currentGroupID) {
                     groupDrawers[i].Show(true);
-                    groupDrawers[currentGroupID].ShowInfoPanel(true);
+                    //groupDrawers[i].ShowInfoPanel(true);
                 } else {
                     groupDrawers[i].Show(false);
                 }
@@ -99,13 +102,19 @@ public class InventoryUI : MonoBehaviour {
                 if (i == currentGroupID) {
                     groupDrawers[i].Draw();
                     groupDrawers[i].Show(true);
-                    groupDrawers[currentGroupID].ShowInfoPanel(true);
+                    //groupDrawers[i].ShowInfoPanel(true);
                 } else {
                     groupDrawers[i].Show(false);
                 }
             }			
         }
 	}
+
+    public void OnClose() {
+        foreach (var item in Game.data.inventory.items) {
+            item.isNew = false;
+        }
+    }
 
     public void OnHeroItemButtonEvent(UIEventType e, HeroItemButton button, object arg) {
 
@@ -268,7 +277,7 @@ public class InventoryUI : MonoBehaviour {
 
     private void SwitchTab(int tabID) {
         if (currentGroupID != -1) {
-            groupDrawers[currentGroupID].ShowInfoPanel(false);
+            groupDrawers[currentGroupID].infoDrawer.Show(false);
         }
 
         currentGroupID = tabID;

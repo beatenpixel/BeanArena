@@ -12,11 +12,14 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
     public override void Init(InventoryGroupConfig config) {
         base.Init(config);
 
+        config.tabButton.notificationDot.Enable(false);
         itemButtons = new ObjectListSpawner<HeroItemButton>(SpawnItemButton, Enable_ItemButton, Update_ItemButton, Destroy_ItemButton);
     }
 
     public override void Show(bool show) {
         base.Show(show);
+
+        infoDrawer.Show(show);
     }
 
     public override void Draw() {
@@ -29,7 +32,7 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
             GD_HeroItem item = heroesToDraw[i];
             HeroItemButton button = itemButtons[i];
 
-            button.SetItem(item);
+            button.DrawItem(item);
             button.SetArg(i);
             button.rectT.SetAsLastSibling();
 
@@ -40,20 +43,24 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
                 //button.SetState(ItemButton.ItemButtonState.InInventory);
             }
         }
+
+        GD_HeroItem equipedHero = Game.data.inventory.heroes.Find(x => x.isEquiped);
+        infoDrawer.DrawHeroInfo(equipedHero);
     }
 
     private void OnItemButtonEvent(UIEventType eventType, HeroItemButton button, object arg) {
         if (eventType == UIEventType.Click) {
             int inventorySlotID = (int)arg;
-
             GD_HeroItem item = heroesToDraw[inventorySlotID];
 
-            Game.data.SetEquipedHero(item);
+            if (item.isUnlocked) {
+                Game.data.SetEquipedHero(item);
 
-            GM_Menu.inst.DestroyPreviewHero();
-            GM_Menu.inst.SpawnPreviewHero();
+                GM_Menu.inst.DestroyPreviewHero();
+                GM_Menu.inst.SpawnPreviewHero();
 
-            infoDrawer.DrawHeroInfo(item);
+                infoDrawer.DrawHeroInfo(item);
+            }
         }
 
         config.drawer.OnHeroItemButtonEvent(eventType, button, arg);

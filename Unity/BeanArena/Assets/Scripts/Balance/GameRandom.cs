@@ -6,7 +6,7 @@ using UnityEngine;
 public static class GameRandom  {
 
     private static int[] CHEST_TYPE_CHANCE = new int[] {
-        50, 10, 5
+        50, 5, 1
     };
 
     private static int[] ITEM_RARENESS_CHANCE = new int[] {
@@ -30,8 +30,10 @@ public static class GameRandom  {
     }
 
     public static GD_Chest GenerateRoundRewardChest() {
+        ChestType chestType = MRandom.Get(new RandomEntry<ChestType>(ChestType.Common, 50), new RandomEntry<ChestType>(ChestType.Common, 7), new RandomEntry<ChestType>(ChestType.Common, 1));
+
         GD_Chest chest = new GD_Chest() {
-            type = ChestType.Common
+            type = chestType
         };
 
         chest.info = MAssets.chestsInfo.GetAsset(chest.type);
@@ -46,6 +48,28 @@ public static class GameRandom  {
             content.coins = MRandom.Range(20, 50);
         } else {
             content.coins = 0;
+        }
+
+        content.heroCards = new List<HeroCardsContainer>();
+
+        if (MRandom.Range(0, 10) > -1) {            
+
+            List<RandomEntry<HeroType>> heroesThatAreNotFull = new List<RandomEntry<HeroType>>();
+
+            foreach (var hero in Game.data.inventory.heroes) {
+                if (hero.levelID < hero.info.rarenessInfo.maxLevel) {
+                    heroesThatAreNotFull.Add(new RandomEntry<HeroType>(hero.heroType, hero.info.rarenessInfo.randomDropWeight));
+                }
+            }
+
+            HeroType heroCard = MRandom.Get(heroesThatAreNotFull);
+            SO_HeroInfo heroInfo = MAssets.heroesInfo.GetAsset(heroCard);
+
+            content.heroCards.Add(new HeroCardsContainer() {
+                heroType = heroCard,
+                amount = MRandom.Range(heroInfo.rarenessInfo.dropAmount.x, heroInfo.rarenessInfo.dropAmount.y)
+            });
+            //HeroType heroType = heroesThatAreNotFull MRandom.Range(0, GD_HeroItem.HeroTypeCount);
         }
 
         content.items = new List<GD_Item>();
@@ -75,9 +99,11 @@ public static class GameRandom  {
 
 }
 
+
 public class ChestContent {
     public ChestType chestType;
     public List<GD_Item> items;
+    public List<HeroCardsContainer> heroCards;
     public int coins;
 
     public override string ToString() {
@@ -87,10 +113,4 @@ public class ChestContent {
         }
         return s;
     }
-}
-
-public class ChanceProvider<T> {
-
-    
-
 }
