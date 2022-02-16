@@ -13,7 +13,23 @@ MonoBehaviour:
   m_Name: Epic
   m_EditorClassIdentifier: 
   heroRareness: 3
-  maxLevel: 8
   cardsToLevel: 010000000200000004000000080000000c000000120000001800000024000000
+  levelsInfo:
+  - cardsToLevel: 1
+    coinsToLevel: 100
+  - cardsToLevel: 2
+    coinsToLevel: 100
+  - cardsToLevel: 4
+    coinsToLevel: 100
+  - cardsToLevel: 8
+    coinsToLevel: 100
+  - cardsToLevel: 12
+    coinsToLevel: 100
+  - cardsToLevel: 18
+    coinsToLevel: 100
+  - cardsToLevel: 24
+    coinsToLevel: 100
+  - cardsToLevel: 36
+    coinsToLevel: 100
   randomDropWeight: 50
   dropAmount: {x: 1, y: 3}

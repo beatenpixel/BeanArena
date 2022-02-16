@@ -19,7 +19,7 @@ public abstract class ItemInfoDrawerBase : MonoBehaviour {
         panelRootGO.SetActive(show);
     }
 
-    public virtual void DrawHeroInfo(GD_HeroItem item) {
+    public virtual void DrawHeroInfo(GD_HeroItem item, HeroInfoDrawConfig config) {
         
     }
 

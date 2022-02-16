@@ -65,6 +65,8 @@ MonoBehaviour:
     t: {r: 0.972549, g: 0.22956829, b: 0.19607842, a: 1}
   - name: STAT_MAGENTA
     t: {r: 0.91011673, g: 0.2783019, b: 1, a: 1}
+  - name: BUTTON_MAGENTA
+    t: {r: 0.91011673, g: 0.2783019, b: 1, a: 1}
   m_TextPresets:
   - preset: 0
     fontAsset: {fileID: 11400000, guid: b3e1909bfa2fc3640b6280041d40f338, type: 2}

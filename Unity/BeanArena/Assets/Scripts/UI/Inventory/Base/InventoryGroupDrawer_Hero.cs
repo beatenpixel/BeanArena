@@ -1,4 +1,5 @@
 using MicroCrew.Utils;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
     private ObjectListSpawner<HeroItemButton> itemButtons;
 
     private List<GD_HeroItem> heroesToDraw;
+
+    private HeroItemButton currentButton;
 
     public override void Init(InventoryGroupConfig config) {
         base.Init(config);
@@ -19,11 +22,24 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
     public override void Show(bool show) {
         base.Show(show);
 
+        int newItemsCount = 0;
+        for (int i = 0; i < Game.data.inventory.heroes.Count; i++) {
+            if (Game.data.inventory.heroes[i].enoughCardsToUpgrade)
+                newItemsCount += 1;
+        }
+
+        if (newItemsCount > 0) {
+            config.tabButton.notificationDot.Enable(true, newItemsCount);
+        } else {
+            config.tabButton.notificationDot.Enable(false);
+        }
+
         infoDrawer.Show(show);
     }
 
     public override void Draw() {
-        //base.Draw();
+        base.Draw();
+
         heroesToDraw = Game.data.inventory.heroes;
 
         itemButtons.Update(heroesToDraw.Count);
@@ -36,16 +52,13 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
             button.SetArg(i);
             button.rectT.SetAsLastSibling();
 
-            if (item.isEquiped) {
-                //config.drawer.SetItemButtonEquiped(button);
-                //button.SetState(ItemButton.ItemButtonState.InHeroSlot);
-            } else {
-                //button.SetState(ItemButton.ItemButtonState.InInventory);
+            if(item.isEquiped) {
+                currentButton = button;
+                infoDrawer.DrawHeroInfo(item, new HeroInfoDrawConfig() {
+                    OnUpgradeButtonClickCallback = ButtonClick_HeroUpgrade
+                });
             }
-        }
-
-        GD_HeroItem equipedHero = Game.data.inventory.heroes.Find(x => x.isEquiped);
-        infoDrawer.DrawHeroInfo(equipedHero);
+        }        
     }
 
     private void OnItemButtonEvent(UIEventType eventType, HeroItemButton button, object arg) {
@@ -54,16 +67,43 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
             GD_HeroItem item = heroesToDraw[inventorySlotID];
 
             if (item.isUnlocked) {
+                currentButton = button;
                 Game.data.SetEquipedHero(item);
 
                 GM_Menu.inst.DestroyPreviewHero();
                 GM_Menu.inst.SpawnPreviewHero();
 
-                infoDrawer.DrawHeroInfo(item);
+                infoDrawer.DrawHeroInfo(item, new HeroInfoDrawConfig() {
+                    OnUpgradeButtonClickCallback = ButtonClick_HeroUpgrade
+                });
             }
         }
 
         config.drawer.OnHeroItemButtonEvent(eventType, button, arg);
+    }
+
+    public void ButtonClick_HeroUpgrade() {
+        GD_HeroItem heroItem = currentButton.currentItem;
+
+        if(currentButton != null && currentButton.currentItem != null) {
+            if(currentButton.currentItem.enoughCardsToUpgrade) {
+                HeroLevelInfo levelInfo = heroItem.info.rarenessInfo.levelsInfo[heroItem.levelID];
+
+                if (Economy.inst.HasCurrency(CurrencyType.Coin, levelInfo.coinsToLevel)) {
+                    heroItem.Upgrade();
+
+                    currentButton.DrawItem(currentButton.currentItem);
+
+                    infoDrawer.DrawHeroInfo(heroItem, new HeroInfoDrawConfig() {
+                        OnUpgradeButtonClickCallback = ButtonClick_HeroUpgrade
+                    });
+                } else {
+                    
+                }
+            } else {
+
+            }
+        }
     }
 
     private HeroItemButton SpawnItemButton(int ind) {
@@ -84,4 +124,8 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
 
     }
 
+}
+
+public class HeroInfoDrawConfig {
+    public Action OnUpgradeButtonClickCallback;
 }

@@ -43,7 +43,8 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
     private HeroConfig initConfig;
     private Vector2 spawnPos;
 
-    [HideInInspector] public SO_HeroInfo editorPreviewHeroInfo;
+    [HideInInspector] public SO_HeroInfo heroInfo;
+    [HideInInspector] public GD_HeroItem heroData;
 
     protected override void Awake() {
         base.Awake();
@@ -74,9 +75,13 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
 	public virtual void InitInFactory(HeroConfig config) {
         initConfig = config;
 
+        heroInfo = MAssets.heroesInfo.GetAsset(config.heroType);
+        heroData = Game.data.inventory.heroes.Find(x => x.heroType == heroInfo.heroType);
+
         info = new HeroInfo();
-		info.maxHealth = 100;
-		info.health = 100;        
+        info.maxHealth = heroData.GetStatValue(StatType.Health).intValue;
+		info.health = info.maxHealth;
+
 		info.teamID = config.teamID;
 		info.state = HeroState.Alive;
 		info.role = config.role;

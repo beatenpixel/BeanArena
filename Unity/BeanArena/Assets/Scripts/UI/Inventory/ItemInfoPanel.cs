@@ -36,7 +36,7 @@ public class ItemInfoPanel : MonoBehaviour {
             if (itemA.info.stats[i].statType == StatType.FusePoints)
                 continue;
 
-            string lineStr = GetTMProStringForStatType(itemA.info.stats[i].statType);            
+            string lineStr = MFormat.GetTMProIcon(itemA.info.stats[i].statType);
 
             lineStr += itemA.info.stats[i].GetDifferenceStr(itemA.levelID, mergeResult.newLevel);
 
@@ -59,7 +59,7 @@ public class ItemInfoPanel : MonoBehaviour {
             if (itemInfo.stats[i].statType == StatType.FusePoints)
                 continue;
 
-            string lineStr = GetTMProStringForStatType(itemInfo.stats[i].statType);
+            string lineStr = MFormat.GetTMProIcon(itemInfo.stats[i].statType);
 
             if (itemInfo.stats[i].statType == StatType.FusePoints) {
                 lineStr += item.fusePoints;
@@ -71,30 +71,6 @@ public class ItemInfoPanel : MonoBehaviour {
         }
 
         itemStatsText.text = statsStr;
-    }
-
-    public static string GetTMProStringForStatType(StatType statType) {
-        string statIconStr = "<sprite name=\"";
-
-        switch (statType) {
-            case StatType.Damage:
-                statIconStr += "damage\"> ";
-                break;
-            case StatType.Health:
-                statIconStr += "heart\"> ";
-                break;
-            case StatType.Duration:
-                statIconStr += "time\"> ";
-                break;
-            case StatType.JumpHeight:
-                statIconStr += "jump\"> ";
-                break;
-            case StatType.FusePoints:
-                statIconStr += "coin\"> ";
-                break;
-        }
-
-        return statIconStr;
     }
 
 }

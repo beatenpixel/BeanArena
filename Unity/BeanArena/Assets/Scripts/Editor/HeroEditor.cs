@@ -29,7 +29,7 @@ public class HeroEditor : Editor {
     }
 
     private void SwapHeroInfo() {
-        inst.editorPreviewHeroInfo = heroInfo;
+        inst.heroInfo = heroInfo;
     }
 
 }

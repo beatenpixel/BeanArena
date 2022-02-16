@@ -44,3 +44,29 @@ MonoBehaviour:
     decimalsCount: 2
     maxLevel: 5
     isFoldoutInInspector: 1
+  - statType: 3
+    valueType: 1
+    progressionType: 0
+    progressionFunc: 0
+    upgradeDirection: 1
+    intStartEndValue: {x: 10, y: 100}
+    floatStartEndValue: {x: 1, y: 2}
+    values:
+    - intValue: 10
+      floatValue: 1
+      manual: 0
+    - intValue: 32
+      floatValue: 1.25
+      manual: 0
+    - intValue: 55
+      floatValue: 1.5
+      manual: 0
+    - intValue: 78
+      floatValue: 1.75
+      manual: 0
+    - intValue: 100
+      floatValue: 2
+      manual: 0
+    decimalsCount: 2
+    maxLevel: 5
+    isFoldoutInInspector: 1

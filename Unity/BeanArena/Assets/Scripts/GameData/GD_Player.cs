@@ -39,7 +39,7 @@ public class GD_Player : GD {
     [OnDeserializing]
     protected override void SetDefaults(StreamingContext ds) {
         mmr = 0;
-        coins = 0;
+        coins = 1000;
         gems = 10;
         nickname = "SuperBean";
     }

@@ -12,6 +12,8 @@ public class HeroItemButton : PoolObject {
     public IconDrawer iconDrawer;
     public Image lockImage;
 
+    public GD_HeroItem currentItem { get; private set; }
+
     public event Action<UIEventType, HeroItemButton, object> OnEvent;
     private object onClickArg;
 
@@ -26,6 +28,8 @@ public class HeroItemButton : PoolObject {
     }
 
     public void DrawItem(GD_HeroItem item) {
+        currentItem = item;
+
         iconDrawer.DrawHero(item);
 
         if(item.isUnlocked) {
@@ -33,6 +37,8 @@ public class HeroItemButton : PoolObject {
         } else {
             lockImage.enabled = true;
         }
+
+        iconDrawer.EnableRedDot(item.enoughCardsToUpgrade);
     }
 
     public void SetArg(object arg) {

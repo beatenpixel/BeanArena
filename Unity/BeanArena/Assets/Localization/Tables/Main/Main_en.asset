@@ -218,6 +218,16 @@ MonoBehaviour:
     m_Localized: Equip
     m_Metadata:
       m_Items: []
+  - m_Id: 3635574778060800
+    m_Localized: 'Upgrade
+
+      {0} <sprite name="coin">'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3642795721187328
+    m_Localized: <sprite name="upgrade"> {0}/{1}
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

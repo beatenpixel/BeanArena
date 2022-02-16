@@ -55,7 +55,7 @@ public class SO_HeroInfo : ScriptableObject, ITypeKey<HeroType>, IStatContainer 
         }
     }
 
-    private ItemStatProgression GetStat(StatType statType) {
+    public ItemStatProgression GetStat(StatType statType) {
         return stats.Find(x => x.statType == statType);
     }
 

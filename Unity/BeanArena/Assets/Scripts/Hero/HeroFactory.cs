@@ -33,4 +33,5 @@ public class HeroConfig {
     public Orientation orientation;
     public HeroRole role;
     public HeroType heroType;
+    public SO_HeroInfo info;
 }

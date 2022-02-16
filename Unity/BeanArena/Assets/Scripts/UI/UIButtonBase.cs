@@ -24,6 +24,8 @@ public abstract class UIButtonBase : UIInteractableElement {
     protected Vector3 startScale;
     protected Color startImageColor;
 
+    private bool buttonIsInited;
+
     public override Type GetPoolObjectType() {
         return typeof(UIButtonBase);
     }
@@ -34,6 +36,14 @@ public abstract class UIButtonBase : UIInteractableElement {
 
     protected override void Awake() {
         base.Awake();
+
+        InitButton();
+    }
+
+    private void InitButton() {
+        if (buttonIsInited) {
+            return;
+        }
 
         startAnchoredPosition = subRectT.anchoredPosition;
         startScale = subRectT.localScale;
@@ -50,6 +60,8 @@ public abstract class UIButtonBase : UIInteractableElement {
         if (buttonImage != null) {
             startImageColor = buttonImage.color;
         }
+
+        buttonIsInited = true;
     }
 
     public void TintAllGraphics(Color tint) {
@@ -59,6 +71,8 @@ public abstract class UIButtonBase : UIInteractableElement {
     }
 
     public void SetBackgroundColor(Color color) {
+        InitButton();
+
         startColors[buttonImage] = color;
         buttonImage.color = color;
     }

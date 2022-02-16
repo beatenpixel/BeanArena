@@ -11,6 +11,19 @@ public class MFormat {
 
     public static string TextColorTagEnd => "</color>";
 
+    private static Dictionary<StatType, TMProIcon> statIcons = new Dictionary<StatType, TMProIcon> {
+        {StatType.Health, TMProIcon.Heart },
+        {StatType.Damage, TMProIcon.Damage },
+        {StatType.Speed, TMProIcon.Heart },
+        {StatType.JumpHeight, TMProIcon.Jump },
+        {StatType.Duration, TMProIcon.Time },
+        {StatType.FusePoints, TMProIcon.Fuse },
+    };
+
+    public static string GetTMProIcon(StatType statType) {
+        return GetTMProIcon(statIcons[statType]);
+    }
+
     public static string GetTMProIcon(TMProIcon icon) {
         string statIconStr = "<sprite name=\"";
 
@@ -35,6 +48,9 @@ public class MFormat {
                 break;
             case TMProIcon.Gem:
                 statIconStr += "gem\"> ";
+                break;
+            case TMProIcon.Upgrade:
+                statIconStr += "upgrade\"> ";
                 break;
         }
 
@@ -110,5 +126,6 @@ public enum TMProIcon {
     Damage,
     Heart,
     Jump,
-    Gem
+    Gem,
+    Upgrade
 }

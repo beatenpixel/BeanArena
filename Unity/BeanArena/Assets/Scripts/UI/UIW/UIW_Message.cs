@@ -106,6 +106,14 @@ public class UIWData_Message : UIW_Data {
     public string messageText;
     public UIW_ButtonConfig[] buttons;
 
+    public UIWData_Message(string someText) {
+        UIWindowManager.CreateWindow(new UIWData_Message(someText,
+        new UIW_ButtonConfig(MLocalization.OK, MAssets.colors[MAssets.COLOR_BUTTON_GRAY], (x) => {
+
+        }, null)
+        ));
+    }
+
     public UIWData_Message(string _someText, params UIW_ButtonConfig[] _buttons) {
         messageText = _someText;
         buttons = _buttons;

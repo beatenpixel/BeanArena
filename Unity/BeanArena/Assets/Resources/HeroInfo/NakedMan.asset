@@ -23,22 +23,22 @@ MonoBehaviour:
     progressionType: 0
     progressionFunc: 0
     upgradeDirection: 1
-    intStartEndValue: {x: 10, y: 100}
+    intStartEndValue: {x: 300, y: 500}
     floatStartEndValue: {x: 0, y: 0}
     values:
-    - intValue: 10
+    - intValue: 300
       floatValue: 0
       manual: 0
-    - intValue: 32
+    - intValue: 350
       floatValue: 0
       manual: 0
-    - intValue: 55
+    - intValue: 400
       floatValue: 0
       manual: 0
-    - intValue: 78
+    - intValue: 450
       floatValue: 0
       manual: 0
-    - intValue: 100
+    - intValue: 500
       floatValue: 0
       manual: 0
     decimalsCount: 2

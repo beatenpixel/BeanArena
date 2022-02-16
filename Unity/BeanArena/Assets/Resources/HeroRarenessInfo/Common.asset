@@ -13,7 +13,31 @@ MonoBehaviour:
   m_Name: Common
   m_EditorClassIdentifier: 
   heroRareness: 0
-  maxLevel: 12
   cardsToLevel: 0100000002000000040000000800000010000000180000002400000036000000540000007000000090000000c4000000
+  levelsInfo:
+  - cardsToLevel: 1
+    coinsToLevel: 20
+  - cardsToLevel: 2
+    coinsToLevel: 20
+  - cardsToLevel: 4
+    coinsToLevel: 20
+  - cardsToLevel: 8
+    coinsToLevel: 20
+  - cardsToLevel: 16
+    coinsToLevel: 20
+  - cardsToLevel: 24
+    coinsToLevel: 20
+  - cardsToLevel: 36
+    coinsToLevel: 20
+  - cardsToLevel: 54
+    coinsToLevel: 20
+  - cardsToLevel: 84
+    coinsToLevel: 20
+  - cardsToLevel: 112
+    coinsToLevel: 20
+  - cardsToLevel: 144
+    coinsToLevel: 20
+  - cardsToLevel: 196
+    coinsToLevel: 20
   randomDropWeight: 500
   dropAmount: {x: 3, y: 12}

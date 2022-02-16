@@ -215,6 +215,14 @@ MonoBehaviour:
     m_Key: EQUIP
     m_Metadata:
       m_Items: []
+  - m_Id: 3635574778060800
+    m_Key: UPGRADE_CARD_BUTTON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3642795721187328
+    m_Key: UPGRADE_CARD_BUTTON_NOT_ENOUGH_CARDS
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -227,6 +227,15 @@ MonoBehaviour:
     m_Localized: "\u041D\u0430\u0434\u0435\u0442\u044C"
     m_Metadata:
       m_Items: []
+  - m_Id: 3635574778060800
+    m_Localized: "\u0423\u043B\u0443\u0447\u0448\u0438\u0442\u044C\r\n{0} <sprite
+      name=\"coin\">"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3642795721187328
+    m_Localized: <sprite name="upgrade"> {0}/{1}
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

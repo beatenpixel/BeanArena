@@ -46,6 +46,7 @@ public class ItemStatProgressionDrawer : PropertyDrawer {
 
         var statValueTypeProp = property.FindPropertyRelative(nameof(ItemStatProgression.valueType));
         var statProgressionTypeProp = property.FindPropertyRelative(nameof(ItemStatProgression.progressionType));
+        //var statIconProp = property.FindPropertyRelative(nameof(ItemStatProgression.statIcon));
 
         isFoldoutInInspectorProp.boolValue = EditorGUI.Foldout(position, isFoldoutInInspectorProp.boolValue, "Open", false, foldoutStyle);
 
@@ -65,6 +66,12 @@ public class ItemStatProgressionDrawer : PropertyDrawer {
             StatValueType statValueType = (StatValueType)EditorGUI.EnumPopup(statTypeRect, (StatValueType)statValueTypeProp.enumValueIndex);
             statValueTypeProp.enumValueIndex = (int)statValueType;
             position = AddLine(position);
+
+            /*
+            TMProIcon statIcon = (TMProIcon)EditorGUI.EnumPopup(position, (TMProIcon)statIconProp.enumValueIndex);
+            statIconProp.enumValueIndex = (int)statValueType;
+            position = AddLine(position);
+            */
 
             Rect progressionTypeRect = position;
             progressionTypeRect.width *= 0.5f;

@@ -144,6 +144,7 @@ public class IconDrawer : PoolObject {
 
         SetIcon(item.info.icon);
         DrawIcon();
+        SetTextRect(new Vector2(0.1f, 0.7f), new Vector2(0.9f, 1f), Vector2.zero, Vector2.zero);
         DrawText("x" + amount.ToString());
         
         EnableRedDot(false);
@@ -162,7 +163,7 @@ public class IconDrawer : PoolObject {
             DrawIconWithEffects();
             DrawText("");
         }
-        SetTextRect(new Vector2(0.1f, 0.0f), new Vector2(0.9f, 0.3f), Vector2.zero, Vector2.zero);
+        SetTextRect(new Vector2(0.1f, 0.7f), new Vector2(0.9f, 1f), Vector2.zero, Vector2.zero);
         EnableRedDot(false);
 
         DrawBar(null);        

@@ -11,10 +11,10 @@ public class ItemInfoDrawer_Hero : ItemInfoDrawerBase {
         //base.Init();
     }
 
-    public override void DrawHeroInfo(GD_HeroItem item) {
-        base.DrawHeroInfo(item);
+    public override void DrawHeroInfo(GD_HeroItem item, HeroInfoDrawConfig config) {
+        base.DrawHeroInfo(item, config);
 
-        heroInfoPanel.DrawHero(item);
+        heroInfoPanel.DrawHero(item, config);
     }
 
 }
