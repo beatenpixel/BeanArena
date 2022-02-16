@@ -43,9 +43,9 @@ public class HeroInfoPanel : MonoBehaviour {
             upgradeButton.SetText(MLocalization.Get("UPGRADE_CARD_BUTTON", LocalizationGroup.Main, heroLevelInfo.coinsToLevel));
 
             if (item.cardsCollected >= heroLevelInfo.cardsToLevel) {
-                iconDrawer.DrawText(item.cardsCollected + "/" + heroLevelInfo.cardsToLevel);
+                iconDrawer.DrawText(MFormat.GetTMProIcon(TMProIcon.Card) + item.cardsCollected + "/" + heroLevelInfo.cardsToLevel);
             } else {
-                iconDrawer.DrawText(MFormat.TextColorTag(MAssets.colors[MAssets.COLOR_BUTTON_RED]) + item.cardsCollected + MFormat.TextColorTagEnd + "/" + heroLevelInfo.cardsToLevel);
+                iconDrawer.DrawText(MFormat.GetTMProIcon(TMProIcon.Card) + MFormat.TextColorTag(MAssets.colors[MAssets.COLOR_BUTTON_RED]) + item.cardsCollected + MFormat.TextColorTagEnd + "/" + heroLevelInfo.cardsToLevel);
             }
 
             if (item.cardsCollected >= heroLevelInfo.cardsToLevel && Economy.inst.HasCurrency(CurrencyType.Coin, heroLevelInfo.coinsToLevel)) {

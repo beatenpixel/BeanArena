@@ -1037,7 +1037,7 @@ TextureImporter:
         width: 147
         height: 63
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1045,6 +1045,27 @@ TextureImporter:
       bones: []
       spriteID: 69cf9a8a2c7aa974e85f623f64f161f1
       internalID: 1361083388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tex_0_26
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 1638
+        width: 375
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 149a3fe6dc2128c41bc355735c6b506a
+      internalID: -795541576
       vertices: []
       indices: 
       edges: []
@@ -1099,6 +1120,7 @@ TextureImporter:
       water_pistol: -882657101450742125
       hero_icon_skeleton: -656622605
       tex_0_20: 8984777409455169079
+      tex_0_26: -795541576
       nakedman_icon: 1362259204
       tex_0_25: 1361083388
   spritePackingTag: 

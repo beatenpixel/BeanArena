@@ -9,14 +9,15 @@ public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType>, IStatContainer 
 
     public ItemType itemType;
     public ItemCategory category;
-    public string itemName_LKey;
-    public string itemDescription_LKey;
     public SO_IconContent icon;
     public GameObject prefab;
 
     public int maxLevel = 5;
 
     public List<ItemStatProgression> stats = new List<ItemStatProgression>();
+
+    public string localizationKeyName => "ITEM_NAME_" + itemType.ToString().ToUpper();
+    public string localizationKeyDescr => "ITEM_DESCR_" + itemType.ToString().ToUpper();
 
     public ItemType GetKey() {
         return itemType;

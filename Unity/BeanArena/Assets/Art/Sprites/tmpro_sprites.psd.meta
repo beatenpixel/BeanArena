@@ -304,7 +304,7 @@ TextureImporter:
         width: 138
         height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -312,6 +312,27 @@ TextureImporter:
       bones: []
       spriteID: ad111cf7e0711d14d8af9bf9184cf40d
       internalID: -822885012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cards
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 876
+        width: 148
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 047cdb9a31fd1724c9a491954297b18e
+      internalID: -1286667125
       vertices: []
       indices: 
       edges: []
@@ -332,6 +353,7 @@ TextureImporter:
       damage: 2434013178458663610
       time: 1922921581267463393
       cup: 7374767111035791262
+      cards: -1286667125
       coin: -5935198479381384675
       upgrade: -822885012
       bean_gold: 3959047777783908238

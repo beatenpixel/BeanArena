@@ -224,13 +224,13 @@ public class MCamera : Singleton<MCamera> {
         }
     }
 
-    public void Shake() {
+    public void Shake(float force = 1f) {
         if (shakeTween != null) {
             shakeTween.Kill(true);
         }
         shakeValue = Vector3.zero;
 
-        shakeTween = DOTween.Shake(() => shakeValue, (x) => shakeValue = x, 0.3f, 0.4f, 12).OnComplete(() => {
+        shakeTween = DOTween.Shake(() => shakeValue, (x) => shakeValue = x, 0.15f + Mathf.Sqrt(force) * 0.3f, 0.4f * force, 15).OnComplete(() => {
             shakeTween = null;
         });
     }

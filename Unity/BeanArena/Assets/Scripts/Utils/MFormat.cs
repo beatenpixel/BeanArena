@@ -52,6 +52,9 @@ public class MFormat {
             case TMProIcon.Upgrade:
                 statIconStr += "upgrade\"> ";
                 break;
+            case TMProIcon.Card:
+                statIconStr += "cards\"> ";
+                break;
         }
 
         return statIconStr;
@@ -127,5 +130,6 @@ public enum TMProIcon {
     Heart,
     Jump,
     Gem,
-    Upgrade
+    Upgrade,
+    Card
 }

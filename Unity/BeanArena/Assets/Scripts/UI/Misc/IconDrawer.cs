@@ -48,6 +48,8 @@ public class IconDrawer : PoolObject {
             imageRectT.offsetMax = -config.offsetMax;
             imageRectT.pivot = config.pivot;
 
+            imageRectT.rotation = Quaternion.Euler(0, 0, config.rotation);
+
             SetTextRect(new Vector2(0.1f, 0.1f), new Vector2(0.9f, 0.4f), Vector2.zero, Vector2.zero);
 
             image.sprite = config.sprite;
@@ -77,6 +79,8 @@ public class IconDrawer : PoolObject {
             imageWithEffectRectT.offsetMin = config.offsetMin;
             imageWithEffectRectT.offsetMax = -config.offsetMax;
             imageWithEffectRectT.pivot = config.pivot;
+
+            imageWithEffectRectT.rotation = Quaternion.Euler(0, 0, config.rotation);
 
             imageWithEffects.sprite = config.sprite;
             imageWithEffects.color = Color.Lerp(config.color, Color.black, 0.8f);

@@ -125,7 +125,8 @@ public enum ItemType : byte {
     HelicopterHat,
     JumpyBoots,
     RocketBoots,
-    Wheel
+    Wheel,
+    Bazooka
 }
 
 public enum ItemRareness : byte {

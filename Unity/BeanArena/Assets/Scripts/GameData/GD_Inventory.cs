@@ -62,6 +62,14 @@ public class GD_Inventory : GD {
     protected override void SetDefaults(StreamingContext ds) {
         items = new List<GD_Item>();
 
+        var allItemsInfo = MAssets.itemsInfo.GetAllAssets();
+
+        foreach (var item in allItemsInfo) {
+            items.Add(new GD_Item() {
+                itemType = item.itemType,
+            });
+        }
+
         chests = new List<GD_Chest>();
         chests.Add(new GD_Chest());
         chests.Add(new GD_Chest() {

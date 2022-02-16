@@ -94,6 +94,38 @@ MonoBehaviour:
     m_Localized: did you get it? Clown but B first
     m_Metadata:
       m_Items: []
+  - m_Id: 3725008190005248
+    m_Localized: Pistol
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3725008227753984
+    m_Localized: Pew-pew
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3725008227753987
+    m_Localized: Wheel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3725008231948288
+    m_Localized: You spin me right 'round, baby, right 'round
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3725008231948289
+    m_Localized: Bazooka
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3725008231948290
+    m_Localized: makes BOOOOM!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3725524886315008
+    m_Localized: Water Gun
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3725524886315009
+    m_Localized: Mmmmm... wet beans...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

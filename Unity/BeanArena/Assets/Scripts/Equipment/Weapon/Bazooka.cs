@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pistol : Weapon {
+public class Bazooka : Weapon {
 
     public Vector2 shootForce;
     public Transform shootPoint;
@@ -28,14 +28,12 @@ public class Pistol : Weapon {
         bullet.Shoot(shootPoint.right * Mathf.Lerp(shootForce.x, shootForce.y, useArgs.charge));
 
         if (hero.info.role != HeroRole.Player) {
-            MSound.Play("pistol_shot", new SoundConfig().SetPitch(1,0.1f).SetVolume(0.2f,0.1f), t.position);
+            MSound.Play("pistol_shot", new SoundConfig().SetPitch(1, 0.1f).SetVolume(0.2f, 0.1f), t.position);
         } else {
             MSound.Play("pistol_shot", SoundConfig.randVolumePitch01, t.position);
         }
 
-        if (hero.info.role == HeroRole.Player) {
-            MCamera.inst.Shake(0.2f);
-        }
+        MCamera.inst.Shake(0.7f);
     }
 
 }

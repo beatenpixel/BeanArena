@@ -16,7 +16,7 @@ MonoBehaviour:
   rarenessInfo: {fileID: 11400000, guid: f1f7e4d727deca1489caf59d096978d6, type: 2}
   icon: {fileID: 11400000, guid: 978c06fdb36fe0e418bb0fd4fa0a4879, type: 2}
   prefab: {fileID: 0}
-  maxLevelsCount: 5
+  maxLevelsCount: 12
   stats:
   - statType: 0
     valueType: 0
@@ -29,20 +29,41 @@ MonoBehaviour:
     - intValue: 10
       floatValue: 0
       manual: 0
-    - intValue: 32
+    - intValue: 18
       floatValue: 0
       manual: 0
-    - intValue: 55
+    - intValue: 26
       floatValue: 0
       manual: 0
-    - intValue: 78
+    - intValue: 35
+      floatValue: 0
+      manual: 0
+    - intValue: 43
+      floatValue: 0
+      manual: 0
+    - intValue: 51
+      floatValue: 0
+      manual: 0
+    - intValue: 59
+      floatValue: 0
+      manual: 0
+    - intValue: 67
+      floatValue: 0
+      manual: 0
+    - intValue: 75
+      floatValue: 0
+      manual: 0
+    - intValue: 84
+      floatValue: 0
+      manual: 0
+    - intValue: 92
       floatValue: 0
       manual: 0
     - intValue: 100
       floatValue: 0
       manual: 0
     decimalsCount: 2
-    maxLevel: 5
+    maxLevel: 12
     isFoldoutInInspector: 1
   - statType: 3
     valueType: 1
@@ -55,18 +76,39 @@ MonoBehaviour:
     - intValue: 10
       floatValue: 1
       manual: 0
-    - intValue: 32
-      floatValue: 1.25
+    - intValue: 10
+      floatValue: 1.09
       manual: 0
-    - intValue: 55
-      floatValue: 1.5
+    - intValue: 10
+      floatValue: 1.18
       manual: 0
-    - intValue: 78
-      floatValue: 1.75
+    - intValue: 10
+      floatValue: 1.27
       manual: 0
-    - intValue: 100
+    - intValue: 10
+      floatValue: 1.36
+      manual: 0
+    - intValue: 10
+      floatValue: 1.4499999
+      manual: 0
+    - intValue: 10
+      floatValue: 1.54
+      manual: 0
+    - intValue: 10
+      floatValue: 1.63
+      manual: 0
+    - intValue: 10
+      floatValue: 1.7199999
+      manual: 0
+    - intValue: 10
+      floatValue: 1.81
+      manual: 0
+    - intValue: 10
+      floatValue: 1.9
+      manual: 0
+    - intValue: 10
       floatValue: 2
       manual: 0
     decimalsCount: 2
-    maxLevel: 5
+    maxLevel: 12
     isFoldoutInInspector: 1

@@ -8,6 +8,7 @@ public class ItemInfoPanel : MonoBehaviour {
 
     public IconDrawer isevIconDrawer;
     public TextMeshProUGUI itemNameText;
+    public TextMeshProUGUI itemDescrText;
     public TextMeshProUGUI itemStatsText;
 
     public void Init() {
@@ -29,7 +30,8 @@ public class ItemInfoPanel : MonoBehaviour {
             progressBar = fuseProgress
         });
 
-        itemNameText.text = MLocalization.Get(itemA.info.itemName_LKey);
+        itemNameText.text = MLocalization.Get(itemA.info.localizationKeyName, LocalizationGroup.Items);
+        itemDescrText.text = MLocalization.Get(itemA.info.localizationKeyDescr, LocalizationGroup.Items);
 
         string statsStr = "";
         for (int i = 0; i < itemA.info.stats.Count; i++) {
@@ -52,7 +54,8 @@ public class ItemInfoPanel : MonoBehaviour {
         isevIconDrawer.DrawItem(item, itemInfo);
         isevIconDrawer.EnableRedDot(false);
 
-        itemNameText.text = MLocalization.Get(itemInfo.itemName_LKey);
+        itemNameText.text = MLocalization.Get(itemInfo.localizationKeyName, LocalizationGroup.Items);
+        itemDescrText.text = MLocalization.Get(itemInfo.localizationKeyDescr, LocalizationGroup.Items);
 
         string statsStr = "";
         for (int i = 0; i < itemInfo.stats.Count; i++) {

@@ -16,7 +16,7 @@ MonoBehaviour:
   rarenessInfo: {fileID: 11400000, guid: 1a1acced7d599a948a3c8fa5a5515eb2, type: 2}
   icon: {fileID: 11400000, guid: fbb4cf3c4d06fba4c8f8c92c8790619f, type: 2}
   prefab: {fileID: 0}
-  maxLevelsCount: 5
+  maxLevelsCount: 8
   stats:
   - statType: 0
     valueType: 0
@@ -29,18 +29,27 @@ MonoBehaviour:
     - intValue: 300
       floatValue: 0
       manual: 0
-    - intValue: 350
+    - intValue: 329
       floatValue: 0
       manual: 0
-    - intValue: 400
+    - intValue: 357
       floatValue: 0
       manual: 0
-    - intValue: 450
+    - intValue: 386
+      floatValue: 0
+      manual: 0
+    - intValue: 414
+      floatValue: 0
+      manual: 0
+    - intValue: 443
+      floatValue: 0
+      manual: 0
+    - intValue: 471
       floatValue: 0
       manual: 0
     - intValue: 500
       floatValue: 0
       manual: 0
     decimalsCount: 2
-    maxLevel: 5
+    maxLevel: 8
     isFoldoutInInspector: 1

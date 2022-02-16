@@ -91,6 +91,38 @@ MonoBehaviour:
     m_Key: BEAN_DESCR_CLOWN
     m_Metadata:
       m_Items: []
+  - m_Id: 3725008190005248
+    m_Key: ITEM_NAME_PISTOL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3725008227753984
+    m_Key: ITEM_DESCR_PISTOL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3725524886315008
+    m_Key: ITEM_NAME_WATERPISTOL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3725524886315009
+    m_Key: ITEM_DESCR_WATERPISTOL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3725008227753987
+    m_Key: ITEM_NAME_WHEEL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3725008231948288
+    m_Key: ITEM_DESCR_WHEEL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3725008231948289
+    m_Key: ITEM_NAME_BAZOOKA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3725008231948290
+    m_Key: ITEM_DESCR_BAZOOKA
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

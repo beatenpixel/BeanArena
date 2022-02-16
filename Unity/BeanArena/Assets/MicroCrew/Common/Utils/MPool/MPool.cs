@@ -66,6 +66,10 @@ namespace MicroCrew.Utils {
                 obj.OnPop();
                 return obj;
             } else {
+                if(!objPrefabs.ContainsKey(targetType) || !objPrefabs[targetType].ContainsKey(subType)) {
+                    Debug.LogError($"[MPool] No prefab found: {targetType}:{subType}");
+                }
+
                 IPoolObject newObj = CreateNew(objPrefabs[targetType][subType], parent);
                 newObj.OnCreate();
                 newObj.OnPop();
