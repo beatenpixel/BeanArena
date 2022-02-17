@@ -56,7 +56,6 @@ Shader "Demonixis/FastPostProcessing"
 		return o;
 	}
 
-
 	half4 fragFunction(v2f_data i) : SV_Target
 	{
 		float2 uv = i.uv;
@@ -105,14 +104,34 @@ Shader "Demonixis/FastPostProcessing"
 		col.rgb = lerp(col.rgb, _VignetteColor.rgb, (1 - dst.x));
 
 		// Shadows
-		float offsetX = sin(_Time.y) * 0.15;
-		offsetX = 0.2;
+		//float offsetX = sin(_Time.y) * 0.15;
+		float offsetX = 0.2;
 		float fadeP = (_MapBaseLineCameraSpaceY - uv.y) / _MapBaseLineCameraSpaceY;
 		half4 shadowSample = tex2D(_ShadowTex, float2(uv.x - offsetX * fadeP, _MapBaseLineCameraSpaceY - (uv.y - _MapBaseLineCameraSpaceY)*3));
 
 		fixed below = step(_MapBaseLineWorldY, i.vertexWorldPos.y);
 		float shadowSample2 = step(0.5,shadowSample.a);
 		col.rgb *= 1 - (1 - below) * shadowSample2 * clamp(shadowSample * 100,0,1) * 0.3 * (1 - fadeP);
+
+		// Reflections
+		
+		/* V1
+		
+		*/
+
+		
+		if(true) {
+			float2 reflectionUv = float2(uv.x, _MapBaseLineCameraSpaceY - (uv.y - _MapBaseLineCameraSpaceY)*2);
+			half4 reflectionSample = tex2D(_ShadowTex, reflectionUv);
+			col.rgb = lerp(col.rgb, reflectionSample, (1 - below) * 0.3f);
+		} else {
+			float2 reflectionUv = float2(uv.x, _MapBaseLineCameraSpaceY - (uv.y - _MapBaseLineCameraSpaceY)*2);
+			half4 reflectionSample = tex2D(_MainTex, reflectionUv);
+			col.rgb = lerp(col.rgb, reflectionSample * 0.5, (1 - below) * 0.5);
+
+			//col.rgb *= noise(reflectionUv);
+		}		
+		
 
 		/*
 		if (i.vertexWorldPos.y < _MapBaseLineWorldY) {		

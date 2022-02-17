@@ -30,7 +30,7 @@ public class MSound : SingletonFromResources<MSound> {
             sounds[i].soundName = sounds[i].name;
 
             soundsDict[sounds[i].soundName] = sounds[i];
-            sounds[i].lastPlayTime = 0f;
+            sounds[i].lastPlayTime = -10;
         }
     }
 

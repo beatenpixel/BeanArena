@@ -1049,6 +1049,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: rain_drop
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 931
+        width: 63
+        height: 149
+      alignment: 9
+      pivot: {x: 0.5, y: 0.20113747}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5877a43fce351c4a906575ad08ddc13
+      internalID: -1615725522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1097,10 +1118,11 @@ TextureImporter:
       tex_0_14: -294833298
       tex_0_22: 3349988611915878177
       tex_0_3: -5692604581601830981
-      tex_0_19: 6530401923317716584
+      rain_drop: -1615725522
       tex_0_2: 1894656480312254778
-      chest_common: 538634505
       tex_0_26: -795541576
+      chest_common: 538634505
+      tex_0_19: 6530401923317716584
       water_pistol: -882657101450742125
       tex_0_20: 8984777409455169079
       nakedman_icon: 1362259204

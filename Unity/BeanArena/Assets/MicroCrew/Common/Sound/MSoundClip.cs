@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class MSoundClip : ScriptableObject {
     public float volume = 1f;
     public float pitch = 1f;
     public float playTimeThreshold = 0.1f;
-    [HideInInspector] public float lastPlayTime;
+    [HideInInspector] public float lastPlayTime = -10;
 }
 
 public enum SoundClipCategory {
