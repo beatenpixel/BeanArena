@@ -30,7 +30,7 @@ public static class GameRandom  {
     }
 
     public static GD_Chest GenerateRoundRewardChest() {
-        ChestType chestType = MRandom.Get(new RandomEntry<ChestType>(ChestType.Common, 50), new RandomEntry<ChestType>(ChestType.Common, 7), new RandomEntry<ChestType>(ChestType.Common, 1));
+        ChestType chestType = MRandom.Get(new RandomEntry<ChestType>(ChestType.Common, CHEST_TYPE_CHANCE[0]), new RandomEntry<ChestType>(ChestType.Epic, CHEST_TYPE_CHANCE[1]), new RandomEntry<ChestType>(ChestType.Legendary, CHEST_TYPE_CHANCE[2]));
 
         GD_Chest chest = new GD_Chest() {
             type = chestType
@@ -52,7 +52,7 @@ public static class GameRandom  {
 
         content.heroCards = new List<HeroCardsContainer>();
 
-        if (MRandom.Range(0, 10) > -1) {            
+        if (MRandom.Range(0, 10) > 5) {            
 
             List<RandomEntry<HeroType>> heroesThatAreNotFull = new List<RandomEntry<HeroType>>();
 
@@ -74,9 +74,17 @@ public static class GameRandom  {
 
         content.items = new List<GD_Item>();
 
-        int itemCount = (int)content.chestType + MRandom.Range(1, 3);
+        int itemCount = (int)content.chestType + MRandom.Range(0, 2);
         for (int i = 0; i < itemCount; i++) {
-            ItemType itemType = MRandom.Get(new RandomEntry<ItemType>(ItemType.Pistol, 10), new RandomEntry<ItemType>(ItemType.Wheel, 5));
+            List<RandomEntry<ItemType>> itemsTypes = new List<RandomEntry<ItemType>>();
+            var allItemsInfo = MAssets.itemsInfo.GetAllAssets();
+
+            for (int x = 0; x < allItemsInfo.Count; x++) {
+                itemsTypes.Add(new RandomEntry<ItemType>(allItemsInfo[i].itemType, allItemsInfo[i].dropInfo.dropWeight));
+            }
+
+            ItemType itemType = MRandom.Get(itemsTypes);
+
             SO_ItemInfo itemInfo = MAssets.itemsInfo.GetAsset(itemType);
             int level = MRandom.GetWithChance(LEVELS_ARRAY, ITEM_LEVEL_CHANCE);
             Vector2Int fusePointsBounds = itemInfo.GetFusePointsBounds(level);
@@ -99,6 +107,10 @@ public static class GameRandom  {
 
 }
 
+[System.Serializable]
+public class DropInfo {
+    public int dropWeight = 50;
+}
 
 public class ChestContent {
     public ChestType chestType;

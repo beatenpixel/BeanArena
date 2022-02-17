@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e139ec811b0c70047a77447d1586ba55, type: 3}
   m_Name: Legendary
   m_EditorClassIdentifier: 
-  chestType: 2
+  chestType: 3
   chestName_LKey: CHEST_NAME_LEGENDARY
   chestDescr_LKey: CHEST_DESCR_LEGENDARY
   openDurationInSec: 7200

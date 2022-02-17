@@ -163,6 +163,8 @@ public sealed class FastPostProcessing : MonoBehaviour {
 
     #endregion
 
+    private int vignetteColorPropID = -1;
+
     private void Awake() {
         shadowTexture = new RenderTexture(Screen.width / 4, Screen.height / 4, 0, RenderTextureFormat.ARGB32, 0);
         shadowCam.targetTexture = shadowTexture;
@@ -171,8 +173,10 @@ public sealed class FastPostProcessing : MonoBehaviour {
     private void OnEnable() {
         cam = GetComponent<Camera>();
 
-        if (m_Shader == null)
+        if (m_Shader == null) {
             m_Shader = Shader.Find("Demonixis/FastPostProcessing");
+            vignetteColorPropID = m_Shader.FindPropertyIndex("_VignetteColor");
+        }
 
         if (m_PostProcessMaterial == null)
             m_PostProcessMaterial = new Material(m_Shader);
@@ -247,6 +251,17 @@ public sealed class FastPostProcessing : MonoBehaviour {
         }
 
         grayscaleEnabled = enable;
+    }
+
+    public void SetVignetteColor(Color color) {
+        if(vignetteColorPropID == -1) {
+            vignetteColorPropID = Shader.FindPropertyIndex("_VignetteColor");
+        }
+
+
+        //[OPTIMIZE]
+        m_PostProcessMaterial.SetColor("_VignetteColor", color);
+        //m_PostProcessMaterial.SetColor(vignetteColorPropID, color);
     }
 
 #if UNITY_EDITOR

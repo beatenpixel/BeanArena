@@ -11,7 +11,7 @@ public class GradientBackground : MonoBehaviour {
 	public List<GradientPoint> gradientPoints;
 	public int orderInLayer;
 
-	//private Timer updateTimer;
+	private Timer updateTimer;
 
 	private List<Vector3> verts = new List<Vector3>();
 	private List<Vector2> uvs0 = new List<Vector2>();
@@ -25,19 +25,27 @@ public class GradientBackground : MonoBehaviour {
 	}
 
 	private void Awake() {
-		//updateTimer = new Timer(0.5f);
+		updateTimer = new Timer(0.1f);
 		GenerateBackground();
 	}
 
 	private void Update() {
-		/*
+		
         if(updateTimer) {
-			updateTimer.Add();
+			updateTimer.AddFromNow();
 
-			GenerateBackground();
-		}
-		*/
+            UpdateColors();
+        }		
 	}
+
+    private void UpdateColors() {
+        for (int i = 0; i < gradientPoints.Count; i++) {
+            colors[i*2] = gradientPoints[i].color;
+            colors[i*2+1] = gradientPoints[i].color;
+        }
+
+        mesh.SetColors(colors);
+    }
 
 	private void GenerateBackground() {
 		verts = new List<Vector3>();
@@ -84,3 +92,4 @@ public class GradientBackground : MonoBehaviour {
 	}
 
 }
+

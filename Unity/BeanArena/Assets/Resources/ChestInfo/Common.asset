@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e139ec811b0c70047a77447d1586ba55, type: 3}
   m_Name: Common
   m_EditorClassIdentifier: 
-  chestType: 0
+  chestType: 1
   chestName_LKey: CHEST_NAME_COMMON
   chestDescr_LKey: CHEST_DESCR_COMMON
   openDurationInSec: 30

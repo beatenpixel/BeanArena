@@ -217,10 +217,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   faces:
-  - {fileID: -6597388907290003206, guid: 56fe8a06b0052aa4c9d578a4b452a045, type: 3}
+  - {fileID: 1157239988, guid: a7824e99320e86f4a8dd66fad9291819, type: 3}
   - {fileID: 306614722634328623, guid: a7824e99320e86f4a8dd66fad9291819, type: 3}
   - {fileID: -6154962540722802533, guid: a7824e99320e86f4a8dd66fad9291819, type: 3}
-  - {fileID: -5092351411351413438, guid: 56fe8a06b0052aa4c9d578a4b452a045, type: 3}
+  - {fileID: 1659917562, guid: a7824e99320e86f4a8dd66fad9291819, type: 3}
   faceSpriteRend: {fileID: 6186975834600973596}
 --- !u!1 &6186975834321502702
 GameObject:
@@ -288,7 +288,12 @@ MonoBehaviour:
     jumpForce: 1200
   heroEquipment: {fileID: 7610001874787510047}
   body: {fileID: 0}
-  editorPreviewHeroInfo: {fileID: 0}
+  heroInfo: {fileID: 0}
+  heroData:
+    heroType: 0
+    cardsCollected: 0
+    levelID: 0
+    isEquiped: 0
 --- !u!1 &6186975834423308998
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,12 +535,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: -6597388907290003206, guid: 56fe8a06b0052aa4c9d578a4b452a045, type: 3}
+  m_Sprite: {fileID: 1157239988, guid: a7824e99320e86f4a8dd66fad9291819, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.89, y: 1.69}
+  m_Size: {x: 1.92, y: 1.71}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

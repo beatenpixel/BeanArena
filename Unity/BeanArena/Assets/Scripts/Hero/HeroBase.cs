@@ -321,6 +321,11 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
                 break;
 		}
 
+        if(info.role == HeroRole.Player) {
+            MCamera.inst.VignetteColor_OnHit();
+            MCamera.inst.Shake(0.4f);
+        }
+
 		if (info.state != HeroState.Alive) {
 			return new DamageResponse() { success = false };
 		}

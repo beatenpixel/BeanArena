@@ -70,8 +70,8 @@ public class GD_Chest : GD {
 
 }
 
-public enum ChestType : byte {
-    Common,
-    Epic,
-    Legendary
+public enum ChestType {
+    Common = 1,
+    Epic = 2,
+    Legendary = 3
 }

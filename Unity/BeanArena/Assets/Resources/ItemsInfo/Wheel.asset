@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 6
   category: 3
-  itemName_LKey: ITEM_NAME_PISTOL
-  itemDescription_LKey: ITEM_DESCR_PISTOL
   icon: {fileID: 11400000, guid: c473d31935e875443a3cdcccb17370e7, type: 2}
   prefab: {fileID: 416318777461901068, guid: bc1f5fe8a4c72634ebe8a3683aad358d, type: 3}
   maxLevel: 10
@@ -25,37 +23,37 @@ MonoBehaviour:
     progressionType: 0
     progressionFunc: 3
     upgradeDirection: 1
-    intStartEndValue: {x: 0, y: 1000}
+    intStartEndValue: {x: 25, y: 500}
     floatStartEndValue: {x: 0, y: 0}
     values:
-    - intValue: 0
+    - intValue: 25
       floatValue: 0
       manual: 0
-    - intValue: 15
+    - intValue: 32
       floatValue: 0
       manual: 0
-    - intValue: 60
+    - intValue: 54
       floatValue: 0
       manual: 0
-    - intValue: 134
+    - intValue: 89
       floatValue: 0
       manual: 0
-    - intValue: 234
+    - intValue: 136
       floatValue: 0
       manual: 0
-    - intValue: 357
+    - intValue: 195
+      floatValue: 0
+      manual: 0
+    - intValue: 262
+      floatValue: 0
+      manual: 0
+    - intValue: 338
+      floatValue: 0
+      manual: 0
+    - intValue: 418
       floatValue: 0
       manual: 0
     - intValue: 500
-      floatValue: 0
-      manual: 0
-    - intValue: 658
-      floatValue: 0
-      manual: 0
-    - intValue: 826
-      floatValue: 0
-      manual: 0
-    - intValue: 1000
       floatValue: 0
       manual: 0
     decimalsCount: 2
@@ -102,3 +100,5 @@ MonoBehaviour:
     decimalsCount: 2
     maxLevel: 10
     isFoldoutInInspector: 1
+  dropInfo:
+    dropWeight: 50

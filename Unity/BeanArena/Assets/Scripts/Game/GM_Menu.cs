@@ -1,3 +1,4 @@
+using IngameDebugConsole;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -152,6 +153,13 @@ public abstract class GameMode : MonoBehaviour {
 
     protected virtual void OnGameEvent_HeroDie(HeroDieEvent e) {
         
+    }
+
+    [ConsoleMethod("ai", "Enable/disable all AI")]
+    public static void EnableAI(bool enable) {
+        foreach (var enemy in GameMode.current.enemies) {
+            enemy.enabledAI = enable;
+        }
     }
 
 }

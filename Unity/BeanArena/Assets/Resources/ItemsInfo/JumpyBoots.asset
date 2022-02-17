@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 4
   category: 3
-  itemName_LKey: ITEM_NAME_PISTOL
-  itemDescription_LKey: ITEM_DESCR_PISTOL
   icon: {fileID: 11400000, guid: 2b84a5d1f1f2f9f49aea9ce286a3be97, type: 2}
   prefab: {fileID: 0}
   maxLevel: 10
@@ -31,33 +29,35 @@ MonoBehaviour:
     - intValue: 25
       floatValue: 0
       manual: 0
-    - intValue: 25
+    - intValue: 32
       floatValue: 0
       manual: 0
-    - intValue: 50
+    - intValue: 54
       floatValue: 0
       manual: 0
-    - intValue: 75
+    - intValue: 89
       floatValue: 0
       manual: 0
-    - intValue: 125
+    - intValue: 136
       floatValue: 0
       manual: 0
-    - intValue: 175
+    - intValue: 195
       floatValue: 0
       manual: 0
-    - intValue: 250
+    - intValue: 262
       floatValue: 0
       manual: 0
-    - intValue: 325
+    - intValue: 338
       floatValue: 0
       manual: 0
-    - intValue: 400
+    - intValue: 418
       floatValue: 0
       manual: 0
     - intValue: 500
       floatValue: 0
       manual: 0
-    roundAccuracy: 25
+    decimalsCount: 2
     maxLevel: 10
     isFoldoutInInspector: 1
+  dropInfo:
+    dropWeight: 50

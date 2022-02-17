@@ -4,6 +4,7 @@ Shader "Demonixis/FastPostProcessing"
 	{
 		_MainTex("Base (RGB)", 2D) = "white" {}
 		_ShadowTex("ShadowTexture",2D) = "white" {}
+		_VignetteColor("VignetteColor", Color) = (0,0,0,0)
 	}
 
 		CGINCLUDE
@@ -27,6 +28,7 @@ Shader "Demonixis/FastPostProcessing"
 	uniform float _MapBaseLineCameraSpaceY;
 	uniform float _MapBaseLineWorldY;
 	uniform float _GrayscaleValue;
+	fixed4 _VignetteColor;
 
 	struct v2f_data {
 		float4 pos : SV_POSITION;
@@ -99,7 +101,8 @@ Shader "Demonixis/FastPostProcessing"
 		// Vignette
 		half2 dst = (uv - 0.5) * 1.25;
 		dst.x = 1 - dot(dst, dst)*0.5;
-		col.rgb *= dst.x;
+		//col.rgb *= dst.x;
+		col.rgb = lerp(col.rgb, _VignetteColor.rgb, (1 - dst.x));
 
 		// Shadows
 		float offsetX = sin(_Time.y) * 0.15;

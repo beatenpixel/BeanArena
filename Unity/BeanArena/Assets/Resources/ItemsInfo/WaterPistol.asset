@@ -100,3 +100,5 @@ MonoBehaviour:
     decimalsCount: 2
     maxLevel: 10
     isFoldoutInInspector: 1
+  dropInfo:
+    dropWeight: 50

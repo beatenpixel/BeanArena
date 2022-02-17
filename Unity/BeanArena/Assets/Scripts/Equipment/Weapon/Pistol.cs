@@ -10,8 +10,6 @@ public class Pistol : Weapon {
     public Transform shootPoint;
 
     protected override void OnUse(EquipmentUseArgs useArgs) {
-        Debug.Log("CHARGE: " + useArgs.charge);
-
         string bulletType = null;
 
         Bullet bullet = MPool.Get<Bullet>(bulletType);
@@ -22,7 +20,6 @@ public class Pistol : Weapon {
         bullet.SetShotCharge(useArgs.charge);
 
         float damage = itemData.GetStatValue(StatType.Damage).intValue;
-        Debug.Log("damage: " + damage + " level: " + itemData.levelID);
 
         bullet.SetDamage(damage);
         bullet.Shoot(shootPoint.right * Mathf.Lerp(shootForce.x, shootForce.y, useArgs.charge));

@@ -39,6 +39,8 @@ public class MCamera : Singleton<MCamera> {
     private Bounds targetsBounds;
 
     private Tween shakeTween;
+    private Tween vignetteTween;
+    private Color vignetteColor;
 
     public static float SCREEN_WH_RATIO => Screen.width / (float)Screen.height;
 
@@ -232,6 +234,18 @@ public class MCamera : Singleton<MCamera> {
 
         shakeTween = DOTween.Shake(() => shakeValue, (x) => shakeValue = x, 0.15f + Mathf.Sqrt(force) * 0.3f, 0.4f * force, 15).OnComplete(() => {
             shakeTween = null;
+        });
+    }
+
+    public void VignetteColor_OnHit(float duration = 0.5f) {
+        if(vignetteTween != null) {
+            vignetteTween.Kill(true);
+        }
+
+        vignetteColor = Color.red * 0.7f;
+
+        vignetteTween = DOTween.To(() => vignetteColor, (x) => vignetteColor = x, Color.black, duration).SetEase(Ease.OutSine).OnUpdate(() => {
+            fastPostProcessing.SetVignetteColor(vignetteColor);
         });
     }
 

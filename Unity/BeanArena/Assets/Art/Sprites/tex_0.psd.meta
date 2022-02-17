@@ -1058,7 +1058,7 @@ TextureImporter:
         width: 375
         height: 191
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1066,6 +1066,48 @@ TextureImporter:
       bones: []
       spriteID: 149a3fe6dc2128c41bc355735c6b506a
       internalID: -795541576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tex_0_27
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 1659
+        width: 192
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fc4d2c04ffc08e45882fca94477c3d4
+      internalID: 1157239988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tex_0_28
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 1501
+        width: 201
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13ce5bba02be85c44a869c6830a032dc
+      internalID: 1659917562
       vertices: []
       indices: 
       edges: []
@@ -1082,30 +1124,36 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       capsule: -7411500690239887169
+      drop_4: 8344815454573176662
+      tex_0_12: -1252051043
+      tex_0_13: 1878352554
+      tex_0_4: -40810238627940632
+      hero_icon_bean: 5504138388294342362
+      tex_0_18: 5880695188566547066
+      tex_0_10: -367433212
+      tex_0_27: 1157239988
+      hero_icon_skeleton: -656622605
+      tex_0_16: 1045647409
+      tex_0_23: 9171183186283799205
+      tex_0_25: 1361083388
       tex_0_7: 306614722634328623
       hero_icon_clown: 1291546328
       drop_3: -4551323591017913812
       drop_0: -341480925492483727
       drop_1: 6910860581909789431
       tex_0_9: -307186218552904950
-      drop_4: 8344815454573176662
-      drop_2: 2079128524816627004
-      tex_0_12: -1252051043
       chest_epic: 1464966154
+      drop_2: 2079128524816627004
       hero_icon_shark: -1917672438
-      tex_0_13: 1878352554
-      tex_0_4: -40810238627940632
       tex_0_1: 8036309752053734007
-      hero_icon_bean: 5504138388294342362
       tex_0_15: 1761533502
+      tex_0_28: 1659917562
       tex_0_0: -1866947196
       tex_0_17: 7804612495321305686
       tex_0_21: -2142735356839987325
       tex_0_6: 2781597166843550514
-      tex_0_18: 5880695188566547066
       tex_0_5: -6154962540722802533
       tex_0_8: -2149578559650092762
-      tex_0_10: -367433212
       tex_0_11: 383223930
       tex_0_24: -3940336546365883990
       chest_legendary: 1059245388
@@ -1114,15 +1162,11 @@ TextureImporter:
       tex_0_3: -5692604581601830981
       tex_0_19: 6530401923317716584
       tex_0_2: 1894656480312254778
-      tex_0_23: 9171183186283799205
       chest_common: 538634505
-      tex_0_16: 1045647409
-      water_pistol: -882657101450742125
-      hero_icon_skeleton: -656622605
-      tex_0_20: 8984777409455169079
       tex_0_26: -795541576
+      water_pistol: -882657101450742125
+      tex_0_20: 8984777409455169079
       nakedman_icon: 1362259204
-      tex_0_25: 1361083388
   spritePackingTag: 
   pSDRemoveMatte: 1
   pSDShowRemoveMatteOption: 1

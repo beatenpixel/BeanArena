@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class MRandom {
 
-    public static int[] randomIndexesCache = new int[2000];
+    public static int[] randomIndexesCache = new int[10000];
 
     public static T GetWithChance<T>(T[] items, int[] chances) {
         int ind = -1;

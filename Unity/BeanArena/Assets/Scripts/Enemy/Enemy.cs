@@ -12,6 +12,8 @@ public class Enemy {
 
     private Timer shootTimer;
 
+    [HideInInspector] public bool enabledAI = true;
+
     public void Init() {
         changeDirTimer = new Timer(MRandom.Range(0.5f, 3f));
         shootTimer = new Timer(MRandom.Range(0.75f, 1.5f));
@@ -20,7 +22,7 @@ public class Enemy {
     }
 
     public void InternalUpdate() {
-        if(hero != null) {
+        if(hero != null && enabledAI) {
             if(!GameMode.current.heroesInputAllowed) {
                 hero.MoveInput(Vector2.zero);
                 return;

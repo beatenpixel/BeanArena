@@ -46,7 +46,7 @@ public class ChestOpener : MonoBehaviour {
 
         //anim.enabled = false;
 
-        currentChestGO = Instantiate(chestPrefabs[(int)chest.type], chestHolderT);
+        currentChestGO = Instantiate(chestPrefabs[(int)(chest.type - 1)], chestHolderT);
         currentChestGO.name = "chest";
         currentChestGO.transform.SetAsFirstSibling();
         anim.Rebind();

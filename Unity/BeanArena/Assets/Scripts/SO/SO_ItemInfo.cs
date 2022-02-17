@@ -16,6 +16,8 @@ public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType>, IStatContainer 
 
     public List<ItemStatProgression> stats = new List<ItemStatProgression>();
 
+    public DropInfo dropInfo;
+
     public string localizationKeyName => "ITEM_NAME_" + itemType.ToString().ToUpper();
     public string localizationKeyDescr => "ITEM_DESCR_" + itemType.ToString().ToUpper();
 
