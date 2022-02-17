@@ -136,6 +136,12 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: cards
     m_HashCode: 116134151
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 10
+    m_Scale: 1
+    m_Name: cross
+    m_HashCode: 116734942
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -287,5 +293,20 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     sprite: {fileID: -1286667125, guid: e9104975539d48742ab9e47a6a6eb9af, type: 3}
+  - m_Index: 10
+    m_Metrics:
+      m_Width: 136
+      m_Height: 136
+      m_HorizontalBearingX: -34.3
+      m_HorizontalBearingY: 111.8
+      m_HorizontalAdvance: 136
+    m_GlyphRect:
+      m_X: 620
+      m_Y: 876
+      m_Width: 136
+      m_Height: 136
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: 313744257, guid: e9104975539d48742ab9e47a6a6eb9af, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []

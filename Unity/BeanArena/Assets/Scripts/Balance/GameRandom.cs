@@ -75,13 +75,14 @@ public static class GameRandom  {
         content.items = new List<GD_Item>();
 
         int itemCount = (int)content.chestType + MRandom.Range(0, 2);
-        for (int i = 0; i < itemCount; i++) {
-            List<RandomEntry<ItemType>> itemsTypes = new List<RandomEntry<ItemType>>();
-            var allItemsInfo = MAssets.itemsInfo.GetAllAssets();
 
-            for (int x = 0; x < allItemsInfo.Count; x++) {
-                itemsTypes.Add(new RandomEntry<ItemType>(allItemsInfo[i].itemType, allItemsInfo[i].dropInfo.dropWeight));
-            }
+        var allItemsInfo = MAssets.itemsInfo.GetAllAssets();
+        List<RandomEntry<ItemType>> itemsTypes = new List<RandomEntry<ItemType>>();
+        for (int x = 0; x < allItemsInfo.Count; x++) {
+            itemsTypes.Add(new RandomEntry<ItemType>(allItemsInfo[x].itemType, allItemsInfo[x].dropInfo.dropWeight));
+        }
+
+        for (int i = 0; i < itemCount; i++) {           
 
             ItemType itemType = MRandom.Get(itemsTypes);
 

@@ -50,5 +50,5 @@ public class InventoryGroupConfig {
     public int groupID;
     public ItemCategory itemCategory;
     public InventoryTabButton tabButton;
-    public InventoryUI drawer;
+    public InventoryUI inventoryUI;
 }

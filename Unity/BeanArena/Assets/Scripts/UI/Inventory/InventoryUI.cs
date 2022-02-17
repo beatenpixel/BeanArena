@@ -13,7 +13,7 @@ public class InventoryUI : MonoBehaviour {
     public RectTransform itemsInfoRectT;
     [SerializeField]private RectTransform selectionRect;
 
-    public GameObject[] onDragItemButtonScrollingLines;
+    public UICompHolder[] onDragItemButtonScrollingLines;
 
 	public InventoryWorldUI worldUI;
 	public List<InventoryGroupDrawer> groupDrawers;
@@ -56,7 +56,7 @@ public class InventoryUI : MonoBehaviour {
                 groupID = i,
                 itemCategory = groupsCategory[i],
                 tabButton = tabButtons[i],
-                drawer = this,
+                inventoryUI = this,
             });
         }       
 
@@ -168,8 +168,8 @@ public class InventoryUI : MonoBehaviour {
 
 				currentDragedButton = null;
 
-                onDragItemButtonScrollingLines[0].SetActive(false);
-                onDragItemButtonScrollingLines[1].SetActive(false);
+                onDragItemButtonScrollingLines[0].go.SetActive(false);
+                onDragItemButtonScrollingLines[1].go.SetActive(false);
                 break;
 			case UIEventType.DragStart:
 				currentDragedButton = button;
@@ -177,8 +177,10 @@ public class InventoryUI : MonoBehaviour {
                 if (button.buttonState == ItemButton.ItemButtonState.InHeroSlot) {
 
                 } else {
-                    onDragItemButtonScrollingLines[0].SetActive(true);
-                    onDragItemButtonScrollingLines[1].SetActive(true);
+                    onDragItemButtonScrollingLines[0].go.SetActive(true);
+
+                    onDragItemButtonScrollingLines[1].text.text = MLocalization.Get("EQUIP");
+                    onDragItemButtonScrollingLines[1].go.SetActive(true);
                 }
                 break;
             case UIEventType.Click:
@@ -301,6 +303,10 @@ public class InventoryUI : MonoBehaviour {
         selectionRect.SetParent(null);
     }
 
+    public void ShowItemInfoBorderNotification(string notificationText) {
+        onDragItemButtonScrollingLines[0].text.text = notificationText;
+    }
+
 
 	#region InventoryTabButton
 
@@ -323,7 +329,7 @@ public class InventoryUI : MonoBehaviour {
 	}
 
     private void Destroy_InventoryTabButton(InventoryTabButton obj, int ind) {
-
+        
     }
 
     #endregion

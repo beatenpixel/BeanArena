@@ -79,7 +79,7 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
             }
         }
 
-        config.drawer.OnHeroItemButtonEvent(eventType, button, arg);
+        config.inventoryUI.OnHeroItemButtonEvent(eventType, button, arg);
     }
 
     public void ButtonClick_HeroUpgrade() {

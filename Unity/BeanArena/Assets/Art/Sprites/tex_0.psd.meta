@@ -1070,6 +1070,132 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: tex_0_circle
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 493
+        width: 229
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4872ba02309951e49a8fd36fbc9437de
+      internalID: 1361548593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tex_0_circle_smooth_edge
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 496
+        width: 224
+        height: 224
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 386feee7ead54154b85a90564d7744c9
+      internalID: -417000142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: particle_drop_3
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 931
+        width: 64
+        height: 146
+      alignment: 9
+      pivot: {x: 0.4923377, y: 0.21114945}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79acd32291b9ae14b916cfe72236c24f
+      internalID: -776414081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: particle_drop_2
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 801
+        width: 50
+        height: 115
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8c43569bd3a86941924ef979bb81745
+      internalID: 375084091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: particle_drop_1
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 800
+        width: 50
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3f4cf810631dd547ba7b547057db3f0
+      internalID: 813093173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: particle_drop_0
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 800
+        width: 46
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebcf87a3d94dfe446a5fec5270cb0f85
+      internalID: -311074686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1082,10 +1208,12 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       capsule: -7411500690239887169
+      particle_drop_2: 375084091
       drop_4: 8344815454573176662
       tex_0_12: -1252051043
       tex_0_13: 1878352554
       tex_0_4: -40810238627940632
+      particle_drop_1: 813093173
       hero_icon_bean: 5504138388294342362
       tex_0_18: 5880695188566547066
       tex_0_10: -367433212
@@ -1093,7 +1221,10 @@ TextureImporter:
       hero_icon_skeleton: -656622605
       tex_0_16: 1045647409
       tex_0_23: 9171183186283799205
+      particle_drop_0: -311074686
+      tex_0_circle: 1361548593
       tex_0_25: 1361083388
+      tex_0_circle_smooth_edge: -417000142
       tex_0_7: 306614722634328623
       hero_icon_clown: 1291546328
       drop_3: -4551323591017913812
@@ -1110,19 +1241,20 @@ TextureImporter:
       tex_0_17: 7804612495321305686
       tex_0_21: -2142735356839987325
       tex_0_6: 2781597166843550514
+      particle_drop_3: -776414081
       tex_0_5: -6154962540722802533
       tex_0_8: -2149578559650092762
       tex_0_11: 383223930
       tex_0_24: -3940336546365883990
       chest_legendary: 1059245388
-      tex_0_14: -294833298
+      rain_drop: -1615725522
       tex_0_22: 3349988611915878177
       tex_0_3: -5692604581601830981
-      rain_drop: -1615725522
-      tex_0_2: 1894656480312254778
-      tex_0_26: -795541576
-      chest_common: 538634505
       tex_0_19: 6530401923317716584
+      tex_0_2: 1894656480312254778
+      tex_0_14: -294833298
+      chest_common: 538634505
+      tex_0_26: -795541576
       water_pistol: -882657101450742125
       tex_0_20: 8984777409455169079
       nakedman_icon: 1362259204

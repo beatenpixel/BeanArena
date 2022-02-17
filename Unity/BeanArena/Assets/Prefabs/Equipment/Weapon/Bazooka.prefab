@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 8106220297018392105}
   - component: {fileID: 8106220297018392110}
   - component: {fileID: 8106220297018392104}
-  - component: {fileID: 4459897483373044470}
+  - component: {fileID: 2169051581485034294}
   m_Layer: 17
   m_Name: Bazooka
   m_TagString: Untagged
@@ -116,7 +116,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8106220297018392111}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.205, y: 3.012, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5717, y: 0.5717, z: 0.5717}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -203,7 +203,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.6004295, y: 0.81476235}
   m_EdgeRadius: 0
---- !u!114 &4459897483373044470
+--- !u!114 &2169051581485034294
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8106220297018392111}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2378b09a6c1c0bb4a9516406dc77ebde, type: 3}
+  m_Script: {fileID: 11500000, guid: af911247cc21e974ba5142c4586325a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   go: {fileID: 0}
@@ -226,10 +226,10 @@ MonoBehaviour:
     rotation: {x: 0, y: 0, z: -2}
     scale: {x: 0.5717, y: 0.5717, z: 0.5717}
     isLocal: 1
-  useDelay: 0.5
+  useDelay: 2
   itemInfo: {fileID: 11400000, guid: f34dd5598b9225a4abaa4c5cb87f1bfa, type: 2}
-  hingeJointAnchor: {x: -0.4, y: -0.2}
-  hingeJointConnectedAnchor: {x: 0.8, y: 0}
+  hingeJointAnchor: {x: 0, y: 0}
+  hingeJointConnectedAnchor: {x: 0, y: 0}
   hingeJointLimits: {x: -10, y: 10}
   shootForce: {x: 50, y: 120}
   shootPoint: {fileID: 7819585168761884302}

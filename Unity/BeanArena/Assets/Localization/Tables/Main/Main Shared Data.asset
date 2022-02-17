@@ -131,22 +131,6 @@ MonoBehaviour:
     m_Key: READY_BUTTON
     m_Metadata:
       m_Items: []
-  - m_Id: 918337318937
-    m_Key: ITEM_NAME_PISTOL
-    m_Metadata:
-      m_Items: []
-  - m_Id: 918337318938
-    m_Key: ITEM_DESCR_PISTOL
-    m_Metadata:
-      m_Items: []
-  - m_Id: 918337318939
-    m_Key: ITEM_NAME_WATER_PISTOL
-    m_Metadata:
-      m_Items: []
-  - m_Id: 918337318940
-    m_Key: ITEM_DESCR_WATER_PISTOL
-    m_Metadata:
-      m_Items: []
   - m_Id: 918337318941
     m_Key: LVL_MAX_STR
     m_Metadata:
@@ -221,6 +205,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3642795721187328
     m_Key: UPGRADE_CARD_BUTTON_NOT_ENOUGH_CARDS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4099825570754560
+    m_Key: CAN_NOT_MERGE_ITSELF
     m_Metadata:
       m_Items: []
   m_Metadata:

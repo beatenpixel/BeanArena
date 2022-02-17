@@ -134,22 +134,6 @@ MonoBehaviour:
     m_Localized: READY
     m_Metadata:
       m_Items: []
-  - m_Id: 918337318937
-    m_Localized: Pistol
-    m_Metadata:
-      m_Items: []
-  - m_Id: 918337318938
-    m_Localized: Pew-pew
-    m_Metadata:
-      m_Items: []
-  - m_Id: 918337318939
-    m_Localized: Water Gun
-    m_Metadata:
-      m_Items: []
-  - m_Id: 918337318940
-    m_Localized: Mmmmm... wet beans...
-    m_Metadata:
-      m_Items: []
   - m_Id: 918337318941
     m_Localized: MAX
     m_Metadata:
@@ -226,6 +210,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3642795721187328
     m_Localized: <sprite name="upgrade"> {0}/{1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4099825570754560
+    m_Localized: <sprite name="cross"> Can't merge item with itself
     m_Metadata:
       m_Items: []
   references:

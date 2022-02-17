@@ -224,7 +224,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: circle
+      name: ui_circle
       rect:
         serializedVersion: 2
         x: 1
@@ -1072,7 +1072,7 @@ TextureImporter:
         width: 164
         height: 167
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1093,7 +1093,7 @@ TextureImporter:
         width: 181
         height: 164
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1114,7 +1114,7 @@ TextureImporter:
         width: 179
         height: 166
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1139,7 +1139,6 @@ TextureImporter:
     nameFileIdTable:
       square: 6390131276126905485
       ui_tex_0_16: 4757458707963401709
-      circle: -4187891518713874702
       ui_tex_0_1: 1214459604
       ui_tex_0_9: -8419336667231071291
       ui_tex_circle_outline: 3351257870148316972
@@ -1158,6 +1157,7 @@ TextureImporter:
       outlined_square_3: 3202421464805995654
       ui_tex_0_10: 7320795754320263975
       ui_tex_0_20: -8462279620567652671
+      ui_circle: -4187891518713874702
       ui_tex_0_24: 2207049236666536747
       ui_tex_0_19: -4574502271702597608
       outlined_square_1: 6545345903711095465
@@ -1172,9 +1172,9 @@ TextureImporter:
       ui_tex_0_27: 5944819625405402220
       ui_tex_0_11: 1915218108729368014
       ui_tex_0_3: -5939392066266728649
-      ui_tex_0_7: 5252745319869964491
       notification_dot: 7889531768124057266
       lock: 1279629441
+      ui_tex_0_7: 5252745319869964491
       outlined_square_2: 8150091747698094711
       chet_common: 726886142
       red_circle: 1270405969311979357

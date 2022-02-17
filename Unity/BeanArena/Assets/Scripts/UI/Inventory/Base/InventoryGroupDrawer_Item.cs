@@ -37,18 +37,18 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
         }
 
         if (show) {
-            if (!config.drawer.showedAnyItemInfo) {
+            if (!config.inventoryUI.showedAnyItemInfo) {
 
                 if (itemsToDraw.Count > 0) {
                     infoDrawer.Show(true);
                     infoDrawer.DrawItemInfo(itemsToDraw[0], itemButtons[0]);
-                    config.drawer.Select(itemButtons[0].iconDrawer.rarenessImage.rectTransform);
+                    config.inventoryUI.Select(itemButtons[0].iconDrawer.rarenessImage.rectTransform);
 
-                    config.drawer.showedAnyItemInfo = true;
+                    config.inventoryUI.showedAnyItemInfo = true;
                 }
             }
 
-            if (config.drawer.showedAnyItemInfo) {
+            if (config.inventoryUI.showedAnyItemInfo) {
                 infoDrawer.Show(true);
             }
         }        
@@ -72,7 +72,7 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
             button.rectT.SetAsLastSibling();
 
             if (item.isEquiped) {
-                config.drawer.SetItemButtonEquiped(button);
+                config.inventoryUI.SetItemButtonEquiped(button);
                 //button.SetState(ItemButton.ItemButtonState.InHeroSlot);
             } else {
                 //button.SetState(ItemButton.ItemButtonState.InInventory);
@@ -81,18 +81,26 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
     }
 
     private void OnItemButtonEvent(UIEventType eventType, ItemButton button, object arg) {
-        if (eventType == UIEventType.Click) {
-            int inventorySlotID = (int)arg;
+        switch(eventType) {
+            case UIEventType.Click:
+                int inventorySlotID = (int)arg;
 
-            config.drawer.Select(button.iconDrawer.rarenessImage.rectTransform);
+                config.inventoryUI.Select(button.iconDrawer.rarenessImage.rectTransform);
 
-            selectedItemButton = button;
-            infoDrawer.DrawItemInfo(selectedItemButton.currentItem, selectedItemButton);
-
-            Debug.Log("onClick: " + button.currentItem.itemType + button.currentItem.fusePoints);
+                selectedItemButton = button;
+                infoDrawer.DrawItemInfo(selectedItemButton.currentItem, selectedItemButton);
+                break;
+            case UIEventType.DragStart:
+                //CAN_NOT_MERGE_ITSELF
+                if(button == infoDrawer.lastItemButton) {
+                    config.inventoryUI.ShowItemInfoBorderNotification(MLocalization.Get("CAN_NOT_MERGE_ITSELF"));
+                } else {
+                    config.inventoryUI.ShowItemInfoBorderNotification(MLocalization.Get("UPGRADE"));
+                }
+                break;
         }
 
-        config.drawer.OnItemButtonEvent(eventType, button, arg);
+        config.inventoryUI.OnItemButtonEvent(eventType, button, arg);
     }
 
     private ItemButton SpawnItemButton(int ind) {

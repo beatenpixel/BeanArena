@@ -67,6 +67,9 @@ public sealed class FastPostProcessing : MonoBehaviour {
     [SerializeField]
     private bool m_Vignette = false;
 
+    [Header("Noise")]
+    public Texture noiseTexture;
+
     [Header("Shadows")]
     public RenderTexture shadowTexture;
     [Header("Grayscale")]
@@ -181,7 +184,9 @@ public sealed class FastPostProcessing : MonoBehaviour {
         if (m_PostProcessMaterial == null)
             m_PostProcessMaterial = new Material(m_Shader);
 
-        m_PostProcessMaterial.SetTexture("_ShadowTex", shadowTexture);                
+        m_PostProcessMaterial.SetTexture("_ShadowTex", shadowTexture);
+
+        Shader.SetGlobalTexture("_MNoiseTex", noiseTexture);
 
         m_UserLutEnabled = m_UserLutTexture != null;
 

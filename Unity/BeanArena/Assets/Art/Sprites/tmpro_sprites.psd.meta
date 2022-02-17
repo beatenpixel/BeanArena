@@ -325,7 +325,7 @@ TextureImporter:
         width: 148
         height: 138
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -333,6 +333,27 @@ TextureImporter:
       bones: []
       spriteID: 047cdb9a31fd1724c9a491954297b18e
       internalID: -1286667125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cross
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 876
+        width: 136
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee0b1b239f0a06d4687d48c90ead3451
+      internalID: 313744257
       vertices: []
       indices: 
       edges: []
@@ -350,6 +371,7 @@ TextureImporter:
     nameFileIdTable:
       heart: -1043653011585756779
       jump: 6234432818899860378
+      cross: 313744257
       damage: 2434013178458663610
       time: 1922921581267463393
       cup: 7374767111035791262

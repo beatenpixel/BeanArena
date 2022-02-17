@@ -13,6 +13,7 @@ Shader "Demonixis/FastPostProcessing"
 
 	uniform sampler2D _MainTex;
 	uniform sampler2D _ShadowTex;
+	uniform sampler2D _MNoiseTex;
 	uniform half4 _MainTex_TexelSize;
 	uniform	half4 _MainTex_ST;
 	uniform float _SharpenSize;
@@ -105,9 +106,14 @@ Shader "Demonixis/FastPostProcessing"
 
 		// Shadows
 		//float offsetX = sin(_Time.y) * 0.15;
+		float2 reflectionUv = float2(uv.x, _MapBaseLineCameraSpaceY - (uv.y - _MapBaseLineCameraSpaceY)*2);
+
 		float offsetX = 0.2;
+
+		half4 noiseSample = tex2D(_MNoiseTex, reflectionUv * 0.3);
 		float fadeP = (_MapBaseLineCameraSpaceY - uv.y) / _MapBaseLineCameraSpaceY;
-		half4 shadowSample = tex2D(_ShadowTex, float2(uv.x - offsetX * fadeP, _MapBaseLineCameraSpaceY - (uv.y - _MapBaseLineCameraSpaceY)*3));
+
+		half4 shadowSample = tex2D(_ShadowTex, float2(uv.x - offsetX * fadeP, _MapBaseLineCameraSpaceY - (uv.y - _MapBaseLineCameraSpaceY)*3));		
 
 		fixed below = step(_MapBaseLineWorldY, i.vertexWorldPos.y);
 		float shadowSample2 = step(0.5,shadowSample.a);
@@ -120,14 +126,17 @@ Shader "Demonixis/FastPostProcessing"
 		*/
 
 		
-		if(true) {
-			float2 reflectionUv = float2(uv.x, _MapBaseLineCameraSpaceY - (uv.y - _MapBaseLineCameraSpaceY)*2);
+		if(true) {			
 			half4 reflectionSample = tex2D(_ShadowTex, reflectionUv);
-			col.rgb = lerp(col.rgb, reflectionSample, (1 - below) * 0.3f);
+			float reflectionFadeP = clamp((_MapBaseLineCameraSpaceY - uv.y) / _MapBaseLineCameraSpaceY * 3,0,1) * noiseSample.x * 0.5;
+
+			//col.rgb = lerp(col.rgb, fixed3(reflectionFadeP,reflectionFadeP,reflectionFadeP), (1-below));
+			col.rgb = lerp(col.rgb, reflectionSample, (1 - below) * reflectionFadeP);			
+			//col.rgb = lerp(col.rgb, noiseSample, (1-below));
 		} else {
 			float2 reflectionUv = float2(uv.x, _MapBaseLineCameraSpaceY - (uv.y - _MapBaseLineCameraSpaceY)*2);
-			half4 reflectionSample = tex2D(_MainTex, reflectionUv);
-			col.rgb = lerp(col.rgb, reflectionSample * 0.5, (1 - below) * 0.5);
+			half4 reflectionSample = tex2D(_MainTex, reflectionUv*0.1);
+			col.rgb = lerp(col.rgb, reflectionSample * 0.5, (1 - below) * 0.3);
 
 			//col.rgb *= noise(reflectionUv);
 		}		

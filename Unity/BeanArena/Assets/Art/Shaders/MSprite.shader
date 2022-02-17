@@ -46,23 +46,6 @@ Shader "MicroCrew/MSprite"
 
 				fixed4 _Color;
 
-				v2f vert(appdata_t IN) {
-					v2f OUT;
-					OUT.vertex = UnityObjectToClipPos(IN.vertex);
-					OUT.texcoord = IN.texcoord;
-					OUT.color = IN.color * _Color;
-					OUT.worldPos = mul(unity_ObjectToWorld, IN.vertex);
-					#ifdef PIXELSNAP_ON
-					OUT.vertex = UnityPixelSnap(OUT.vertex);
-					#endif
-
-					return OUT;
-				}
-
-				sampler2D _MainTex;
-				sampler2D _AlphaTex;
-				float _AlphaSplitEnabled;
-
 				float3 mod289(float3 x) {
 					return x - floor(x * (1.0 / 289.0)) * 289.0;
 				}
@@ -122,6 +105,40 @@ Shader "MicroCrew/MSprite"
 					g.yz = a0.yz * x12.xz + h.yz * x12.yw;
 					return 130.0 * dot(m, g);
 				}
+
+				float myrandom(float2 uv) {
+					return frac(sin(dot(uv,float2(12.9898,78.233)))*43758.5453123);
+				} 
+
+				v2f vert(appdata_t IN) {
+					v2f OUT;				
+					
+					float2 startWorldPos = mul(unity_ObjectToWorld, IN.vertex);
+					float2 seedX = float2(startWorldPos.x, startWorldPos.y) + _Time.y * 0.49237;
+					float2 seedY = float2(startWorldPos.y, startWorldPos.x) + _Time.y * 0.4399978;
+
+					seedX = frac(seedX);
+					seedY = frac(seedY);
+
+					IN.vertex += float4(snoise(seedX), snoise(seedY),0,0) * 0.015;
+
+					OUT.vertex = UnityObjectToClipPos(IN.vertex);
+					OUT.texcoord = IN.texcoord;
+					OUT.color = IN.color * _Color;
+					OUT.worldPos = mul(unity_ObjectToWorld, IN.vertex);
+
+					//OUT.vertex = UnityPixelSnap(OUT.vertex);
+
+					#ifdef PIXELSNAP_ON
+					OUT.vertex = UnityPixelSnap(OUT.vertex);
+					#endif
+
+					return OUT;
+				}
+
+				sampler2D _MainTex;
+				sampler2D _AlphaTex;
+				float _AlphaSplitEnabled;				
 
 				fixed4 SampleSpriteTexture(float2 uv) {
 					fixed4 color = tex2D(_MainTex, uv);

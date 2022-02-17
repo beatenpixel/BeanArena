@@ -9,12 +9,9 @@ public class Bazooka : Weapon {
     public Vector2 shootForce;
     public Transform shootPoint;
 
-    protected override void OnUse(EquipmentUseArgs useArgs) {
-        Debug.Log("CHARGE: " + useArgs.charge);
+    protected override void OnUse(EquipmentUseArgs useArgs) {       
+        RocketBullet bullet = MPool.Get<RocketBullet>();
 
-        string bulletType = null;
-
-        Bullet bullet = MPool.Get<Bullet>(bulletType);
         int teamLayer = Game.TeamIDToLayer(hero.info.teamID);
         bullet.gameObject.SetLayerRecursively(teamLayer);
 
@@ -22,7 +19,6 @@ public class Bazooka : Weapon {
         bullet.SetShotCharge(useArgs.charge);
 
         float damage = itemData.GetStatValue(StatType.Damage).intValue;
-        Debug.Log("damage: " + damage + " level: " + itemData.levelID);
 
         bullet.SetDamage(damage);
         bullet.Shoot(shootPoint.right * Mathf.Lerp(shootForce.x, shootForce.y, useArgs.charge));
@@ -32,8 +28,6 @@ public class Bazooka : Weapon {
         } else {
             MSound.Play("pistol_shot", SoundConfig.randVolumePitch01, t.position);
         }
-
-        MCamera.inst.Shake(0.7f);
     }
 
 }
