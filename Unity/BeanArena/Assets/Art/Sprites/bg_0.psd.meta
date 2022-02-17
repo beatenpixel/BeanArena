@@ -208,7 +208,7 @@ TextureImporter:
         width: 308
         height: 308
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -216,6 +216,27 @@ TextureImporter:
       bones: []
       spriteID: 3994fad50bd584543905a6fff4d203fe
       internalID: 212379815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: capsule_background
+      rect:
+        serializedVersion: 2
+        x: 1436
+        y: 1703
+        width: 169
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d23c5f9c01e383044bb65df458f555ed
+      internalID: 1585854328
       vertices: []
       indices: 
       edges: []
@@ -234,6 +255,7 @@ TextureImporter:
       bg_0_2: -2031864737441705993
       filler_bg: 212379815
       bg_0_1: 932110826067113497
+      capsule_background: 1585854328
       bg_0_3: -5485100389190070991
       bg_0_0: -372114562080597852
   spritePackingTag: 

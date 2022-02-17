@@ -1051,7 +1051,7 @@ TextureImporter:
         width: 112
         height: 146
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1059,6 +1059,69 @@ TextureImporter:
       bones: []
       spriteID: 8100a6eea3500a94f9b5f2c60cef01dc
       internalID: 1279629441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chet_common
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 6
+        width: 164
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fde045ef1b93924dae64afd2babcd27
+      internalID: 726886142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chet_epic
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 9
+        width: 181
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26d710ff6ee5cc24893e5601486ed10f
+      internalID: -1347054880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chet_legendary
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 16
+        width: 179
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7d2efb1de197f242bfe1e5b4ca2261c
+      internalID: -984720169
       vertices: []
       indices: 
       edges: []
@@ -1077,43 +1140,46 @@ TextureImporter:
       square: 6390131276126905485
       ui_tex_0_16: 4757458707963401709
       circle: -4187891518713874702
+      ui_tex_0_1: 1214459604
+      ui_tex_0_9: -8419336667231071291
+      ui_tex_circle_outline: 3351257870148316972
+      chet_legendary: -984720169
+      ui_tex_0_22: 5735232691708411601
+      ui_tex_0_25: 4466377444764198360
+      circle_hollow: 7664110690172724516
+      ui_tex_0_12: -5533055706335005242
+      chet_epic: -1347054880
+      ui_tex_0_15: 3695785943852260640
+      ui_tex_0_28: -8032843666640372647
+      ui_tex_0_8: -1606289997266319434
+      ui_tex_0_17: 4731069663199060549
       ui_tex_0_4: -3847174719652805541
       ui_tex_0_23: 8884965353457876934
-      ui_tex_0_17: 4731069663199060549
+      outlined_square_3: 3202421464805995654
       ui_tex_0_10: 7320795754320263975
       ui_tex_0_20: -8462279620567652671
-      outlined_square_3: 3202421464805995654
       ui_tex_0_24: 2207049236666536747
       ui_tex_0_19: -4574502271702597608
       outlined_square_1: 6545345903711095465
       ui_tex_0_13: 5092004662555432458
-      ui_tex_0_1: 1214459604
-      ui_tex_0_9: -8419336667231071291
-      ui_tex_circle_outline: 3351257870148316972
-      ui_tex_0_21: 4851257479850987984
       ui_tex_0_18: 7280420390076308308
+      ui_tex_0_21: 4851257479850987984
       border_scrolling: 1284541186
       ui_tex_0_0: -279535694
       ui_tex_0_14: 5664633557606694232
-      ui_tex_0_22: 5735232691708411601
       ui_tex_0_29: 684093613229026834
-      ui_tex_0_25: 4466377444764198360
       ui_tex_0_26: 133255040692957496
-      circle_hollow: 7664110690172724516
-      ui_tex_0_11: 1915218108729368014
       ui_tex_0_27: 5944819625405402220
+      ui_tex_0_11: 1915218108729368014
       ui_tex_0_3: -5939392066266728649
       ui_tex_0_7: 5252745319869964491
       notification_dot: 7889531768124057266
-      ui_tex_0_12: -5533055706335005242
-      ui_tex_0_15: 3695785943852260640
-      ui_tex_0_28: -8032843666640372647
-      outlined_square_2: 8150091747698094711
       lock: 1279629441
+      outlined_square_2: 8150091747698094711
+      chet_common: 726886142
       red_circle: 1270405969311979357
       outlined_square_0: -3015479599112616866
       circle_hollow_1: 1533761465559781216
-      ui_tex_0_8: -1606289997266319434
   spritePackingTag: 
   pSDRemoveMatte: 1
   pSDShowRemoveMatteOption: 1

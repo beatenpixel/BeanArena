@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.625, y: 0, z: 0}
   m_LocalScale: {x: 0.5856, y: 0.5856, z: 0.5856}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7881113888555900079}
   m_RootOrder: 0
@@ -51,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 71a050ced752b2b4582eb5c72e9437c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -112,6 +113,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.854, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7881113888423176000}
   m_Father: {fileID: 0}
@@ -196,7 +198,7 @@ MonoBehaviour:
     scale: {x: 1, y: 1, z: 1}
     isLocal: 1
   useDelay: 0.5
-  weaponSO: {fileID: 11400000, guid: 8b36ecf6074368248a2fae2569eeaf94, type: 2}
+  itemInfo: {fileID: 0}
   hingeJointAnchor: {x: 0, y: 0}
   hingeJointConnectedAnchor: {x: 0.8, y: 0}
   hingeJointLimits: {x: -1, y: 1}

@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaccffd033974444fac3e353309c2b75, type: 3}
   m_Name: Legendary
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1059245388, guid: a7824e99320e86f4a8dd66fad9291819, type: 3}
+  sprite: {fileID: -984720169, guid: d32db92b880007c4fa0d062b47d79bf2, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   anchorMin: {x: 0, y: 0}
   anchorMax: {x: 1, y: 1}
   offsetMin: {x: 0, y: 0}
   offsetMax: {x: 0, y: 0}
+  pivot: {x: 0.5, y: 0.5}
+  rotation: 0

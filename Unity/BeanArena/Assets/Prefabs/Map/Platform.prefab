@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.21, y: 1.44, z: 0}
   m_LocalScale: {x: 1.5113, y: 0.1856, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7013854242764175202}
   m_Father: {fileID: 0}
@@ -53,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 71a050ced752b2b4582eb5c72e9437c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -138,6 +139,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.395, z: 0}
   m_LocalScale: {x: 1.0532658, y: 1.2995045, z: 1.0846}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7013854241702399645}
   m_RootOrder: 0
@@ -162,7 +164,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 71a050ced752b2b4582eb5c72e9437c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

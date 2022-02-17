@@ -668,7 +668,7 @@ PrefabInstance:
     - target: {fileID: 703198675787853829, guid: 2a91a405b5d4c92469969479f6da1ab8, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 5355257908315070428, guid: 9aa6326b69cf6fb43b5ac6d834b4f3d3, type: 2}
+      objectReference: {fileID: 2100000, guid: 47e793def0c741e409527bb3a28f2b1c, type: 2}
     - target: {fileID: 703198675787853829, guid: 2a91a405b5d4c92469969479f6da1ab8, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4293717228
