@@ -54,14 +54,6 @@ MonoBehaviour:
     m_Localized: Weapon
     m_Metadata:
       m_Items: []
-  - m_Id: 91441844678656
-    m_Localized: Legs
-    m_Metadata:
-      m_Items: []
-  - m_Id: 91441844678657
-    m_Localized: Head
-    m_Metadata:
-      m_Items: []
   - m_Id: 1905797435715584
     m_Localized: Bean-Man
     m_Metadata:
@@ -124,6 +116,42 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3725524886315009
     m_Localized: Mmmmm... wet beans...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4775081805426688
+    m_Localized: Head
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4777575713419264
+    m_Localized: Bucket
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4777575713419265
+    m_Localized: Bucket descr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4777575713419266
+    m_Localized: Pumpkin descr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4777575713419267
+    m_Localized: Pumpkin descr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4777575717613568
+    m_Localized: Aquarium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4777575717613569
+    m_Localized: Aquarium descr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4777575717613570
+    m_Localized: Anobeanus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4777575717613571
+    m_Localized: Anobeanus descr
     m_Metadata:
       m_Items: []
   references:

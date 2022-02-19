@@ -8,6 +8,8 @@ public class GM_Arena : GameMode {
 
     public List<OpponentInfo> opponentsInfo;
 
+    private bool isRespawningHeroes;
+
     public override void InitGame(Game game) {
         base.InitGame(game);
 
@@ -94,10 +96,10 @@ public class GM_Arena : GameMode {
 			MCamera.inst.AddTarget(new CameraTarget(enemy.hero.body.transform, new Vector2(0, -2), Vector2.one * 2));
 
             GD_Item enemyPistol = new GD_Item() {
-                itemType = ItemType.Pistol,
+                itemType = ItemType.Weapon_Pistol,
                 levelID = 3,
                 rareness = ItemRareness.Common,
-                info = MAssets.itemsInfo.GetAsset(ItemType.Pistol)
+                info = MAssets.itemsInfo.GetAsset(ItemType.Weapon_Pistol)
             };
 
             enemyHero.heroEquipment.PreviewItem(enemyPistol, enemyHero.heroEquipment.GetFreeSlots(enemyPistol)[0]);
@@ -140,7 +142,13 @@ public class GM_Arena : GameMode {
     protected override void OnGameEvent_HeroDie(HeroDieEvent e) {
         base.OnGameEvent_HeroDie(e);
 
-        heroesInputAllowed = false;
+        if (isRespawningHeroes) {
+            return;
+        }
+
+        isRespawningHeroes = true;
+
+        heroesInputAllowed = false;        
 
         if (e.hero == player.hero) {
             FX.inst.EnableDeathScreenEffect(true);
@@ -196,6 +204,8 @@ public class GM_Arena : GameMode {
                 }                
             } else {                
                 genericMap.ResetMap();
+
+                isRespawningHeroes = false;
                 heroesInputAllowed = true;
             }
 

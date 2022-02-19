@@ -137,6 +137,10 @@ public class ItemStatProgression {
         if (valueType == StatValueType.Int) {
             int intValue = (int)value;
 
+            if(intValue < values[0].intValue) {
+                return 0;
+            }
+
             for (int i = 0; i < values.Length - 1; i++) {
                 if(intValue >= values[i].intValue && intValue < values[i + 1].intValue) {
                     return i;
@@ -146,6 +150,10 @@ public class ItemStatProgression {
             return maxLevel - 1;
         } else if(valueType == StatValueType.Float) {
             float floatValue = (float)value;
+
+            if (floatValue < values[0].floatValue) {
+                return 0;
+            }
 
             for (int i = 0; i < values.Length - 1; i++) {
                 if (floatValue > values[i].floatValue && floatValue < values[i + 1].floatValue) {
@@ -278,5 +286,6 @@ public enum StatType {
     Speed,
     JumpHeight,
     Duration,
-    FusePoints
+    FusePoints,
+    Armor
 }

@@ -51,12 +51,8 @@ MonoBehaviour:
     m_Key: ITEM_CATEGORY_WEAPON
     m_Metadata:
       m_Items: []
-  - m_Id: 91441844678656
-    m_Key: ITEM_CATEGORY_BOTTOMGADGET
-    m_Metadata:
-      m_Items: []
-  - m_Id: 91441844678657
-    m_Key: ITEM_CATEGORY_UPPERGADGET
+  - m_Id: 4775081805426688
+    m_Key: ITEM_CATEGORY_HEAD
     m_Metadata:
       m_Items: []
   - m_Id: 1905797435715584
@@ -121,6 +117,38 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3725008231948290
     m_Key: ITEM_DESCR_BAZOOKA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4777575713419264
+    m_Key: ITEM_NAME_HEAD_BUCKET
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4777575713419265
+    m_Key: ITEM_DESCR_HEAD_BUCKET
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4777575713419266
+    m_Key: ITEM_NAME_HEAD_PUMPKIN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4777575713419267
+    m_Key: ITEM_DESCR_HEAD_PUMPKIN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4777575717613568
+    m_Key: ITEM_NAME_HEAD_AQUARIUM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4777575717613569
+    m_Key: ITEM_DESCR_HEAD_AQUARIUM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4777575717613570
+    m_Key: ITEM_NAME_HEAD_ANONYMOUS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4777575717613571
+    m_Key: ITEM_DESCR_HEAD_ANONYMOUS
     m_Metadata:
       m_Items: []
   m_Metadata:

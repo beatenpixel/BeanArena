@@ -38,7 +38,7 @@ public class MAssets : SingletonScriptableObject<MAssets> {
             textPresets.Add(m_TextPresets[i].preset, m_TextPresets[i]);
         }
 
-        itemsInfo = new SO_AssetDB<SO_ItemInfo, ItemType>("ItemsInfo");
+        itemsInfo = new SO_AssetDB<SO_ItemInfo, ItemType>("ItemsInfo/Weapon", "ItemsInfo/Head");
         chestsInfo = new SO_AssetDB<SO_ChestInfo, ChestType>("ChestInfo");
         heroesInfo = new SO_AssetDB<SO_HeroInfo, HeroType>("HeroInfo");
         heroesRarenessInfo = new SO_AssetDB<SO_HeroRarenessInfo, ItemRareness>("HeroRarenessInfo");
@@ -82,6 +82,19 @@ public class SO_AssetDB<TObject, TKey> where TObject : ScriptableObject, ITypeKe
     public SO_AssetDB(string resourcesLoadPath) {
         assetDict = new Dictionary<TKey, TObject>();
         assetList = new List<TObject>(Resources.LoadAll<TObject>(resourcesLoadPath));
+
+        foreach (var a in assetList) {
+            assetDict[a.GetKey()] = a;
+        }
+    }
+
+    public SO_AssetDB(params string[] resourcesLoadPath) {
+        assetDict = new Dictionary<TKey, TObject>();
+        assetList = new List<TObject>();
+
+        for (int i = 0; i < resourcesLoadPath.Length; i++) {
+            assetList.AddRange(Resources.LoadAll<TObject>(resourcesLoadPath[i]));
+        }
 
         foreach (var a in assetList) {
             assetDict[a.GetKey()] = a;

@@ -114,8 +114,8 @@ public class Game : Singleton<Game> {
 		return LayerMask.NameToLayer("team" + teamID);
     }
 
-	public static int TeamIDToOnlyBeanLayer(int teamID) {
-		return LayerMask.NameToLayer("team" + teamID + "_beanonly");
-	}
+    public static int TeamIDToBeanLayer(int teamID) {
+        return LayerMask.NameToLayer("bean_team" + teamID);
+    }
 
 }

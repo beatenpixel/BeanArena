@@ -19,7 +19,7 @@ public class EquipmentFactory : MonoBehaviour {
             weapon.t.position = position;
 
             return weapon;
-        } else if (itemData.info.category == ItemCategory.BottomGadget) {
+        } else if (itemData.info.category == ItemCategory.Head) {
             Gadget gadgetPrefab = itemData.info.prefab.GetComponent<Gadget>();
 
             Gadget gadget = MPool.Get<Gadget>(gadgetPrefab.subType);

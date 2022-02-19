@@ -46,12 +46,11 @@ public class InventoryUI : MonoBehaviour {
 
         List<ItemCategory> groupsCategory = new List<ItemCategory>() {
             ItemCategory.Weapon,
-            ItemCategory.BottomGadget,
-            ItemCategory.UpperGadget,
+            ItemCategory.Head,
             ItemCategory.Hero
         };
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < groupsCategory.Count; i++) {
             groupDrawers[i].Init(new InventoryGroupConfig() {
                 groupID = i,
                 itemCategory = groupsCategory[i],

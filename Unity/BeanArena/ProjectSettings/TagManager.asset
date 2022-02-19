@@ -24,12 +24,12 @@ TagManager:
   - 
   - team0
   - team1
-  - team2
-  - team3
-  - team0_beanonly
-  - team1_beanonly
-  - team2_beanonly
-  - team3_beanonly
+  - bean_team0
+  - bean_team1
+  - 
+  - 
+  - beanonly
+  - 
   - 
   - 
   - 

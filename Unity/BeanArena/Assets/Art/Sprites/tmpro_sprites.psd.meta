@@ -346,7 +346,7 @@ TextureImporter:
         width: 136
         height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -354,6 +354,48 @@ TextureImporter:
       bones: []
       spriteID: ee0b1b239f0a06d4687d48c90ead3451
       internalID: 313744257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tmpro_sprites_0
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 873
+        width: 112
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f6ce3aa5b33ae74c9187b50cea3fdb9
+      internalID: -1535008171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: armor
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 729
+        width: 138
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 217af1fc4a1e3a640874a3beea660c6f
+      internalID: -1519203248
       vertices: []
       indices: 
       edges: []
@@ -371,6 +413,7 @@ TextureImporter:
     nameFileIdTable:
       heart: -1043653011585756779
       jump: 6234432818899860378
+      armor: -1519203248
       cross: 313744257
       damage: 2434013178458663610
       time: 1922921581267463393
@@ -380,6 +423,7 @@ TextureImporter:
       upgrade: -822885012
       bean_gold: 3959047777783908238
       gem: 3867287787966158001
+      tmpro_sprites_0: -1535008171
   spritePackingTag: 
   pSDRemoveMatte: 1
   pSDShowRemoveMatteOption: 1

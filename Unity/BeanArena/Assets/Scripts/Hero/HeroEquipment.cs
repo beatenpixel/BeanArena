@@ -19,9 +19,7 @@ public class HeroEquipment : HeroComponent {
 	public void Init() {
 		slots = new List<EquipmentSlot>() {
 			new EquipmentSlot(hero, new ItemFilter(ItemCategory.Weapon)).SetLimb(hero[LimbType.LArm].First()),
-			new EquipmentSlot(hero, new ItemFilter(ItemCategory.BottomGadget)).SetLimb(hero[LimbType.Body].First()),
-			new EquipmentSlot(hero, new ItemFilter(ItemCategory.UpperGadget)).SetLimb(hero[LimbType.Body].First()),
-			new EquipmentSlot(hero, new ItemFilter(ItemCategory.Weapon)).SetLimb(hero[LimbType.RArm].First()),
+			new EquipmentSlot(hero, new ItemFilter(ItemCategory.Head)).SetLimb(hero[LimbType.Body].First()),
 		};
 	}
 

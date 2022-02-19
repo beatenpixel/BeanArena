@@ -11,15 +11,19 @@ public abstract class Map : MonoBehaviour {
 	public List<HeroBase> heroes = new List<HeroBase>();
 	public List<ITarget> targets = new List<ITarget>();
 
+    [SerializeField] private List<MapElement> mapElements;
 	[SerializeField] private List<MapArea> areas;
 
 	protected virtual void Awake() {
 		areas = new List<MapArea>(FindObjectsOfType<MapArea>());
+        mapElements = new List<MapElement>(FindObjectsOfType<MapElement>());
     }
 
 	public virtual void Init() {
-		
-	}
+        for (int i = 0; i < mapElements.Count; i++) {
+            mapElements[i].Init();
+        }
+    }
 
 	protected virtual void OnDestroy() {
         

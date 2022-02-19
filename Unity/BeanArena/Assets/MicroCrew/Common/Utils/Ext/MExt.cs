@@ -7,6 +7,13 @@ using UnityEngine;
 
 public static class MExt {
 
+    public static void FillPoints2D(this Bounds bounds, Vector2[] points) {
+        points[0] = bounds.min;
+        points[1] = bounds.min.SetY(bounds.max.y);
+        points[2] = bounds.max;
+        points[3] = bounds.max.SetY(bounds.min.y);
+    }
+
     public static void SetAnchor(this RectTransform rectT, Vector2 min, Vector2 max) {
         rectT.anchorMin = min;
         rectT.anchorMax = max;

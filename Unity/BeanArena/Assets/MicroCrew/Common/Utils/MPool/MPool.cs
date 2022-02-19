@@ -11,6 +11,7 @@ namespace MicroCrew.Utils {
     public class MPool : SingletonScriptableObject<MPool> {
 
         public List<GameObject> prefabs;
+        public List<PoolObjectGroup> prefabGroups;
 
         [HideInInspector] public Dictionary<Type, Dictionary<string, List<IPoolObject>>> objects;
         [HideInInspector] public Dictionary<Type, Dictionary<string, IPoolObject>> objPrefabs;
@@ -21,7 +22,26 @@ namespace MicroCrew.Utils {
             objects = new Dictionary<Type, Dictionary<string, List<IPoolObject>>>();
             objPrefabs = new Dictionary<Type, Dictionary<string, IPoolObject>>();
 
-            AddPrefabs(prefabs.Select(x => x.GetComponent<IPoolObject>()).ToList());
+            List<IPoolObject> poolPrefabs = new List<IPoolObject>();
+
+            for (int i = 0; i < prefabGroups.Count; i++) {
+                for (int x = 0; x < prefabGroups[i].prefabs.Count; x++) {
+                    if(prefabGroups[i].prefabs[x] == null) {
+                        Debug.LogError($"[MPool] Prefab in group '{prefabGroups[i].groupName}' at #{x} is null");
+                        continue;
+                    }
+
+                    IPoolObject poolObject = prefabGroups[i].prefabs[x].GetComponent<IPoolObject>();
+
+                    if(poolObject != null) {
+                        poolPrefabs.Add(poolObject);
+                    } else {
+                        Debug.LogError($"[MPool] Prefab in group '{prefabGroups[i].groupName}' at #{x} has no IPoolObject interface");
+                    }
+                }
+            }
+
+            AddPrefabs(poolPrefabs);
         }
 
         public void AddPrefabs(List<IPoolObject> prefabsToAdd) {
@@ -144,6 +164,12 @@ namespace MicroCrew.Utils {
         void OnCreate();
         void OnPop();
         void OnPush();
+    }
+
+    [System.Serializable]
+    public class PoolObjectGroup {
+        public string groupName;
+        public List<GameObject> prefabs;
     }
 
 }

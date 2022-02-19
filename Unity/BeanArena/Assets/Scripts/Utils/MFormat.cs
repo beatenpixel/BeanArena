@@ -18,6 +18,7 @@ public class MFormat {
         {StatType.JumpHeight, TMProIcon.Jump },
         {StatType.Duration, TMProIcon.Time },
         {StatType.FusePoints, TMProIcon.Fuse },
+        {StatType.Armor, TMProIcon.Armor }
     };
 
     public static string GetTMProIcon(StatType statType) {
@@ -54,6 +55,9 @@ public class MFormat {
                 break;
             case TMProIcon.Card:
                 statIconStr += "cards\"> ";
+                break;
+            case TMProIcon.Armor:
+                statIconStr += "armor\"> ";
                 break;
         }
 
@@ -131,5 +135,6 @@ public enum TMProIcon {
     Jump,
     Gem,
     Upgrade,
-    Card
+    Card,
+    Armor
 }

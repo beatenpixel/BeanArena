@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b01a7bf1b2c9564aa8315d8830dba41, type: 3}
+  m_Name: MillitaryCap
+  m_EditorClassIdentifier: 
+  itemType: 209
+  category: 3
+  icon: {fileID: 11400000, guid: ef545d2cde384d540bb87de95e6a1c0d, type: 2}
+  prefab: {fileID: 416318777461901068, guid: 156e9144ace4b324699f187b3a5d5936, type: 3}
+  maxLevel: 10
+  stats:
+  - statType: 5
+    valueType: 0
+    progressionType: 0
+    progressionFunc: 3
+    upgradeDirection: 1
+    intStartEndValue: {x: 0, y: 1000}
+    floatStartEndValue: {x: 0, y: 0}
+    values:
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 15
+      floatValue: 0
+      manual: 0
+    - intValue: 60
+      floatValue: 0
+      manual: 0
+    - intValue: 134
+      floatValue: 0
+      manual: 0
+    - intValue: 234
+      floatValue: 0
+      manual: 0
+    - intValue: 357
+      floatValue: 0
+      manual: 0
+    - intValue: 500
+      floatValue: 0
+      manual: 0
+    - intValue: 658
+      floatValue: 0
+      manual: 0
+    - intValue: 826
+      floatValue: 0
+      manual: 0
+    - intValue: 1000
+      floatValue: 0
+      manual: 0
+    decimalsCount: 2
+    maxLevel: 10
+    isFoldoutInInspector: 1
+  - statType: 0
+    valueType: 0
+    progressionType: 0
+    progressionFunc: 3
+    upgradeDirection: 1
+    intStartEndValue: {x: 30, y: 70}
+    floatStartEndValue: {x: 0, y: 0}
+    values:
+    - intValue: 30
+      floatValue: 0
+      manual: 0
+    - intValue: 31
+      floatValue: 0
+      manual: 0
+    - intValue: 32
+      floatValue: 0
+      manual: 0
+    - intValue: 35
+      floatValue: 0
+      manual: 0
+    - intValue: 39
+      floatValue: 0
+      manual: 0
+    - intValue: 44
+      floatValue: 0
+      manual: 0
+    - intValue: 50
+      floatValue: 0
+      manual: 0
+    - intValue: 56
+      floatValue: 0
+      manual: 0
+    - intValue: 63
+      floatValue: 0
+      manual: 0
+    - intValue: 70
+      floatValue: 0
+      manual: 0
+    decimalsCount: 2
+    maxLevel: 10
+    isFoldoutInInspector: 0
+  - statType: 6
+    valueType: 0
+    progressionType: 0
+    progressionFunc: 3
+    upgradeDirection: 1
+    intStartEndValue: {x: 0, y: 0}
+    floatStartEndValue: {x: 0, y: 0}
+    values:
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    - intValue: 0
+      floatValue: 0
+      manual: 0
+    decimalsCount: 2
+    maxLevel: 10
+    isFoldoutInInspector: 0
+  dropInfo:
+    dropWeight: 50

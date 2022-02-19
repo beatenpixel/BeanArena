@@ -25,7 +25,7 @@ public class GD_Item : GD {
     }
 
     public GD_Item(SerializationInfo info, StreamingContext sc) : base(info, sc) {
-        itemType = (ItemType)info.GetByte("itemType");
+        itemType = (ItemType)info.GetInt32("itemType");
         rareness = (ItemRareness)info.GetByte("rareness");
         levelID = info.GetInt32("level");
         fusePoints = info.GetInt32("fusePoints");
@@ -36,7 +36,7 @@ public class GD_Item : GD {
     
     public override void GetObjectData(SerializationInfo info, StreamingContext context) {
         base.GetObjectData(info, context);
-        info.AddValue("itemType", (byte)itemType);
+        info.AddValue("itemType", (int)itemType);
         info.AddValue("rareness", (byte)rareness);
         info.AddValue("level", levelID);
         info.AddValue("fusePoints", fusePoints);
@@ -114,19 +114,28 @@ public enum ItemCategory {
     Hero,
     HeroSkin,
     Weapon,
-    BottomGadget,
-    UpperGadget
+    Head,
 }
 
-public enum ItemType : byte {
-    None,
-    Pistol,
-    WaterPistol,
-    HelicopterHat,
-    JumpyBoots,
-    RocketBoots,
-    Wheel,
-    Bazooka
+public enum ItemType {
+    None = -1,
+    Weapon_Pistol = 100,
+    Weapon_WaterPistol = 101,
+    Weapon_Bazooka = 102,
+    Weapon_Snowball = 103,
+    Head_Bucket = 200,
+    Head_Pumpkin = 201,
+    Head_Aquarium = 202,
+    Head_Anonymous = 203,
+    Head_EnergyCap = 204,
+    Head_GirlHair = 205,
+    Head_AstronautHelmet = 206,
+    Head_BeanSticker = 207,
+    Head_CoolGlasses = 208,
+    Head_MillitaryCap = 209,
+    Head_Crown = 210,
+    Head_HelicopterCap = 211,
+    Head_DreamMask = 212,
 }
 
 public enum ItemRareness : byte {

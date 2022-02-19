@@ -18,6 +18,7 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
 	public List<HeroLimb> limbs { get; private set; }
 
 	private HeroInput input = new HeroInput();
+    public HeroInput GetHeroInput() => input;
 
 	private float jumpTimer;
 
@@ -97,10 +98,10 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
 
         for (int i = 0; i < limbs.Count; i++) {
             limbs[i].rend.SetBaseColor(Color.white);
-            limbs[i].gameObject.layer = Game.TeamIDToLayer(config.teamID);
+            limbs[i].gameObject.layer = Game.TeamIDToBeanLayer(config.teamID);
 		}
 
-		gameObject.layer = Game.TeamIDToLayer(config.teamID);
+		gameObject.layer = Game.TeamIDToBeanLayer(config.teamID);
 
 		SetOrientation(config.orientation);
 	}
@@ -284,7 +285,10 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
 
     public virtual void Revive() {
         info.health = info.maxHealth;
-        info.state = HeroState.Alive;          
+        info.state = HeroState.Alive;
+
+        input.move = Vector2.zero;
+        input.arm = Vector2.zero;
 
         ReturnToSpawnPosition();
         SetOrientation(initConfig.orientation);        

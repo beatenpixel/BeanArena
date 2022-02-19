@@ -142,6 +142,18 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: cross
     m_HashCode: 116734942
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 11
+    m_Scale: 1
+    m_Name: armor
+    m_HashCode: 119104707
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 12
+    m_Scale: 1
+    m_Name: tmpro_sprites_0
+    m_HashCode: 828703966
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -308,5 +320,35 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     sprite: {fileID: 313744257, guid: e9104975539d48742ab9e47a6a6eb9af, type: 3}
+  - m_Index: 11
+    m_Metrics:
+      m_Width: 138
+      m_Height: 140
+      m_HorizontalBearingX: 7.57
+      m_HorizontalBearingY: 114.8
+      m_HorizontalAdvance: 138
+    m_GlyphRect:
+      m_X: 377
+      m_Y: 729
+      m_Width: 138
+      m_Height: 140
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: -1519203248, guid: e9104975539d48742ab9e47a6a6eb9af, type: 3}
+  - m_Index: 12
+    m_Metrics:
+      m_Width: 112
+      m_Height: 144
+      m_HorizontalBearingX: -56
+      m_HorizontalBearingY: 72
+      m_HorizontalAdvance: 112
+    m_GlyphRect:
+      m_X: 777
+      m_Y: 873
+      m_Width: 112
+      m_Height: 144
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: -1535008171, guid: e9104975539d48742ab9e47a6a6eb9af, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []

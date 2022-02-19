@@ -60,6 +60,16 @@ public abstract class HeroLimb : MonoBehaviour {
 		}
     }
 
+    public Bounds GetBounds() {
+        Bounds b = colliders[0].bounds;
+
+        for (int i = 1; i < colliders.Length; i++) {
+            b.Encapsulate(colliders[i].bounds);
+        }
+
+        return b;
+    }
+
 	public void SetGrounded(bool isGrounded) {
 		this.isGrounded = isGrounded;
     }
