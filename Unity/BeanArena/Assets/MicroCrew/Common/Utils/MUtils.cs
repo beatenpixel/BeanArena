@@ -22,11 +22,21 @@ public class MUtils : Singleton<MUtils> {
         { ItemRareness.Legendary, 16f },
     };
 
-	/*
+    public static void PopulateHeroStatSummary(HeroStatsSummary summ, List<ItemStatProgression> stats, int levelID) {
+        foreach (var stat in stats) {
+            if (summ.stats.ContainsKey(stat.statType)) {
+                summ.stats[stat.statType] += stat.GetValue(levelID);
+            } else {
+                summ.stats.Add(stat.statType, new StatValue(stat.GetValue(levelID)));
+            }
+        }
+    }
+
+    /*
 	1  2
 	0  3
 	*/
-	public static bool PointIsInsideCorners(Vector2 point, Vector3[] corners) {
+    public static bool PointIsInsideCorners(Vector2 point, Vector3[] corners) {
 		return point.x >= corners[0].x && point.x <= corners[2].x && point.y >= corners[0].y && point.y <= corners[2].y;
 	}
 

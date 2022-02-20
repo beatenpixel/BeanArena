@@ -67,6 +67,7 @@ public class GD_Inventory : GD {
         foreach (var item in allItemsInfo) {
             items.Add(new GD_Item() {
                 itemType = item.itemType,
+                fusePoints = 200
             });
         }
 

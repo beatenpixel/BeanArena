@@ -81,7 +81,13 @@ public class ItemButton : UIButtonBase {
         currentItem = itemData;
 
         iconDrawer.DrawItem(itemData, itemInfo);
-    }   
+    }
+
+    public void Redraw() {
+        if (currentItem != null) {
+            iconDrawer.DrawItem(currentItem, currentItem.info);
+        }
+    }
 
     public void AlignToItemList() {
         rectT.SetParent(m_InventoryGroupDrawer.itemsButtonsRootT);

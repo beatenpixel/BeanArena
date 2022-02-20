@@ -238,22 +238,35 @@ public class ItemStatProgression {
         return null;
     }
 
-    public object GetValue(int lvl) {
-        switch(valueType) {
-            case StatValueType.Int: return values[lvl].intValue;
-            case StatValueType.Float: return values[lvl].floatValue;
-        }
-
-        return null;
+    public StatValue GetValue(int lvl) {
+        return values[lvl];
     }
 }
 
 [System.Serializable]
 public class StatValue {
+    public StatValueType valueType;
     public int intValue;
     public float floatValue;
     public decimal decimalValue => (decimal)floatValue;
     public bool manual;
+
+    public StatValue() {
+
+    }
+
+    public StatValue(StatValue original) {
+        intValue = original.intValue;
+        floatValue = original.floatValue;
+        manual = original.manual;
+    }
+
+    public static StatValue operator +(StatValue a, StatValue b) {
+        a.intValue += b.intValue;
+        a.floatValue += b.floatValue;
+        return a;
+    }
+
 }
 
 public enum StatProgressionFunc {

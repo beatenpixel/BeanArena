@@ -23,6 +23,16 @@ public class HeroEquipment : HeroComponent {
 		};
 	}
 
+    public void PopulateStatsSummaryWithAllEquipment(HeroStatsSummary summ) {
+        for (int i = 0; i < slots.Count; i++) {
+            if(slots[i].HasPreviewItem()) {
+                Equipment equipm = slots[i].GetCurrentEquipment();
+                equipm.PopulateStatsSummaryWithAllEquipment(summ);
+                Debug.Log($"Populate #{i}");
+            }
+        }
+    }
+
     public void LoadEquipmentFromGameData() {
         for (int i = 0; i < Game.data.inventory.items.Count; i++) {
             GD_Item item = Game.data.inventory.items[i];
@@ -52,6 +62,12 @@ public class HeroEquipment : HeroComponent {
     public void PreviewItem(GD_Item item, EquipmentSlot slot) {
 		Equipment itemPreviewInstance = Game.inst.equipmentFactory.Create(item, Vector2.zero);
 		slot.EquipPreviewItem(item, itemPreviewInstance);
+
+        if (hero.hasUIPanel) {
+            if (item.info.category == ItemCategory.Weapon) {
+                hero.uiPanel.panelCircleItem.SetWeaponItem(item);
+            }
+        }
     }
 
 	public void ClearPreviewItem(EquipmentSlot slot) {
@@ -80,6 +96,7 @@ public class HeroEquipment : HeroComponent {
 		}
 
         Equipment equipment =  slots[0].GetCurrentEquipment();
+
         if(equipment != null) {
             equipment.Use(new EquipmentUseArgs() {
                 charge = inp.chargePercent

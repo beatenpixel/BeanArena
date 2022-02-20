@@ -12,7 +12,7 @@ public class GM_Menu : GameMode {
 
 	private Map_Menu map;
 
-    private HeroBase previewHero;
+    public HeroBase previewHero { get; private set; }
 
     public override void InitGame(Game game) {
         base.InitGame(game);

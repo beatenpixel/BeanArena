@@ -140,6 +140,9 @@ public class ItemStatProgressionDrawer : PropertyDrawer {
                     var elemIntValue = elemProp.FindPropertyRelative(nameof(StatValue.intValue));
                     var elemFloatValue = elemProp.FindPropertyRelative(nameof(StatValue.floatValue));
 
+                    var elemValueTypeValue = elemProp.FindPropertyRelative(nameof(StatValue.valueType));
+                    elemValueTypeValue.enumValueIndex = (int)statValueType;
+
                     float p = i / (float)(statsMaxLevel - 1);
                     float p2;
 
@@ -161,7 +164,7 @@ public class ItemStatProgressionDrawer : PropertyDrawer {
                             break;
                     }
 
-                    float interpValue = MMath.RoundToAccuracy(Mathf.Lerp(startEnd.x, startEnd.y, Mathf.Clamp01(p2)), Mathf.Pow(10, -roundAccuracy), false);
+                    float interpValue = MMath.RoundToAccuracy(Mathf.Lerp(startEnd.x, startEnd.y, Mathf.Clamp01(p2)), Mathf.Pow(10, -roundAccuracy), false);                    
 
                     if (!manual.boolValue) {
                         if (isInt) {

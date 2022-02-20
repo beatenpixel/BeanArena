@@ -42,7 +42,7 @@ public abstract class Gadget : Equipment {
 
 		gameObject.SetLayerRecursively(Game.TeamIDToLayer(hero.info.teamID));
 
-		transform.SetParent(limb.transform);
+		transform.SetParent(limb.rend.rendT);
 		transform.ApplyTransformData(attachTData);
 
 		if (attachType == EquipmentAttachType.Rigidbody) {

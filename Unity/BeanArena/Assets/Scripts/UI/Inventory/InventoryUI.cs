@@ -169,6 +169,8 @@ public class InventoryUI : MonoBehaviour {
 
                 onDragItemButtonScrollingLines[0].go.SetActive(false);
                 onDragItemButtonScrollingLines[1].go.SetActive(false);
+
+                MenuUI.inst.RefreshStats();
                 break;
 			case UIEventType.DragStart:
 				currentDragedButton = button;

@@ -23,18 +23,7 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
         base.Show(show);
 
         CollectItemsToDraw();
-
-        int newItemsCount = 0;
-        for (int i = 0; i < itemsToDraw.Count; i++) {
-            if (itemsToDraw[i].isNew)
-                newItemsCount += 1;
-        }
-
-        if (newItemsCount > 0) {
-            config.tabButton.notificationDot.Enable(true, newItemsCount);
-        } else {
-            config.tabButton.notificationDot.Enable(false);
-        }
+        UpdateTabNotification();
 
         if (show) {
             if (!config.inventoryUI.showedAnyItemInfo) {
@@ -52,6 +41,20 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
                 infoDrawer.Show(true);
             }
         }        
+    }
+
+    public void UpdateTabNotification() {
+        int newItemsCount = 0;
+        for (int i = 0; i < itemsToDraw.Count; i++) {
+            if (itemsToDraw[i].isNew)
+                newItemsCount += 1;
+        }
+
+        if (newItemsCount > 0) {
+            config.tabButton.notificationDot.Enable(true, newItemsCount);
+        } else {
+            config.tabButton.notificationDot.Enable(false);
+        }
     }
 
     private void CollectItemsToDraw() {
@@ -83,20 +86,35 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
     private void OnItemButtonEvent(UIEventType eventType, ItemButton button, object arg) {
         switch(eventType) {
             case UIEventType.Click:
-                int inventorySlotID = (int)arg;
-
-                config.inventoryUI.Select(button.iconDrawer.rarenessImage.rectTransform);
-
                 selectedItemButton = button;
+
+                if (selectedItemButton.currentItem.isNew) {
+                    selectedItemButton.currentItem.isNew = false;
+
+                    selectedItemButton.Redraw();
+                    UpdateTabNotification();
+                }
+                
+                config.inventoryUI.Select(button.iconDrawer.rarenessImage.rectTransform);                
                 infoDrawer.DrawItemInfo(selectedItemButton.currentItem, selectedItemButton);
+
                 break;
             case UIEventType.DragStart:
                 //CAN_NOT_MERGE_ITSELF
-                if(button == infoDrawer.lastItemButton) {
+
+                if (button.currentItem.isNew) {
+                    button.currentItem.isNew = false;
+
+                    button.Redraw();
+                    UpdateTabNotification();
+                }
+
+                if (button == infoDrawer.lastItemButton) {
                     config.inventoryUI.ShowItemInfoBorderNotification(MLocalization.Get("CAN_NOT_MERGE_ITSELF"));
                 } else {
                     config.inventoryUI.ShowItemInfoBorderNotification(MLocalization.Get("UPGRADE"));
                 }
+
                 break;
         }
 

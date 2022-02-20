@@ -13,6 +13,8 @@ public class Player : MonoBehaviour {
 
 	public void Init() {
 		//playerInput.OnMoveInput += MoveJoystickInput;
+
+
 		playerInput.OnArmInput += MoveJoystickInput;
 		playerInput.OnButtonInput += ButtonInput;
 	}

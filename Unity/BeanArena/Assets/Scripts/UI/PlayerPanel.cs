@@ -13,6 +13,8 @@ public class PlayerPanel : MonoBehaviour {
 	public TextMeshProUGUI cupsText;
 	public WinCounter winCounter;
 
+    public PanelCircleItem panelCircleItem;
+
 	[HideInInspector] public HeroBase attachedHero;
 
 	public void Init() {

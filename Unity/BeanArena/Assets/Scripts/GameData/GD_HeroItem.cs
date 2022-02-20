@@ -19,7 +19,7 @@ public class GD_HeroItem : GD {
 
     public bool enoughCardsToUpgrade {
         get {
-            if(levelID < info.rarenessInfo.maxLevel) {
+            if(levelID < info.rarenessInfo.maxLevel - 1) {
                 if(cardsCollected >= info.rarenessInfo.levelsInfo[levelID].cardsToLevel) {
                     return true;
                 } else {

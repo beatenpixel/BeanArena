@@ -22,18 +22,7 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
     public override void Show(bool show) {
         base.Show(show);
 
-        int newItemsCount = 0;
-        for (int i = 0; i < Game.data.inventory.heroes.Count; i++) {
-            if (Game.data.inventory.heroes[i].enoughCardsToUpgrade)
-                newItemsCount += 1;
-        }
-
-        if (newItemsCount > 0) {
-            config.tabButton.notificationDot.Enable(true, newItemsCount);
-        } else {
-            config.tabButton.notificationDot.Enable(false);
-        }
-
+        UpdateTabNotification();
         infoDrawer.Show(show);
     }
 
@@ -76,6 +65,8 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
                 infoDrawer.DrawHeroInfo(item, new HeroInfoDrawConfig() {
                     OnUpgradeButtonClickCallback = ButtonClick_HeroUpgrade
                 });
+
+                MenuUI.inst.RefreshStats();
             }
         }
 
@@ -86,7 +77,7 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
         GD_HeroItem heroItem = currentButton.currentItem;
 
         if(currentButton != null && currentButton.currentItem != null) {
-            if(currentButton.currentItem.enoughCardsToUpgrade) {
+            if(currentButton.currentItem.levelID < (currentButton.currentItem.info.rarenessInfo.maxLevel - 1) && currentButton.currentItem.enoughCardsToUpgrade) {
                 HeroLevelInfo levelInfo = heroItem.info.rarenessInfo.levelsInfo[heroItem.levelID];
 
                 if (Economy.inst.HasCurrency(CurrencyType.Coin, levelInfo.coinsToLevel)) {
@@ -97,12 +88,31 @@ public class InventoryGroupDrawer_Hero : InventoryGroupDrawer {
                     infoDrawer.DrawHeroInfo(heroItem, new HeroInfoDrawConfig() {
                         OnUpgradeButtonClickCallback = ButtonClick_HeroUpgrade
                     });
+
+                    MenuUI.inst.RefreshStats();
+                    UpdateTabNotification();
                 } else {
                     
                 }
             } else {
 
             }
+        }
+    }
+
+    public void UpdateTabNotification() {
+        int newItemsCount = 0;
+        for (int i = 0; i < Game.data.inventory.heroes.Count; i++) {
+            if (Game.data.inventory.heroes[i].enoughCardsToUpgrade
+                && Game.data.inventory.heroes[i].levelID < Game.data.inventory.heroes[i].info.maxLevelsCount - 1) {
+                newItemsCount += 1;
+            }
+        }
+
+        if (newItemsCount > 0) {
+            config.tabButton.notificationDot.Enable(true, newItemsCount);
+        } else {
+            config.tabButton.notificationDot.Enable(false);
         }
     }
 

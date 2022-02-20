@@ -123,7 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!84 &151583045
+--- !u!84 &181500027
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,8 +137,8 @@ RenderTexture:
   m_DownscaleFallback: 0
   m_IsAlphaChannelOptional: 0
   serializedVersion: 5
-  m_Width: 236
-  m_Height: 118
+  m_Width: 234
+  m_Height: 117
   m_AntiAliasing: 1
   m_MipCount: -1
   m_DepthStencilFormat: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <sprite name="armor">1  <sprite name="heart"> 200 <sprite name="damage">
+  m_text: <sprite name="armor">1 <sprite name="heart"> 200 <sprite name="damage">
     50
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9aa6326b69cf6fb43b5ac6d834b4f3d3, type: 2}
@@ -838,6 +838,18 @@ PrefabInstance:
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 527502550}
+    - target: {fileID: 938518224, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234006554, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234006556, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
+      propertyPath: totalHeroStatsText
+      value: 
+      objectReference: {fileID: 412973947}
     - target: {fileID: 1779316969, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
       propertyPath: shadowTexture
       value: 
@@ -854,6 +866,26 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 7374767111035791262, guid: e9104975539d48742ab9e47a6a6eb9af, type: 3}
+    - target: {fileID: 1578830302171534383, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578830302171534383, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578830302171534383, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 39.77771
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578830302171534383, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -19.889
+      objectReference: {fileID: 0}
+    - target: {fileID: 5235363805451320012, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5235363806201991139, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -902,6 +934,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[App]'
       objectReference: {fileID: 0}
+    - target: {fileID: 6720374281099201786, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
+      propertyPath: panelCircleItem
+      value: 
+      objectReference: {fileID: 1170188119}
     - target: {fileID: 8168703228296415736, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
       propertyPath: m_text
       value: <sprite name="cup">1500
@@ -912,6 +948,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
+--- !u!114 &1170188119 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3649372673818163970, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
+  m_PrefabInstance: {fileID: 1170188118}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f09f416cbba351b4c9c91bfdeeaa9f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1237357947
 GameObject:
   m_ObjectHideFlags: 0

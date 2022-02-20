@@ -47,6 +47,9 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
     [HideInInspector] public SO_HeroInfo heroInfo;
     [HideInInspector] public GD_HeroItem heroData;
 
+    public PlayerPanel uiPanel { get; private set; }
+    public bool hasUIPanel => uiPanel != null;
+
     protected override void Awake() {
         base.Awake();
 
@@ -106,10 +109,16 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
 		SetOrientation(config.orientation);
 	}
 
+    public void InitForUI(PlayerPanel panel) {
+        uiPanel = panel;
+    }
 
-    public void Init() {
-		
-	}
+    public void InitFinish() {
+        GetStatsSummary();
+
+        info.maxHealth = info.statsSummary.health;
+        info.health = info.maxHealth;
+    }
 
     public void SetSpawnPosition(Vector2 pos) {
         spawnPos = pos;
@@ -174,10 +183,23 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
 			arms[i].motion.SetR(armAngle2 + i * 10, true).SetS(500);
 		}
 
-		if (input.move.magnitude > 0.2f) {
-			if (!body.isGrounded) {
-				body.rb.AddForce(input.move * moveConfig.moveForce * Time.deltaTime);
-			}
+        if (!body.isGrounded) {
+            float maxVel = 10;
+
+            //body.rb.velocity += input.arm * moveConfig.moveForce * Time.deltaTime;
+            if(body.rb.velocity.magnitude > maxVel) {
+                //body.rb.velocity = body.rb.velocity.normalized * maxVel;
+            }
+
+            if (input.move.magnitude > 0.2f) {
+                body.rb.AddForce(input.arm * moveConfig.moveForce * Time.deltaTime, ForceMode2D.Impulse);
+            } else {
+
+            }
+            //body.rb.AddForce(input.move * moveConfig.moveForce * Time.deltaTime);
+        }
+
+        if (input.move.magnitude > 0.2f) {			
 
 			float angle = Vector2.SignedAngle(Vector2.up, input.move.normalized);
 
@@ -202,7 +224,7 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
 			body.motion.SetR(0f, true);
 
 			if (hadMoveInputLastFrame) {
-				SetGravityLevelForBodyParts(1f);
+				SetGravityLevelForBodyParts(1.5f);
 			}
 
 			hadMoveInputLastFrame = false;
@@ -291,13 +313,35 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
         input.arm = Vector2.zero;
 
         ReturnToSpawnPosition();
-        SetOrientation(initConfig.orientation);        
+        SetOrientation(initConfig.orientation);
 
-        HeroDamageEvent.Invoke(new HeroDamageEvent(this));
+        if (hasUIPanel) {
+            uiPanel.healthbar.SetValue(info.health / (float)info.maxHealth, false);
+        }
     }
 
 	public Vector2 GetPosition() {
 		return body.transform.position;
+    }
+
+    public HeroStatsSummary GetStatsSummary() {
+        info.statsSummary = new HeroStatsSummary();
+        info.statsSummary.stats.Add(StatType.Armor, new StatValue() {
+            valueType = StatValueType.Int
+        });
+
+        info.statsSummary.stats.Add(StatType.Health, new StatValue() {
+            valueType = StatValueType.Int
+        });
+
+        info.statsSummary.stats.Add(StatType.Damage, new StatValue() {
+            valueType = StatValueType.Int
+        });
+
+        heroEquipment.PopulateStatsSummaryWithAllEquipment(info.statsSummary);
+        MUtils.PopulateHeroStatSummary(info.statsSummary, heroInfo.stats, heroData.levelID);
+
+        return info.statsSummary;
     }
 
 	public IEnumerable<HeroLimb> this[LimbType type] {
@@ -309,11 +353,23 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
 	// IDamageable
     public virtual DamageResponse TakeDamage(DamageInfo damage) {
 
-		switch(damage.causeType) {
+        float dmgMod = 1f;
+
+        int armor = info.statsSummary.armor;
+
+        if(armor != 0) {
+            dmgMod *= (100f / (100f + armor));
+        }
+
+        Debug.Log("armor: " + armor + " dmgMod: " + dmgMod);
+
+        switch (damage.causeType) {
 			case DamageCause.PHYSICS: {
 					PhysicalDamage physDmg = (PhysicalDamage)damage;
 
-					float dmg = physDmg.GetDamage();
+                    Debug.Log("Dmg: " + physDmg.GetDamage());
+
+					float dmg = physDmg.GetDamage() * dmgMod;
 					info.health -= dmg;
 
 					physDmg.limb.rend.TakeDamage(Mathf.Clamp01(dmg / info.maxHealth * 4));					
@@ -336,7 +392,11 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
 
 		HeroDamageEvent.Invoke(new HeroDamageEvent(this));
 
-		if(info.health <= 0) {
+        if (hasUIPanel) {
+            uiPanel.healthbar.SetValue(info.health / (float)info.maxHealth, false);
+        }
+
+        if (info.health <= 0) {
 			info.health = 0f;
 			MSound.Play("death", null, t.position);
 			Die();			
@@ -392,6 +452,47 @@ public class HeroInfo {
 
     public string nickname;
     public int mmr;
+
+    public HeroStatsSummary statsSummary;
+}
+
+public class HeroStatsSummary {
+    public Dictionary<StatType, StatValue> stats;
+
+    public int armor {
+        get {
+            if(stats.ContainsKey(StatType.Armor)) {
+                return stats[StatType.Armor].intValue;
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    public int damage {
+        get {
+            if (stats.ContainsKey(StatType.Damage)) {
+                return stats[StatType.Damage].intValue;
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    public int health {
+        get {
+            if (stats.ContainsKey(StatType.Health)) {
+                return stats[StatType.Health].intValue;
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    public HeroStatsSummary() {
+        stats = new Dictionary<StatType, StatValue>();
+    }
+
 }
 
 public enum HeroControllType {

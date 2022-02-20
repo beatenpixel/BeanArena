@@ -106,7 +106,8 @@ public class IconDrawer : PoolObject {
         levelText.color = color ?? Color.white;
     }
 
-    public void DrawItemMerged(GD_Item item, MergedItemInfo info) {        
+    public void DrawItemMerged(GD_Item item, MergedItemInfo info) {
+        rarenessImage.enabled = true;
         rarenessImage.color = MAssets.colors[("rareness_" + item.rareness.ToString()).ToLower()].SetA(0.5f);
 
         SetIcon(item.info.icon);
@@ -121,6 +122,7 @@ public class IconDrawer : PoolObject {
     public void DrawItem(GD_Item itemData, SO_ItemInfo itemInfo) {
         bool hasFuse = itemInfo.GetFusePointsPercent(itemData.fusePoints, itemData.levelID, out float fuseProgress);
 
+        rarenessImage.enabled = true;
         rarenessImage.color = MAssets.colors[("rareness_" + itemData.rareness.ToString()).ToLower()].SetA(0.5f);
 
         SetIcon(itemInfo.icon);
@@ -141,9 +143,24 @@ public class IconDrawer : PoolObject {
         DrawText(MFormat.GetLVLString(itemData.levelID, itemInfo.maxLevel));
     }
 
+    public void DrawItemPanelCircle(GD_Item item, PanelCircleItem panelCircle) {
+        bool hasFuse = item.info.GetFusePointsPercent(item.fusePoints, item.levelID, out float fuseProgress);
+
+        rarenessImage.enabled = false;
+        //rarenessImage.color = MAssets.colors[("rareness_" + item.rareness.ToString()).ToLower()].SetA(0.5f);
+
+        SetIcon(item.info.icon);
+        DrawIcon();
+
+        EnableRedDot(false);
+        DrawBar(null);
+        DrawText("");
+    }
+
     public void DrawHeroDrop(HeroType heroType, int amount) {
         GD_HeroItem item = Game.data.inventory.heroes.Find(x => x.heroType == heroType);
 
+        rarenessImage.enabled = true;
         rarenessImage.color = MAssets.colors[("rareness_" + item.info.rarenessInfo.heroRareness.ToString()).ToLower()].SetA(0.5f);
 
         SetIcon(item.info.icon);
@@ -157,6 +174,7 @@ public class IconDrawer : PoolObject {
     }
 
     public void DrawHero(GD_HeroItem item) {
+        rarenessImage.enabled = true;
         rarenessImage.color = MAssets.colors[("rareness_" + item.info.rarenessInfo.heroRareness.ToString()).ToLower()].SetA(0.5f);
 
         SetIcon(item.info.icon);
@@ -174,6 +192,7 @@ public class IconDrawer : PoolObject {
     }
 
     public void DrawChest(GD_Chest chestData) {
+        rarenessImage.enabled = true;
         rarenessImage.color = Color.white.SetA(0f);
 
         SetIcon(chestData.info.icon);

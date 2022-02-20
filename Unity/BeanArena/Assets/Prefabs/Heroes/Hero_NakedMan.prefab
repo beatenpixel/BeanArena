@@ -352,8 +352,8 @@ MonoBehaviour:
   t: {fileID: 0}
   _subType: default
   moveConfig:
-    moveForce: 400
-    jumpForce: 1200
+    moveForce: 20
+    jumpForce: 1300
   heroEquipment: {fileID: 9069535127651683539}
   body: {fileID: 0}
   heroInfo: {fileID: 0}

@@ -19,6 +19,7 @@ public class MenuUI : MonoBehaviour {
 	public UIGroupAppear editGroup;
 
     public TextMeshProUGUI mmrText;
+    public TextMeshProUGUI totalHeroStatsText;
 
 	public GameObject rootGO;
 
@@ -58,7 +59,7 @@ public class MenuUI : MonoBehaviour {
 		idleGroup.Show(true);
 		editGroup.Show(false);
 		editCharacterWorldUI.Show(false);
-	}
+    }
 
     public void ButtonClick_GoFight() {
         GM_Menu.inst.GoToFight();
@@ -75,11 +76,37 @@ public class MenuUI : MonoBehaviour {
             topPanel.Draw();
             DrawMMRText();
             chestPanel.Draw();
+
+            ShowTotalHeroStats(true);
             //inventoryDrawer.SpawnPreviewItems();
         } else {
-
-		}
+            ShowTotalHeroStats(false);
+        }
 	}
+
+    public void RefreshStats() {
+        ShowTotalHeroStats(true);
+    }
+
+    public void ShowTotalHeroStats(bool show) {
+        if(show) {
+            totalHeroStatsText.gameObject.SetActive(true);
+            HeroStatsSummary summ = GM_Menu.inst.previewHero.GetStatsSummary();
+
+            string str = "";
+
+            foreach (var stat in summ.stats) {
+                if (stat.Value.valueType == StatValueType.Int
+                    && (stat.Key == StatType.Damage || stat.Key == StatType.Armor || stat.Key == StatType.Health)) {
+                    str += MFormat.GetTMProIcon(stat.Key) + stat.Value.intValue + " ";
+                }
+            }
+
+            totalHeroStatsText.text = str;
+        } else {
+            totalHeroStatsText.gameObject.SetActive(false);
+        }
+    }
 
 
 }

@@ -62,10 +62,11 @@ public class GM_Arena : GameMode {
 
 		player.AssignHero(playerHero);
 		player.Init();
-
-		genericMap.AddHero(playerHero);
-
+        player.hero.InitForUI(GameUI.inst.playerPanels[0]);
         player.hero.heroEquipment.LoadEquipmentFromGameData();
+        player.hero.InitFinish();
+
+        genericMap.AddHero(playerHero);
 
         enemies = new List<Enemy>();
 
@@ -88,8 +89,9 @@ public class GM_Arena : GameMode {
 
 			enemy.AssignHero(enemyHero);
 			enemy.Init();
+            enemyHero.InitForUI(GameUI.inst.playerPanels[1]);
 
-			genericMap.AddHero(enemyHero);
+            genericMap.AddHero(enemyHero);
 
 			enemies.Add(enemy);
 
@@ -103,12 +105,12 @@ public class GM_Arena : GameMode {
             };
 
             enemyHero.heroEquipment.PreviewItem(enemyPistol, enemyHero.heroEquipment.GetFreeSlots(enemyPistol)[0]);
+            enemyHero.InitFinish();
 
 
-
-			//Pistol epistol = (Pistol)equipmentFactory.Create(MAssets.itemsInfo.GetAsset(ItemType.Pistol), Vector2.zero);
-			//enemyHero.heroEquipment.CanAttachEquipment(epistol);
-		}
+            //Pistol epistol = (Pistol)equipmentFactory.Create(MAssets.itemsInfo.GetAsset(ItemType.Pistol), Vector2.zero);
+            //enemyHero.heroEquipment.CanAttachEquipment(epistol);
+        }
 
 		MCamera.inst.AddTarget(new CameraTarget(player.hero.body.transform, new Vector2(0, -2), Vector2.one * 2));
 

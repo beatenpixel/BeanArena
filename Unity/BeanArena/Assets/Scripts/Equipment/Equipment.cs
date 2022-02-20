@@ -20,6 +20,16 @@ public abstract class Equipment : PoolObject {
     protected HeroLimb limb;
     protected HeroBase hero;
 
+    public void PopulateStatsSummaryWithAllEquipment(HeroStatsSummary summ) {
+        foreach (var stat in itemInfo.stats) {
+            if (summ.stats.ContainsKey(stat.statType)) {
+                summ.stats[stat.statType] = summ.stats[stat.statType] + stat.GetValue(itemData.levelID);
+            } else {
+                summ.stats.Add(stat.statType, new StatValue(stat.GetValue(itemData.levelID)));
+            }
+        }
+    }
+
     public void SetItemData(GD_Item _itemData) {
         itemData = _itemData;
     }
@@ -38,6 +48,10 @@ public abstract class Equipment : PoolObject {
             nextUseTime = Time.time + useDelay;
 
             OnUse(useArgs);
+
+            if(hero.hasUIPanel) {
+                hero.uiPanel.panelCircleItem.RunReloadAnimation(useDelay);
+            }
         }
     }
 
