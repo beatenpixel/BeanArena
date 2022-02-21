@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ea1e5293988754c861f0f5c57ec9fe, type: 3}
   m_Name: DefaultBean
   m_EditorClassIdentifier: 
-  heroType: 1
+  heroType: 100
   rarenessInfo: {fileID: 11400000, guid: f1f7e4d727deca1489caf59d096978d6, type: 2}
   icon: {fileID: 11400000, guid: 978c06fdb36fe0e418bb0fd4fa0a4879, type: 2}
   prefab: {fileID: 0}
@@ -26,40 +26,52 @@ MonoBehaviour:
     intStartEndValue: {x: 10, y: 100}
     floatStartEndValue: {x: 0, y: 0}
     values:
-    - intValue: 10
+    - valueType: 0
+      intValue: 10
       floatValue: 0
       manual: 0
-    - intValue: 18
+    - valueType: 0
+      intValue: 18
       floatValue: 0
       manual: 0
-    - intValue: 26
+    - valueType: 0
+      intValue: 26
       floatValue: 0
       manual: 0
-    - intValue: 35
+    - valueType: 0
+      intValue: 35
       floatValue: 0
       manual: 0
-    - intValue: 43
+    - valueType: 0
+      intValue: 43
       floatValue: 0
       manual: 0
-    - intValue: 51
+    - valueType: 0
+      intValue: 51
       floatValue: 0
       manual: 0
-    - intValue: 59
+    - valueType: 0
+      intValue: 59
       floatValue: 0
       manual: 0
-    - intValue: 67
+    - valueType: 0
+      intValue: 67
       floatValue: 0
       manual: 0
-    - intValue: 75
+    - valueType: 0
+      intValue: 75
       floatValue: 0
       manual: 0
-    - intValue: 84
+    - valueType: 0
+      intValue: 84
       floatValue: 0
       manual: 0
-    - intValue: 92
+    - valueType: 0
+      intValue: 92
       floatValue: 0
       manual: 0
-    - intValue: 100
+    - valueType: 0
+      intValue: 100
       floatValue: 0
       manual: 0
     decimalsCount: 2
@@ -73,40 +85,52 @@ MonoBehaviour:
     intStartEndValue: {x: 10, y: 100}
     floatStartEndValue: {x: 1, y: 2}
     values:
-    - intValue: 10
+    - valueType: 1
+      intValue: 10
       floatValue: 1
       manual: 0
-    - intValue: 10
+    - valueType: 1
+      intValue: 10
       floatValue: 1.09
       manual: 0
-    - intValue: 10
+    - valueType: 1
+      intValue: 10
       floatValue: 1.18
       manual: 0
-    - intValue: 10
+    - valueType: 1
+      intValue: 10
       floatValue: 1.27
       manual: 0
-    - intValue: 10
+    - valueType: 1
+      intValue: 10
       floatValue: 1.36
       manual: 0
-    - intValue: 10
+    - valueType: 1
+      intValue: 10
       floatValue: 1.4499999
       manual: 0
-    - intValue: 10
+    - valueType: 1
+      intValue: 10
       floatValue: 1.54
       manual: 0
-    - intValue: 10
+    - valueType: 1
+      intValue: 10
       floatValue: 1.63
       manual: 0
-    - intValue: 10
+    - valueType: 1
+      intValue: 10
       floatValue: 1.7199999
       manual: 0
-    - intValue: 10
+    - valueType: 1
+      intValue: 10
       floatValue: 1.81
       manual: 0
-    - intValue: 10
+    - valueType: 1
+      intValue: 10
       floatValue: 1.9
       manual: 0
-    - intValue: 10
+    - valueType: 1
+      intValue: 10
       floatValue: 2
       manual: 0
     decimalsCount: 2

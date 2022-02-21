@@ -16,6 +16,7 @@ public class HeroFactory : MonoBehaviour {
         switch(config.heroType) {
             case HeroType.Shark: hero = MPool.Get<Hero_Shbark>(); break;
             case HeroType.NakedMan: hero = MPool.Get<Hero_NakedMan>(); break;
+            case HeroType.Skeleton: hero = MPool.Get<Hero_Skeleton>(); break;
             default: hero = MPool.Get<Hero_DefaultBean>(); break;
         } 
 

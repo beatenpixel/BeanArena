@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40ea1e5293988754c861f0f5c57ec9fe, type: 3}
-  m_Name: Shark
+  m_Name: GoldBean
   m_EditorClassIdentifier: 
-  heroType: 101
-  rarenessInfo: {fileID: 11400000, guid: e7f3a12553908074ea6d6fc3207c13ad, type: 2}
-  icon: {fileID: 11400000, guid: 56025a7f6cfb46048affaee911ffbf44, type: 2}
+  heroType: 107
+  rarenessInfo: {fileID: 11400000, guid: 1a1acced7d599a948a3c8fa5a5515eb2, type: 2}
+  icon: {fileID: 11400000, guid: d44d53e1ecd7cda449fbca4990cef834, type: 2}
   prefab: {fileID: 0}
-  maxLevelsCount: 10
+  maxLevelsCount: 8
   stats:
   - statType: 0
     valueType: 0
@@ -31,35 +31,27 @@ MonoBehaviour:
       floatValue: 0
       manual: 0
     - valueType: 0
-      intValue: 20
+      intValue: 23
       floatValue: 0
       manual: 0
     - valueType: 0
-      intValue: 30
+      intValue: 36
       floatValue: 0
       manual: 0
     - valueType: 0
-      intValue: 40
+      intValue: 49
       floatValue: 0
       manual: 0
     - valueType: 0
-      intValue: 50
+      intValue: 61
       floatValue: 0
       manual: 0
     - valueType: 0
-      intValue: 60
+      intValue: 74
       floatValue: 0
       manual: 0
     - valueType: 0
-      intValue: 70
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 80
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 90
+      intValue: 87
       floatValue: 0
       manual: 0
     - valueType: 0
@@ -67,5 +59,5 @@ MonoBehaviour:
       floatValue: 0
       manual: 0
     decimalsCount: 2
-    maxLevel: 10
+    maxLevel: 8
     isFoldoutInInspector: 0

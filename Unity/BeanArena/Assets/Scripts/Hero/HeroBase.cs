@@ -438,8 +438,8 @@ public class HeroInput {
 
 [System.Serializable]
 public class MoveConfig {
-	public float moveForce = 400;
-	public float jumpForce = 1200f;
+	public float moveForce = 20;
+	public float jumpForce = 1300f;
 }
 
 [System.Serializable]

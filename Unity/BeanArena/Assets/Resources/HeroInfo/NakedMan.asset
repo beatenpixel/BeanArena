@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ea1e5293988754c861f0f5c57ec9fe, type: 3}
   m_Name: NakedMan
   m_EditorClassIdentifier: 
-  heroType: 5
+  heroType: 104
   rarenessInfo: {fileID: 11400000, guid: 1a1acced7d599a948a3c8fa5a5515eb2, type: 2}
   icon: {fileID: 11400000, guid: fbb4cf3c4d06fba4c8f8c92c8790619f, type: 2}
   prefab: {fileID: 0}
@@ -26,28 +26,36 @@ MonoBehaviour:
     intStartEndValue: {x: 300, y: 500}
     floatStartEndValue: {x: 0, y: 0}
     values:
-    - intValue: 300
+    - valueType: 0
+      intValue: 300
       floatValue: 0
       manual: 0
-    - intValue: 329
+    - valueType: 0
+      intValue: 329
       floatValue: 0
       manual: 0
-    - intValue: 357
+    - valueType: 0
+      intValue: 357
       floatValue: 0
       manual: 0
-    - intValue: 386
+    - valueType: 0
+      intValue: 386
       floatValue: 0
       manual: 0
-    - intValue: 414
+    - valueType: 0
+      intValue: 414
       floatValue: 0
       manual: 0
-    - intValue: 443
+    - valueType: 0
+      intValue: 443
       floatValue: 0
       manual: 0
-    - intValue: 471
+    - valueType: 0
+      intValue: 471
       floatValue: 0
       manual: 0
-    - intValue: 500
+    - valueType: 0
+      intValue: 500
       floatValue: 0
       manual: 0
     decimalsCount: 2

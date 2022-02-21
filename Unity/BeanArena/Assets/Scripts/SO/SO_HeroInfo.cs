@@ -12,7 +12,15 @@ public class SO_HeroInfo : ScriptableObject, ITypeKey<HeroType>, IStatContainer 
     public SO_IconContent icon;
     public GameObject prefab;
 
-    public int maxLevelsCount = 5;
+    public int maxLevelsCount {
+        get {
+            if (rarenessInfo == null) {
+                return 0;
+            } else {
+                return rarenessInfo.maxLevel;
+            }
+        }
+    }
 
     public List<ItemStatProgression> stats = new List<ItemStatProgression>();
 

@@ -67,6 +67,7 @@ MonoBehaviour:
     - {fileID: 6186975834321502702, guid: befbaac469cee5a46957574baacb2e00, type: 3}
     - {fileID: 3388391118818844831, guid: 19564b1c9155f9e4cb3de6a79606eda9, type: 3}
     - {fileID: 9069535127651683917, guid: 5d0e91f849ed89f49aac231174f3d612, type: 3}
+    - {fileID: 6186975834321502702, guid: d8a078d205916214f882a152ea532847, type: 3}
   - groupName: Weapon
     prefabs:
     - {fileID: 2846095526838627189, guid: ae0f199766662e44a97c3d3327ece0ba, type: 3}

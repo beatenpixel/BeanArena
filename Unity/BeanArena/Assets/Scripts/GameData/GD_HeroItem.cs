@@ -90,12 +90,18 @@ public class GD_HeroItem : GD {
 }
 
 public enum HeroType {
-    None,
-    DefaultBean,
-    Shark,
-    Skeleton,
-    Clown,
-    NakedMan
+    None = -1,
+    DefaultBean = 100,
+    Shark = 101,
+    Skeleton = 102,
+    Clown = 103,
+    NakedMan = 104,
+    Terminator = 105,
+    Pickle = 106,
+    GoldBean = 107,
+    Finger = 108,
+    Dinosaur = 109,
+    Robber = 110
 }
 
 public struct HeroCardsContainer {
