@@ -29,8 +29,4 @@ public class Hero_Sample : HeroBase {
         base.DestroyHero();
     }
 
-    public override Type GetPoolObjectType() {
-        return typeof(Hero_Sample);
-    }
-
 }

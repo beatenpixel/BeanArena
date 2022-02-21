@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Pickle
   m_EditorClassIdentifier: 
   heroType: 106
-  rarenessInfo: {fileID: 11400000, guid: 1a1acced7d599a948a3c8fa5a5515eb2, type: 2}
-  icon: {fileID: 11400000, guid: d44d53e1ecd7cda449fbca4990cef834, type: 2}
+  rarenessInfo: {fileID: 11400000, guid: e7f3a12553908074ea6d6fc3207c13ad, type: 2}
+  icon: {fileID: 11400000, guid: d8ef176ca51003a48a7308a3dc249781, type: 2}
   prefab: {fileID: 0}
-  maxLevelsCount: 8
   stats:
   - statType: 0
     valueType: 0
@@ -59,5 +58,5 @@ MonoBehaviour:
       floatValue: 0
       manual: 0
     decimalsCount: 2
-    maxLevel: 8
+    maxLevel: 10
     isFoldoutInInspector: 0

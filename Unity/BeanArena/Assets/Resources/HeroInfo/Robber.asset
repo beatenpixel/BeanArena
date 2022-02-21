@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Robber
   m_EditorClassIdentifier: 
   heroType: 110
-  rarenessInfo: {fileID: 11400000, guid: 1a1acced7d599a948a3c8fa5a5515eb2, type: 2}
-  icon: {fileID: 11400000, guid: d44d53e1ecd7cda449fbca4990cef834, type: 2}
+  rarenessInfo: {fileID: 11400000, guid: f1f7e4d727deca1489caf59d096978d6, type: 2}
+  icon: {fileID: 11400000, guid: 94efb74adec7b51448ff281d922b4148, type: 2}
   prefab: {fileID: 0}
-  maxLevelsCount: 8
   stats:
   - statType: 0
     valueType: 0
@@ -59,5 +58,5 @@ MonoBehaviour:
       floatValue: 0
       manual: 0
     decimalsCount: 2
-    maxLevel: 8
+    maxLevel: 12
     isFoldoutInInspector: 0

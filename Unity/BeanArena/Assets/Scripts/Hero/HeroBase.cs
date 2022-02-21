@@ -44,7 +44,7 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
     private HeroConfig initConfig;
     private Vector2 spawnPos;
 
-    [HideInInspector] public SO_HeroInfo heroInfo;
+    public SO_HeroInfo heroInfo;
     [HideInInspector] public GD_HeroItem heroData;
 
     public PlayerPanel uiPanel { get; private set; }
@@ -79,7 +79,6 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
 	public virtual void InitInFactory(HeroConfig config) {
         initConfig = config;
 
-        heroInfo = MAssets.heroesInfo.GetAsset(config.heroType);
         heroData = Game.data.inventory.heroes.Find(x => x.heroType == heroInfo.heroType);
 
         info = new HeroInfo();
@@ -416,6 +415,12 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
         Destroy(gameObject);
         //Push();
     }
+
+    public override Type GetPoolObjectType() {
+        return typeof(HeroBase);
+    }
+
+    public override string subType => heroInfo.heroType.ToString();
 
 }
 

@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Finger
   m_EditorClassIdentifier: 
   heroType: 108
-  rarenessInfo: {fileID: 11400000, guid: 1a1acced7d599a948a3c8fa5a5515eb2, type: 2}
-  icon: {fileID: 11400000, guid: d44d53e1ecd7cda449fbca4990cef834, type: 2}
+  rarenessInfo: {fileID: 11400000, guid: af7bf3e30b723f6429868a70ca4c2cf7, type: 2}
+  icon: {fileID: 11400000, guid: 4ce73cfaed1ac50498c9cf6ca4221f90, type: 2}
   prefab: {fileID: 0}
-  maxLevelsCount: 8
   stats:
   - statType: 0
     valueType: 0
@@ -59,5 +58,5 @@ MonoBehaviour:
       floatValue: 0
       manual: 0
     decimalsCount: 2
-    maxLevel: 8
+    maxLevel: 4
     isFoldoutInInspector: 0

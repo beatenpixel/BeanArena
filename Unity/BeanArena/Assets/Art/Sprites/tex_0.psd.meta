@@ -1835,7 +1835,7 @@ TextureImporter:
         width: 209
         height: 76
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1856,7 +1856,7 @@ TextureImporter:
         width: 298
         height: 374
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1877,7 +1877,7 @@ TextureImporter:
         width: 172
         height: 341
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1885,6 +1885,132 @@ TextureImporter:
       bones: []
       spriteID: c26c03937b5ebbd4294da0886357d74b
       internalID: 687890383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_terminator
+      rect:
+        serializedVersion: 2
+        x: 908
+        y: 619
+        width: 176
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3dda0876da628f42a11edc7b7a29eb9
+      internalID: -1733108048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tex_0_17
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 522
+        width: 184
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af8b1a1c11b559348b185672788b3ec8
+      internalID: -625826444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tex_0_63
+      rect:
+        serializedVersion: 2
+        x: 1495
+        y: 551
+        width: 190
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff76d03eec4f74d42aff20a6ad645ba7
+      internalID: -1585776859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tex_0_64
+      rect:
+        serializedVersion: 2
+        x: 1288
+        y: 425
+        width: 203
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ebca0db0c555164fb019eb4150e4edb
+      internalID: 1230339182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tex_0_65
+      rect:
+        serializedVersion: 2
+        x: 1765
+        y: 536
+        width: 232
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae16a453a69254f40877a1e974c32424
+      internalID: 1920964623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tex_0_66
+      rect:
+        serializedVersion: 2
+        x: 1494
+        y: 182
+        width: 176
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e47145db6e7eb274d93e0d0f641887c2
+      internalID: -76113105
       vertices: []
       indices: 
       edges: []
@@ -1900,9 +2026,52 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      tex_0_41: -411719273
+      particle_drop_1: 813093173
+      hero_icon_bean: 5504138388294342362
+      tex_0_37: -2072125343
+      tex_0_56: -466102611
+      tex_0_18: 5880695188566547066
+      tex_0_10: -367433212
+      tex_0_27: 1157239988
+      hero_icon_skeleton: -656622605
+      tex_0_16: 1045647409
+      tex_0_23: 9171183186283799205
+      icon_terminator: 7804612495321305686
+      tex_0_25: 1361083388
+      tex_0_circle_smooth_edge: -417000142
+      tex_0_40: -944122829
+      tex_0_7: 306614722634328623
+      tex_0_48: -691209749
+      hero_icon_clown: 1291546328
+      drop_3: -4551323591017913812
+      tex_0_47: 1279901368
+      tex_0_32: 1478349913
+      hero_icon_shark: -1917672438
+      tex_0_1: 8036309752053734007
+      tex_0_17: -625826444
+      tex_0_21: -2142735356839987325
+      tex_0_43: 1049773067
+      tex_0_6: 2781597166843550514
+      tex_0_54: -565564576
+      tex_0_8: -2149578559650092762
+      tex_0_55: 1235607265
+      tex_0_11: 383223930
+      tex_0_24: -3940336546365883990
+      chest_legendary: 1059245388
+      rain_drop: -1615725522
+      tex_0_22: 3349988611915878177
+      tex_0_3: -5692604581601830981
+      tex_0_38: 936898377
+      tex_0_26: -795541576
+      tex_0_2: 1894656480312254778
+      tex_0_30: -2128431680
+      tex_0_14: -294833298
+      tex_0_20: 8984777409455169079
+      tex_0_51: -1278947005
+      tex_0_65: 1920964623
       capsule: -7411500690239887169
       particle_drop_2: 375084091
-      tex_0_41: -411719273
       tex_0_46: 2004034096
       tex_0_42: 171968598
       drop_4: 8344815454573176662
@@ -1910,80 +2079,42 @@ TextureImporter:
       tex_0_12: -1252051043
       tex_0_13: 1878352554
       tex_0_4: -40810238627940632
-      particle_drop_1: 813093173
-      hero_icon_bean: 5504138388294342362
-      tex_0_61: 1049705262
-      tex_0_37: -2072125343
       tex_0_45: 1228089928
       tex_0_44: -760602752
-      tex_0_56: -466102611
-      tex_0_18: 5880695188566547066
       tex_0_50: 1388185218
-      tex_0_10: -367433212
       tex_0_29: -2144702762
       tex_0_60: 473428242
-      tex_0_27: 1157239988
-      hero_icon_skeleton: -656622605
-      tex_0_16: 1045647409
-      tex_0_23: 9171183186283799205
+      tex_0_66: -76113105
       particle_drop_0: -311074686
       tex_0_62: 687890383
       tex_0_33: 980012666
       tex_0_circle: 1361548593
-      tex_0_25: 1361083388
       tex_0_31: 809415466
-      tex_0_40: -944122829
-      tex_0_7: 306614722634328623
+      tex_0_53: -916858034
       tex_0_36: -2047955963
-      hero_icon_clown: 1291546328
-      drop_3: -4551323591017913812
       drop_0: -341480925492483727
       drop_1: 6910860581909789431
       tex_0_9: -307186218552904950
       chest_epic: 1464966154
       drop_2: 2079128524816627004
-      tex_0_32: 1478349913
-      tex_0_47: 1279901368
-      hero_icon_shark: -1917672438
-      tex_0_1: 8036309752053734007
-      tex_0_circle_smooth_edge: -417000142
       tex_0_15: 1761533502
       tex_0_28: 1659917562
       tex_0_0: -1866947196
-      tex_0_48: -691209749
-      tex_0_17: 7804612495321305686
-      tex_0_21: -2142735356839987325
       tex_0_39: 1453688178
-      tex_0_6: 2781597166843550514
-      tex_0_43: 1049773067
+      tex_0_64: 1230339182
       tex_0_57: -1969684865
       tex_0_52: -1189535101
-      tex_0_54: -565564576
       particle_drop_3: -776414081
       tex_0_5: -6154962540722802533
-      tex_0_8: -2149578559650092762
+      tex_0_61: 1049705262
       tex_0_49: 898256708
-      tex_0_11: 383223930
-      tex_0_24: -3940336546365883990
-      chest_legendary: 1059245388
-      tex_0_53: -916858034
-      rain_drop: -1615725522
-      tex_0_22: 3349988611915878177
-      tex_0_3: -5692604581601830981
-      tex_0_2: 1894656480312254778
       tex_0_19: 6530401923317716584
       chest_common: 538634505
       tex_0_59: 1136998002
-      water_pistol: -882657101450742125
-      tex_0_14: -294833298
-      tex_0_26: -795541576
-      tex_0_20: 8984777409455169079
-      tex_0_58: -2071015731
-      tex_0_30: -2128431680
       tex_0_34: -626419992
-      tex_0_51: -1278947005
-      tex_0_55: 1235607265
-      tex_0_38: 936898377
+      water_pistol: -882657101450742125
+      tex_0_63: -1585776859
+      tex_0_58: -2071015731
       nakedman_icon: 1362259204
   spritePackingTag: 
   pSDRemoveMatte: 1

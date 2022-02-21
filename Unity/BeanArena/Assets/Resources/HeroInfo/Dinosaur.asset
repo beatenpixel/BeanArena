@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroType: 109
   rarenessInfo: {fileID: 11400000, guid: 1a1acced7d599a948a3c8fa5a5515eb2, type: 2}
-  icon: {fileID: 11400000, guid: d44d53e1ecd7cda449fbca4990cef834, type: 2}
+  icon: {fileID: 11400000, guid: 17350e49e093bcb41adf2b50bf4ddd49, type: 2}
   prefab: {fileID: 0}
-  maxLevelsCount: 8
   stats:
   - statType: 0
     valueType: 0

@@ -288,7 +288,7 @@ MonoBehaviour:
     jumpForce: 1300
   heroEquipment: {fileID: 7610001874787510047}
   body: {fileID: 0}
-  heroInfo: {fileID: 0}
+  heroInfo: {fileID: 11400000, guid: a925424dc77420b4399c87a5e9b671ce, type: 2}
   heroData:
     heroType: 0
     cardsCollected: 0

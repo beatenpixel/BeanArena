@@ -38,8 +38,5 @@ public class Hero_NakedMan : HeroBase {
         base.DestroyHero();
     }
 
-    public override Type GetPoolObjectType() {
-        return typeof(Hero_NakedMan);
-    }
 
 }

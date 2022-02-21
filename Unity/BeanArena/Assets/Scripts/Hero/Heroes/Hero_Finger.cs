@@ -29,8 +29,6 @@ public class Hero_Finger : HeroBase {
         base.DestroyHero();
     }
 
-    public override Type GetPoolObjectType() {
-        return typeof(Hero_Finger);
-    }
+
 
 }

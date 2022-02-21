@@ -29,8 +29,4 @@ public class Hero_GoldBean : HeroBase {
         base.DestroyHero();
     }
 
-    public override Type GetPoolObjectType() {
-        return typeof(Hero_GoldBean);
-    }
-
 }

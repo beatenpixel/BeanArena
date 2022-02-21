@@ -44,8 +44,4 @@ public class Hero_DefaultBean : HeroBase {
         base.DestroyHero();
     }
 
-    public override Type GetPoolObjectType() {
-        return typeof(Hero_DefaultBean);
-    }
-
 }

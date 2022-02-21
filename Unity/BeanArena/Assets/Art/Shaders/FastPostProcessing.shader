@@ -126,13 +126,16 @@ Shader "Demonixis/FastPostProcessing"
 		*/
 
 		
-		if(true) {			
-			half4 reflectionSample = tex2D(_ShadowTex, reflectionUv);
-			float reflectionFadeP = clamp((_MapBaseLineCameraSpaceY - uv.y) / _MapBaseLineCameraSpaceY * 3,0,1) * noiseSample.x * 0.5;
+		half4 reflectionSample = tex2D(_ShadowTex, reflectionUv);
+		float reflectionFadeP = clamp((_MapBaseLineCameraSpaceY - uv.y) / _MapBaseLineCameraSpaceY * 3,0,1) * noiseSample.x * 0.5;
+		col.rgb = lerp(col.rgb, reflectionSample, (1 - below) * reflectionFadeP);			
 
-			//col.rgb = lerp(col.rgb, fixed3(reflectionFadeP,reflectionFadeP,reflectionFadeP), (1-below));
-			col.rgb = lerp(col.rgb, reflectionSample, (1 - below) * reflectionFadeP);			
-			//col.rgb = lerp(col.rgb, noiseSample, (1-below));
+		//col.rgb = lerp(col.rgb, fixed3(reflectionFadeP,reflectionFadeP,reflectionFadeP), (1-below));		
+		//col.rgb = lerp(col.rgb, noiseSample, (1-below));
+
+		/*
+		if(true) {			
+			
 		} else {
 			float2 reflectionUv = float2(uv.x, _MapBaseLineCameraSpaceY - (uv.y - _MapBaseLineCameraSpaceY)*2);
 			half4 reflectionSample = tex2D(_MainTex, reflectionUv*0.1);
@@ -140,7 +143,8 @@ Shader "Demonixis/FastPostProcessing"
 
 			//col.rgb *= noise(reflectionUv);
 		}		
-		
+		*/
+
 
 		/*
 		if (i.vertexWorldPos.y < _MapBaseLineWorldY) {		
