@@ -79,7 +79,7 @@ public abstract class HeroBase : PoolObject, IDamageable, ITarget {
 	public virtual void InitInFactory(HeroConfig config) {
         initConfig = config;
 
-        heroData = Game.data.inventory.heroes.Find(x => x.heroType == heroInfo.heroType);
+        heroData = config.heroData;
 
         info = new HeroInfo();
         info.maxHealth = heroData.GetStatValue(StatType.Health).intValue;

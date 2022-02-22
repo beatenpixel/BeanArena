@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GM_Arena : GameMode {
 
+    public const int ROUNDS_TO_WIN = 2;
+
     public List<OpponentInfo> opponentsInfo;
 
     private bool isRespawningHeroes;
@@ -57,8 +59,9 @@ public class GM_Arena : GameMode {
 			orientation = Orientation.Right,
 			teamID = 0,
 			role = HeroRole.Player,
-            heroType = equipedHero.heroType
-		}, genericMap.GetArea("PlayerSpawn").GetRandomPosition());
+            heroType = equipedHero.heroType,
+            heroData = Game.data.inventory.heroes.Find(x => x.heroType == equipedHero.heroType)
+        }, genericMap.GetArea("PlayerSpawn").GetRandomPosition());
 
 		player.AssignHero(playerHero);
 		player.Init();
@@ -82,7 +85,13 @@ public class GM_Arena : GameMode {
 				orientation = Orientation.Left,
 				teamID = 1,
 				role = HeroRole.Enemy,
-                heroType = HeroType.DefaultBean
+                heroType = HeroType.NakedMan,
+                heroData = new GD_HeroItem() {
+                    cardsCollected = 1000,
+                    heroType = HeroType.NakedMan,
+                    levelID = 5,
+                    info = MAssets.heroesInfo.GetAsset(HeroType.NakedMan)
+                }
 			}, genericMap.GetArea("EnemySpawn").GetRandomPosition());
 
             enemyHero.info.mmr = MRandom.Range(30, 100);
@@ -163,7 +172,7 @@ public class GM_Arena : GameMode {
 
             opInfo.panel.winCounter.SetWinsCount(opInfo.score);                  
 
-            if(opInfo.score >= 2) {
+            if(opInfo.score >= ROUNDS_TO_WIN) {
                 GameUI.inst.Show(false);
 
                 if(e.hero == player.hero) {

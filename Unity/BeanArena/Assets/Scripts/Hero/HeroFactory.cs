@@ -28,4 +28,5 @@ public class HeroConfig {
     public HeroRole role;
     public HeroType heroType;
     public SO_HeroInfo info;
+    public GD_HeroItem heroData;
 }

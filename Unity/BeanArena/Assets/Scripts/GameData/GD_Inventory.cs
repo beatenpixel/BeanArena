@@ -61,30 +61,55 @@ public class GD_Inventory : GD {
     [OnDeserializing]
     protected override void SetDefaults(StreamingContext ds) {
         items = new List<GD_Item>();
+        chests = new List<GD_Chest>();
+        heroes = new List<GD_HeroItem>();
 
-        var allItemsInfo = MAssets.itemsInfo.GetAllAssets();
+        heroes.Add(new GD_HeroItem() { heroType = HeroType.DefaultBean, isEquiped = true, cardsCollected = 1 });
 
-        foreach (var item in allItemsInfo) {
+        bool isRichStart = false;
+
+        if (isRichStart) {
+            var allItemsInfo = MAssets.itemsInfo.GetAllAssets();
+
+            foreach (var item in allItemsInfo) {
+                items.Add(new GD_Item() {
+                    itemType = item.itemType,
+                    fusePoints = 200
+                });
+                items.Add(new GD_Item() {
+                    itemType = item.itemType,
+                    fusePoints = 100
+                });
+            }
+
+            chests.Add(new GD_Chest());
+            chests.Add(new GD_Chest() {
+                type = ChestType.Epic
+            });
+            chests.Add(new GD_Chest() {
+                type = ChestType.Legendary
+            });
+            chests.Add(new GD_Chest() {
+                type = ChestType.Legendary
+            });
+
+            var allHeroesInfo = MAssets.heroesInfo.GetAllAssets();
+
+            foreach (var hero in allHeroesInfo) {
+                heroes.Add(new GD_HeroItem() {
+                    heroType = hero.heroType,
+                    levelID = 0,
+                    cardsCollected = 1000,
+                    info = MAssets.heroesInfo.GetAsset(hero.heroType)
+                });
+            }
+        } else {
             items.Add(new GD_Item() {
-                itemType = item.itemType,
-                fusePoints = 200
+                itemType = ItemType.Weapon_Pistol,
+                fusePoints = 0,
+                isEquiped = true,                
             });
         }
-
-        chests = new List<GD_Chest>();
-        chests.Add(new GD_Chest());
-        chests.Add(new GD_Chest() {
-            type = ChestType.Epic
-        });
-        chests.Add(new GD_Chest() {
-            type = ChestType.Legendary
-        });
-        chests.Add(new GD_Chest() {
-            type = ChestType.Legendary
-        });
-
-        heroes = new List<GD_HeroItem>();
-        heroes.Add(new GD_HeroItem() { heroType = HeroType.DefaultBean, isEquiped = true, cardsCollected = 1 });
     }
 
 }

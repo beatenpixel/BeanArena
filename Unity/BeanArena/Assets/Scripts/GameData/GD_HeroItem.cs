@@ -67,7 +67,7 @@ public class GD_HeroItem : GD {
     [OnDeserializing]
     protected override void SetDefaults(StreamingContext ds) {
         heroType = HeroType.None;
-        cardsCollected = 1000;
+        cardsCollected = 0;
         levelID = 0;
         isEquiped = false;
     }

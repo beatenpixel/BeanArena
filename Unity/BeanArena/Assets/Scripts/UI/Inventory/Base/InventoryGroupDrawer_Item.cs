@@ -3,8 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
+
+    public Scrollbar scrollbar;
+    public RectTransform maskRectT;
+    public GridLayoutGroup gridLayout;
 
     private ObjectListSpawner<ItemButton> itemButtons;
 
@@ -17,6 +22,8 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
         Debug.Log("Init InventoryGroupDrawer_Item");
 
         itemButtons = new ObjectListSpawner<ItemButton>(SpawnItemButton, Enable_ItemButton, Update_ItemButton, DestroyItemButton);
+
+        scrollbar.onValueChanged.AddListener(OnScrollbarChange);
     }
 
     public override void Show(bool show) {
@@ -40,6 +47,8 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
             if (config.inventoryUI.showedAnyItemInfo) {
                 infoDrawer.Show(true);
             }
+
+            RefreshScrollbar();
         }        
     }
 
@@ -81,6 +90,8 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
                 //button.SetState(ItemButton.ItemButtonState.InInventory);
             }
         }
+
+        RefreshScrollbar();
     }
 
     private void OnItemButtonEvent(UIEventType eventType, ItemButton button, object arg) {
@@ -119,6 +130,12 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
         }
 
         config.inventoryUI.OnItemButtonEvent(eventType, button, arg);
+
+        switch(eventType) {
+            case UIEventType.DragEnd:
+                RefreshScrollbar();
+                break;
+        }
     }
 
     private ItemButton SpawnItemButton(int ind) {
@@ -179,6 +196,41 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
             Draw();
         }
     }
+
+    private void OnScrollbarChange(float value) {
+        //contentSizeFitter.SetLayoutVertical();
+
+        float maxY = Mathf.Clamp((itemsButtonsRootT.rect.height - maskRectT.rect.height), -3f, float.MaxValue);
+        float minY = -3f;
+
+        itemsButtonsRootT.anchoredPosition = new Vector2(itemsButtonsRootT.anchoredPosition.x, Mathf.Lerp(minY, maxY, value));
+    }
+
+    private void RefreshScrollbar() {
+        CollectItemsToDraw();
+        //contentSizeFitter.SetLayoutVertical();
+        UpdateRectSizeAccordingToItemsCount();
+
+        float k = maskRectT.rect.height / itemsButtonsRootT.rect.height;
+        Debug.Log("RefreshScrollbar " + k + " | " + itemsButtonsRootT.rect.height + " ; " + maskRectT.rect.height);
+        scrollbar.size = Mathf.Clamp(k, 0.2f, 1f);
+
+        OnScrollbarChange(scrollbar.value);
+    }
+
+    private void UpdateRectSizeAccordingToItemsCount() {
+        int itemsInInventory = 0;
+        for (int i = 0; i < itemsToDraw.Count; i++) {
+            if(!itemsToDraw[i].isEquiped) {
+                itemsInInventory++;
+            }
+        }
+
+        int linesCount = 1 + (Mathf.Clamp(itemsInInventory, 0, int.MaxValue) - 1) / 5;
+        float size = gridLayout.padding.bottom + gridLayout.padding.top + (gridLayout.spacing.y + gridLayout.cellSize.y) * linesCount;
+        itemsButtonsRootT.sizeDelta = itemsButtonsRootT.sizeDelta.SetY(size);
+    }
+
 }
 
 public struct ItemsMergeResult {

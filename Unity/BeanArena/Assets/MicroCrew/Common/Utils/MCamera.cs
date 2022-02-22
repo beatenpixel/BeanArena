@@ -147,8 +147,10 @@ public class MCamera : Singleton<MCamera> {
 
         if (targets != null && targets.Count > 0) {
             for (int i = 0; i < targets.Count; i++) {
-                Gizmos.color = Color.green.SetA(0.1f);
-                Gizmos.DrawCube(targets[i].targetPosition, targets[i].bounds);
+                if (targets[i] != null && targets[i].t != null) {
+                    Gizmos.color = Color.green.SetA(0.1f);
+                    Gizmos.DrawCube(targets[i].targetPosition, targets[i].bounds);
+                }
             }
         }
 

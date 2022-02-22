@@ -62,8 +62,9 @@ public class GM_Menu : GameMode {
 			orientation = Orientation.Right,
 			teamID = 0,
 			role = HeroRole.Player,
-            heroType = equipedHero.heroType
-		}, genericMap.GetArea("PlayerSpawn").GetRandomPosition());
+            heroType = equipedHero.heroType,
+            heroData = Game.data.inventory.heroes.Find(x => x.heroType == equipedHero.heroType)
+        }, genericMap.GetArea("PlayerSpawn").GetRandomPosition());
 
 		player.AssignHero(previewHero);
 		player.Init();
