@@ -87,36 +87,28 @@ MonoBehaviour:
     m_Key: BEAN_DESCR_CLOWN
     m_Metadata:
       m_Items: []
-  - m_Id: 3725008190005248
-    m_Key: ITEM_NAME_PISTOL
+  - m_Id: 25401030815506432
+    m_Key: ITEM_NAME_WEAPON_PISTOL
     m_Metadata:
       m_Items: []
-  - m_Id: 3725008227753984
-    m_Key: ITEM_DESCR_PISTOL
+  - m_Id: 25401030853255168
+    m_Key: ITEM_DESCR_WEAPON_PISTOL
     m_Metadata:
       m_Items: []
-  - m_Id: 3725524886315008
-    m_Key: ITEM_NAME_WATERPISTOL
+  - m_Id: 25401030853255169
+    m_Key: ITEM_NAME_WEAPON_WATERPISTOL
     m_Metadata:
       m_Items: []
-  - m_Id: 3725524886315009
-    m_Key: ITEM_DESCR_WATERPISTOL
+  - m_Id: 25401030853255170
+    m_Key: ITEM_DESCR_WEAPON_WATERPISTOL
     m_Metadata:
       m_Items: []
-  - m_Id: 3725008227753987
-    m_Key: ITEM_NAME_WHEEL
+  - m_Id: 25401030853255171
+    m_Key: ITEM_NAME_WEAPON_BAZOOKA
     m_Metadata:
       m_Items: []
-  - m_Id: 3725008231948288
-    m_Key: ITEM_DESCR_WHEEL
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3725008231948289
-    m_Key: ITEM_NAME_BAZOOKA
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3725008231948290
-    m_Key: ITEM_DESCR_BAZOOKA
+  - m_Id: 25401030853255172
+    m_Key: ITEM_DESCR_WEAPON_BAZOOKA
     m_Metadata:
       m_Items: []
   - m_Id: 4777575713419264
@@ -149,6 +141,78 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4777575717613571
     m_Key: ITEM_DESCR_HEAD_ANONYMOUS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449472
+    m_Key: ITEM_NAME_HEAD_ENERGYCAP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449473
+    m_Key: ITEM_DESCR_HEAD_ENERGYCAP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449474
+    m_Key: ITEM_NAME_HEAD_GIRLHAIR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449475
+    m_Key: ITEM_DESCR_HEAD_GIRLHAIR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449476
+    m_Key: ITEM_NAME_HEAD_ASTRONAUTHELMET
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449477
+    m_Key: ITEM_DESCR_HEAD_ASTRONAUTHELMET
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449478
+    m_Key: ITEM_NAME_HEAD_BEANSTICKER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449479
+    m_Key: ITEM_DESCR_HEAD_BEANSTICKER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449480
+    m_Key: ITEM_NAME_HEAD_COOLGLASSES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449481
+    m_Key: ITEM_DESCR_HEAD_COOLGLASSES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449482
+    m_Key: ITEM_NAME_HEAD_MILITARYCAP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449483
+    m_Key: ITEM_DESCR_HEAD_MILITARYCAP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449484
+    m_Key: ITEM_NAME_HEAD_CROWN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449485
+    m_Key: ITEM_DESCR_HEAD_CROWN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449486
+    m_Key: ITEM_NAME_HEAD_HELICOPTERCAP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449487
+    m_Key: ITEM_DESCR_HEAD_HELICOPTERCAP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449488
+    m_Key: ITEM_NAME_HEAD_DREAMMASK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449489
+    m_Key: ITEM_DESCR_HEAD_DREAMMASK
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -109,11 +109,9 @@ public class GD_Inventory : GD {
                 }
             }
         } else {
-            items.Add(new GD_Item() {
-                itemType = ItemType.Weapon_Pistol,
-                fusePoints = 0,
-                isEquiped = true,                
-            });
+            GD_Item pistol = GD_Item.FromRarenessAndLevel(ItemType.Weapon_Pistol, ItemRareness.Common, 3);
+            pistol.isEquiped = true;
+            items.Add(pistol);
         }
     }
 

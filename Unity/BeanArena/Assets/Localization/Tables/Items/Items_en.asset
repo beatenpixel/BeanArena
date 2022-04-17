@@ -86,38 +86,6 @@ MonoBehaviour:
     m_Localized: did you get it? Clown but B first
     m_Metadata:
       m_Items: []
-  - m_Id: 3725008190005248
-    m_Localized: Pistol
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3725008227753984
-    m_Localized: Pew-pew
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3725008227753987
-    m_Localized: Wheel
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3725008231948288
-    m_Localized: You spin me right 'round, baby, right 'round
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3725008231948289
-    m_Localized: Bazooka
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3725008231948290
-    m_Localized: makes BOOOOM!!
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3725524886315008
-    m_Localized: Water Gun
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3725524886315009
-    m_Localized: Mmmmm... wet beans...
-    m_Metadata:
-      m_Items: []
   - m_Id: 4775081805426688
     m_Localized: Head
     m_Metadata:
@@ -127,15 +95,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4777575713419265
-    m_Localized: Bucket descr
+    m_Localized: Can fit around 20 beans
     m_Metadata:
       m_Items: []
   - m_Id: 4777575713419266
-    m_Localized: Pumpkin descr
+    m_Localized: Pumpkin
     m_Metadata:
       m_Items: []
   - m_Id: 4777575713419267
-    m_Localized: Pumpkin descr
+    m_Localized: Description
     m_Metadata:
       m_Items: []
   - m_Id: 4777575717613568
@@ -143,7 +111,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4777575717613569
-    m_Localized: Aquarium descr
+    m_Localized: Description
     m_Metadata:
       m_Items: []
   - m_Id: 4777575717613570
@@ -151,7 +119,103 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4777575717613571
-    m_Localized: Anobeanus descr
+    m_Localized: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030815506432
+    m_Localized: Pistol
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030853255168
+    m_Localized: Pew-pew
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030853255169
+    m_Localized: Water Gun
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030853255170
+    m_Localized: Mmmmm... wet beans...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030853255171
+    m_Localized: Bazooka
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030853255172
+    m_Localized: makes BOOOOM!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449472
+    m_Localized: Energy cap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449474
+    m_Localized: Girl hair
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449476
+    m_Localized: Astrounaut helmet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449478
+    m_Localized: Sticker
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449480
+    m_Localized: Cool glasses
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449482
+    m_Localized: Military Cap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449484
+    m_Localized: Crown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449486
+    m_Localized: Helicopter Cap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449488
+    m_Localized: Dream's mask
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449475
+    m_Localized: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449477
+    m_Localized: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449479
+    m_Localized: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449481
+    m_Localized: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449483
+    m_Localized: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449485
+    m_Localized: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449487
+    m_Localized: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449489
+    m_Localized: Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25401030857449473
+    m_Localized: Description
     m_Metadata:
       m_Items: []
   references:
