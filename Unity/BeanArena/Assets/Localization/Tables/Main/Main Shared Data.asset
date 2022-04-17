@@ -131,6 +131,10 @@ MonoBehaviour:
     m_Key: READY_BUTTON
     m_Metadata:
       m_Items: []
+  - m_Id: 6943107604770816
+    m_Key: CLAIM_REWARD
+    m_Metadata:
+      m_Items: []
   - m_Id: 918337318941
     m_Key: LVL_MAX_STR
     m_Metadata:
@@ -209,6 +213,18 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4099825570754560
     m_Key: CAN_NOT_MERGE_ITSELF
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25391538904227840
+    m_Key: NOT_ENOUGH_GEMS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25391538941976576
+    m_Key: NOT_ENOUGH_COINS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25393117849968640
+    m_Key: BUTTON_WATCH_AD_FOR_GEMS
     m_Metadata:
       m_Items: []
   m_Metadata:

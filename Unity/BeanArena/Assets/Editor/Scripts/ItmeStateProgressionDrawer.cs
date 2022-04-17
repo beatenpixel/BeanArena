@@ -130,7 +130,7 @@ public class ItemStatProgressionDrawer : PropertyDrawer {
 
                 position = AddLine(position);
 
-                var valuesArrayProp = property.FindPropertyRelative(nameof(ItemStatProgression.values));
+                var valuesArrayProp = property.FindPropertyRelative("values");
 
                 valuesArrayProp.arraySize = statsMaxLevel;
 
@@ -158,6 +158,9 @@ public class ItemStatProgressionDrawer : PropertyDrawer {
                             break;
                         case StatProgressionFunc.SineOut:
                             p2 = Easing.Sine.Out(p);
+                            break;
+                        case StatProgressionFunc.Pow17:
+                            p2 = Mathf.Pow(p, 1.7f);
                             break;
                         default:
                             p2 = Easing.Linear(p);

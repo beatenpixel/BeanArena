@@ -80,21 +80,18 @@ public class GM_Arena : GameMode {
 		for (int i = 0; i < enemyCount; i++) {
 			Enemy enemy = new Enemy();
 
+            GD_HeroItem enemyData = GameBalance.GenerateEnemyData_Arena();
+
 			HeroBase enemyHero = heroFactory.Create(new HeroConfig() {
 				nickname = "Evil Bean " + (i + 1),
 				orientation = Orientation.Left,
 				teamID = 1,
 				role = HeroRole.Enemy,
-                heroType = HeroType.NakedMan,
-                heroData = new GD_HeroItem() {
-                    cardsCollected = 1000,
-                    heroType = HeroType.NakedMan,
-                    levelID = 5,
-                    info = MAssets.heroesInfo.GetAsset(HeroType.NakedMan)
-                }
+                heroType = enemyData.heroType,
+                heroData = enemyData,
 			}, genericMap.GetArea("EnemySpawn").GetRandomPosition());
 
-            enemyHero.info.mmr = MRandom.Range(30, 100);
+            enemyHero.info.mmr = Mathf.Clamp(Game.data.player.mmr + MRandom.Range(-30, 60),0,int.MaxValue);
 
 			enemy.AssignHero(enemyHero);
 			enemy.Init();
@@ -108,7 +105,7 @@ public class GM_Arena : GameMode {
 
             GD_Item enemyPistol = new GD_Item() {
                 itemType = ItemType.Weapon_Pistol,
-                levelID = 3,
+                levelID = (Game.data.player.mmr / 30),
                 rareness = ItemRareness.Common,
                 info = MAssets.itemsInfo.GetAsset(ItemType.Weapon_Pistol)
             };
@@ -202,7 +199,7 @@ public class GM_Arena : GameMode {
                     GD_Chest m_EarnedChest = null; 
                     
                     if (Game.data.inventory.chests.Count < 4) {
-                        m_EarnedChest = GameRandom.GenerateRoundRewardChest();
+                        m_EarnedChest = GameBalance.GenerateRoundRewardChest();
                         Game.data.inventory.chests.Add(m_EarnedChest);
                     }
 

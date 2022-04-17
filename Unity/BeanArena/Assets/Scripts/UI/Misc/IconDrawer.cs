@@ -106,6 +106,16 @@ public class IconDrawer : PoolObject {
         levelText.color = color ?? Color.white;
     }
 
+    public void DrawReward(RoadmapReward reward) {
+        if(reward.rewardType == RewardType.Chest) {
+            DrawChest(reward.chestData);
+        } else if(reward.rewardType == RewardType.Hero) {
+            DrawHeroDrop(reward.heroData.heroType, reward.heroData.amount);
+        } else if(reward.rewardType == RewardType.Item) {
+            DrawItem(reward.itemData, reward.itemData.info);
+        }
+    }
+
     public void DrawItemMerged(GD_Item item, MergedItemInfo info) {
         rarenessImage.enabled = true;
         rarenessImage.color = MAssets.colors[("rareness_" + item.rareness.ToString()).ToLower()].SetA(0.5f);
@@ -120,7 +130,7 @@ public class IconDrawer : PoolObject {
     }
 
     public void DrawItem(GD_Item itemData, SO_ItemInfo itemInfo) {
-        bool hasFuse = itemInfo.GetFusePointsPercent(itemData.fusePoints, itemData.levelID, out float fuseProgress);
+        bool hasFuse = itemInfo.GetFusePointsPercent(itemData, itemData.fusePoints, itemData.levelID, out float fuseProgress);
 
         rarenessImage.enabled = true;
         rarenessImage.color = MAssets.colors[("rareness_" + itemData.rareness.ToString()).ToLower()].SetA(0.5f);
@@ -144,7 +154,7 @@ public class IconDrawer : PoolObject {
     }
 
     public void DrawItemPanelCircle(GD_Item item, PanelCircleItem panelCircle) {
-        bool hasFuse = item.info.GetFusePointsPercent(item.fusePoints, item.levelID, out float fuseProgress);
+        bool hasFuse = item.info.GetFusePointsPercent(item, item.fusePoints, item.levelID, out float fuseProgress);
 
         rarenessImage.enabled = false;
         //rarenessImage.color = MAssets.colors[("rareness_" + item.rareness.ToString()).ToLower()].SetA(0.5f);

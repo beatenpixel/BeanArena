@@ -74,7 +74,9 @@ public enum GDType : byte {
     ItemData,
     Inventory,
     Player,
-    ChestData
+    ChestData,
+    HeroData,
+    RoadmapReward
 }
 
 [Serializable]

@@ -212,7 +212,6 @@ public class InventoryGroupDrawer_Item : InventoryGroupDrawer {
         UpdateRectSizeAccordingToItemsCount();
 
         float k = maskRectT.rect.height / itemsButtonsRootT.rect.height;
-        Debug.Log("RefreshScrollbar " + k + " | " + itemsButtonsRootT.rect.height + " ; " + maskRectT.rect.height);
         scrollbar.size = Mathf.Clamp(k, 0.2f, 1f);
 
         OnScrollbarChange(scrollbar.value);

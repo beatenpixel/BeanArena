@@ -8,6 +8,11 @@ public class MenuUI : MonoBehaviour {
 
 	public static MenuUI inst;
 
+    public UICanvas canvas;
+
+    public UISimpleButton rewardedVideoButton;
+
+    public RoadmapUI roadmapUI;
     public MenuTopPanel topPanel;
     public ChestPanel chestPanel;
     public ChestOpener chestOpener;
@@ -34,11 +39,18 @@ public class MenuUI : MonoBehaviour {
         DrawMMRText();
         topPanel.Draw();
 
+        roadmapUI.Init();
+
         MGameLoop.Update.Register(InternalUpdate);
 	}
 	
 	public void InternalUpdate() {
         chestPanel.InternalUpdate();
+    }
+
+    public void RewardPanel_Click() {
+        Debug.Log("RewardPanel_Click");
+        roadmapUI.Show(true);
     }
 
 	public void EditButton_Click() {
@@ -70,12 +82,13 @@ public class MenuUI : MonoBehaviour {
     }
 
 	public void Show(bool show) {
-		rootGO.SetActive(show);
+        canvas.Show(show);
 
 		if (show) {
             topPanel.Draw();
             DrawMMRText();
             chestPanel.Draw();
+            roadmapUI.DrawPreview();
 
             ShowTotalHeroStats(true);
             //inventoryDrawer.SpawnPreviewItems();

@@ -21,39 +21,49 @@ MonoBehaviour:
   - statType: 5
     valueType: 0
     progressionType: 0
-    progressionFunc: 3
+    progressionFunc: 5
     upgradeDirection: 1
     intStartEndValue: {x: 0, y: 500}
     floatStartEndValue: {x: 0, y: 0}
     values:
-    - intValue: 0
+    - valueType: 0
+      intValue: 0
       floatValue: 0
       manual: 0
-    - intValue: 8
+    - valueType: 0
+      intValue: 12
       floatValue: 0
       manual: 0
-    - intValue: 30
+    - valueType: 0
+      intValue: 39
       floatValue: 0
       manual: 0
-    - intValue: 67
+    - valueType: 0
+      intValue: 77
       floatValue: 0
       manual: 0
-    - intValue: 117
+    - valueType: 0
+      intValue: 126
       floatValue: 0
       manual: 0
-    - intValue: 179
+    - valueType: 0
+      intValue: 184
       floatValue: 0
       manual: 0
-    - intValue: 250
+    - valueType: 0
+      intValue: 251
       floatValue: 0
       manual: 0
-    - intValue: 329
+    - valueType: 0
+      intValue: 326
       floatValue: 0
       manual: 0
-    - intValue: 413
+    - valueType: 0
+      intValue: 409
       floatValue: 0
       manual: 0
-    - intValue: 500
+    - valueType: 0
+      intValue: 500
       floatValue: 0
       manual: 0
     decimalsCount: 2
@@ -62,84 +72,104 @@ MonoBehaviour:
   - statType: 1
     valueType: 0
     progressionType: 0
-    progressionFunc: 1
+    progressionFunc: 5
     upgradeDirection: 1
     intStartEndValue: {x: 15, y: 45}
     floatStartEndValue: {x: 0, y: 0}
     values:
-    - intValue: 15
+    - valueType: 0
+      intValue: 15
       floatValue: 0
       manual: 0
-    - intValue: 15
+    - valueType: 0
+      intValue: 16
       floatValue: 0
       manual: 0
-    - intValue: 16
+    - valueType: 0
+      intValue: 17
       floatValue: 0
       manual: 0
-    - intValue: 18
+    - valueType: 0
+      intValue: 20
       floatValue: 0
       manual: 0
-    - intValue: 21
+    - valueType: 0
+      intValue: 23
       floatValue: 0
       manual: 0
-    - intValue: 24
+    - valueType: 0
+      intValue: 26
       floatValue: 0
       manual: 0
-    - intValue: 28
+    - valueType: 0
+      intValue: 30
       floatValue: 0
       manual: 0
-    - intValue: 33
+    - valueType: 0
+      intValue: 35
       floatValue: 0
       manual: 0
-    - intValue: 39
+    - valueType: 0
+      intValue: 40
       floatValue: 0
       manual: 0
-    - intValue: 45
+    - valueType: 0
+      intValue: 45
       floatValue: 0
       manual: 0
     decimalsCount: 2
     maxLevel: 10
-    isFoldoutInInspector: 0
+    isFoldoutInInspector: 1
   - statType: 4
     valueType: 1
     progressionType: 0
-    progressionFunc: 1
+    progressionFunc: 5
     upgradeDirection: 0
     intStartEndValue: {x: 5, y: 20}
-    floatStartEndValue: {x: 1, y: 0.2}
+    floatStartEndValue: {x: 1.5, y: 0.8}
     values:
-    - intValue: 5
-      floatValue: 1
+    - valueType: 1
+      intValue: 5
+      floatValue: 1.5
       manual: 0
-    - intValue: 6
-      floatValue: 0.98999995
+    - valueType: 1
+      intValue: 6
+      floatValue: 1.48
       manual: 0
-    - intValue: 9
-      floatValue: 0.96
+    - valueType: 1
+      intValue: 9
+      floatValue: 1.4399999
       manual: 0
-    - intValue: 14
-      floatValue: 0.90999997
+    - valueType: 1
+      intValue: 14
+      floatValue: 1.39
       manual: 0
-    - intValue: 20
-      floatValue: 0.84
+    - valueType: 1
+      intValue: 20
+      floatValue: 1.3199999
       manual: 0
-    - intValue: 20
-      floatValue: 0.75
+    - valueType: 1
+      intValue: 20
+      floatValue: 1.24
       manual: 0
-    - intValue: 20
-      floatValue: 0.64
+    - valueType: 1
+      intValue: 20
+      floatValue: 1.14
       manual: 0
-    - intValue: 20
-      floatValue: 0.51
+    - valueType: 1
+      intValue: 20
+      floatValue: 1.04
       manual: 0
-    - intValue: 20
-      floatValue: 0.35999998
+    - valueType: 1
+      intValue: 20
+      floatValue: 0.91999996
       manual: 0
-    - intValue: 20
-      floatValue: 0.19999999
+    - valueType: 1
+      intValue: 20
+      floatValue: 0.79999995
       manual: 0
     decimalsCount: 2
     maxLevel: 10
-    isFoldoutInInspector: 0
+    isFoldoutInInspector: 1
   dropInfo:
     dropWeight: 50

@@ -13,16 +13,70 @@ MonoBehaviour:
   m_Name: Terminator
   m_EditorClassIdentifier: 
   heroType: 105
-  rarenessInfo: {fileID: 11400000, guid: 1a1acced7d599a948a3c8fa5a5515eb2, type: 2}
+  rarenessInfo: {fileID: 11400000, guid: af7bf3e30b723f6429868a70ca4c2cf7, type: 2}
   icon: {fileID: 11400000, guid: c23501a162039fd4d9d4acf7bce63cc2, type: 2}
   prefab: {fileID: 0}
   stats:
   - statType: 0
     valueType: 0
     progressionType: 0
-    progressionFunc: 0
+    progressionFunc: 5
     upgradeDirection: 1
-    intStartEndValue: {x: 10, y: 100}
+    intStartEndValue: {x: 200, y: 400}
+    floatStartEndValue: {x: 0, y: 0}
+    values:
+    - valueType: 0
+      intValue: 200
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 231
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 300
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 400
+      floatValue: 0
+      manual: 0
+    decimalsCount: 2
+    maxLevel: 4
+    isFoldoutInInspector: 1
+  - statType: 1
+    valueType: 0
+    progressionType: 0
+    progressionFunc: 5
+    upgradeDirection: 1
+    intStartEndValue: {x: 15, y: 50}
+    floatStartEndValue: {x: 0, y: 0}
+    values:
+    - valueType: 0
+      intValue: 15
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 20
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 33
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 50
+      floatValue: 0
+      manual: 0
+    decimalsCount: 2
+    maxLevel: 4
+    isFoldoutInInspector: 1
+  - statType: 6
+    valueType: 0
+    progressionType: 0
+    progressionFunc: 5
+    upgradeDirection: 1
+    intStartEndValue: {x: 10, y: 30}
     floatStartEndValue: {x: 0, y: 0}
     values:
     - valueType: 0
@@ -30,33 +84,17 @@ MonoBehaviour:
       floatValue: 0
       manual: 0
     - valueType: 0
-      intValue: 23
+      intValue: 13
       floatValue: 0
       manual: 0
     - valueType: 0
-      intValue: 36
+      intValue: 20
       floatValue: 0
       manual: 0
     - valueType: 0
-      intValue: 49
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 61
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 74
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 87
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 100
+      intValue: 30
       floatValue: 0
       manual: 0
     decimalsCount: 2
-    maxLevel: 8
-    isFoldoutInInspector: 0
+    maxLevel: 4
+    isFoldoutInInspector: 1

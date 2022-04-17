@@ -62,7 +62,7 @@ public class SceneTransitionManager : Singleton<SceneTransitionManager> {
         levelName = _levelName;
         isTransitioning = true;
 
-        canvas.canvas.enabled = true;
+        canvas.Show(true);
 
         levelLoadCanvasGroup.alpha = 0f;
         levelLoadCanvasGroup.DOFade(1f, 0.2f).SetUpdate(true).OnComplete(OnFadeInAsync);
@@ -72,7 +72,7 @@ public class SceneTransitionManager : Singleton<SceneTransitionManager> {
         levelName = _levelName;
         isTransitioning = true;
 
-        canvas.canvas.enabled = true;
+        canvas.Show(true);
 
         levelLoadCanvasGroup.alpha = 0f;
         levelLoadCanvasGroup.DOFade(1f, 0.2f).SetUpdate(true).OnComplete(OnFadeIn);
@@ -122,7 +122,7 @@ public class SceneTransitionManager : Singleton<SceneTransitionManager> {
     private void OnFadeOut() {
         isTransitioning = false;
         levelName = null;
-        canvas.canvas.enabled = false;
+        canvas.Show(false);
     }
 
 }

@@ -60,15 +60,30 @@ public class GD_Item : GD {
         return $"GD_Item[{itemType}] R:{rareness} LVL:{levelID} F:{fusePoints}";
     }
 
-    public StatValue GetStatValue(StatType statType) {
-        return info.GetStat(statType).values[levelID];
+    public bool HasStat(StatType statType) {
+        return info.HasStat(statType);
     }
+
+    public StatValue GetStatValueWithRareness(StatType statType) {
+        ItemStatProgression stat = info.GetStat(statType);
+        return stat.GetValue(levelID, StatConfig.FromItem(this));
+    }
+
+    /*
+    public static Dictionary<StatType, Func<StatValue, GD_Item, StatValue>> rarenessStatModificators = new Dictionary<StatType, Func<StatValue, GD_Item, StatValue>>() {
+        {StatType.Damage, (stat,data) => {
+            StatValue modifiedStat = new StatValue(stat);
+            modifiedStat.intValue = modifiedStat.intValue * 
+            return v;
+        } }
+    };
+    */
 
     public static ItemsMergeResult TestMerge(GD_Item itemA, GD_Item itemB) {
         ItemsMergeResult result = new ItemsMergeResult();
 
         ItemStatProgression itemAFuseProg = itemA.info.GetStat(StatType.FusePoints);
-        int itemAMaxFusePoints = itemAFuseProg.values[itemAFuseProg.maxLevel - 1].intValue;
+        int itemAMaxFusePoints = itemAFuseProg.GetValue(itemAFuseProg.maxLevel - 1, StatConfig.FromItem(itemA)).intValue;
 
         float rarenessCoeff = MUtils.rarenessFuseCoeff[itemB.rareness] / MUtils.rarenessFuseCoeff[itemA.rareness];
 
@@ -79,7 +94,7 @@ public class GD_Item : GD {
         int fuseAdd = Mathf.RoundToInt(itemB.fusePoints * rarenessCoeff);
 
         result.newFusePoints = Mathf.Clamp(itemA.fusePoints + fuseAdd, 0, itemAMaxFusePoints);
-        result.newLevel = itemAFuseProg.GetLevelByValue(result.newFusePoints);
+        result.newLevel = itemAFuseProg.GetLevelByValue(result.newFusePoints, StatConfig.FromItem(itemA));
 
         return result;
     }

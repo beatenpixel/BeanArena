@@ -118,3 +118,9 @@ public abstract class Map : MonoBehaviour {
     }
 	
 }
+
+public enum MapType {
+    None = -1,
+    Arena_ConcreteAndBushes = 100,
+
+}

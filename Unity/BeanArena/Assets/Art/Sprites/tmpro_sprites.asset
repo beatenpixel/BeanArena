@@ -154,6 +154,12 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: tmpro_sprites_0
     m_HashCode: 828703966
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 13
+    m_Scale: 1
+    m_Name: ad
+    m_HashCode: 3301
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -350,5 +356,20 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     sprite: {fileID: -1535008171, guid: e9104975539d48742ab9e47a6a6eb9af, type: 3}
+  - m_Index: 13
+    m_Metrics:
+      m_Width: 157
+      m_Height: 155
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 129.2
+      m_HorizontalAdvance: 157
+    m_GlyphRect:
+      m_X: 538
+      m_Y: 701
+      m_Width: 157
+      m_Height: 155
+    m_Scale: 1.37
+    m_AtlasIndex: 0
+    sprite: {fileID: 930572649, guid: e9104975539d48742ab9e47a6a6eb9af, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []

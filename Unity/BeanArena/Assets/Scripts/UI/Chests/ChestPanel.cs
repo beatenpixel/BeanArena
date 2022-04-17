@@ -45,7 +45,16 @@ public class ChestPanel : MonoBehaviour {
 
                         }, null),
                         new UIW_ButtonConfig(MLocalization.YES, MAssets.colors[MAssets.COLOR_BUTTON_GREEN], (x) => {
-                            ForceOpenSlot(chestSlot);
+                            if (Economy.inst.HasCurrency(CurrencyType.Gem, chestSlot.chest.gemSkipPrice)) {
+                                Economy.inst.TakeCurrency(CurrencyType.Gem, chestSlot.chest.gemSkipPrice);
+                                ForceOpenSlot(chestSlot);
+                            } else {
+                                UIWindowManager.CreateWindow(new UIWData_Message(MLocalization.Get("NOT_ENOUGH_GEMS"),
+                                    new UIW_ButtonConfig(MLocalization.OK, MAssets.colors[MAssets.COLOR_BUTTON_GRAY], (x) => {
+
+                                    }, null)
+                                ));
+                            }
                         }, null)
                         ));
                 }
@@ -69,9 +78,9 @@ public class ChestPanel : MonoBehaviour {
     private void ForceOpenSlot(ChestSlotUI slot) {
         MenuUI.inst.chestOpener.ShowChestScreen(slot.chest);
         Game.data.inventory.chests.Remove(slot.chest);
-        Draw();
-
         slot.SetEmpty();
+
+        Draw();
     }
 
     public void Draw() {

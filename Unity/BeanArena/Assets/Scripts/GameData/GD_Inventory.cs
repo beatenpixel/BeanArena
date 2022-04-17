@@ -12,6 +12,7 @@ public class GD_Inventory : GD {
     public List<GD_Item> items;
     public List<GD_Chest> chests;
     public List<GD_HeroItem> heroes;
+    public List<GD_RoadmapReward> roadMapClaimedRewards;
 
     public GD_Inventory() : base(GDType.Inventory, GDLoadOrder.Default) {
         SetDefaults(default);
@@ -25,7 +26,6 @@ public class GD_Inventory : GD {
         for (int i = 0; i < chests.Count; i++) {
             chests[i].info = MAssets.chestsInfo.GetAsset(chests[i].type);
         }
-
 
         List<SO_HeroInfo> allHeroesInfo = MAssets.heroesInfo.GetAllAssets();
 
@@ -49,6 +49,7 @@ public class GD_Inventory : GD {
         items = (List<GD_Item>)info.GetValue("items", typeof(List<GD_Item>));
         chests = info.GetValueSafe<List<GD_Chest>>("chests");
         heroes = info.GetValueSafe<List<GD_HeroItem>>("heroes");
+        roadMapClaimedRewards = info.GetValueSafe<List<GD_RoadmapReward>>("roadmapRewards");
     }
 
     public override void GetObjectData(SerializationInfo info, StreamingContext context) {
@@ -56,6 +57,7 @@ public class GD_Inventory : GD {
         info.AddValue("items", items);
         info.AddValue("chests", chests);
         info.AddValue("heroes", heroes);
+        info.AddValue("roadmapRewards", roadMapClaimedRewards);
     }
 
     [OnDeserializing]
@@ -63,6 +65,7 @@ public class GD_Inventory : GD {
         items = new List<GD_Item>();
         chests = new List<GD_Chest>();
         heroes = new List<GD_HeroItem>();
+        roadMapClaimedRewards = new List<GD_RoadmapReward>();
 
         heroes.Add(new GD_HeroItem() { heroType = HeroType.DefaultBean, isEquiped = true, cardsCollected = 1 });
 
@@ -96,12 +99,14 @@ public class GD_Inventory : GD {
             var allHeroesInfo = MAssets.heroesInfo.GetAllAssets();
 
             foreach (var hero in allHeroesInfo) {
-                heroes.Add(new GD_HeroItem() {
-                    heroType = hero.heroType,
-                    levelID = 0,
-                    cardsCollected = 1000,
-                    info = MAssets.heroesInfo.GetAsset(hero.heroType)
-                });
+                if (hero.heroType != HeroType.DefaultBean) {
+                    heroes.Add(new GD_HeroItem() {
+                        heroType = hero.heroType,
+                        levelID = 0,
+                        cardsCollected = 1000,
+                        info = MAssets.heroesInfo.GetAsset(hero.heroType)
+                    });
+                }
             }
         } else {
             items.Add(new GD_Item() {

@@ -20,43 +20,27 @@ MonoBehaviour:
   - statType: 0
     valueType: 0
     progressionType: 0
-    progressionFunc: 0
+    progressionFunc: 5
     upgradeDirection: 1
-    intStartEndValue: {x: 10, y: 100}
+    intStartEndValue: {x: 100, y: 200}
     floatStartEndValue: {x: 0, y: 0}
     values:
-    - valueType: 0
-      intValue: 10
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 23
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 36
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 49
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 61
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 74
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 87
-      floatValue: 0
-      manual: 0
     - valueType: 0
       intValue: 100
       floatValue: 0
       manual: 0
+    - valueType: 0
+      intValue: 115
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 150
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 200
+      floatValue: 0
+      manual: 0
     decimalsCount: 2
     maxLevel: 4
-    isFoldoutInInspector: 0
+    isFoldoutInInspector: 1

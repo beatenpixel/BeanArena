@@ -5,6 +5,17 @@ using UnityEngine;
 
 public class MFormat {
 
+    public static string CurrencyToStr(CurrencyType currency, int amount) {
+        switch(currency) {
+            case CurrencyType.Coin:
+                return GetTMProIcon(TMProIcon.Coin) + amount;
+            case CurrencyType.Gem:
+                return GetTMProIcon(TMProIcon.Gem) + amount;
+            default:
+                return "noSuchCurrency";
+        }
+    }
+
     public static string TextColorTag(Color color) {
         return "<color=#" + ColorUtility.ToHtmlStringRGB(color) + ">";
     }
@@ -30,34 +41,37 @@ public class MFormat {
 
         switch (icon) {
             case TMProIcon.Coin:
-                statIconStr += "coin\"> ";
+                statIconStr += "coin\">";
             break;
             case TMProIcon.Damage:
-                statIconStr += "damage\"> ";
+                statIconStr += "damage\">";
                 break;
             case TMProIcon.Heart:
-                statIconStr += "heart\"> ";
+                statIconStr += "heart\">";
                 break;
             case TMProIcon.Time:
-                statIconStr += "time\"> ";
+                statIconStr += "time\">";
                 break;
             case TMProIcon.Jump:
-                statIconStr += "jump\"> ";
+                statIconStr += "jump\">";
                 break;
             case TMProIcon.Fuse:
-                statIconStr += "coin\"> ";
+                statIconStr += "coin\">";
                 break;
             case TMProIcon.Gem:
-                statIconStr += "gem\"> ";
+                statIconStr += "gem\">";
                 break;
             case TMProIcon.Upgrade:
-                statIconStr += "upgrade\"> ";
+                statIconStr += "upgrade\">";
                 break;
             case TMProIcon.Card:
-                statIconStr += "cards\"> ";
+                statIconStr += "cards\">";
                 break;
             case TMProIcon.Armor:
-                statIconStr += "armor\"> ";
+                statIconStr += "armor\">";
+                break;
+            case TMProIcon.Cup:
+                statIconStr += "cup\">";
                 break;
         }
 

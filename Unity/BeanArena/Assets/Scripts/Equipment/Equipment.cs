@@ -23,15 +23,19 @@ public abstract class Equipment : PoolObject {
     public void PopulateStatsSummaryWithAllEquipment(HeroStatsSummary summ) {
         foreach (var stat in itemInfo.stats) {
             if (summ.stats.ContainsKey(stat.statType)) {
-                summ.stats[stat.statType] = summ.stats[stat.statType] + stat.GetValue(itemData.levelID);
+                summ.stats[stat.statType] = summ.stats[stat.statType] + stat.GetValue(itemData.levelID, StatConfig.FromItem(itemData));
             } else {
-                summ.stats.Add(stat.statType, new StatValue(stat.GetValue(itemData.levelID)));
+                summ.stats.Add(stat.statType, new StatValue(stat.GetValue(itemData.levelID, StatConfig.FromItem(itemData))));
             }
         }
     }
 
     public void SetItemData(GD_Item _itemData) {
         itemData = _itemData;
+
+        if (itemData.HasStat(StatType.Duration)) {
+            useDelay = itemData.GetStatValueWithRareness(StatType.Duration).floatValue;
+        }
     }
 
     public virtual void AttachToHero(HeroBase hero, HeroLimb limb) {

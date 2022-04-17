@@ -26,7 +26,7 @@ public class HeroInfoPanel : MonoBehaviour {
         for (int i = 0; i < item.info.stats.Count; i++) {
             string lineStr = MFormat.GetTMProIcon(item.info.stats[i].statType);
 
-            lineStr += item.info.stats[i].GetValueStr(item.levelID);
+            lineStr += item.info.stats[i].GetValueStr(item.levelID, StatConfig.FromHero(item));
 
             statsStr += lineStr + "\n";
         }

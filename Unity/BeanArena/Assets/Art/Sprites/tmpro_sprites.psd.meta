@@ -367,7 +367,7 @@ TextureImporter:
         width: 112
         height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -388,7 +388,7 @@ TextureImporter:
         width: 138
         height: 140
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -396,6 +396,27 @@ TextureImporter:
       bones: []
       spriteID: 217af1fc4a1e3a640874a3beea660c6f
       internalID: -1519203248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ad
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 701
+        width: 157
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9b3ce299eb60ac4687a05192725535c
+      internalID: 930572649
       vertices: []
       indices: 
       edges: []
@@ -417,6 +438,7 @@ TextureImporter:
       cross: 313744257
       damage: 2434013178458663610
       time: 1922921581267463393
+      ad: 930572649
       cup: 7374767111035791262
       cards: -1286667125
       coin: -5935198479381384675

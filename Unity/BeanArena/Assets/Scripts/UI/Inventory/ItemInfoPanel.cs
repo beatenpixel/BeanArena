@@ -21,7 +21,7 @@ public class ItemInfoPanel : MonoBehaviour {
 
         ItemsMergeResult mergeResult = GD_Item.TestMerge(itemA, itemB);
 
-        bool hasFuse = itemA.info.GetFusePointsPercent(mergeResult.newFusePoints, mergeResult.newLevel, out float fuseProgress);
+        bool hasFuse = itemA.info.GetFusePointsPercent(itemA, mergeResult.newFusePoints, mergeResult.newLevel, out float fuseProgress);
 
         isevIconDrawer.DrawItemMerged(itemA, new MergedItemInfo() {
             prevLevel = itemA.levelID,
@@ -40,7 +40,7 @@ public class ItemInfoPanel : MonoBehaviour {
 
             string lineStr = MFormat.GetTMProIcon(itemA.info.stats[i].statType);
 
-            lineStr += itemA.info.stats[i].GetDifferenceStr(itemA.levelID, mergeResult.newLevel);
+            lineStr += itemA.info.stats[i].GetDifferenceStr(itemA.levelID, mergeResult.newLevel, StatConfig.FromItem(itemA));
 
             statsStr += lineStr + "\n";
         }
@@ -67,7 +67,7 @@ public class ItemInfoPanel : MonoBehaviour {
             if (itemInfo.stats[i].statType == StatType.FusePoints) {
                 lineStr += item.fusePoints;
             } else {                
-                lineStr += itemInfo.stats[i].GetValueStr(item.levelID);
+                lineStr += itemInfo.stats[i].GetValueStr(item.levelID, StatConfig.FromItem(item));
             }
 
             statsStr += lineStr + "\n";

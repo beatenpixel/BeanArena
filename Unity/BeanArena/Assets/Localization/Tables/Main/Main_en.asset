@@ -216,6 +216,22 @@ MonoBehaviour:
     m_Localized: <sprite name="cross"> Can't merge item with itself
     m_Metadata:
       m_Items: []
+  - m_Id: 6943107604770816
+    m_Localized: CLAIM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25391538904227840
+    m_Localized: Not enough gems
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25391538941976576
+    m_Localized: Not enough bean-coins
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25393117849968640
+    m_Localized: Watch AD
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

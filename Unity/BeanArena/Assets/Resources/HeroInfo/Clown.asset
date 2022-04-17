@@ -16,62 +16,61 @@ MonoBehaviour:
   rarenessInfo: {fileID: 11400000, guid: f1f7e4d727deca1489caf59d096978d6, type: 2}
   icon: {fileID: 11400000, guid: f478db10a3353bb4b8ff013fc24b52d8, type: 2}
   prefab: {fileID: 0}
-  maxLevelsCount: 12
   stats:
   - statType: 0
     valueType: 0
     progressionType: 0
-    progressionFunc: 0
+    progressionFunc: 5
     upgradeDirection: 1
-    intStartEndValue: {x: 10, y: 100}
+    intStartEndValue: {x: 100, y: 200}
     floatStartEndValue: {x: 0, y: 0}
     values:
     - valueType: 0
-      intValue: 10
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 18
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 26
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 35
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 43
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 51
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 59
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 67
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 75
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 84
-      floatValue: 0
-      manual: 0
-    - valueType: 0
-      intValue: 92
-      floatValue: 0
-      manual: 0
-    - valueType: 0
       intValue: 100
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 102
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 106
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 111
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 118
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 126
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 136
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 146
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 158
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 171
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 185
+      floatValue: 0
+      manual: 0
+    - valueType: 0
+      intValue: 200
       floatValue: 0
       manual: 0
     decimalsCount: 2

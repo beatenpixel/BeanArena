@@ -39,9 +39,9 @@ public class GD_Player : GD {
     [OnDeserializing]
     protected override void SetDefaults(StreamingContext ds) {
         mmr = 0;
-        coins = 1000;
+        coins = 0;
         gems = 10;
-        nickname = "SuperBean";
+        nickname = "Bean";
     }
 
     private const string MMR_KEY = "mmr";

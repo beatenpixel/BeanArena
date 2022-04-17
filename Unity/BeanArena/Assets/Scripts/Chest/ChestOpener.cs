@@ -83,7 +83,7 @@ public class ChestOpener : MonoBehaviour {
     public void Exit() {
         state = ChestOpenerState.Exit;
         UIWindowManager.CreateWindow(new UIWData_ChestReward() {
-            content = GameRandom.GenerateChestContent(openingChest),
+            content = GameBalance.GenerateChestContent(openingChest),
             fadeBlackBackground = false,
             CloseChestOpenerCallback = CloseChestOpener
         });

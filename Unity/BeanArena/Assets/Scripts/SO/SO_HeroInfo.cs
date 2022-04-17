@@ -34,26 +34,8 @@ public class SO_HeroInfo : ScriptableObject, ITypeKey<HeroType>, IStatContainer 
 
     private void OnEnable() {
         for (int i = 0; i < stats.Count; i++) {
-            //stats[i].statContainer = this;
             stats[i].maxLevel = maxLevelsCount;
-
-            if (stats[i].values == null) {
-                stats[i].values = new StatValue[maxLevelsCount];
-                for (int x = 0; x < stats[i].values.Length; x++) {
-                    stats[i].values[x] = new StatValue();
-                }
-            }
-
-            if (stats[i].values.Length != maxLevelsCount) {
-                StatValue[] prevArray = stats[i].values;
-                stats[i].values = new StatValue[maxLevelsCount];
-
-                if (prevArray.Length > stats[i].values.Length) {
-                    Array.Copy(prevArray, stats[i].values, stats[i].values.Length);
-                } else {
-                    Array.Copy(prevArray, stats[i].values, prevArray.Length);
-                }
-            }
+            stats[i].Init();
         }
     }
 
@@ -67,30 +49,30 @@ public class SO_HeroInfo : ScriptableObject, ITypeKey<HeroType>, IStatContainer 
         return stats.Find(x => x.statType == statType);
     }
 
-    public Vector2Int GetFusePointsBounds(int itemLevel) {
+    public Vector2Int GetFusePointsBounds(GD_HeroItem data, int itemLevel) {
         ItemStatProgression fuseStat = GetStat(StatType.FusePoints);
 
         if (fuseStat == null) {
             return new Vector2Int(-1, -1);
         }
 
-        if (itemLevel > fuseStat.values.Length) {
+        if (itemLevel > fuseStat.valuesCount) {
             Debug.LogError("Level is too big!!!");
             return new Vector2Int(-1, -1);
         }
 
-        StatValue start = fuseStat.values[itemLevel];
+        StatValue start = fuseStat.GetValue(itemLevel, StatConfig.FromHero(data));
         StatValue end;
 
         if (itemLevel == maxLevelsCount - 1) {
             return new Vector2Int(start.intValue, start.intValue);
         } else {
-            end = fuseStat.values[itemLevel + 1];
+            end = fuseStat.GetValue(itemLevel + 1, StatConfig.FromHero(data));
             return new Vector2Int(start.intValue, end.intValue);
         }
     }
 
-    public bool GetFusePointsPercent(int fusePoints, int level, out float fuseP) {
+    public bool GetFusePointsPercent(GD_HeroItem data, int fusePoints, int level, out float fuseP) {
         ItemStatProgression fuseStat = GetStat(StatType.FusePoints);
 
         if (fuseStat == null) {
@@ -102,8 +84,8 @@ public class SO_HeroInfo : ScriptableObject, ITypeKey<HeroType>, IStatContainer 
             fuseP = 1;
             return true;
         } else {
-            StatValue start = fuseStat.values[level];
-            StatValue end = fuseStat.values[level + 1];
+            StatValue start = fuseStat.GetValue(level, StatConfig.FromHero(data));
+            StatValue end = fuseStat.GetValue(level + 1, StatConfig.FromHero(data));
 
             fuseP = (fusePoints - start.intValue) / (float)(end.intValue - start.intValue);
             return true;

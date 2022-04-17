@@ -41,7 +41,7 @@ public class GD_HeroItem : GD {
         }
     }
 
-    public GD_HeroItem() : base(GDType.ItemData, GDLoadOrder.Default) {
+    public GD_HeroItem() : base(GDType.HeroData, GDLoadOrder.Default) {
         SetDefaults(default);
     }
 
@@ -73,7 +73,7 @@ public class GD_HeroItem : GD {
     }
 
     public StatValue GetStatValue(StatType statType) {
-        return info.GetStat(statType).values[levelID];
+        return info.GetStat(statType).GetValue(levelID, StatConfig.FromHero(this));
     }
 
     private static HeroType[] heroTypes;

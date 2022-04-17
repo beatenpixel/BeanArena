@@ -25,9 +25,9 @@ public class MUtils : Singleton<MUtils> {
     public static void PopulateHeroStatSummary(HeroStatsSummary summ, List<ItemStatProgression> stats, int levelID) {
         foreach (var stat in stats) {
             if (summ.stats.ContainsKey(stat.statType)) {
-                summ.stats[stat.statType] += stat.GetValue(levelID);
+                summ.stats[stat.statType] += stat.GetValue(levelID, StatConfig.Rareness(ItemRareness.Common));
             } else {
-                summ.stats.Add(stat.statType, new StatValue(stat.GetValue(levelID)));
+                summ.stats.Add(stat.statType, new StatValue(stat.GetValue(levelID, StatConfig.Rareness(ItemRareness.Common))));
             }
         }
     }

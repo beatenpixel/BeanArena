@@ -18,7 +18,8 @@ public class Bazooka : Weapon {
         bullet.t.position = shootPoint.position;
         bullet.SetShotCharge(useArgs.charge);
 
-        float damage = itemData.GetStatValue(StatType.Damage).intValue;
+        //float damage = itemData.GetStatValueWithRareness(StatType.Damage).intValue;
+        float damage = hero.info.statsSummary.damage;
 
         bullet.SetDamage(damage);
         bullet.Shoot(shootPoint.right * Mathf.Lerp(shootForce.x, shootForce.y, useArgs.charge));

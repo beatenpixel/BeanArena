@@ -30,24 +30,7 @@ public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType>, IStatContainer 
     private void OnEnable() {        
         for (int i = 0; i < stats.Count; i++) {
             stats[i].maxLevel = maxLevel;
-
-            if (stats[i].values == null) {
-                stats[i].values = new StatValue[maxLevel];
-                for (int x = 0; x < stats[i].values.Length; x++) {
-                    stats[i].values[x] = new StatValue();
-                }
-            }
-
-            if(stats[i].values.Length != maxLevel) {
-                StatValue[] prevArray = stats[i].values;
-                stats[i].values = new StatValue[maxLevel];
-
-                if(prevArray.Length > stats[i].values.Length) {
-                    Array.Copy(prevArray, stats[i].values, stats[i].values.Length);
-                } else {
-                    Array.Copy(prevArray, stats[i].values, prevArray.Length);
-                }
-            }            
+            stats[i].Init();         
         }
     }
 
@@ -61,30 +44,40 @@ public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType>, IStatContainer 
         return stats.Find(x => x.statType == statType);
     }
 
-    public Vector2Int GetFusePointsBounds(int itemLevel) {
+    public bool HasStat(StatType statType) {
+        for (int i = 0; i < stats.Count; i++) {
+            if(stats[i].statType == statType) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public Vector2Int GetFusePointsBounds(GD_Item data, int itemLevel) {
         ItemStatProgression fuseStat = GetStat(StatType.FusePoints);
 
         if (fuseStat == null) {
             return new Vector2Int(-1, -1);
         }
 
-        if(itemLevel > fuseStat.values.Length) {
+        if(itemLevel > fuseStat.valuesCount) {
             Debug.LogError("Level is too big!!!");
             return new Vector2Int(-1, -1);
         }
 
-        StatValue start = fuseStat.values[itemLevel];
+        StatValue start = fuseStat.GetValue(itemLevel, StatConfig.FromItem(data));
         StatValue end;
 
         if(itemLevel == maxLevel - 1) {
             return new Vector2Int(start.intValue, start.intValue);
         } else {
-            end = fuseStat.values[itemLevel + 1];
+            end = fuseStat.GetValue(itemLevel + 1, StatConfig.FromItem(data));
             return new Vector2Int(start.intValue, end.intValue);
         }        
     }
 
-    public bool GetFusePointsPercent(int fusePoints, int level, out float fuseP) {
+    public bool GetFusePointsPercent(GD_Item data, int fusePoints, int level, out float fuseP) {
         ItemStatProgression fuseStat = GetStat(StatType.FusePoints);
 
         if (fuseStat == null) {
@@ -96,8 +89,8 @@ public class SO_ItemInfo : ScriptableObject, ITypeKey<ItemType>, IStatContainer 
             fuseP = 1;
             return true;
         } else {
-            StatValue start = fuseStat.values[level];
-            StatValue end = fuseStat.values[level + 1];
+            StatValue start = fuseStat.GetValue(level, StatConfig.FromItem(data));
+            StatValue end = fuseStat.GetValue(level + 1, StatConfig.FromItem(data));
 
             fuseP = (fusePoints - start.intValue) / (float)(end.intValue - start.intValue);
             return true;
@@ -120,29 +113,51 @@ public class ItemStatProgression {
     public StatType statType = StatType.Health;
     public StatValueType valueType = StatValueType.Int;
     public ItemStatProgressionType progressionType = ItemStatProgressionType.Interpolate;
-    public StatProgressionFunc progressionFunc = StatProgressionFunc.SineIn;
+    public StatProgressionFunc progressionFunc = StatProgressionFunc.Pow17;
     public ItemStatUpgradeDirection upgradeDirection = ItemStatUpgradeDirection.HigherIsBetter;
 
     public Vector2Int intStartEndValue;
     public Vector2 floatStartEndValue;
 
-    public StatValue[] values;
+    [SerializeField] private StatValue[] values;
 
     public int decimalsCount = 2;
 
     public int maxLevel;
     [HideInInspector] public bool isFoldoutInInspector;
 
-    public int GetLevelByValue(object value) {
+    public int valuesCount => values.Length;
+
+    public void Init() {
+        if (values == null) {
+            values = new StatValue[maxLevel];
+            for (int x = 0; x < values.Length; x++) {
+                values[x] = new StatValue();
+            }
+        }
+
+        if (values.Length != maxLevel) {
+            StatValue[] prevArray = values;
+            values = new StatValue[maxLevel];
+
+            if (prevArray.Length > values.Length) {
+                Array.Copy(prevArray, values, values.Length);
+            } else {
+                Array.Copy(prevArray, values, prevArray.Length);
+            }
+        }
+    }
+
+    public int GetLevelByValue(object value, StatConfig config) {
         if (valueType == StatValueType.Int) {
             int intValue = (int)value;
 
-            if(intValue < values[0].intValue) {
+            if(intValue < GetValue(0, config).intValue) {
                 return 0;
             }
 
             for (int i = 0; i < values.Length - 1; i++) {
-                if(intValue >= values[i].intValue && intValue < values[i + 1].intValue) {
+                if(intValue >= GetValue(i, config).intValue && intValue < GetValue(i + 1, config).intValue) {
                     return i;
                 }
             }
@@ -151,12 +166,12 @@ public class ItemStatProgression {
         } else if(valueType == StatValueType.Float) {
             float floatValue = (float)value;
 
-            if (floatValue < values[0].floatValue) {
+            if (floatValue < GetValue(0, config).floatValue) {
                 return 0;
             }
 
             for (int i = 0; i < values.Length - 1; i++) {
-                if (floatValue > values[i].floatValue && floatValue < values[i + 1].floatValue) {
+                if (floatValue > GetValue(i, config).floatValue && floatValue < GetValue(i + 1, config).floatValue) {
                     return i;
                 }
             }
@@ -167,15 +182,15 @@ public class ItemStatProgression {
         return -1;
     }
 
-    public string GetDifferenceStr(int levelA, int levelB) {
+    public string GetDifferenceStr(int levelA, int levelB, StatConfig config) {
         string str = "";
 
         string posStr = MFormat.TextColorTag(MAssets.colors["STAT_UPGRADE_COLOR"]);
         string negStr = MFormat.TextColorTag(MAssets.colors["STAT_DOWNGRADE_COLOR"]);
 
         if (valueType == StatValueType.Int) {
-            StatValue valueA = values[levelA];
-            StatValue valueB = values[levelB];
+            StatValue valueA = GetValue(levelA, config);
+            StatValue valueB = GetValue(levelB, config);
 
             str += valueA.intValue;
 
@@ -189,8 +204,8 @@ public class ItemStatProgression {
                 str += $"{((posOrNeg == 1) ? posStr : negStr)} ({MFormat.GetSignStr((MFormat.Sign)diffSign)}{Mathf.Abs(diff)}){MFormat.TextColorTagEnd}";
             }
         } else if (valueType == StatValueType.Float) {
-            StatValue valueA = values[levelA];
-            StatValue valueB = values[levelB];
+            StatValue valueA = GetValue(levelA, config);
+            StatValue valueB = GetValue(levelB, config);
 
             str += Math.Round(valueA.decimalValue, decimalsCount);
 
@@ -204,42 +219,86 @@ public class ItemStatProgression {
                 str += $"{((posOrNeg == 1) ? posStr : negStr)} ({MFormat.GetSignStr((MFormat.Sign)diffSign)}{Math.Abs(diff)}){MFormat.TextColorTagEnd}";
             }
         } 
-        
-        /*
-        else if(valueType == StatValueType.Float) {
-            StatValue valueA = values[levelA];
-            StatValue valueB = values[levelB];
-
-            str += valueA.floatValue;
-
-            float diff = valueB.floatValue - valueA.floatValue;
-            int diffSign = MMath.SignInt(diff);
-
-            int signedUpgradeDirection = (upgradeDirection == ItemStatUpgradeDirection.HigherIsBetter ? 1 : -1);
-
-            if (diff != 0) {
-                int posOrNeg = diffSign * signedUpgradeDirection;
-                str += $"{((posOrNeg == 1) ? posStr : negStr)} ({MFormat.GetSignStr((MFormat.Sign)diffSign)}{Mathf.Abs(diff)}){MFormat.TextColorTagEnd}";
-            }
-        }
-        */
 
         return str;
     }
 
-    public string GetValueStr(int lvl) {
+    public string GetValueStr(int lvl, StatConfig config) {
+        StatValue value = GetValue(lvl, config);
+
         switch (valueType) {
             case StatValueType.Int:                
-                return values[lvl].intValue.ToString();
+                return value.intValue.ToString();
             case StatValueType.Float:
-                return Math.Round(values[lvl].decimalValue, decimalsCount).ToString();
+                return Math.Round(value.decimalValue, decimalsCount).ToString();
         }
 
         return null;
     }
 
-    public StatValue GetValue(int lvl) {
-        return values[lvl];
+    public StatValue GetValue(int lvl, StatConfig config) {
+        StatValue statValue = values[lvl];
+        StatValue newStatValue = new StatValue(statValue);
+
+        float rarenessMul = 1f;
+
+        if (upgradeDirection == ItemStatUpgradeDirection.HigherIsBetter) {
+            rarenessMul = GameBalance.rarenessToMulUp[config.rareness];
+        } else if (upgradeDirection == ItemStatUpgradeDirection.LowerIsBetter) {
+            rarenessMul = GameBalance.rarenessToMulDown[config.rareness];
+        }
+
+        switch (statType) {
+            case StatType.Damage:
+                //rarenessMul = Mathf.Pow(rarenessMul, 0.8f);
+                break;
+            case StatType.Health:
+                //rarenessMul = Mathf.Pow(rarenessMul, 1.1f);
+                break;
+            case StatType.FusePoints:
+                rarenessMul = 1f;
+                break;
+        }
+
+        if (upgradeDirection == ItemStatUpgradeDirection.HigherIsBetter) {           
+
+            if (valueType == StatValueType.Int) {
+                newStatValue.intValue = Mathf.RoundToInt(statValue.intValue * rarenessMul);
+            } else {
+                newStatValue.floatValue = statValue.floatValue * rarenessMul;
+            }
+        } else if (upgradeDirection == ItemStatUpgradeDirection.LowerIsBetter) {            
+
+            if (valueType == StatValueType.Int) {
+                newStatValue.intValue = Mathf.RoundToInt(statValue.intValue * rarenessMul);
+            } else {
+                newStatValue.floatValue = statValue.floatValue * rarenessMul;
+            }
+        }
+
+        return newStatValue;
+    }
+}
+
+public class StatConfig {
+    public ItemRareness rareness;
+
+    public static StatConfig FromHero(GD_HeroItem heroData) {
+        return new StatConfig() {
+            rareness = ItemRareness.Common
+        };
+    }
+
+    public static StatConfig FromItem(GD_Item itemData) {
+        return new StatConfig() {
+            rareness = itemData.rareness
+        };
+    }
+
+    public static StatConfig Rareness(ItemRareness r) {
+        return new StatConfig() {
+            rareness = r
+        };
     }
 }
 
@@ -274,7 +333,8 @@ public enum StatProgressionFunc {
     QuadIn,
     QuadOut,
     SineIn,
-    SineOut
+    SineOut,
+    Pow17
 }
 
 public enum ItemStatProgressionType {

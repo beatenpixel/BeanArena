@@ -28,6 +28,10 @@ public class UICanvas : MonoBehaviour {
         }
     }
 
+    public void Show(bool show) {
+        canvas.enabled = show;
+    }
+
 	public Vector2 WorldToCanvasPos(Vector2 worldPos) {
 		return new Vector2(worldPos.x / canvasT.localScale.x, worldPos.y / canvasT.localScale.y);
 	}

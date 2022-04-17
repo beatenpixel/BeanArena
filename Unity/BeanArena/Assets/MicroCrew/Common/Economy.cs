@@ -57,6 +57,11 @@ public class Economy : Singleton<Economy> {
                 Currency.Create(type, amount))), true);
     }
 
+    public void TakeCurrency(CurrencyType type, int amount) {
+        playerInventory.ExecuteTransaction(new Transaction_Take(new TransactionContent(
+                Currency.Create(type, amount))), true);
+    }
+
     public bool HasCurrency(CurrencyType type, int amount) {
         return playerInventory.Has(new TransactionContent(new Currency(type, amount)));
     }
