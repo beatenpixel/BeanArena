@@ -62,6 +62,8 @@ public class MApp : Singleton<MApp> {
 #else
         MInput.inputType = MInput.InputType.Mobile;
 #endif
+
+        Debug.unityLogger.logEnabled = config.unityLoggerEnabled;
     }
 
     #region UnityCallbacks

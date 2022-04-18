@@ -248,6 +248,10 @@ MonoBehaviour:
     m_Localized: Yo!
     m_Metadata:
       m_Items: []
+  - m_Id: 25852994409979904
+    m_Localized: Drag to equip
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

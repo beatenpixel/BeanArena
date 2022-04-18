@@ -243,6 +243,10 @@ MonoBehaviour:
     m_Key: YO
     m_Metadata:
       m_Items: []
+  - m_Id: 25852994409979904
+    m_Key: DRAG_TO_EQUIP
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

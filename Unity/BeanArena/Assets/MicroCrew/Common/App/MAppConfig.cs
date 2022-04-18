@@ -9,5 +9,6 @@ public class MAppConfig : ScriptableObject {
     public bool useDisplayFps = true;
     public int targetFPS = 60;
     public bool isUnityRemote;
+    public bool unityLoggerEnabled;
 
 }
