@@ -11,7 +11,7 @@ public class InventoryGroupDrawer : MonoBehaviour {
     public GameObject allObjectsRootGO;
     public ItemInfoDrawerBase infoDrawer;
 
-    protected GD_Inventory gdInventory;
+    [NonSerialized] [HideInInspector] protected GD_Inventory gdInventory;
 
     protected InventoryGroupConfig config;
     public InventoryGroupConfig GetConfig() => config;

@@ -17,7 +17,7 @@ public class Hero_DefaultBean : HeroBase {
     public override void InitInFactory(HeroConfig config) {
         base.InitInFactory(config);
 
-        Color beanColor = MAssets.colors["bean_team_" + config.teamID];
+        Color beanColor = MAssets.inst.colors["bean_team_" + config.teamID];
 
         for (int i = 0; i < limbs.Count; i++) {
             limbs[i].rend.SetBaseColor(beanColor);

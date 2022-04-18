@@ -11,14 +11,14 @@ public class MAssets : SingletonScriptableObject<MAssets> {
     [SerializeField] private List<TextMeshProPreset> m_TextPresets;
 
     private Sprite[] m_ui_tex_0;
-    public static Dictionary<string, Sprite> ui_tex_0;
-    public static Dictionary<string, Color> colors;
-    public static Dictionary<TextStylePreset, TextMeshProPreset> textPresets;
+    public Dictionary<string, Sprite> ui_tex_0;
+    public Dictionary<string, Color> colors;
+    public Dictionary<TextStylePreset, TextMeshProPreset> textPresets;
 
-    public static SO_AssetDB<SO_ItemInfo, ItemType> itemsInfo;
-    public static SO_AssetDB<SO_ChestInfo, ChestType> chestsInfo;
-    public static SO_AssetDB<SO_HeroInfo, HeroType> heroesInfo;
-    public static SO_AssetDB<SO_HeroRarenessInfo, ItemRareness> heroesRarenessInfo;
+    public SO_AssetDB<SO_ItemInfo, ItemType> itemsInfo;
+    public SO_AssetDB<SO_ChestInfo, ChestType> chestsInfo;
+    public SO_AssetDB<SO_HeroInfo, HeroType> heroesInfo;
+    public SO_AssetDB<SO_HeroRarenessInfo, ItemRareness> heroesRarenessInfo;
 
     public override void Init() {
         m_ui_tex_0 = Resources.LoadAll<Sprite>("Sprites/ui_tex_0");

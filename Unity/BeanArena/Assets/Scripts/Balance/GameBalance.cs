@@ -61,7 +61,7 @@ public static class GameBalance  {
                 new RandomEntry<HeroType>(HeroType.Robber, 5)
             ),
             levelID = (playerMMR / 50),
-            info = MAssets.heroesInfo.GetAsset(HeroType.DefaultBean)
+            info = MAssets.inst.heroesInfo.GetAsset(HeroType.DefaultBean)
         };
 
         return data;
@@ -87,7 +87,7 @@ public static class GameBalance  {
             type = chestType
         };
 
-        chest.info = MAssets.chestsInfo.GetAsset(chest.type);
+        chest.info = MAssets.inst.chestsInfo.GetAsset(chest.type);
         return chest;
     }
 
@@ -114,7 +114,7 @@ public static class GameBalance  {
             }
 
             HeroType heroCard = MRandom.Get(heroesThatAreNotFull);
-            SO_HeroInfo heroInfo = MAssets.heroesInfo.GetAsset(heroCard);
+            SO_HeroInfo heroInfo = MAssets.inst.heroesInfo.GetAsset(heroCard);
 
             content.heroCards.Add(new HeroCardsContainer() {
                 heroType = heroCard,
@@ -127,7 +127,7 @@ public static class GameBalance  {
 
         int itemCount = (int)content.chestType + MRandom.Range(0, 2);
 
-        var allItemsInfo = MAssets.itemsInfo.GetAllAssets();
+        var allItemsInfo = MAssets.inst.itemsInfo.GetAllAssets();
         List<RandomEntry<ItemType>> itemsTypes = new List<RandomEntry<ItemType>>();
         for (int x = 0; x < allItemsInfo.Count; x++) {
             itemsTypes.Add(new RandomEntry<ItemType>(allItemsInfo[x].itemType, allItemsInfo[x].dropInfo.dropWeight));
@@ -137,7 +137,7 @@ public static class GameBalance  {
 
             ItemType itemType = MRandom.Get(itemsTypes);
 
-            SO_ItemInfo itemInfo = MAssets.itemsInfo.GetAsset(itemType);
+            SO_ItemInfo itemInfo = MAssets.inst.itemsInfo.GetAsset(itemType);
             int level = MRandom.GetWithChance(LEVELS_ARRAY, ITEM_LEVEL_CHANCE);
 
             GD_Item randItem = new GD_Item() {

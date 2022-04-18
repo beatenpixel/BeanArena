@@ -31,11 +31,11 @@ public class UIW_RoundEnd : UIWindow {
 
         if (data.win) {
             logoText.text = MLocalization.Get("WIN");
-            goToMenuButton.SetBackgroundColor(MAssets.colors["button_green"]);
+            goToMenuButton.SetBackgroundColor(MAssets.inst.colors["button_green"]);
             MMRCountText.text = "<sprite name=\"cup\">+" + data.mmrCount;
         } else {
             logoText.text = MLocalization.Get("LOSE");
-            goToMenuButton.SetBackgroundColor(MAssets.colors["button_red"]);
+            goToMenuButton.SetBackgroundColor(MAssets.inst.colors["button_red"]);
             MMRCountText.text = "<sprite name=\"cup\">-" + data.mmrCount;
         }
 

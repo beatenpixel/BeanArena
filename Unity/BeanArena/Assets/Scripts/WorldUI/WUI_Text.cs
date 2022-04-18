@@ -17,7 +17,7 @@ public class WUI_Text : PoolObject {
         text.color = style.textColor;
         text.fontSize = style.fontSize;
 
-        MAssets.TextMeshProPreset preset = MAssets.textPresets[style.preset];
+        MAssets.TextMeshProPreset preset = MAssets.inst.textPresets[style.preset];
 
         text.font = preset.fontAsset;
         text.fontSharedMaterial = preset.material;

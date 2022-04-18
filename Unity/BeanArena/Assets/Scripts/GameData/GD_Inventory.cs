@@ -20,14 +20,14 @@ public class GD_Inventory : GD {
 
     public void Restore() {
         for (int i = 0; i < items.Count; i++) {
-            items[i].info = MAssets.itemsInfo.GetAsset(items[i].itemType);
+            items[i].info = MAssets.inst.itemsInfo.GetAsset(items[i].itemType);
         }
 
         for (int i = 0; i < chests.Count; i++) {
-            chests[i].info = MAssets.chestsInfo.GetAsset(chests[i].type);
+            chests[i].info = MAssets.inst.chestsInfo.GetAsset(chests[i].type);
         }
 
-        List<SO_HeroInfo> allHeroesInfo = MAssets.heroesInfo.GetAllAssets();
+        List<SO_HeroInfo> allHeroesInfo = MAssets.inst.heroesInfo.GetAllAssets();
 
         if (heroes.Count < allHeroesInfo.Count) {
             for (int i = 0; i < allHeroesInfo.Count; i++) {
@@ -41,7 +41,7 @@ public class GD_Inventory : GD {
         }
 
         for (int i = 0; i < heroes.Count; i++) {
-            heroes[i].info = MAssets.heroesInfo.GetAsset(heroes[i].heroType);
+            heroes[i].info = MAssets.inst.heroesInfo.GetAsset(heroes[i].heroType);
         }
     }
 
@@ -72,7 +72,7 @@ public class GD_Inventory : GD {
         bool isRichStart = false;
 
         if (isRichStart) {
-            var allItemsInfo = MAssets.itemsInfo.GetAllAssets();
+            var allItemsInfo = MAssets.inst.itemsInfo.GetAllAssets();
 
             foreach (var item in allItemsInfo) {
                 items.Add(new GD_Item() {
@@ -96,7 +96,7 @@ public class GD_Inventory : GD {
                 type = ChestType.Legendary
             });
 
-            var allHeroesInfo = MAssets.heroesInfo.GetAllAssets();
+            var allHeroesInfo = MAssets.inst.heroesInfo.GetAllAssets();
 
             foreach (var hero in allHeroesInfo) {
                 if (hero.heroType != HeroType.DefaultBean) {
@@ -104,7 +104,7 @@ public class GD_Inventory : GD {
                         heroType = hero.heroType,
                         levelID = 0,
                         cardsCollected = 1000,
-                        info = MAssets.heroesInfo.GetAsset(hero.heroType)
+                        info = MAssets.inst.heroesInfo.GetAsset(hero.heroType)
                     });
                 }
             }

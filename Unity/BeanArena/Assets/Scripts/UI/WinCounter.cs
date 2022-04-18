@@ -27,9 +27,9 @@ public class WinCounter : MonoBehaviour {
 
         for (int i = 0; i < dots.Length; i++) {
 			if (i < wins) {
-				dots[i].dot.color = MAssets.colors["win_dot"];
+				dots[i].dot.color = MAssets.inst.colors["win_dot"];
 			} else {
-				dots[i].dot.color = MAssets.colors["neutral_dot"];
+				dots[i].dot.color = MAssets.inst.colors["neutral_dot"];
 			}
         }
     }

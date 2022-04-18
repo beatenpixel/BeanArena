@@ -185,8 +185,8 @@ public class ItemStatProgression {
     public string GetDifferenceStr(int levelA, int levelB, StatConfig config) {
         string str = "";
 
-        string posStr = MFormat.TextColorTag(MAssets.colors["STAT_UPGRADE_COLOR"]);
-        string negStr = MFormat.TextColorTag(MAssets.colors["STAT_DOWNGRADE_COLOR"]);
+        string posStr = MFormat.TextColorTag(MAssets.inst.colors["STAT_UPGRADE_COLOR"]);
+        string negStr = MFormat.TextColorTag(MAssets.inst.colors["STAT_DOWNGRADE_COLOR"]);
 
         if (valueType == StatValueType.Int) {
             StatValue valueA = GetValue(levelA, config);

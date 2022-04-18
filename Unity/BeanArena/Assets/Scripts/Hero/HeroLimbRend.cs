@@ -59,7 +59,7 @@ public class HeroLimbRend : MonoBehaviour {
             colorTween.Kill(false);
         }
 
-        baseRendSprite.color = Color.Lerp(defaultBaseColor, MAssets.colors["bean_damage"], 0.5f);
+        baseRendSprite.color = Color.Lerp(defaultBaseColor, MAssets.inst.colors["bean_damage"], 0.5f);
         colorTween = baseRendSprite.DOColor(defaultBaseColor, 0.3f).OnComplete(() => {
             colorTween = null;
         });

@@ -41,16 +41,16 @@ public class ChestPanel : MonoBehaviour {
                     ForceOpenSlot(chestSlot);
                 } else {
                     UIWindowManager.CreateWindow(new UIWData_Message(MLocalization.Get("CHEST_OPEN_NOW", LocalizationGroup.Main, MFormat.GetTMProIcon(TMProIcon.Gem),chestSlot.chest.gemSkipPrice),                       
-                        new UIW_ButtonConfig(MLocalization.NO, MAssets.colors[MAssets.COLOR_BUTTON_GRAY], (x) => {
+                        new UIW_ButtonConfig(MLocalization.NO, MAssets.inst.colors[MAssets.COLOR_BUTTON_GRAY], (x) => {
 
                         }, null),
-                        new UIW_ButtonConfig(MLocalization.YES, MAssets.colors[MAssets.COLOR_BUTTON_GREEN], (x) => {
+                        new UIW_ButtonConfig(MLocalization.YES, MAssets.inst.colors[MAssets.COLOR_BUTTON_GREEN], (x) => {
                             if (Economy.inst.HasCurrency(CurrencyType.Gem, chestSlot.chest.gemSkipPrice)) {
                                 Economy.inst.TakeCurrency(CurrencyType.Gem, chestSlot.chest.gemSkipPrice);
                                 ForceOpenSlot(chestSlot);
                             } else {
                                 UIWindowManager.CreateWindow(new UIWData_Message(MLocalization.Get("NOT_ENOUGH_GEMS"),
-                                    new UIW_ButtonConfig(MLocalization.OK, MAssets.colors[MAssets.COLOR_BUTTON_GRAY], (x) => {
+                                    new UIW_ButtonConfig(MLocalization.OK, MAssets.inst.colors[MAssets.COLOR_BUTTON_GRAY], (x) => {
 
                                     }, null)
                                 ));
@@ -60,7 +60,7 @@ public class ChestPanel : MonoBehaviour {
                 }
             } else {
                 UIWindowManager.CreateWindow(new UIWData_Message(MLocalization.Get("ANOTHER_CHEST_IS_OPENING"),
-                        new UIW_ButtonConfig(MLocalization.OK, MAssets.colors[MAssets.COLOR_BUTTON_GRAY], (x) => {
+                        new UIW_ButtonConfig(MLocalization.OK, MAssets.inst.colors[MAssets.COLOR_BUTTON_GRAY], (x) => {
 
                         }, null)
                         ));

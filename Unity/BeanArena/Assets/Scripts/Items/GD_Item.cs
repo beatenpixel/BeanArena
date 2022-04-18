@@ -80,7 +80,7 @@ public class GD_Item : GD {
     */
 
     public static GD_Item FromRarenessAndLevel(ItemType itemType, ItemRareness rareness, int levelID) {
-        SO_ItemInfo itemInfo = MAssets.itemsInfo.GetAsset(itemType);
+        SO_ItemInfo itemInfo = MAssets.inst.itemsInfo.GetAsset(itemType);
         GD_Item item = new GD_Item();
         item.itemType = itemType;
         item.info = itemInfo;

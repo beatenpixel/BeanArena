@@ -8,14 +8,14 @@ public class UI_SwitchPanel : UI_Element {
     public UI_Button[] buttons;
 
 	public UI_SwitchPanel(string _name, RectTransform _rootT, int count) : base(_name, UIElementType.SwitchPanel) {
-        background = CreateImage("background", null).Sprite("square").Color(MAssets.colors["switch_panel"]);
+        background = CreateImage("background", null).Sprite("square").Color(MAssets.inst.colors["switch_panel"]);
         background.rootRend.SetParent(_rootT);
         background.rootRend.AnchorMin(0, 0).AnchorMax(1f, 0).OffsetMin(0f, 0).OffsetMax(0, 200);
 
         buttons = new UI_Button[count];
         for (int i = 0; i < count; i++) {
             UI_Button button = new UI_Button("button" + i, background.rootRend.GetRectT(), new UI_Button.UIData_Button() {
-                defaultColor = MAssets.colors["button"]
+                defaultColor = MAssets.inst.colors["button"]
             });
 
             button.SetClick((x) => {

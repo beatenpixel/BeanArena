@@ -107,7 +107,7 @@ public class GM_Arena : GameMode {
                 itemType = ItemType.Weapon_Pistol,
                 levelID = (Game.data.player.mmr / 30),
                 rareness = ItemRareness.Common,
-                info = MAssets.itemsInfo.GetAsset(ItemType.Weapon_Pistol)
+                info = MAssets.inst.itemsInfo.GetAsset(ItemType.Weapon_Pistol)
             };
 
             enemyHero.heroEquipment.PreviewItem(enemyPistol, enemyHero.heroEquipment.GetFreeSlots(enemyPistol)[0]);

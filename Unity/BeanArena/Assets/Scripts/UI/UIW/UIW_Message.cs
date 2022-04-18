@@ -108,7 +108,7 @@ public class UIWData_Message : UIW_Data {
 
     public UIWData_Message(string someText) {
         UIWindowManager.CreateWindow(new UIWData_Message(someText,
-        new UIW_ButtonConfig(MLocalization.OK, MAssets.colors[MAssets.COLOR_BUTTON_GRAY], (x) => {
+        new UIW_ButtonConfig(MLocalization.OK, MAssets.inst.colors[MAssets.COLOR_BUTTON_GRAY], (x) => {
 
         }, null)
         ));

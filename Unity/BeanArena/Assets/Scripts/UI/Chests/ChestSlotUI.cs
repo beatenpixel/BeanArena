@@ -35,7 +35,7 @@ public class ChestSlotUI : MonoBehaviour {
                 if (chest.IsReadyToOpen()) {
                     openButton.Enable(true);
                     openButton.SetText(MLocalization.Get("OPEN"));
-                    openButton.SetBackgroundColor(MAssets.colors[MAssets.COLOR_BUTTON_RED]);
+                    openButton.SetBackgroundColor(MAssets.inst.colors[MAssets.COLOR_BUTTON_RED]);
 
                     timeLeftText.gameObject.SetActive(false);                    
 
@@ -46,7 +46,7 @@ public class ChestSlotUI : MonoBehaviour {
                     }
                 } else {
                     openButton.Enable(true);
-                    openButton.SetBackgroundColor(MAssets.colors[MAssets.COLOR_BUTTON_GREEN]);
+                    openButton.SetBackgroundColor(MAssets.inst.colors[MAssets.COLOR_BUTTON_GREEN]);
 
                     TimeSpan timeLeft = chest.timeLeft;
                     timeLeftText.text = MFormat.GetTMProIcon(TMProIcon.Time) + MFormat.TimeSpan(timeLeft.Hours, timeLeft.Minutes, timeLeft.Seconds);
@@ -78,7 +78,7 @@ public class ChestSlotUI : MonoBehaviour {
             openButton.Enable(false);
         } else {
             openButton.Enable(true);
-            openButton.SetBackgroundColor(MAssets.colors[MAssets.COLOR_BUTTON_GREEN]);
+            openButton.SetBackgroundColor(MAssets.inst.colors[MAssets.COLOR_BUTTON_GREEN]);
             openButton.SetText(MLocalization.Get("OPEN"));
         }        
     }

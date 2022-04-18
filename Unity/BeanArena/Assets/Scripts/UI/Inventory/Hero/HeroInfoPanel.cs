@@ -35,7 +35,7 @@ public class HeroInfoPanel : MonoBehaviour {
 
         if(item.levelID == item.info.rarenessInfo.maxLevel - 1) {
             upgradeButton.SetText(MLocalization.Get("LVL_MAX_STR"));
-            upgradeButton.SetBackgroundColor(MAssets.colors[MAssets.COLOR_BUTTON_MAGENTA]);
+            upgradeButton.SetBackgroundColor(MAssets.inst.colors[MAssets.COLOR_BUTTON_MAGENTA]);
             iconDrawer.DrawText("");
         } else {
             HeroLevelInfo heroLevelInfo = item.info.rarenessInfo.levelsInfo[item.levelID];            
@@ -45,13 +45,13 @@ public class HeroInfoPanel : MonoBehaviour {
             if (item.cardsCollected >= heroLevelInfo.cardsToLevel) {
                 iconDrawer.DrawText(MFormat.GetTMProIcon(TMProIcon.Card) + item.cardsCollected + "/" + heroLevelInfo.cardsToLevel);
             } else {
-                iconDrawer.DrawText(MFormat.GetTMProIcon(TMProIcon.Card) + MFormat.TextColorTag(MAssets.colors[MAssets.COLOR_BUTTON_RED]) + item.cardsCollected + MFormat.TextColorTagEnd + "/" + heroLevelInfo.cardsToLevel);
+                iconDrawer.DrawText(MFormat.GetTMProIcon(TMProIcon.Card) + MFormat.TextColorTag(MAssets.inst.colors[MAssets.COLOR_BUTTON_RED]) + item.cardsCollected + MFormat.TextColorTagEnd + "/" + heroLevelInfo.cardsToLevel);
             }
 
             if (item.cardsCollected >= heroLevelInfo.cardsToLevel && Economy.inst.HasCurrency(CurrencyType.Coin, heroLevelInfo.coinsToLevel)) {
-                upgradeButton.SetBackgroundColor(MAssets.colors[MAssets.COLOR_BUTTON_GREEN]);
+                upgradeButton.SetBackgroundColor(MAssets.inst.colors[MAssets.COLOR_BUTTON_GREEN]);
             } else {
-                upgradeButton.SetBackgroundColor(MAssets.colors[MAssets.COLOR_BUTTON_RED]);
+                upgradeButton.SetBackgroundColor(MAssets.inst.colors[MAssets.COLOR_BUTTON_RED]);
             }
         }        
     }

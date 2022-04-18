@@ -324,7 +324,7 @@ public class UI_Image : UI_Element {
     }
 
     public UI_Image Sprite(string spriteName, Image.Type imageType = Image.Type.Simple, float pixelsPerUnit = 1f) {
-        return Sprite(MAssets.ui_tex_0[spriteName], imageType, pixelsPerUnit);
+        return Sprite(MAssets.inst.ui_tex_0[spriteName], imageType, pixelsPerUnit);
     }
 
     public UI_Image Color(Color color) {

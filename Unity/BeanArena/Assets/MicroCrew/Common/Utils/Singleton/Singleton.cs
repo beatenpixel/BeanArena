@@ -170,6 +170,8 @@ namespace MicroCrew.Utils {
                 return;
             }
 
+            Debug.Log("P");
+
             if (obj != null) {
                 m_Inst = obj;
             } else {
