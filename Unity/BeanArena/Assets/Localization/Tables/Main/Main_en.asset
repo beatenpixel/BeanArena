@@ -232,6 +232,22 @@ MonoBehaviour:
     m_Localized: <sprite name=ad> Watch AD
     m_Metadata:
       m_Items: []
+  - m_Id: 25709503591444480
+    m_Localized: An error occured while watching AD :(
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25709503637581824
+    m_Localized: 'Error: unable to show AD, try later'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25727110918926336
+    m_Localized: You got {0}{1}!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25734529732829184
+    m_Localized: Yo!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

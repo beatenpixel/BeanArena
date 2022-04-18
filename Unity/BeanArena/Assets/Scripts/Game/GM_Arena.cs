@@ -209,8 +209,10 @@ public class GM_Arena : GameMode {
                         coinCount = coinsGain,
                         earnedChest = m_EarnedChest
                     });                    
-                }                
-            } else {                
+                }             
+            } else {             
+                // Next round
+
                 genericMap.ResetMap();
 
                 isRespawningHeroes = false;

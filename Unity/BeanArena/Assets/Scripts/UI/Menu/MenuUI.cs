@@ -25,6 +25,7 @@ public class MenuUI : MonoBehaviour {
 
     public TextMeshProUGUI mmrText;
     public TextMeshProUGUI totalHeroStatsText;
+    public TextMeshProUGUI versionText;
 
 	public GameObject rootGO;
 
@@ -42,7 +43,11 @@ public class MenuUI : MonoBehaviour {
         roadmapUI.Init();
 
         MGameLoop.Update.Register(InternalUpdate);
-	}
+
+        rewardedVideoButton.SetOnClick(WatchRewardedForGems);
+
+        versionText.text = Application.version;
+    }
 	
 	public void InternalUpdate() {
         chestPanel.InternalUpdate();
@@ -121,5 +126,25 @@ public class MenuUI : MonoBehaviour {
         }
     }
 
+    public void WatchRewardedForGems() {
+        AdManager.inst.TryShowRewarded((finished, amount) => {
+            if(finished) {
+                int gemCount = (int)amount;
+                gemCount = 15;
+
+                UIWindowManager.CreateWindow(new UIWData_Message(MLocalization.Get("REWARDED_FINISH_CURRENCY", LocalizationGroup.Main, gemCount, MFormat.GetTMProIcon(TMProIcon.Gem)),
+                        new UIW_ButtonConfig(MLocalization.Get("YO"), MAssets.inst.colors[MAssets.COLOR_BUTTON_GREEN], (x) => {
+                            Economy.inst.AddCurrency(CurrencyType.Gem, gemCount);
+                        }, null)
+                ));
+            } else {
+                UIWindowManager.CreateWindow(new UIWData_Message(MLocalization.Get("ERROR_WATCH_AD"),
+                        new UIW_ButtonConfig(MLocalization.OK, MAssets.inst.colors[MAssets.COLOR_BUTTON_GRAY], (x) => {
+
+                        }, null)
+                ));
+            }
+        });
+    }
 
 }

@@ -65,6 +65,7 @@ public class UIW_RoundEnd : UIWindow {
     public void ButtonClick_GoToMenu() {
         GameMode.current.ExitGame();
         Open(false);
+        AdManager.inst.TryShowInterstitial();
     }
 
     public override Type GetPoolObjectType() {
@@ -79,7 +80,7 @@ public class UIW_RoundEnd : UIWindow {
         return new UIWindowInfo() {
             windowDataType = typeof(UIWData_RoundEnd),
             windowType = typeof(UIW_RoundEnd),
-            layer = UIWindowLayerType.Notification
+            layer = UIWindowLayerType.Main
         };
     }
 }

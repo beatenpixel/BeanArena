@@ -49,6 +49,8 @@ public class Game : Singleton<Game> {
 		MAppUI.InitIfNeeded(null);
 		MUI.InitIfNeeded(null);
 
+        MServices.InitIfNeeded(null);
+
 		equipmentFactory.Init();
 		heroFactory.Init();
 
