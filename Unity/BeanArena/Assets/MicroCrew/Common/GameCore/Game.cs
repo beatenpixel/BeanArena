@@ -12,12 +12,14 @@ public class Game : Singleton<Game> {
 	public HeroFactory heroFactory;
 	public EquipmentFactory equipmentFactory;
 
-	public Player player;
-
 	[HideInInspector] public Map map;
 	[HideInInspector] public GameMode gameMode;
 
-	private bool didSetupGame;
+    public static ArenaLoadOptions arenaLoadOptions = new ArenaLoadOptions() {
+        vsType = GameModeVSType.None
+    };
+
+    private bool didSetupGame;
 
 	private MLog logger = new MLog("Game");
     private MAudioSource musicSource;
@@ -69,7 +71,7 @@ public class Game : Singleton<Game> {
 	private void StartGameLogic() {
 		MLog.Log("StartGameLogic" % MLogColor.Green, true);
 
-		SetupGame();
+        SetupGame();
 
 		map.Init();
 
@@ -80,7 +82,16 @@ public class Game : Singleton<Game> {
 	}	
 
 	private void OnSceneLoadEnd(SceneEvent e) {		
-		gameMode = FindObjectOfType<GameMode>();
+        if(arenaLoadOptions.vsType == GameModeVSType.Bot) {
+            GameObject gameModeGO = new GameObject("[GM_ArenaBot]");
+            gameMode = gameModeGO.AddComponent<GM_ArenaBot>();
+        } else if(arenaLoadOptions.vsType == GameModeVSType.Local) {
+            GameObject gameModeGO = new GameObject("[GM_ArenaLocal]");
+            gameMode = gameModeGO.AddComponent<GM_ArenaLocal>();
+        } else {
+            gameMode = FindObjectOfType<GM_Menu>();
+        }
+
 		map = FindObjectOfType<Map>();
 
 		StartGameLogic();
@@ -94,8 +105,6 @@ public class Game : Singleton<Game> {
 		if(gameMode != null) {
 			gameMode.InternalUpdate();
         }
-
-		player.InternalUpdate();
 
 		if(Input.GetKeyDown(KeyCode.R)) {
 			MSceneManager.ReloadScene();
@@ -120,4 +129,15 @@ public class Game : Singleton<Game> {
         return LayerMask.NameToLayer("bean_team" + teamID);
     }
 
+}
+
+public class ArenaLoadOptions {
+    public GameModeVSType vsType;
+}
+
+public enum GameModeVSType {
+    None,
+    Bot,
+    Local,
+    Online
 }

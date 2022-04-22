@@ -433,9 +433,25 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 256971419, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 282070365, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1434.697
+      value: -0.0078125
+      objectReference: {fileID: 0}
+    - target: {fileID: 387057695, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 387057695, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 387057695, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 789588633, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
       propertyPath: m_TargetTexture

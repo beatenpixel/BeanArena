@@ -1,16 +1,22 @@
+using IngameDebugConsole;
 using MicroCrew.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GM_Arena : GameMode {
+public class GM_ArenaBot : GameMode {
 
     public const int ROUNDS_TO_WIN = 2;
 
     public List<OpponentInfo> opponentsInfo;
 
     private bool isRespawningHeroes;
+
+    protected Player player;
+    protected List<Enemy> enemies;
+
+    private JoystickInputUI joystickInput;
 
     public override void InitGame(Game game) {
         base.InitGame(game);
@@ -23,16 +29,40 @@ public class GM_Arena : GameMode {
 
     public override bool StartGame() {
 
-		SpawnHeroes();
+        if (Game.arenaLoadOptions.vsType == GameModeVSType.Bot) {
+            SpawnHeroes_VsBot();
+        } else if(Game.arenaLoadOptions.vsType == GameModeVSType.Local) {
+
+        }
 
 		GameUI.inst.Show(true);
         MenuUI.inst.Show(false);
 
-		return base.StartGame();
+        joystickInput = MPool.Get<JoystickInputUI>(null, GameUI.inst.gameModeStuffHolderT);
+        joystickInput.OnEvent.AddListener((x) => {
+            player.MoveJoystickInput(x);
+        });
+
+        joystickInput.joystickDrift = 0f;
+        joystickInput.cancelRange = 0f;
+        joystickInput.rectT.SetAnchor(Vector2.zero, Vector2.one);
+        joystickInput.rectT.SetOffset(Vector2.zero, Vector2.zero);
+
+        return base.StartGame();
+    }
+
+    protected override void OnPreExitGame() {
+        base.OnPreExitGame();
+
+        joystickInput.DestroyJoystick();
     }
 
     public override void InternalUpdate() {
         base.InternalUpdate();
+
+        for (int i = 0; i < enemies.Count; i++) {
+            enemies[i].InternalUpdate();
+        }
 
         if(Input.GetKeyDown(KeyCode.Keypad7)) {
             foreach (var hero in genericMap.heroes) {
@@ -51,10 +81,12 @@ public class GM_Arena : GameMode {
         }
     }
 
-    private void SpawnHeroes() {
+    private void SpawnHeroes_VsBot() {
         GD_HeroItem equipedHero = Game.data.GetEquipedHero();
 
-		HeroBase playerHero = heroFactory.Create(new HeroConfig() {
+        player = new Player();
+
+        HeroBase playerHero = heroFactory.Create(new HeroConfig() {
 			nickname = "Lorg",
 			orientation = Orientation.Right,
 			teamID = 0,
@@ -63,8 +95,8 @@ public class GM_Arena : GameMode {
             heroData = Game.data.inventory.heroes.Find(x => x.heroType == equipedHero.heroType)
         }, genericMap.GetArea("PlayerSpawn").GetRandomPosition());
 
-		player.AssignHero(playerHero);
-		player.Init();
+        player.AssignHero(playerHero);
+        player.Init();
         player.hero.InitForUI(GameUI.inst.playerPanels[0]);
         player.hero.heroEquipment.LoadEquipmentFromGameData();
         player.hero.InitFinish();
@@ -112,10 +144,6 @@ public class GM_Arena : GameMode {
 
             enemyHero.heroEquipment.PreviewItem(enemyPistol, enemyHero.heroEquipment.GetFreeSlots(enemyPistol)[0]);
             enemyHero.InitFinish();
-
-
-            //Pistol epistol = (Pistol)equipmentFactory.Create(MAssets.itemsInfo.GetAsset(ItemType.Pistol), Vector2.zero);
-            //enemyHero.heroEquipment.CanAttachEquipment(epistol);
         }
 
 		MCamera.inst.AddTarget(new CameraTarget(player.hero.body.transform, new Vector2(0, -2), Vector2.one * 2));
@@ -128,12 +156,6 @@ public class GM_Arena : GameMode {
         //Sword sword = (Sword)equipmentFactory.Create(new WeaponConfig(WeaponType.Sword), Vector2.zero);
         //playerHero.AttachEquipment(sword);
 
-        //Pistol waterPistol = (Pistol)equipmentFactory.Create(new WeaponConfig(WeaponType.WaterPistol), Vector2.zero);
-        //playerHero.AttachEquipment(waterPistol);
-
-        //Pistol pistol2 = (Pistol)equipmentFactory.Create(MAssets.itemsInfo.GetAsset(ItemType.Pistol), Vector2.zero);
-        //playerHero.heroEquipment.CanAttachEquipment(pistol2);
-
         playerHero.info.nickname = Game.data.player.nickname;
         playerHero.info.mmr = Game.data.player.mmr;
 
@@ -145,7 +167,7 @@ public class GM_Arena : GameMode {
 
         GameUI.inst.playerPanels[0].SetHero(playerHero);
 		GameUI.inst.playerPanels[1].SetHero(enemies[0].hero);
-	}
+	}  
 
     protected override void OnGameEvent_HeroDie(HeroDieEvent e) {
         base.OnGameEvent_HeroDie(e);
@@ -156,7 +178,7 @@ public class GM_Arena : GameMode {
 
         isRespawningHeroes = true;
 
-        heroesInputAllowed = false;        
+        heroesInputAllowed = false;
 
         if (e.hero == player.hero) {
             FX.inst.EnableDeathScreenEffect(true);
@@ -212,7 +234,6 @@ public class GM_Arena : GameMode {
                 }             
             } else {             
                 // Next round
-
                 genericMap.ResetMap();
 
                 isRespawningHeroes = false;
@@ -221,6 +242,15 @@ public class GM_Arena : GameMode {
 
             FX.inst.EnableDeathScreenEffect(false);
         }, 1f);
+    }
+
+    [ConsoleMethod("ai", "Enable/disable all AI")]
+    public static void EnableAI(bool enable) {
+        if (GameMode.current is GM_ArenaBot gmArenaBot) {
+            foreach (var enemy in gmArenaBot.enemies) {
+                enemy.enabledAI = enable;
+            }
+        }
     }
 
 }

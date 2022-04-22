@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[CreateAssetMenu(menuName = "BeanArena/PlayerInput")]
-public class SO_PlayerInput : ScriptableObject {
+public class SO_PlayerInput {
 
     public Action<UIJoystickEventData> OnMoveInput;
     public Action<UIJoystickEventData> OnArmInput;

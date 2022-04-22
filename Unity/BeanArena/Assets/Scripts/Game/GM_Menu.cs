@@ -38,11 +38,25 @@ public class GM_Menu : GameMode {
 	}
 
     public void GoToFight() {
+        Game.arenaLoadOptions = new ArenaLoadOptions() {
+            vsType = GameModeVSType.Bot
+        };
+
         genericMap.OnGameExit();
         SceneTransitionManager.inst.LoadLevelAsync(MSceneManager.ARENA_SCENE_NAME);
     }
 
-	public void SwitchMenuState(MenuState newState) {
+    public void GoFightLocal() {
+        Game.arenaLoadOptions = new ArenaLoadOptions() {
+            vsType = GameModeVSType.Local
+        };
+
+        genericMap.OnGameExit();
+        SceneTransitionManager.inst.LoadLevelAsync(MSceneManager.ARENA_SCENE_NAME);
+    }
+
+
+    public void SwitchMenuState(MenuState newState) {
 		menuState = newState;
 
 		if(menuState == MenuState.CustomizingCharacter) {
@@ -54,6 +68,8 @@ public class GM_Menu : GameMode {
 
     public void SpawnPreviewHero() {
         Debug.Log("GM_Menu:Spawn");
+
+        Player player = new Player();
 
         GD_HeroItem equipedHero = Game.data.GetEquipedHero();
 
@@ -99,9 +115,6 @@ public abstract class GameMode : MonoBehaviour {
 	protected HeroFactory heroFactory;
 	protected EquipmentFactory equipmentFactory;
 	protected Map genericMap;
-	protected Player player;
-
-	public List<Enemy> enemies;
 
 	public virtual void InitGame(Game game) {
 		current = this;
@@ -109,11 +122,8 @@ public abstract class GameMode : MonoBehaviour {
 		heroFactory = game.heroFactory;
 		equipmentFactory = game.equipmentFactory;
 		genericMap = game.map;
-		player = game.player;
 
 		state = GameModeState.Ready;
-
-		enemies = new List<Enemy>();
 
         HeroDieEvent.Register(OnGameEvent_HeroDie);
     }
@@ -127,9 +137,7 @@ public abstract class GameMode : MonoBehaviour {
 	}
 
 	public virtual void InternalUpdate() {
-		for (int i = enemies.Count - 1; i >= 0; i--) {
-			enemies[i].InternalUpdate();
-		}
+		
 	}
 
 	public virtual void InternalFixedUpdate() {
@@ -141,26 +149,20 @@ public abstract class GameMode : MonoBehaviour {
     }
 
 	public virtual void ExitGame() {
-        HeroDieEvent.Unregister(OnGameEvent_HeroDie);
+        OnPreExitGame();
 
+        Game.arenaLoadOptions.vsType = GameModeVSType.None;
+        HeroDieEvent.Unregister(OnGameEvent_HeroDie);
         genericMap.OnGameExit();
         SceneTransitionManager.inst.LoadLevelAsync(MSceneManager.MENU_SCENE_NAME);
     }
 
-    public virtual void RestartGame() {
-        genericMap.OnGameExit();
-        SceneTransitionManager.inst.LoadLevelAsync(MSceneManager.ARENA_SCENE_NAME);
+    protected virtual void OnPreExitGame() {
+
     }
 
     protected virtual void OnGameEvent_HeroDie(HeroDieEvent e) {
         
-    }
-
-    [ConsoleMethod("ai", "Enable/disable all AI")]
-    public static void EnableAI(bool enable) {
-        foreach (var enemy in GameMode.current.enemies) {
-            enemy.enabledAI = enable;
-        }
     }
 
 }

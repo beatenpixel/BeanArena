@@ -15,3 +15,4 @@ MonoBehaviour:
   useDisplayFps: 1
   targetFPS: 60
   isUnityRemote: 0
+  unityLoggerEnabled: 1

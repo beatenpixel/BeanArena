@@ -8,8 +8,7 @@ public class GameUI : MonoBehaviour {
     public static UICanvas canvas => inst.m_Canvas;
 
     public GameObject rootGO;
-
-    public SO_PlayerInput playerInput;
+    public RectTransform gameModeStuffHolderT;
 
     public PlayerPanel[] playerPanels;
     public UIChargableButton chargeableButton;
@@ -20,15 +19,19 @@ public class GameUI : MonoBehaviour {
 	public void Init() {
         inst = this;
 
+        /*
         chargeableButton.OnOutput += (chargeOutput) => {
             playerInput.TriggerOnButtonInput(new ButtonInputEventData(0, chargeOutput.chargePercent));
         };
+        */
 
+        /*
         for (int i = 0; i < abilityButtons.Length; i++) {
             abilityButtons[i].SetOnClick(i, (x) => playerInput.TriggerOnButtonInput(new ButtonInputEventData() {
                 buttonID = (int)x
             }));
         }
+        */
 
         for (int i = 0; i < playerPanels.Length; i++) {
             playerPanels[i].Init();

@@ -18,7 +18,7 @@ public class PlayerPanel : MonoBehaviour {
 	[HideInInspector] public HeroBase attachedHero;
 
 	public void Init() {
-		winCounter.Init(GM_Arena.ROUNDS_TO_WIN);
+		winCounter.Init(GM_ArenaBot.ROUNDS_TO_WIN);
 		winCounter.SetWinsCount(0);
         healthbar.SetValue(1f, true);
     }

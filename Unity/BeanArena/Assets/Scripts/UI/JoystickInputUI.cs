@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class JoystickInputUI : MonoBehaviour, IPointerDownHandler {
+public class JoystickInputUI : PoolObject, IPointerDownHandler {
 
     public bool joystickEnabled = true;
     public JoystickRange rangeType;
@@ -17,6 +17,7 @@ public class JoystickInputUI : MonoBehaviour, IPointerDownHandler {
 
     public RectTransform discRectT;
     public RectTransform dotRectT;
+    [HideInInspector] public RectTransform rectT;
 
     private bool isTouchBased => MInput.inputType == MInput.InputType.Mobile;
 
@@ -29,6 +30,12 @@ public class JoystickInputUI : MonoBehaviour, IPointerDownHandler {
 
     public void OnJoystickInput(UIJoystickEventData data) {
         Debug.Log($"{data.type} {data.value}");
+    }
+
+    override protected void Awake() {
+        base.Awake();
+
+        rectT = GetComponent<RectTransform>();
     }
 
     private void Update() {
@@ -122,6 +129,16 @@ public class JoystickInputUI : MonoBehaviour, IPointerDownHandler {
     private void Show(bool show) {
         discRectT.gameObject.SetActive(show);
         dotRectT.gameObject.SetActive(show);
+    }
+
+    public void DestroyJoystick() {
+        discRectT.SetParent(transform);
+        dotRectT.SetParent(transform);
+        Destroy(gameObject);
+    }
+
+    public override Type GetPoolObjectType() {
+        return typeof(JoystickInputUI);
     }
 
     public enum JoystickRange {

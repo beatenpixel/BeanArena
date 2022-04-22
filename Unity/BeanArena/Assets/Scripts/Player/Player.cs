@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player {
 
 	public HeroBase hero { get; private set; }
 
@@ -12,11 +12,10 @@ public class Player : MonoBehaviour {
 	private Vector2 fakeMoveInput;
 
 	public void Init() {
-		//playerInput.OnMoveInput += MoveJoystickInput;
-
-
+        /*
 		playerInput.OnArmInput += MoveJoystickInput;
 		playerInput.OnButtonInput += ButtonInput;
+        */
 	}
 
 	public void InternalUpdate() {
@@ -38,12 +37,9 @@ public class Player : MonoBehaviour {
 		hero = _hero;
 	}
 
-	private void MoveJoystickInput(UIJoystickEventData e) {
+	public void MoveJoystickInput(UIJoystickEventData e) {
 		if (e.type == UIJoystickEventData.EventType.Cancel || e.type == UIJoystickEventData.EventType.End) {
-			//hero.ArmInput(Vector2.zero);
-
 			fakeMoveInput = GetMoveInputByAim(e.value);
-			//hero.MoveInput(fakeMoveInput);
 			hero.MoveInput(Vector2.zero);
 
 			ButtonInput(new ButtonInputEventData(0, e.value.magnitude));
@@ -53,25 +49,7 @@ public class Player : MonoBehaviour {
 			fakeMoveInput = GetMoveInputByAim(e.value);
 			hero.MoveInput(fakeMoveInput);
 		}
-
-		/*
-		if (e.type == UIJoystickEventData.EventType.Cancel || e.type == UIJoystickEventData.EventType.End) {
-			//hero.MoveInput(Vector2.zero);
-		} else {
-			//hero.MoveInput(e.value);
-		}
-		*/
     }
-
-	private void ArmJoystickInput(UIJoystickEventData e) {
-		/*
-		if (e.type == UIJoystickEventData.EventType.Cancel || e.type == UIJoystickEventData.EventType.End) {
-			hero.ArmInput(Vector2.zero);
-		} else {
-			hero.ArmInput(e.value);
-		}
-		*/
-	}
 
 	private Vector2 GetMoveInputByAim(Vector2 aimInput) {
 		float angle = Vector2.SignedAngle(Vector2.up, aimInput);
