@@ -252,6 +252,26 @@ MonoBehaviour:
     m_Localized: Drag to equip
     m_Metadata:
       m_Items: []
+  - m_Id: 27290366498459648
+    m_Localized: '{0} won! >:)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27290366536208384
+    m_Localized: VS AI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27290366536208385
+    m_Localized: LOCAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27290366536208386
+    m_Localized: ONLINE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27290366536208387
+    m_Localized: PLAY
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

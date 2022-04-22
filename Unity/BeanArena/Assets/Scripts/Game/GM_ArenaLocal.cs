@@ -13,6 +13,8 @@ public class GM_ArenaLocal : GameMode {
 
     private List<Player> players;
 
+    private List<JoystickInputUI> joystickInputs;
+
     public override void InitGame(Game game) {
         base.InitGame(game);
 
@@ -24,6 +26,7 @@ public class GM_ArenaLocal : GameMode {
 
     public override bool StartGame() {
         SpawnHeroes_VsLocal();
+        Debug.Log("Start LOCAL");
 
         GameUI.inst.Show(true);
         MenuUI.inst.Show(false);
@@ -55,6 +58,7 @@ public class GM_ArenaLocal : GameMode {
         int playersCount = 2;
 
         players = new List<Player>();
+        joystickInputs = new List<JoystickInputUI>();
 
         GD_HeroItem equipedHero = Game.data.GetEquipedHero();
 
@@ -89,9 +93,39 @@ public class GM_ArenaLocal : GameMode {
             opponentsInfo[i].panel = GameUI.inst.playerPanels[i];
 
             GameUI.inst.playerPanels[i].SetHero(playerHero);
+
+            JoystickInputUI joystickInput = MPool.Get<JoystickInputUI>(null, GameUI.inst.gameModeStuffHolderT);
+            joystickInput.OnEvent.AddListener((x) => {
+                player.MoveJoystickInput(x);
+            });
+
+            joystickInput.joystickDrift = 0f;
+            joystickInput.cancelRange = 0f;
+
+            if (i == 0) {
+                joystickInput.rectT.SetAnchor(Vector2.zero, new Vector2(0.5f,1f));
+                joystickInput.rectT.SetOffset(Vector2.zero, Vector2.zero);
+            } else if(i == 1) {
+                joystickInput.rectT.SetAnchor(new Vector2(0.5f,0f), Vector2.one);
+                joystickInput.rectT.SetOffset(Vector2.zero, Vector2.zero);
+            }
+
+            joystickInputs.Add(joystickInput);
+        }
+
+        for (int i = 0; i < players.Count; i++) {
+            players[i].hero.FindClosestTarget();
         }
     }
 
+    protected override void OnPreExitGame() {
+        base.OnPreExitGame();
+
+        for (int i = 0; i < joystickInputs.Count; i++) {
+            joystickInputs[i].DestroyJoystick();
+        }
+        joystickInputs.Clear();
+    }
 
     protected override void OnGameEvent_HeroDie(HeroDieEvent e) {
         base.OnGameEvent_HeroDie(e);
@@ -115,46 +149,24 @@ public class GM_ArenaLocal : GameMode {
             if (opInfo.score >= ROUNDS_TO_WIN) {
                 GameUI.inst.Show(false);
 
-                /*
-                if (e.hero == players.hero) {
-                    // LOOSE
+                Player winPlayer = players.Find(x => x.hero != e.hero);
 
-                    int mmrPenalty = MRandom.Range(5, 10);
-                    int coinsGain = MRandom.Range(10, 15);
+                int coinsGain = MRandom.Range(10, 15);
+                Economy.inst.AddCurrency(CurrencyType.Coin, coinsGain);
 
-                    Economy.inst.AddCurrency(CurrencyType.Coin, coinsGain);
-                    Game.data.player.mmr = Mathf.Clamp(Game.data.player.mmr - mmrPenalty, 0, int.MaxValue);
+                GD_Chest m_EarnedChest = null;
 
-                    UIWindowManager.CreateWindow(new UIWData_RoundEnd() {
-                        win = false,
-                        mmrCount = mmrPenalty,
-                        coinCount = coinsGain,
-                        earnedChest = null
-                    });
-                } else {
-                    // WIN
-
-                    int mmrGain = MRandom.Range(10, 15);
-                    int coinsGain = MRandom.Range(20, 30);
-
-                    Economy.inst.AddCurrency(CurrencyType.Coin, coinsGain);
-                    Game.data.player.mmr = Mathf.Clamp(Game.data.player.mmr + mmrGain, 0, int.MaxValue);
-
-                    GD_Chest m_EarnedChest = null;
-
-                    if (Game.data.inventory.chests.Count < 4) {
-                        m_EarnedChest = GameBalance.GenerateRoundRewardChest();
-                        Game.data.inventory.chests.Add(m_EarnedChest);
-                    }
-
-                    UIWindowManager.CreateWindow(new UIWData_RoundEnd() {
-                        win = true,
-                        mmrCount = mmrGain,
-                        coinCount = coinsGain,
-                        earnedChest = m_EarnedChest
-                    });
+                if (Game.data.inventory.chests.Count < 4) {
+                    m_EarnedChest = GameBalance.GenerateRoundRewardChest();
+                    Game.data.inventory.chests.Add(m_EarnedChest);
                 }
-                */
+
+                UIWindowManager.CreateWindow(new UIWData_RoundEnd(GameModeVSType.Local) {
+                    coinCount = coinsGain,
+                    earnedChest = m_EarnedChest,
+                    wonPlayerName = winPlayer.hero.info.nickname
+                });
+
             } else {
                 // Next round
 

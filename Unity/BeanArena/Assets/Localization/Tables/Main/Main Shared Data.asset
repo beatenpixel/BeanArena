@@ -247,6 +247,26 @@ MonoBehaviour:
     m_Key: DRAG_TO_EQUIP
     m_Metadata:
       m_Items: []
+  - m_Id: 27290366498459648
+    m_Key: WIN_LOCAL_TEXT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27290366536208384
+    m_Key: PLAY_BUTTON_BOT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27290366536208385
+    m_Key: PLAY_BUTTON_LOCAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27290366536208386
+    m_Key: PLAY_BUTTON_ONLINE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27290366536208387
+    m_Key: PLAY_TEXT
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

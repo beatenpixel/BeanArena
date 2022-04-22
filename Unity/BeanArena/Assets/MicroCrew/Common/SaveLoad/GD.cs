@@ -42,7 +42,6 @@ public class GD : MySerializable {
             switch (entry.Name) {
                 case "gdTypeByte":
                     _gdType = (byte)(entry.Value);
-                    Debug.Log(gdType);
                     break;
                 case "gdSortByte":
                     _gdSortingOrder = (byte)(entry.Value);

@@ -28,14 +28,26 @@ public class JoystickInputUI : PoolObject, IPointerDownHandler {
     private Vector2 joystickPos;
     private Vector2 dotPos;
 
+    private Vector3[] zoneWorldCorners = new Vector3[4];
+
     public void OnJoystickInput(UIJoystickEventData data) {
         Debug.Log($"{data.type} {data.value}");
+    }
+
+    public override void OnCreate() {
+        base.OnCreate();
+
+        rectT = GetComponent<RectTransform>();
+        //discRectT.SetParent(rectT.parent);
+        //dotRectT.SetParent(rectT.parent);
     }
 
     override protected void Awake() {
         base.Awake();
 
         rectT = GetComponent<RectTransform>();
+        //discRectT.SetParent(rectT.parent);
+        //dotRectT.SetParent(rectT.parent);
     }
 
     private void Update() {
@@ -69,7 +81,9 @@ public class JoystickInputUI : PoolObject, IPointerDownHandler {
                 }
             }
 
-            dotPos = GameUI.canvas.WorldToCanvasPos(screenDotPos);
+            rectT.GetWorldCorners(zoneWorldCorners);
+
+            dotPos = GameUI.canvas.WorldToCanvasPos(screenDotPos - (Vector2)zoneWorldCorners[0]);            
             (Vector2 fixedPos, Vector2 normalizedValue) = NormalizeDotPos(dotPos);
 
             if (released) {
@@ -117,7 +131,9 @@ public class JoystickInputUI : PoolObject, IPointerDownHandler {
             lastMousePos = eventData.position;
         }
 
-        joystickPos = GameUI.canvas.WorldToCanvasPos(eventData.position);
+        rectT.GetWorldCorners(zoneWorldCorners);
+
+        joystickPos = GameUI.canvas.WorldToCanvasPos(eventData.position - (Vector2)zoneWorldCorners[0]);
 
         isPressed = true;
 

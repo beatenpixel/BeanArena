@@ -81,7 +81,9 @@ public class Game : Singleton<Game> {
 		FX.inst.EnableDeathScreenEffect(false);        
 	}	
 
-	private void OnSceneLoadEnd(SceneEvent e) {		
+	private void OnSceneLoadEnd(SceneEvent e) {
+        Debug.Log("OnSceneLoadEnd " + arenaLoadOptions.vsType);
+
         if(arenaLoadOptions.vsType == GameModeVSType.Bot) {
             GameObject gameModeGO = new GameObject("[GM_ArenaBot]");
             gameMode = gameModeGO.AddComponent<GM_ArenaBot>();

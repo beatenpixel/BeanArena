@@ -29,14 +29,20 @@ public class UIW_RoundEnd : UIWindow {
             chestIconDrawer.Show(false);
         }
 
-        if (data.win) {
-            logoText.text = MLocalization.Get("WIN");
+        if (data.vsType == GameModeVSType.Bot) {
+            if (data.win) {
+                logoText.text = MLocalization.Get("WIN");
+                goToMenuButton.SetBackgroundColor(MAssets.inst.colors["button_green"]);
+                MMRCountText.text = MFormat.GetTMProIcon(TMProIcon.Cup)  + "+" + data.mmrCount;
+            } else {
+                logoText.text = MLocalization.Get("LOSE");
+                goToMenuButton.SetBackgroundColor(MAssets.inst.colors["button_red"]);
+                MMRCountText.text = MFormat.GetTMProIcon(TMProIcon.Cup) + "-" + data.mmrCount;
+            }
+        } else if(data.vsType == GameModeVSType.Local) {
+            logoText.text = MLocalization.Get("WIN_LOCAL_TEXT", LocalizationGroup.Main, data.wonPlayerName);
             goToMenuButton.SetBackgroundColor(MAssets.inst.colors["button_green"]);
-            MMRCountText.text = "<sprite name=\"cup\">+" + data.mmrCount;
-        } else {
-            logoText.text = MLocalization.Get("LOSE");
-            goToMenuButton.SetBackgroundColor(MAssets.inst.colors["button_red"]);
-            MMRCountText.text = "<sprite name=\"cup\">-" + data.mmrCount;
+            MMRCountText.text = "";
         }
 
         CoinsCountText.text = "<sprite name=\"coin\">+" + data.coinCount;
@@ -92,7 +98,11 @@ public class UIWData_RoundEnd : UIW_Data {
     public int coinCount;
     public GD_Chest earnedChest;
 
-    public UIWData_RoundEnd() {
+    public GameModeVSType vsType;
+    public string wonPlayerName;
+
+    public UIWData_RoundEnd(GameModeVSType _vsType) {
+        vsType = _vsType;
     }
 
     public UIWData_RoundEnd(SerializationInfo info, StreamingContext sc) : base(info, sc) {

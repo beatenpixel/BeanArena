@@ -83,7 +83,7 @@ public class MenuUI : MonoBehaviour {
     }
 
     public void ButtonClick_GoFightLocal() {
-        GM_Menu.inst.GoToFight();
+        GM_Menu.inst.GoFightLocal();
     }
 
     public void DrawMMRText() {

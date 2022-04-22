@@ -203,7 +203,7 @@ public class GM_ArenaBot : GameMode {
                     Economy.inst.AddCurrency(CurrencyType.Coin, coinsGain);
                     Game.data.player.mmr = Mathf.Clamp(Game.data.player.mmr - mmrPenalty, 0, int.MaxValue);
 
-                    UIWindowManager.CreateWindow(new UIWData_RoundEnd() {
+                    UIWindowManager.CreateWindow(new UIWData_RoundEnd(GameModeVSType.Bot) {
                         win = false,
                         mmrCount = mmrPenalty,
                         coinCount = coinsGain,
@@ -225,7 +225,7 @@ public class GM_ArenaBot : GameMode {
                         Game.data.inventory.chests.Add(m_EarnedChest);
                     }
 
-                    UIWindowManager.CreateWindow(new UIWData_RoundEnd() {
+                    UIWindowManager.CreateWindow(new UIWData_RoundEnd(GameModeVSType.Bot) {
                         win = true,
                         mmrCount = mmrGain,
                         coinCount = coinsGain,

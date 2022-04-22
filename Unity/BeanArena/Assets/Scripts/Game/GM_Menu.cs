@@ -51,6 +51,8 @@ public class GM_Menu : GameMode {
             vsType = GameModeVSType.Local
         };
 
+        Debug.Log("GoFIghtLocal " +  Game.arenaLoadOptions.vsType);
+
         genericMap.OnGameExit();
         SceneTransitionManager.inst.LoadLevelAsync(MSceneManager.ARENA_SCENE_NAME);
     }
