@@ -51,7 +51,18 @@ public class GM_Menu : GameMode {
             vsType = GameModeVSType.Local
         };
 
-        Debug.Log("GoFIghtLocal " +  Game.arenaLoadOptions.vsType);
+        Debug.Log("GoFight: " +  Game.arenaLoadOptions.vsType);
+
+        genericMap.OnGameExit();
+        SceneTransitionManager.inst.LoadLevelAsync(MSceneManager.ARENA_SCENE_NAME);
+    }
+
+    public void GoFightOnline() {
+        Game.arenaLoadOptions = new ArenaLoadOptions() {
+            vsType = GameModeVSType.Online
+        };
+
+        Debug.Log("GoFight: " + Game.arenaLoadOptions.vsType);
 
         genericMap.OnGameExit();
         SceneTransitionManager.inst.LoadLevelAsync(MSceneManager.ARENA_SCENE_NAME);

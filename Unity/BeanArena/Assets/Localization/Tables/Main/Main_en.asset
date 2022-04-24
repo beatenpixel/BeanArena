@@ -272,6 +272,14 @@ MonoBehaviour:
     m_Localized: PLAY
     m_Metadata:
       m_Items: []
+  - m_Id: 28030898635952128
+    m_Localized: No internet connection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28037269456572416
+    m_Localized: Searching match
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

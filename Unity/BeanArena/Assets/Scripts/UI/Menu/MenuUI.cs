@@ -86,6 +86,10 @@ public class MenuUI : MonoBehaviour {
         GM_Menu.inst.GoFightLocal();
     }
 
+    public void ButtonClick_GoFightOnline() {
+        GM_Menu.inst.GoFightLocal();
+    }
+
     public void DrawMMRText() {
         mmrText.text = "<sprite name=\"cup\">" + Game.data.player.mmr.ToString();
     }

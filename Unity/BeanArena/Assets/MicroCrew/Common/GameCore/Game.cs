@@ -9,6 +9,7 @@ public class Game : Singleton<Game> {
 
 	public static GD_Game data;
 
+    [SerializeField] private BeanNetwork beanNetwork;
 	public HeroFactory heroFactory;
 	public EquipmentFactory equipmentFactory;
 
@@ -56,6 +57,8 @@ public class Game : Singleton<Game> {
 		equipmentFactory.Init();
 		heroFactory.Init();
 
+        BeanNetwork.InitIfNeeded(null);
+
         this.Wait(() => {
             if (musicSource == null) {
                 musicSource = MSound.Play("music_0", new SoundConfig() {
@@ -84,12 +87,15 @@ public class Game : Singleton<Game> {
 	private void OnSceneLoadEnd(SceneEvent e) {
         Debug.Log("OnSceneLoadEnd " + arenaLoadOptions.vsType);
 
-        if(arenaLoadOptions.vsType == GameModeVSType.Bot) {
+        if (arenaLoadOptions.vsType == GameModeVSType.Bot) {
             GameObject gameModeGO = new GameObject("[GM_ArenaBot]");
             gameMode = gameModeGO.AddComponent<GM_ArenaBot>();
-        } else if(arenaLoadOptions.vsType == GameModeVSType.Local) {
+        } else if (arenaLoadOptions.vsType == GameModeVSType.Local) {
             GameObject gameModeGO = new GameObject("[GM_ArenaLocal]");
             gameMode = gameModeGO.AddComponent<GM_ArenaLocal>();
+        } else if (arenaLoadOptions.vsType == GameModeVSType.Online) {
+            GameObject gameModeGO = new GameObject("[GM_ArenaOnline]");
+            gameMode = gameModeGO.AddComponent<GM_ArenaOnline>();
         } else {
             gameMode = FindObjectOfType<GM_Menu>();
         }
@@ -108,6 +114,8 @@ public class Game : Singleton<Game> {
 			gameMode.InternalUpdate();
         }
 
+        beanNetwork.InternalUpdate();
+
 		if(Input.GetKeyDown(KeyCode.R)) {
 			MSceneManager.ReloadScene();
         }
@@ -121,6 +129,8 @@ public class Game : Singleton<Game> {
 		if (gameMode != null) {
 			gameMode.InternalFixedUpdate();
 		}
+
+        beanNetwork.InternalFixedUpdate();
 	}
 
 	public static int TeamIDToLayer(int teamID) {

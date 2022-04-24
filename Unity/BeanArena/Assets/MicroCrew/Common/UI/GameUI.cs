@@ -39,6 +39,8 @@ public class GameUI : MonoBehaviour {
 
         MGameLoop.Update.Register(InternalUpdate);
         HeroDamageEvent.Register(OnHeroDamageEvent);
+
+
     }
 
     public void InternalUpdate() {

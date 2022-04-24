@@ -11,7 +11,6 @@ public class SceneTransitionManager : Singleton<SceneTransitionManager> {
 
     public CanvasGroup levelLoadCanvasGroup;
     public TextMeshProUGUI loadingText;
-    public RectTransform loadingWheelRectT;
 
     public bool useDotsAnimation = false;
 
@@ -52,9 +51,7 @@ public class SceneTransitionManager : Singleton<SceneTransitionManager> {
 
                     loadingText.text = MLocalization.Get("LEVEL_LOADING_PARAM", LocalizationGroup.Main, dotsText);
                 }
-            }
-
-            loadingWheelRectT.rotation *= Quaternion.Euler(0, 0, -180f * Time.unscaledDeltaTime);
+            }            
         }
     }
 
@@ -87,7 +84,6 @@ public class SceneTransitionManager : Singleton<SceneTransitionManager> {
         startLoadTime = Time.realtimeSinceStartup;
         nextDotAnimationTime = startLoadTime;
         dotCount = 0;
-        loadingWheelRectT.rotation = Quaternion.Euler(0, 0, 0);
         MSceneManager.LoadSceneAsync(levelName, OnSceneLoadState);
     }
 

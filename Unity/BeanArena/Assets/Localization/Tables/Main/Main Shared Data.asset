@@ -267,6 +267,14 @@ MonoBehaviour:
     m_Key: PLAY_TEXT
     m_Metadata:
       m_Items: []
+  - m_Id: 28030898635952128
+    m_Key: NO_INTERNET_CONNECTION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28037269456572416
+    m_Key: SEARCHING_MATCH
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
