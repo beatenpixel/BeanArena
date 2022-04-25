@@ -52,6 +52,11 @@ namespace CrewNetwork.Transport.ENetTransport {
             peer.Send(0, ref enetPacket);
         }
 
+        public override void Send(IPacket packet, SendOption sendOption = SendOption.None) {
+            PacketWriter packetWriter = PacketWriter.Get(sendOption, packet);
+            Send(packetWriter);
+        }
+
         public override void Disconnect() {
             
         }
@@ -123,7 +128,6 @@ namespace CrewNetwork.Transport.ENetTransport {
                 }
             }
         }
-
     }
 
     [System.Serializable]

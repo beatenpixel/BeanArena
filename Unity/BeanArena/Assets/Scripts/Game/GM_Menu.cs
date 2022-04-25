@@ -64,6 +64,10 @@ public class GM_Menu : GameMode {
 
         Debug.Log("GoFight: " + Game.arenaLoadOptions.vsType);
 
+        BeanNetwork.inst.FindMatch();        
+    }
+
+    public void OnOnlineMatchFound() {
         genericMap.OnGameExit();
         SceneTransitionManager.inst.LoadLevelAsync(MSceneManager.ARENA_SCENE_NAME);
     }

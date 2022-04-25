@@ -27,6 +27,8 @@ public class MenuUI : MonoBehaviour {
     public TextMeshProUGUI totalHeroStatsText;
     public TextMeshProUGUI versionText;
 
+    public TextMeshProUGUI playerNicknameText;
+
 	public GameObject rootGO;
 
 	public void Init() {
@@ -47,6 +49,7 @@ public class MenuUI : MonoBehaviour {
         rewardedVideoButton.SetOnClick(WatchRewardedForGems);
 
         versionText.text = Application.version;
+        playerNicknameText.text = Game.data.player.nickname;
     }
 	
 	public void InternalUpdate() {
@@ -87,7 +90,7 @@ public class MenuUI : MonoBehaviour {
     }
 
     public void ButtonClick_GoFightOnline() {
-        GM_Menu.inst.GoFightLocal();
+        GM_Menu.inst.GoFightOnline();
     }
 
     public void DrawMMRText() {

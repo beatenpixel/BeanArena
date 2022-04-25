@@ -41,7 +41,9 @@ public class GD_Player : GD {
         mmr = 0;
         coins = 0;
         gems = 10;
-        nickname = "Bean";
+
+        System.Random rand = new System.Random();
+        nickname = "Bean" + rand.Next(10000);
     }
 
     private const string MMR_KEY = "mmr";

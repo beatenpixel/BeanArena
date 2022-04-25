@@ -6,7 +6,8 @@ using UnityEngine;
 public class GameClient : MonoBehaviour, IServerPacketListener {
 
     public void Init() {
-
+        Client.Instance.OnConnected += OnConnected;
+        Client.Instance.OnDisconnected += OnDisconnected;
     }
 
     public void OnClicksInfo(SPacket_ClicksInfo packet) {
@@ -20,6 +21,18 @@ public class GameClient : MonoBehaviour, IServerPacketListener {
                 OnClicksInfo(spClicksInfo);
                 break;
         }
+    }
+
+    private void OnConnected() {
+        CPacket_PlayerJoin joinPacket = new CPacket_PlayerJoin() {
+            username = "Player " + Random.Range(0, 100000)
+        };
+
+        Client.Instance.Send(joinPacket, SendOption.Reliable);
+    }
+
+    private void OnDisconnected() {
+
     }
 
 }

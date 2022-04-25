@@ -116,6 +116,11 @@ namespace CrewNetwork.Transport.ENetTransport {
             }
         }
 
+        public override void Send(IPacket packet, CrewNetPeer_Ref peer, SendOption sendOption) {
+            PacketWriter packetWriter = PacketWriter.Get(sendOption, packet);
+            Send(packetWriter, peer);
+        }
+
 
         public override void Disconnect(CrewNetPeer_Ref peer) {
             

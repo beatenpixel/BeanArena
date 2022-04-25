@@ -26,6 +26,11 @@ public class PhotonClient : Client {
         manager.SendAsClient(packet);
     }
 
+    public override void Send(IPacket packet, SendOption sendOption = SendOption.None) {
+        PacketWriter packetWriter = PacketWriter.Get(sendOption, packet);
+        Send(packetWriter);
+    }
+
     public override void Disconnect() {
 
     }

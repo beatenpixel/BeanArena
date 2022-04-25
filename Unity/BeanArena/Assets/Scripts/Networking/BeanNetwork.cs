@@ -27,11 +27,11 @@ public class BeanNetwork : Singleton<BeanNetwork> {
 
         MessageListener.InitPacketListeners(gameClient, gameServer);
 
-        gameServer.Init();
-        gameClient.Init();
-
         photonNetworkManager = new PhotonNetworkManager();
         photonNetworkManager.Init();
+
+        gameServer.Init();
+        gameClient.Init();
     }
 
     protected override void Shutdown() {
