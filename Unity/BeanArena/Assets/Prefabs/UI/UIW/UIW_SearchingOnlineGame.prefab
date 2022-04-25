@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   go: {fileID: 0}
   t: {fileID: 0}
-  _subType: default
+  _subType: UIW_SearchingOnlineGame
   rectT: {fileID: 1775621725821694724}
   beansOnlineText: {fileID: 1775621726552857623}
 --- !u!1 &1775621726365543050
@@ -589,7 +589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 703198675787853829, guid: 2a91a405b5d4c92469969479f6da1ab8, type: 3}
       propertyPath: m_text
-      value: Searching game
+      value: "\u041F\u043E\u0438\u0441\u043A \u043C\u0430\u0442\u0447\u0430"
       objectReference: {fileID: 0}
     - target: {fileID: 703198675787853829, guid: 2a91a405b5d4c92469969479f6da1ab8, type: 3}
       propertyPath: m_fontSize

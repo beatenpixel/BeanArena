@@ -280,6 +280,10 @@ MonoBehaviour:
     m_Localized: Searching match
     m_Metadata:
       m_Items: []
+  - m_Id: 28058143387701248
+    m_Localized: 'beans online: {0}'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

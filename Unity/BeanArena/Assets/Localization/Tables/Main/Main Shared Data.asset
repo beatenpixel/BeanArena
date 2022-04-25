@@ -275,6 +275,10 @@ MonoBehaviour:
     m_Key: SEARCHING_MATCH
     m_Metadata:
       m_Items: []
+  - m_Id: 28058143387701248
+    m_Key: BEANS_ONLINE_TEXT
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

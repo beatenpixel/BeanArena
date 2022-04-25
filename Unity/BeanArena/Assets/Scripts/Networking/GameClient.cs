@@ -10,10 +10,6 @@ public class GameClient : MonoBehaviour, IServerPacketListener {
         Client.Instance.OnDisconnected += OnDisconnected;
     }
 
-    public void OnClicksInfo(SPacket_ClicksInfo packet) {
-        
-    }
-
     public void ProcessPacket(MessageType msgType, PacketReader packet) {
         switch (msgType) {
             case MessageType.SPacket_ClicksInfo:
@@ -25,7 +21,7 @@ public class GameClient : MonoBehaviour, IServerPacketListener {
 
     private void OnConnected() {
         CPacket_PlayerJoin joinPacket = new CPacket_PlayerJoin() {
-            username = "Player " + Random.Range(0, 100000)
+            username = Game.data.player.nickname
         };
 
         Client.Instance.Send(joinPacket, SendOption.Reliable);
@@ -33,6 +29,14 @@ public class GameClient : MonoBehaviour, IServerPacketListener {
 
     private void OnDisconnected() {
 
+    }
+
+    public void OnClicksInfo(SPacket_ClicksInfo packet) {
+
+    }
+
+    public void OnJoinAnswer(SPacket_JoinAnswer packet) {
+        Debug.Log("HEY! Got from server JoinAnswer packet");
     }
 
 }

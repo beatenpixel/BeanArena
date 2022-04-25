@@ -11,6 +11,7 @@ Unity/BeanArena/[Bb]uild/
 Unity/BeanArena/[Bb]uilds/
 Unity/BeanArena/[Ll]ogs/
 Unity/BeanArena/[Mm]emoryCaptures/
+Unity/*clone*/
 Builds/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored

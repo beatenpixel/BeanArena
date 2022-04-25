@@ -16,7 +16,7 @@ namespace CrewNetwork {
         public abstract void Start();
         public abstract void Tick();
         public abstract void Send(PacketWriter packet, CrewNetPeer_Ref peer);
-        public abstract void Send(IPacket packet, CrewNetPeer_Ref peer, SendOption sendOption);
+        public abstract void Send(IPacket packet, CrewNetPeer_Ref peer, SendOption sendOption = SendOption.Reliable);
         public abstract void Disconnect(CrewNetPeer_Ref peer);
         public abstract void Shutdown();
     }

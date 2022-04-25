@@ -1,4 +1,5 @@
 using MicroCrew.Utils;
+using ParrelSync;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +15,11 @@ public class GameDataManager : Singleton<GameDataManager> {
     public static string ASSETS_ROOT_PATH;
     public static string PERSISTENT_DATA_PATH;
 
-    public const string PLAYER_DATA_LOCATION = "/gameData.dat";
+    public static string PLAYER_DATA_LOCATION {
+        get {
+            return "/gameData" + ClonesManager.GetArgument() + ".dat";
+        }
+    }
 
     public override void Init() {
         ASSETS_ROOT_PATH = Application.dataPath;

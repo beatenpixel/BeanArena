@@ -216,6 +216,43 @@ Transform:
   m_Father: {fileID: 1652874707}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &460119797
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 203
+  m_Height: 101
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 0
+  m_ColorFormat: 8
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &534319755 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 214851534, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
@@ -579,6 +616,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[App]'
       objectReference: {fileID: 0}
+    - target: {fileID: 7071176787655443398, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
+      propertyPath: ClickUnityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ButtonClick_GoFightOnline
+      objectReference: {fileID: 0}
     - target: {fileID: 8501889546279028255, guid: a18a132be0b7678418d55b4a29cb3ef4, type: 3}
       propertyPath: gameClient
       value: 
@@ -763,43 +804,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8659191878049594546, guid: aa8ca68edc84c824d938a47af7c4b1ce, type: 3}
   m_PrefabInstance: {fileID: 1507570009}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &1561295249
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 203
-  m_Height: 101
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 0
-  m_ColorFormat: 8
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &1652874705
 GameObject:
   m_ObjectHideFlags: 0

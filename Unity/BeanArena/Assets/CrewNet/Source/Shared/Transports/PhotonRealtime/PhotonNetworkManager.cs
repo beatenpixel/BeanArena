@@ -29,6 +29,8 @@ namespace CrewNetwork.Transport {
 
         private List<TypedLobbyInfo> cachedLobbyStatistics;
 
+        private bool m_Shutdown;
+
         public override void Init() {
             base.Init();
 
@@ -50,8 +52,8 @@ namespace CrewNetwork.Transport {
             photonClient.LoadBalancingPeer.ReuseEventInstance = true;
 
             photonClient.ConnectUsingSettings(new AppSettings() {
-                AppIdRealtime = "36247fd7-863f-43dd-a1eb-0c613f660b99",
-                FixedRegion = "eu",
+                AppIdRealtime = "42fba0c7-38bc-4d7e-a9d0-9c3a305f74af",
+                FixedRegion = "ru",
                 UseNameServer = true,
                 EnableLobbyStatistics = true,
             });
@@ -67,6 +69,17 @@ namespace CrewNetwork.Transport {
 
         public void QuickMatch() {
             photonClient.OpJoinRandomOrCreateRoom(null, null);
+        }
+
+        public void QuickMatch1v1() {
+            OpJoinRandomRoomParams joinRandomParams = new OpJoinRandomRoomParams();
+            joinRandomParams.ExpectedMaxPlayers = 2;
+
+            EnterRoomParams createRoomParams = new EnterRoomParams();
+            createRoomParams.RoomOptions = new RoomOptions();
+            createRoomParams.RoomOptions.MaxPlayers = 2;
+
+            photonClient.OpJoinRandomOrCreateRoom(joinRandomParams, createRoomParams);
         }
 
         public void FindRooms(PhotonSqlFilter filter) {
@@ -96,14 +109,18 @@ namespace CrewNetwork.Transport {
         }
 
         public override void Shutdown() {
+            if(!m_Shutdown) {
+                m_Shutdown = true;
 
+                photonClient.Disconnect();
+                photonClient.RemoveCallbackTarget(this);
+
+                CrewNetDebug.Log("Deinitalize Photon Master Client");
+            }
         }
 
         ~PhotonNetworkManager() {
-            photonClient.Disconnect();
-            photonClient.RemoveCallbackTarget(this);
-
-            CrewNetDebug.Log("Deinitalize Photon Master Client");
+            Shutdown();
         }
 
         public void SendAsServer(PacketWriter packet, CrewNetPeer_Ref peer) {

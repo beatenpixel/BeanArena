@@ -12,11 +12,13 @@ public struct SPacket_JoinAnswer : IPacket {
 
     public MessageType type => MessageType.SPacket_PlayerJoinAnswer;
 
+
+
     public void Write(PacketWriter packet) {
-        //packet.WriteInt(playerTotalClicks);
+        
     }
 
     public void Read(PacketReader packet) {
-        //playerTotalClicks = packet.ReadInt();
+        
     }
 }

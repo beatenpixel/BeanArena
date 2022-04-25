@@ -23,10 +23,6 @@ public class GameServer : MonoBehaviour, IClientPacketListener {
         }
     }
 
-    public void OnSendClicks(CrewNetPeer_Ref peer, CPacket_SendClick packet) {
-
-    }
-
     private void OnPeerConnected(CrewNetPeer_Ref peer) {
         NetworkPlayer networkPlayer = new NetworkPlayer();
         networkPlayer.peerUID = peer.UID;
@@ -39,6 +35,16 @@ public class GameServer : MonoBehaviour, IClientPacketListener {
         }
     }
 
+    public void OnSendClicks(CrewNetPeer_Ref peer, CPacket_SendClick packet) {
+
+    }
+
+    public void OnPlayerJoin(CrewNetPeer_Ref peer, CPacket_PlayerJoin packet) {
+        Debug.Log("HEY! " + packet.username);
+
+        SPacket_JoinAnswer pJoinAnswer = new SPacket_JoinAnswer();
+        Server.Instance.Send(pJoinAnswer, peer);
+    }
 }
 
 public class NetworkPlayer {

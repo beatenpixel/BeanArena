@@ -27,6 +27,8 @@ public class BeanNetwork : Singleton<BeanNetwork> {
 
         MessageListener.InitPacketListeners(gameClient, gameServer);
 
+        Debug.Log("[BeanNetwork] Init photon manager");
+
         photonNetworkManager = new PhotonNetworkManager();
         photonNetworkManager.Init();
 
@@ -35,7 +37,7 @@ public class BeanNetwork : Singleton<BeanNetwork> {
     }
 
     protected override void Shutdown() {
-        
+        photonNetworkManager.Shutdown();
     }
 
     public void InternalUpdate() {

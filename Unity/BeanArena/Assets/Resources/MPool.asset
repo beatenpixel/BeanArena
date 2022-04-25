@@ -61,6 +61,7 @@ MonoBehaviour:
     - {fileID: 5176596261943929827, guid: a0ed589cfea1aba47ba8b8213c063d20, type: 3}
     - {fileID: 1549984236681847888, guid: 2bd0f352e2fa9d04fb1545c01ba31fbe, type: 3}
     - {fileID: 4655970778296171564, guid: 2f6f73fec2291f6439ce6ff24f00372b, type: 3}
+    - {fileID: 1775621725821694727, guid: 05c2946297d1d1b489bafee7b8a74874, type: 3}
   - groupName: WorldUI
     prefabs:
     - {fileID: 2560367928480507612, guid: 81a305149882be14691a1d2af17fca98, type: 3}

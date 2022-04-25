@@ -63,7 +63,7 @@ namespace MicroCrew.Utils {
             if (!m_ShuttingDown) {
                 Shutdown();
                 m_ShuttingDown = true;
-                Debug.Log("[Singleton] OnApplicationQuit");
+                //Debug.Log("[Singleton] OnApplicationQuit");
             }
         }
 
@@ -71,7 +71,7 @@ namespace MicroCrew.Utils {
             if (!m_ShuttingDown && this == m_Inst) {
                 Shutdown();
                 m_ShuttingDown = true;
-                Debug.Log("[Singleton] OnDestroy Shutting down");
+                //Debug.Log("[Singleton] OnDestroy Shutting down");
             }
         }
 

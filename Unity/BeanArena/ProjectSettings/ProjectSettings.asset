@@ -763,8 +763,8 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    Android: TMP_PRESENT
-    Standalone: TMP_PRESENT
+    Android: TMP_PRESENT;UNITY
+    Standalone: TMP_PRESENT;UNITY
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
