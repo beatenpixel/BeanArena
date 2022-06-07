@@ -16,10 +16,29 @@ public class GameClient : MonoBehaviour, IServerPacketListener {
                 SPacket_ClicksInfo spClicksInfo = default; spClicksInfo.Read(packet);
                 OnClicksInfo(spClicksInfo);
                 break;
+            case MessageType.SPacket_PlayerJoinAnswer:
+                SPacket_JoinAnswer spJoinAnswer = default; spJoinAnswer.Read(packet);
+                OnJoinAnswer(spJoinAnswer);
+                break;
+            default:
+                Debug.LogError("Unknown packet: " + msgType);
+                break;
+        }
+    }
+
+    private void Update() {
+        if (Input.GetMouseButtonDown(2)) {
+            CPacket_PlayerJoin joinPacket = new CPacket_PlayerJoin() {
+                username = Game.data.player.nickname
+            };
+
+            Client.Instance.Send(joinPacket, SendOption.Reliable);
         }
     }
 
     private void OnConnected() {
+        Debug.Log("[GameClient] OnConnected");
+
         CPacket_PlayerJoin joinPacket = new CPacket_PlayerJoin() {
             username = Game.data.player.nickname
         };
@@ -28,7 +47,7 @@ public class GameClient : MonoBehaviour, IServerPacketListener {
     }
 
     private void OnDisconnected() {
-
+        Debug.Log("[GameClient] OnDisconnected");
     }
 
     public void OnClicksInfo(SPacket_ClicksInfo packet) {

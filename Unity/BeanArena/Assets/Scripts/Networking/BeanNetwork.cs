@@ -33,7 +33,7 @@ public class BeanNetwork : Singleton<BeanNetwork> {
         photonNetworkManager.Init();
 
         gameServer.Init();
-        gameClient.Init();
+        gameClient.Init();        
     }
 
     protected override void Shutdown() {
@@ -45,6 +45,8 @@ public class BeanNetwork : Singleton<BeanNetwork> {
             checkInternetConnectionTimer.AddFromNow();
             CheckInternetConnection();
         }
+
+        photonNetworkManager.Tick();
     }
 
     public void InternalFixedUpdate() {

@@ -20,17 +20,28 @@ public class GameServer : MonoBehaviour, IClientPacketListener {
                 CPacket_SendClick cpSendClick = default; cpSendClick.Read(packet);
                 OnSendClicks(peer, cpSendClick);
                 break;
+            case MessageType.CPacket_PlayerJoin:
+                CPacket_PlayerJoin cpPlayerJoin = default; cpPlayerJoin.Read(packet);
+                OnPlayerJoin(peer, cpPlayerJoin);
+                break;
+            default:
+                Debug.LogError("Unknown packet: " + msgType);
+                break;
         }
     }
 
     private void OnPeerConnected(CrewNetPeer_Ref peer) {
+        Debug.Log("[GameServer] OnPeerConnected " + peer.UID);
+
         NetworkPlayer networkPlayer = new NetworkPlayer();
         networkPlayer.peerUID = peer.UID;
         players.Add(networkPlayer.peerUID, networkPlayer);
     }
 
     private void OnPeerDisconnected(CrewNetPeer_Ref peer) {
-        if(players.ContainsKey(peer.UID)) {
+        Debug.Log("[GameServer] OnPeerDisconnected " + peer.UID);
+
+        if (players.ContainsKey(peer.UID)) {
             players.Remove(peer.UID);
         }
     }

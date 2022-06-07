@@ -69,7 +69,7 @@ public class GD_Inventory : GD {
 
         heroes.Add(new GD_HeroItem() { heroType = HeroType.DefaultBean, isEquiped = true, cardsCollected = 1 });
 
-        bool isRichStart = false;
+        bool isRichStart = true;
 
         if (isRichStart) {
             var allItemsInfo = MAssets.inst.itemsInfo.GetAllAssets();

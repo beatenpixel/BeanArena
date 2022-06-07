@@ -53,7 +53,7 @@ namespace CrewNetwork.Transport {
 
             photonClient.ConnectUsingSettings(new AppSettings() {
                 AppIdRealtime = "42fba0c7-38bc-4d7e-a9d0-9c3a305f74af",
-                FixedRegion = "ru",
+                FixedRegion = "eu",
                 UseNameServer = true,
                 EnableLobbyStatistics = true,
             });
@@ -340,7 +340,9 @@ namespace CrewNetwork.Transport {
 
             switch(photonEvent.Code) {
                 case 1:
-                    byte[] data = (byte[])photonEvent.CustomData;                 
+                    byte[] data = (byte[])photonEvent.CustomData;
+
+                    CrewNetDebug.Log(data.ToPrettyString("bytes: ", false, false, x => x + "_"));
 
                     PacketReader packet = PacketReader.Get(data);
 

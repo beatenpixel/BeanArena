@@ -40,7 +40,7 @@ MonoBehaviour:
       type: {class: SpecificLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
       data:
         m_LocaleId:
-          m_Code: ru
+          m_Code: en
     - rid: 1724062968965234691
       type: {class: LocalesProvider, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
     - rid: 1724062968965234692
